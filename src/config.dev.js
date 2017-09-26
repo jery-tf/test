@@ -4,4 +4,5 @@
 const proConfig = {
   api:'http://localhost:8088/'
 }
+
 module.exports = proConfig;
