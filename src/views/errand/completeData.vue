@@ -24,7 +24,7 @@
     </p>
 
     <div class="box-margin-top padding-container fff">
-      <p class="twoLineFont">文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多</p>
+      <p class="twoLineFont titleLable">文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多</p>
     </div>
 
     <div class="box-margin-top padding-container fff Eno">
@@ -40,7 +40,7 @@
     </div>
 
     <div class="box-margin-top fff">
-      <p class="padding-container border-bottom">办件信息</p>
+      <p class="padding-container border-bottom titleAddr">办件信息</p>
       <div class="padding-container">
         <div>
           <Subtitle title="这是标题" content="这是内容"></Subtitle>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="box-margin-top fff">
-      <p class="padding-container border-bottom">申请人(单位)信息</p>
+      <p class="padding-container border-bottom titleAddr">申请人(单位)信息</p>
       <div class="padding-container">
         <div>
           <Subtitle title="申报人" content="湖南科创信息"></Subtitle>
@@ -141,6 +141,9 @@
       font-size: .5rem;
     }
   }
+.titleLable,.titleAddr{
+  font-size: .28rem;
+}
 
   .remind {
     color: #ff9900;

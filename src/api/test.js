@@ -4,5 +4,3 @@
 import { axiosGet } from './baseApi'
 
 export const getUser = (params,loading)=>axiosGet('/user',params,loading);
-
-

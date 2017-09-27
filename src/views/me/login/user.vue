@@ -16,7 +16,7 @@
       </Field>
     </div>
     <div class="top52">
-      <mint-button type="primary" size="large">登录</mint-button>
+      <mint-button type="primary" size="large" @click="submitLogin">登录</mint-button>
     </div>
     <p class="flex font-middle">
       <span>立即注册</span>
@@ -29,6 +29,8 @@
 <script>
   import LoginTop from '../../../components/login/LoginTop.vue'
   import { Field, Button } from 'mint-ui'
+  import Api from '../../../api'
+//  getUser
   export default {
     components: {LoginTop, Field, 'mint-button': Button},
     data () {
@@ -41,6 +43,12 @@
     methods: {
       showPassword(){
         this.isShowPassword = !this.isShowPassword;
+      },
+      submitLogin(){
+        Api.testApi.getUser({},'加载中...').then(res=>{
+            console.log('res',res)
+        })
+
       }
     }
   }
