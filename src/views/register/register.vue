@@ -4,7 +4,7 @@
             <router-link to="/register/registerforpeo">
                 <div class="forpeo">
                     <div class="peo">
-                        <i class="OAIndexIcon icon-qiyeyonghu"></i>
+                        <i></i>
                     </div>
                     个人注册
                 </div>
@@ -12,7 +12,7 @@
             <router-link to="/register/registerforcmp">
                 <div class="forcmp">
                     <div class="cmp">
-                        <i class="OAIndexIcon icon-qiye"></i>
+                        <i></i>
                     </div>
                     企业注册</div>
             </router-link>
@@ -50,7 +50,6 @@ export default {
             margin: 0 auto;
             width: 1.34rem;
             height: 1.34rem;
-            line-height: 1.34rem;
             background-color: #29ccb7;
             border-radius: 50%;
             margin-bottom: 0.42rem;
@@ -67,7 +66,6 @@ export default {
             margin: 0 auto;
             width: 1.34rem;
             height: 1.34rem;
-            line-height: 1.34rem;
             background-color: #3b9ac6;
             border-radius: 50%;
             margin-bottom: 0.42rem;
@@ -133,9 +131,5 @@ export default {
         padding-top: 0.35rem;
         margin-bottom: 0.46rem;
     }
-}
-.OAIndexIcon{
-    font-size: 0.67rem;
-    color: #fff
 }
 </style>

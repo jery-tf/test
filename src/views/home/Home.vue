@@ -2,19 +2,19 @@
   <div class="flex lingheight">
     <div class="content">
       <mt-tab-container v-model="mySelected">
-        <mt-tab-container-item id="bs">
-          <Errand></Errand>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="gk">
-          <Publicitem></Publicitem>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="bm">
+      <mt-tab-container-item id="bs">
+        <Errand></Errand>
+      </mt-tab-container-item>
+      <mt-tab-container-item id="gk">
+        <Publicitem></Publicitem>
+      </mt-tab-container-item>
+      <mt-tab-container-item id="bm">
           <Forpeople>人人为我，我为人人</Forpeople>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="wd">
+      </mt-tab-container-item>
+      <mt-tab-container-item id="wd">
           <Myselfinfo></Myselfinfo>
-        </mt-tab-container-item>
-      </mt-tab-container>
+      </mt-tab-container-item>
+    </mt-tab-container>
     </div>
     <mt-tabbar v-model="mySelected" class="_tabbar">
       <mt-tab-item id="bs" class="_tabItem">
@@ -47,79 +47,61 @@
 
   import Me from './me.vue'
   import Errand from './Errand.vue'
-  import Util from '../../util'
-  export default {
-    name: 'hello',
-    components: {
-      Me, Errand, Publicitem, Forpeople, Myselfinfo
-    },
-    data () {
-      return {
-        mySelected: 'bs',
-        msg: 'Welcome to Your Vue.js App',
-        proConfig: proConfig.api
-      }
-    },
-    created(){
-      this.pageInit();
-    },
-    methods: {
-      pageInit(){
-        this.mySelected = Util.getHomePageUrl();
-      }
-    },
-    watch: {
-      'mySelected': function(){
-        Util.setHomePageUrl(this.mySelected);
-      }
+export default {
+  name: 'hello',
+  components: {
+    Me,Errand,Publicitem,Forpeople,Myselfinfo
+  },
+  data () {
+    return {
+      mySelected:'bs',
+      msg: 'Welcome to Your Vue.js App',
+      proConfig:proConfig.api
     }
+  },
+  methods:{
+
   }
+}
 </script>
 
 <style scoped>
-  ._tabbar {
-    height: .88rem;
-  }
+._tabbar{
+  height: .88rem;
+}
+._tabItem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.OAIndexIcon.tabbarIcon{
+  width: .4rem;
+  height: .4rem;
+}
+.mint-tabbar > .mint-tab-item{
+  color:#666;
+}
+.mint-tabbar > .mint-tab-item.is-selected{
+  color: #29a1f7;
+}
+.tabbarLabel{
+  padding-top: .1rem;
+}
 
-  ._tabItem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .OAIndexIcon.tabbarIcon {
-    width: .4rem;
-    height: .4rem;
-  }
-
-  .mint-tabbar>.mint-tab-item {
-    color: #666;
-  }
-
-  .mint-tabbar>.mint-tab-item.is-selected {
-    color: #29a1f7;
-  }
-
-  .tabbarLabel {
-    padding-top: .1rem;
-  }
-
-  .testDiv>p{
-    padding: 15px;
-  }
-
-  .lingheight {
-    max-height: 100%;
-  }
-
-  .content {
-    padding-bottom: .88rem;
-    height: 100%;
-    overflow-y: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+.testDiv>p{
+  padding: 15px;
+}
+.lingheight{
+  max-height: 100%;
+}
+.content{
+  padding-bottom: .88rem;
+  height: 100%;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 </style>

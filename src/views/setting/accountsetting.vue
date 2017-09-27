@@ -5,11 +5,11 @@
                 <span>18684891234 <i class=" OAIndexIcon icon-xiayiye"></i> </span>
             </div>
         </router-link>
-         <router-link to="/setting/resetsec">
+         <a href="javascript:void(0)">
             <div class="safety padding-container-lr " >登录密码
                 <span>已设置 <i class=" OAIndexIcon icon-xiayiye"></i> </span>
             </div>
-         </router-link>
+        </a>
          <a href="javascript:void(0)">
             <div class="safety padding-container-lr " >支付密码
                 <span> <i class=" OAIndexIcon icon-xiayiye"></i> </span>
