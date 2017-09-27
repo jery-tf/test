@@ -31,12 +31,6 @@ let router = new Router({
       meta:{
         title:'首页'
       },
-      // beforeEnter:(to, from, next)=>{
-        // console.log('Home to==>',to);
-        // console.log('Home from==>',from);
-        // to.query.show = Util.checkHomeUrl(to.query.show);
-      //   next();
-      // }
     },...errand,...me,...search,...persondata,...register,...setting,gk,selfinfo
   ]
 })
