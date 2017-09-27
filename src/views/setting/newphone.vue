@@ -1,11 +1,10 @@
 <template>
   <div>
     <div class="padding-container-lr changephone">修改手机号码</div>
-    <mt-field placeholder="请输入手机号码" type="tel" label="手机号码" class="padding-container-lr"> </mt-field>
-    <button class="mint-button mint-button--primary mint-button--large ">
-      <!---->
+    <mt-field placeholder="手机号码" type="tel" label="手机号码" class="padding-container-lr"> </mt-field>
+    <router-link to="/setting/lastphone" class="mint-button mint-button--primary mint-button--large ">    
       <label class="mint-button-text">下一步</label>
-    </button>
+    </router-link>
   </div>
 </template>
 <script>
@@ -31,6 +30,7 @@ export default {
 .mint-button--large {
   width: 6.72rem;
   height: 0.93rem;
+  line-height: 0.93rem;
   border-radius: 10px;
 }
 
@@ -52,5 +52,9 @@ export default {
       color: #666;
     }
   }
+}
+.mint-field .mint-cell-title{
+  width: 1.12rem;
+  margin-right: 0.48rem;
 }
 </style>

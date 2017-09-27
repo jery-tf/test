@@ -37,5 +37,20 @@ export default [
           title:'输入新手机'
         },
       },
-     
+      {
+        path: '/setting/lastphone',
+        name: 'lastphone',
+        component: views.Setting.Lastphone,
+        meta:{
+          title:'新手机验证码'
+        },
+      },
+      {
+        path: '/setting/resetsec',
+        name: 'resetsec',
+        component: views.Setting.Resetsec,
+        meta:{
+          title:'重置登录密码'
+        },
+      },
 ]
