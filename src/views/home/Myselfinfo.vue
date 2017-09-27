@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="myheader">
-      <router-link to="/selfinfo">
+      <router-link to="/me/userLogin">
+        <!--/selfinfo-->
         <div class="hport">
         <h3 class=" OAIndexIcon icon-yonghu11"></h3>
         请登录

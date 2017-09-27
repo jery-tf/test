@@ -6,11 +6,11 @@ import views from '../views'
 
 export default [
   {
-    path:'/me/enterpriseLogin',
+    path:'/me/userLogin',
     name:'enterpriseLogin',
     component:views.Me.EnterpriseLogin,
     meta:{
-      title:'企业登录'
+      title:'用户登录'
     }
   },
   {
