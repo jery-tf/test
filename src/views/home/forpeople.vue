@@ -1,63 +1,109 @@
+/**
+* Created by wyg on 2017/9/24.
+*/
+
 <template>
-  <div id="tmpl">
-    <mt-field label="请输入原始密码" type="password" class="ipt"><span class="OAIndexIcon icon-yanjing1"></span></mt-field>
-    <div class="sect">
-      <mt-field label="请输入新密码" type="password" class="ipt"><span class="OAIndexIcon icon-yanjing1"></span></mt-field>
-      <mt-field label="请再次输入原始密码" type="password" class="ipt" placeholder="12345" ><span class="OAIndexIcon icon-yanjing1"></span></mt-field>
-    </div>
+  <div class="h100 doubleListView">
+    <mt-tab-container v-model="selected">
+      <mt-tab-container-item id="1">
+        <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
+                        :selectedId="selectedId">
+          <div class="flex1 right">
+            <Education></Education>
+          </div>
+        </DoubleListView>
+      </mt-tab-container-item>
+      <mt-tab-container-item id="2">
+        222
+      </mt-tab-container-item>
+    </mt-tab-container>
   </div>
 </template>
+
 <script>
-export default {
-  data() {
-    return {
-      password: ''
+  import DoubleListView from 'components/public/DoubleListView.vue'
+   import Education from 'components/convenpeo/Education.vue'
+  export default {
+    name: 'Errand',
+    components: {
+      DoubleListView,Education
+    },
+    data () {
+      return {
+        selected: '1',
+        leftDataList: [
+          {
+            id: 1,
+            icon: 'icon-ertongshouyang',
+            name: '婚育收养'
+          },{
+            id: 2,
+            icon: 'icon-xuexiao',
+            name: '教育培训'
+          },{
+            id: 3,
+            icon: 'icon-weibiaoti9',
+            name: '求职执业'
+          },
+          {
+            id: 4,
+            icon: 'icon-shui',
+            name: '纳税缴费'
+          },
+           {
+            id: 5,
+            icon: 'icon-jiuyifuwu',
+            name: '就医保健'
+          },
+          {
+            id: 6,
+            icon: 'icon-baoxianweidianji',
+            name: '社会保险'
+          },
+           {
+            id: 7,
+            icon: 'icon-kunnanjiuzhu',
+            name: '福利救助'
+          },
+            {
+            id: 8,
+            icon: 'icon-zufang',
+            name: '房屋租售'
+          },
+           {
+            id: 9,
+            icon: 'icon-bus',
+            name: '交通旅游'
+          },
+        ],
+        selectedId:1
+      }
+    },
+    created(){
+
+    },
+    methods: {
+      //点击左侧列表 单元格
+      selecedLeftFun(id){
+          //拿着ID 请求数据
+        console.log('selecedLeftFun-->',id);
+        this.selectedId = id;
+      }
     }
+
   }
-}
 </script>
-<style  lang='less'>
-#tmpl {
-  .icon-yanjing1{
-    display: block;
-    width: 0.33rem;
-    height: 0.24rem;
-    font-size: 0.24rem;
-    color: #12b7f5
-  }
-  .ipt {
-    width: 7.2rem;
-    height: 0.98rem;
-    line-height: 0.98rem;
-    font-size: 0.28rem;
-    color: #333;
-    box-sizing: border-box;
-    .mintui-field-error{
-      content: ""
-    }
-    .mint-cell-wrapper {
-      background-image: none;
-    }
-    .mint-cell-title {
-      color: #333;
-      font-size: 0.28rem;
-      width: 2.6rem;
-      margin-right:0.3rem;
-    }
-    .mint-field-core{
-      font-size: 0.28rem;
-      color:#99666666;
-      margin-top: 0.15rem;
+
+<style lang="less" rel="stylesheet/less">
+  .doubleListView {
+    display: flex;
+    flex-direction: column;
+    .mint-tab-container {
+      flex: 1;
+      .mint-tab-container-wrap {
+        height: 100%;
+      }
     }
   }
-  .sect {
-    margin-top: 0.2rem;
-    .mint-cell:last-child {
-      background-image: none;
-    }
-    .mint-cell:first-child {
-      border-bottom: 1px solid #d9d9d9
-    }
-  }
-}
+
 </style>

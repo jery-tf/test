@@ -59,9 +59,6 @@
         color: #13b7f6;
       }
     }
-    .OAIndexIcon{
-      font-size: .33rem;
-    }
   }
 
   .right {

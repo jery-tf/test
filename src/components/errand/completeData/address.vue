@@ -65,15 +65,11 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .border-bottom{
-    font-size: .28rem;
-  }
   .content{
     font-size: .24rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
-
     .left{
       width: 1.6rem;
       display: block;

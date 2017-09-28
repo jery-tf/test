@@ -11,16 +11,15 @@
       <button class="btn">52秒后重新获取</button>
     </div>
    <router-link to="/setting/newphone">
-      <button class="mint-button mint-button--primary mint-button--large ">
-      <!---->
-      <label class="mint-button-text">下一步</label>
+       <Btncommon msg="下一步"></Btncommon>
     </button>
    </router-link>
   </div>
 </template>
 <script>
+import Btncommon from 'components/btncommon/BtnCommon'
 export default {
-
+ components:{Btncommon},
 }
 </script>
 <style lang="less" scoped>
@@ -59,7 +58,7 @@ export default {
     height: 0.8rem;
     font-size: .28rem;
     color: #aaa;
-    width: 4.75rem;
+    width: 4.5rem;
   }
   .btn {
     border: 1px solid #a0a0a0;

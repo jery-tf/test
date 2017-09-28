@@ -1,74 +1,40 @@
 <template>
-  <div id="tmpl">
-    <div class="pubnews padding-container">
-      <div class="pubhead">
-        <h3>通知公告</h3>
-        <span>查看更多
-          <i class="OAIndexIcon icon-fanhui4"></i>
-        </span>
-      </div>
-      <ul class="pubcont">
-        <li class="publistone">
-          <router-link to="/publicmore"> 
-            <img src="../../assets/img/text1.jpg">浏阳房产行业1小时募集411万元助力灾后重建<br>
-            <span>2017-04-06</span>
-          </router-link>
-        </li>
-        <li class="publistone">
-          <a href="javascript:void(0)">浏阳房产行业1小时募集411万元助力灾后重建<br>
-            <span>2017-04-06</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="pubnews padding-container">
-      <div class="pubhead">
-        <h3>政务动态</h3>
-        <span>查看更多
-          <i class="OAIndexIcon icon-fanhui4"></i>
-        </span>
-      </div>
-      <ul class="pubcont">
-        <li class="publistone">
-          <a href="javascript:void(0)"> <img src="../../assets/img/text1.jpg">浏阳房产行业1小时募集411万元助力灾后重建<br>
-            <span>2017-04-06</span>
-          </a>
-        </li>
-        <li class="publistone">
-          <a href="javascript:void(0)">浏阳房产行业1小时募集411万元助力灾后重建<br>
-            <span>2017-04-06</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="pubnews padding-container">
-      <div class="pubhead">
-        <h3>媒体聚焦</h3>
-        <span>查看更多
-          <i class="OAIndexIcon icon-fanhui4"></i>
-        </span>
-      </div>
-      <ul class="pubcont">
-        <li class="publistone">
-          <a href="javascript:void(0)"> <img src="../../assets/img/text1.jpg">浏阳房产行业1小时募集411万元助力灾后重建<br>
-            <span>2017-04-06</span>
-          </a>
-        </li>
-        <li class="publistone">
-          <a href="javascript:void(0)">浏阳房产行业1小时募集411万元助力灾后重建<br>
-            <span>2017-04-06</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-
+<div id="tmpl">
+    <Publicitem :content="item"  :key="index"  v-for="(item,index) in list"></Publicitem>
     <router-link to="">这是暂时放到这里，到时候要调到我的首页去的</router-link>
   </div>
 </template>
 <script>  
+import Publicitem from 'components/publicitem/publicitem.vue'
 export default {
-
+  components:{Publicitem},
+  data(){
+    return{
+      list:[
+        {
+          title:'通知公告',
+          contentf:'浏阳房产行业1小时募集411万元助力灾后重建',
+          timef:'2017-04-06',
+          contents:'城乡低保一体化实施开始，浏阳低保标准开始大幅度提高',
+          times:'2017-04-06'
+        },
+        {
+          title:'政务动态',
+          contentf:'浏阳房产行业1小时募集411万元助力灾后重建',
+          timef:'2017-04-06',
+          contents:'城乡低保一体化实施开始，浏阳低保标准开始大幅度提高',
+          times:'2017-04-06'
+        },
+        {
+          title:'通知公告',
+          contentf:'浏阳房产行业1小时募集411万元助力灾后重建',
+          timef:'2017-04-06',
+          contents:'城乡低保一体化实施开始，浏阳低保标准开始大幅度提高',
+          times:'2017-04-06'
+        }
+      ]
+    }
+  }
 }
 </script>
 <style scoped>

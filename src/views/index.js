@@ -10,8 +10,8 @@ import Register from './register'
 import Setting from './setting'
 import Gk from './gk'
 import Selfinfo from './selfinfo'
-
+import Convenience from './convenience'
 import Me from './me'
 export default {
-  Errand,Home,noPage,Search,Persondata,Register,Setting,Gk,Selfinfo,Me
+  Errand,Home,noPage,Search,Persondata,Register,Setting,Gk,Selfinfo,Me,Convenience
 }
