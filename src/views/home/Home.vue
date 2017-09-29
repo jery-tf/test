@@ -83,7 +83,7 @@ export default {
 ._tabItem{
   display: flex;
   justify-content: center;
-  align-items: center;˚
+  align-items: center;
 }
 .OAIndexIcon.tabbarIcon{
   width: .4rem;
