@@ -40,6 +40,10 @@ export default {
         span {
             float: right;
         }
+        .icon-yonghu21{
+            font-size: 1.01rem;
+            color: #ccc
+        }
     }
     .pname {
         .adminpname {

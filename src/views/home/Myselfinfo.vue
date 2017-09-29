@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="myheader">
-      <router-link to="/me/userLogin">
-        <!--/selfinfo-->
+      <router-link to="/selfinfo">
         <div class="hport">
         <h3 class=" OAIndexIcon icon-yonghu11"></h3>
         请登录
@@ -91,7 +90,7 @@
      <router-link to="/setting/setting">
         <div  class="particulars company setting">
         <span>
-           <i class="OAIndexIcon icon-shezhi2 setting"></i>设置
+           <i class="OAIndexIcon icon-shezhi2"></i>设置
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>

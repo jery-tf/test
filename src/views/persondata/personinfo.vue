@@ -1,21 +1,19 @@
 <template>
     <div>
-        <div class="tmpl" v-for="item in list">
-            <mt-field :label="item.name" type="text" :placeholder="item.pname" class="ipt"></mt-field>
-        </div>
-        <button class="mint-button mint-button--primary mint-button--large ">
-            <!---->
-            <label class="mint-button-text">保存</label>
-        </button>
+        <Personinfo :person='item'  :key="index"  v-for="(item,index) in list"></Personinfo>
+       <Btncommon msg="保存"></Btncommon>
     </div>
 </template>
 <script>
+import Personinfo from 'components/personinfo/personinfo.vue'
+import Btncommon from 'components/btncommon/BtnCommon'
 export default {
+    components:{Personinfo,Btncommon},
     data() {
         return {
             list: [
-                { name: "客户名称", pname: "请输入客户名称" },
-                { name: "固定电话", pname: "请输入固定电话" },
+                { name: "客户名称", pname: "" },
+                { name: "固定电话", pname: "" },
                 { name: "行政区域", pname: "请输入行政区域" },
                 { name: "客户类型", pname: "请输入客户类型" },
                 { name: "销售区域", pname: "请输入销售区域" },
@@ -28,34 +26,9 @@ export default {
 }
 </script>
 <style lang="less">
-.tmpl {
-    margin-top: 0.2rem;
-    .ipt {
-        width: 7.2rem;
-        height: 1rem;
-        border-bottom: 1px solid #aaa;
-        .mint-cell-wrapper {
-            padding-left: 0.24rem;
-            .mint-field-core {
-                font-size: 0.24rem;
-            }
-            .mint-cell-title {
-                width: 1.14rem;
-                margin-right: 0.66rem;
-                .mint-cell-text {
-                    font-size: 0.28rem;
-                    color: #333;
-                }
-            }
-        }
-        .mint-field-core::-webkit-input-placeholder {
-            color: #aaa;
-        }
-    }
-   
-}
+
  .mint-button {
-        margin: 0 0.24rem;
+        margin: 0.26rem 0.24rem 0 0.24rem; 
     }
     .mint-button--large {
         width: 6.72rem;

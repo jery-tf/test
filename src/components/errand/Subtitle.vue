@@ -31,7 +31,6 @@
 <style scoped lang="less" rel="stylesheet/less">
   .title{
     color:#ff9900;
-    font-size: .28rem;
   }
   .content{
     margin-top: .1rem;

@@ -9,7 +9,7 @@
         <Publicitem></Publicitem>
       </mt-tab-container-item>
       <mt-tab-container-item id="bm">
-          <Forpeople>人人为我，我为人人</Forpeople>
+          <Forpeople></Forpeople>
       </mt-tab-container-item>
       <mt-tab-container-item id="wd">
           <Myselfinfo></Myselfinfo>
@@ -47,7 +47,6 @@
 
   import Me from './me.vue'
   import Errand from './Errand.vue'
-  import Util from '../../util'
 export default {
   name: 'hello',
   components: {
@@ -60,18 +59,8 @@ export default {
       proConfig:proConfig.api
     }
   },
-  created(){
-    this.pageInit();
-  },
-  methods: {
-    pageInit(){
-      this.mySelected = Util.getHomePageUrl();
-    }
-  },
-  watch: {
-    'mySelected': function(){
-      Util.setHomePageUrl(this.mySelected);
-    }
+  methods:{
+
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="morecont">
         <h3>十八大铁岭“首户”敛财500多万 还不服判上诉了</h3>
         <span>2017-07-05</span>
-        <p>我就是不喜欢吃榴莲类</p>
+        <p>法制晚报</p>
     </div>
   </div>
 </template>
