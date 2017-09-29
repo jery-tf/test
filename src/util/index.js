@@ -1,10 +1,10 @@
 /**
  * Created by wyg on 2017/9/21.
  */
-const setTitle = title =>{
-  document.title = title;
-}
+import * as user from './user'
+import * as login from './login'
+import * as home from './home'
 
 export default {
-  setTitle
+  user,login,home
 }

@@ -6,9 +6,9 @@ import views from '../views'
 
 export default [
   {
-    path:'/me/enterpriseLogin',
+    path:'/me/userLogin',
     name:'enterpriseLogin',
-    component:views.Me.EnterpriseLogin,
+    component:views.Me.UserLogin,
     meta:{
       title:'企业登录'
     }
