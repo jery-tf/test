@@ -3,7 +3,7 @@
     <LoginTop rightName="企业用户登录" rightLink="/"></LoginTop>
     <div class="center-center logo">
       <img class="icon" src="../../../assets/img/logo.png">
-      <!--<img class="name" src="../../../assets/img/login/logoName.png">-->
+      <img class="name" src="../../../assets/img/logoName.png">
     </div>
     <div class="top100">
       <Field placeholder="用户名/省份证/手机号码" v-model="userName"></Field>
