@@ -18,7 +18,7 @@ const checkHomeUrl = str =>{
 };
 
 
-/*********************************************************/
+/*********************home************************************/
 
 //设置页面标题
 const setTitle = title =>{
@@ -42,6 +42,22 @@ const getHomePageUrl = () =>{
   return pageUrl;
 };
 
+/*******************login*************************/
+
+//设置token到缓存
+const setToken = (token) =>{
+  if(token){
+    sessionStorage.setItem('token',JSON.stringify(token));
+  }
+};
+
+//从缓存获取token
+const getToken = () =>{
+  let token = sessionStorage.getItem('token');
+  return token?JSON.parse(token):null;
+};
+
+
 export default {
-  setTitle,setHomePageUrl,getHomePageUrl
+  setTitle,setHomePageUrl,getHomePageUrl,setToken,getToken
 }

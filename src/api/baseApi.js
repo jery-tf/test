@@ -17,4 +17,4 @@ export const axiosGet = (url,params,loading)=>$axios.get(url,{params,loading})
  * @param data
  * @param [loading]
  */
-export const axiosPost = (url,data,loading)=>$axios.post(url,{data,loading})
+export const axiosPost = (url,data,loading)=>$axios.post(url,data,{loading})

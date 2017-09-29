@@ -30,7 +30,10 @@
   import LoginTop from '../../../components/login/LoginTop.vue'
   import { Field, Button } from 'mint-ui'
   import Api from '../../../api'
-//  getUser
+  import Util from '../../../util'
+  import axios from 'axios'
+  import Config from '../../../config'
+
   export default {
     components: {LoginTop, Field, 'mint-button': Button},
     data () {
@@ -43,10 +46,27 @@
     methods: {
       showPassword(){
         this.isShowPassword = !this.isShowPassword;
+
+
+        //test
+        let token = Util.getToken();
+        Api.userApi.getUserInfo({access_token:token.access_token}).then(res=>{
+          console.log('用户信息->',res)
+        }).catch(err=>{
+          console.log(err)
+        })
       },
       submitLogin(){
-        Api.testApi.getUser({},'加载中...').then(res=>{
-            console.log('res',res)
+        let data = {
+          clientId:Config.clientId,
+          s:'a6b7YJHba7WrkYKltV4+87+7ybv/VCzdNEeURVxadDA5f6T8ZviUr2tgys3WumdmhspnccLV6Y/i8wpuibeouw=='
+        };
+        Api.loginApi.userLogin(data).then(res=>{
+          console.log('TOKEN->',res)
+          Util.setToken(res);
+
+        }).catch(err=>{
+            console.log(err)
         })
 
       }
