@@ -52,12 +52,15 @@ const setToken = (token) =>{
 };
 
 //从缓存获取token
+const getAccessToken = () =>{
+  let token = sessionStorage.getItem('token');
+  return token?JSON.parse(token).access_token:null;
+};
 const getToken = () =>{
   let token = sessionStorage.getItem('token');
   return token?JSON.parse(token):null;
 };
 
-
 export default {
-  setTitle,setHomePageUrl,getHomePageUrl,setToken,getToken
+  setTitle,setHomePageUrl,getHomePageUrl,setToken,getToken,getAccessToken
 }

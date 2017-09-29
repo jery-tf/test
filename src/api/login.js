@@ -7,4 +7,6 @@
 import { axiosPost } from './baseApi'
 import Config from '../config';
 
+
+//用户登录
 export const userLogin = (params,loading)=>axiosPost(`${Config.loginApiUrl}oauth2/applogin`,params,loading);

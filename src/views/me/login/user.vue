@@ -49,8 +49,8 @@
 
 
         //test
-        let token = Util.getToken();
-        Api.userApi.getUserInfo({access_token:token.access_token}).then(res=>{
+        let accessToken = Util.getAccessToken();
+        Api.userApi.getUserInfo({access_token:accessToken}).then(res=>{
           console.log('用户信息->',res)
         }).catch(err=>{
           console.log(err)
@@ -61,7 +61,7 @@
           clientId:Config.clientId,
           s:'a6b7YJHba7WrkYKltV4+87+7ybv/VCzdNEeURVxadDA5f6T8ZviUr2tgys3WumdmhspnccLV6Y/i8wpuibeouw=='
         };
-        Api.loginApi.userLogin(data).then(res=>{
+        Api.loginApi.userLogin(data,'请稍后...').then(res=>{
           console.log('TOKEN->',res)
           Util.setToken(res);
 
