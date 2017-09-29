@@ -49,12 +49,15 @@
 
 
         //test
-        let accessToken = Util.getAccessToken();
+        let accessToken = Util.login.getAccessToken();
         Api.userApi.getUserInfo({access_token:accessToken}).then(res=>{
-          console.log('用户信息->',res)
+          console.log('用户信息->',res);
+          Util.user.setUserInfo(res)
+          console.log('缓存中的信息-->',Util.user.getUserInfo())
         }).catch(err=>{
           console.log(err)
         })
+
       },
       submitLogin(){
         let data = {
@@ -63,7 +66,7 @@
         };
         Api.loginApi.userLogin(data,'请稍后...').then(res=>{
           console.log('TOKEN->',res)
-          Util.setToken(res);
+          Util.login.setToken(res);
 
         }).catch(err=>{
             console.log(err)

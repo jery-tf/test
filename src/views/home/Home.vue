@@ -65,12 +65,12 @@ export default {
   },
   methods: {
     pageInit(){
-      this.mySelected = Util.getHomePageUrl();
+      this.mySelected = Util.home.getHomePageUrl();
     }
   },
   watch: {
     'mySelected': function(){
-      Util.setHomePageUrl(this.mySelected);
+      Util.home.setHomePageUrl(this.mySelected);
     }
   }
 }

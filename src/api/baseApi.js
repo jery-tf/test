@@ -40,7 +40,7 @@ export const axiosPut = (url,data,loading)=>$axios.put(url,data,{loading});
 
 /**********************需要权限认证*****************************/
 
-let  headers = { "Authorization": `Bearer ${Util.getAccessToken()}`};
+let  headers = { "Authorization": `Bearer ${Util.login.getAccessToken()}`};
 
 /***
  * 底层get方法

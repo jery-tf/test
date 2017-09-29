@@ -47,9 +47,9 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
   //设置title
   if(to.meta.title){
-    Util.setTitle(to.meta.title)
+    Util.home.setTitle(to.meta.title)
   }else{
-    Util.setTitle(to.name)
+    Util.home.setTitle(to.name)
   }
   next();
 })
