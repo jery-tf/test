@@ -47,6 +47,7 @@
 
   import Me from './me.vue'
   import Errand from './Errand.vue'
+  import Util from '../../util'
 export default {
   name: 'hello',
   components: {
@@ -59,8 +60,18 @@ export default {
       proConfig:proConfig.api
     }
   },
-  methods:{
-
+  created(){
+    this.pageInit();
+  },
+  methods: {
+    pageInit(){
+      this.mySelected = Util.getHomePageUrl();
+    }
+  },
+  watch: {
+    'mySelected': function(){
+      Util.setHomePageUrl(this.mySelected);
+    }
   }
 }
 </script>
@@ -72,7 +83,7 @@ export default {
 ._tabItem{
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;˚
 }
 .OAIndexIcon.tabbarIcon{
   width: .4rem;
