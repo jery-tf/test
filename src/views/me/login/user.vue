@@ -43,36 +43,39 @@
         isShowPassword: false
       }
     },
+    created(){
+    },
     methods: {
       showPassword(){
         this.isShowPassword = !this.isShowPassword;
-
-
-        //test
-        let accessToken = Util.login.getAccessToken();
-        Api.userApi.getUserInfo({access_token: accessToken}).then(res => {
-          console.log('用户信息->', res);
-          Util.user.setUserInfo(res)
-          console.log('缓存中的信息-->', Util.user.getUserInfo())
-        }).catch(err => {
-          console.log(err)
-        })
-
       },
+      toNextPage(){
+        this.$router.replace({name:this.nextPath})
+      },
+      //点击完成操作
       submitLogin(){
         let content = {ticket:this.password,account:this.userName,type:'pwd'};
+        let _this = this;
         content = {content:JSON.stringify(content)};
+        //获取登录加密
         Api.loginApi.getLoginAes(content).then(res => {
           let data = {clientId:Config.clientId,s:res};
-          console.log('getLoginAes-->', res);
-          console.log('data------->',data);
+//          登录
           Api.loginApi.userLogin(data).then(res=>{
-            console.log('TOKEN->',res)
+            //获取用户信息
+            Api.userApi.getUserInfo({access_token: res.access_token}).then(res => {
+              Util.user.setUserInfo(res);
+              //跳转页面
+              _this.toNextPage();
+            });
             Util.login.setToken(res);
           })
         })
-
-
+      }
+    },
+    computed:{
+      nextPath(){
+          return this.$route.params.url||'home';
       }
     }
   }

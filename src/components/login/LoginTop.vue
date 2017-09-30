@@ -29,11 +29,11 @@
         methods: {
           //左侧按钮
           closeBtn(){
-              if(this.leftLink){
-                Vue.$router.push({path:this.leftLink});
-              }else{
+//              if(this.leftLink){
+//                Vue.$router.push({path:this.leftLink});
+//              }else{
                 window.history.go(-1)
-              }
+//              }
           }
         }
 

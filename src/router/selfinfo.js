@@ -3,8 +3,9 @@
  */
 //办事
 import views from '@/views'
+import Util from '../util'
 
-export default 
+export default
     {
         path: '/selfinfo',
         name: 'selfinfo',
@@ -12,4 +13,5 @@ export default
         meta:{
           title:'个人信息页'
         },
+        beforeEnter:Util.login.checkLogin
       }

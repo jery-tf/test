@@ -6,7 +6,7 @@ import views from '../views'
 
 export default [
   {
-    path:'/me/userLogin',
+    path:'/me/userLogin/:url',
     name:'enterpriseLogin',
     component:views.Me.UserLogin,
     meta:{
