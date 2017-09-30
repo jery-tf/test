@@ -3,18 +3,18 @@
     <div class="myheader">
       <router-link to="/selfinfo">
         <div class="hport">
-        <h3 class=" OAIndexIcon icon-yonghu11"></h3>
-        请登录
-      </div>
+          <h3 class=" OAIndexIcon icon-yonghu11"></h3>
+          请登录
+        </div>
       </router-link>
       <div class="spanceclt">
         <span class="line"></span>
-       <router-link to="/persondata/personlist">
+        <router-link to="/persondata/personlist">
           <div class="myspace">
-          <span class=" OAIndexIcon icon-ziliao-copy"></span>
-          <p>资料空间</p>
-        </div>
-       </router-link>
+            <span class=" OAIndexIcon icon-ziliao-copy"></span>
+            <p>资料空间</p>
+          </div>
+        </router-link>
         <div class="mycollect">
           <span class="OAIndexIcon icon-shoucang"></span>
           <p>我的收藏</p>
@@ -27,169 +27,212 @@
     </div>
     <ul class="unoffice">
       <li>
-          <em class="icon-savetemp OAIndexIcon"></em>
-          <p>暂存</p>
-          <div class="num">12</div>
+        <em class="icon-savetemp OAIndexIcon"></em>
+        <p>暂存</p>
+        <div class="num">12</div>
       </li>
       <li>
-          <em class="icon-daishouli1 OAIndexIcon"></em>
-          <p>待受理</p>
-          <div class="num">6</div>
+        <em class="icon-daishouli1 OAIndexIcon"></em>
+        <p>待受理</p>
+        <div class="num">6</div>
       </li>
       <li>
-          <em class="icon-daishouli OAIndexIcon"></em>
-          <p>待审核</p>
-          <div class="num">1</div>
+        <em class="icon-daishouli OAIndexIcon"></em>
+        <p>待审核</p>
+        <div class="num">1</div>
       </li>
-       <li>
-          <em class="icon-yibanshixiang OAIndexIcon"></em>
-          <p>已办结</p>
-          <div class="num">3</div>
+      <li>
+        <em class="icon-yibanshixiang OAIndexIcon"></em>
+        <p>已办结</p>
+        <div class="num">3</div>
       </li>
-       <li>
-         <span class="linetoo"></span>
-          <em class="icon-jiaofei OAIndexIcon"></em>
-          <p>待您处理</p>
-          <div class="num">5</div>
+      <li>
+        <span class="linetoo"></span>
+        <em class="icon-jiaofei OAIndexIcon"></em>
+        <p>待您处理</p>
+        <div class="num">5</div>
       </li>
     </ul>
-     <div class="parttop  padding-container-lr">
+    <div class="parttop  padding-container-lr">
 
-        <div  class="particulars">
+      <div class="particulars">
         <span>
            <i class="OAIndexIcon icon-shijian"></i>我的预约
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
-      <div  class="particulars ">
+      <div class="particulars ">
         <span>
            <i class="OAIndexIcon icon-charge"></i>缴费记录
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
-      <div  class="particulars company setting">
+      <div class="particulars company setting">
         <span>
            <i class="OAIndexIcon icon-tousu"></i>我的投诉
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
-     </div>
-     <div class="parttop padding-container-lr">
-        <div  class="particulars ">
+    </div>
+    <div class="parttop padding-container-lr" @click="authentication">
+      <div class="particulars ">
         <span>
            <i class="OAIndexIcon icon-shimingrenzheng"></i>实人认证
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
-      <div  class="particulars">
+      <div class="particulars">
         <span>
            <i class="OAIndexIcon icon-bangzhu"></i>帮助与反馈
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
-     <router-link to="/setting/setting">
-        <div  class="particulars company setting">
+      <router-link to="/setting/setting">
+        <div class="particulars company setting">
         <span>
            <i class="OAIndexIcon icon-shezhi2"></i>设置
         </span>
-        <em class="OAIndexIcon icon-next"></em>
-      </div>
-     </router-link>
+          <em class="OAIndexIcon icon-next"></em>
+        </div>
+      </router-link>
     </div>
-     </div>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+  import Api from '../../api'
+  export default {
+    name: 'myselfinfo',
+    components: {},
+    data () {
+      return {}
+    },
+    created(){
+    },
+    methods: {
+      authentication(){
+//        console.log('实名认证');
+//      var url = "<%=url%>";
+//      var args = {
+//        "appid": '<%=appId %>',
+//        "signature": '<%=signature %>',
+//        "redirect": '<%=redirect%>',
+//        "uid": '<%=uid%>',
+//        "type": <%=type%>
+//    };
+        let url = 'https://iauth-sandbox.wecity.qq.com/new/cgi-bin/auth.php';
+        let appId = '4454', method = 'auth', secret_key = '741be1730541aaed52899b03a3577485', expired = '600',
+          mySign = '';
+        Api.realNameApi.getAppSign({method:'auth',type:'H5'}).then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            console.log(err);
+        })
+//        let args = {
+//          appid: appId,
+//          signature: signature,
+//          redirect: 'http://wyg.natapp4.cc/',
+//          uid: '123',
+//          type: 0
+//        }
+//        Api.realNameApi.realName(args).then(res=>{
+//            console.log(res);
+//        }).catch(err=>{
+//            console.log(err);
+//        })
+      }
+    },
+    computed: {}
+  }
 </script>
 
 
 <style scoped lang='less'>
-.myheader {
-  width: 7.2rem;
-  height: 3.64rem;
-  background-color: #fff;
-  margin-bottom: 0.19rem;
-  text-align: center;
-  .hport {
-    display: inline-block;
-    padding-top: 0.4rem;
-    padding-bottom: 0.66rem;
-    font-size: 0.32rem;
-    color: #999;
-    .icon-yonghu11 {
-      font-size: 1.01rem;
-    }
-  }
-  .spanceclt {
-    overflow: hidden;
-    position: relative;
-    .line{
+  .myheader {
+    width: 7.2rem;
+    height: 3.64rem;
+    background-color: #fff;
+    margin-bottom: 0.19rem;
+    text-align: center;
+    .hport {
       display: inline-block;
-      width: 0.02rem;
-      height: 0.49rem;
-      background-color: #eee;
-      position: absolute;
-      top: 0.2rem;
-      left: 50%;
-    }
-    .myspace {
-      float: left;
-      width: 50%;
-      text-align: center;
-      .icon-ziliao-copy {
-        font-size: 0.4rem;
+      padding-top: 0.4rem;
+      padding-bottom: 0.66rem;
+      font-size: 0.32rem;
+      color: #999;
+      .icon-yonghu11 {
+        font-size: 1.01rem;
       }
+    }
+    .spanceclt {
+      overflow: hidden;
+      position: relative;
+      .line {
+        display: inline-block;
+        width: 0.02rem;
+        height: 0.49rem;
+        background-color: #eee;
+        position: absolute;
+        top: 0.2rem;
+        left: 50%;
+      }
+      .myspace {
+        float: left;
+        width: 50%;
+        text-align: center;
+        .icon-ziliao-copy {
+          font-size: 0.4rem;
+        }
       ;
-      p {
-        font-size: 0.24rem;
-        color: #666;
+        p {
+          font-size: 0.24rem;
+          color: #666;
+        }
+      }
+      .mycollect {
+        float: right;
+        width: 50%;
+        text-align: center;
+        .icon-shoucang {
+          font-size: 0.4rem;
+        }
+        p {
+          font-size: 0.24rem;
+          color: #666;
+        }
       }
     }
-    .mycollect {
+  }
+
+  .officework {
+    width: 7.2rem;
+    height: 0.93rem;
+    line-height: 0.93rem;
+    background-color: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    .myoffice {
+      font-size: 0.32rem;
+      color: #333;
+    }
+    .checkall {
       float: right;
-      width: 50%;
-      text-align: center;
-      .icon-shoucang {
-        font-size: 0.4rem;
-      }
-      p {
-        font-size: 0.24rem;
-        color: #666;
+      font-size: 0.24rem;
+      color: #999;
+      .icon-next {
+        font-size: 0.29rem;
+        vertical-align: -3%;
+        margin-left: 0.26rem;
       }
     }
   }
-}
-.officework{
-  width: 7.2rem;
-  height: 0.93rem;
-  line-height: 0.93rem;
-  background-color: #fff;
-  border-bottom: 1px solid #d9d9d9;
-  .myoffice{
-    font-size: 0.32rem;
-    color: #333;
-  }
-  .checkall{
-    float: right;
-    font-size: 0.24rem;
-    color: #999;
-    .icon-next{
-      font-size: 0.29rem;
-      vertical-align: -3%;
-      margin-left: 0.26rem;
-    }
-  }
-}
-.unoffice{
+
+  .unoffice {
     width: 7.2rem;
     height: 1.67rem;
     background-color: #fff;
     display: flex;
     margin-bottom: 0.2rem;
-    li{
+    li {
       width: 20%;
       height: 1.45rem;
       text-align: center;
@@ -197,15 +240,15 @@ export default {
       font-size: 0.24rem;
       color: #666;
       position: relative;
-      .icon-savetemp,.icon-daishouli1,.icon-daishouli,.icon-yibanshixiang,.icon-jiaofei{
+      .icon-savetemp, .icon-daishouli1, .icon-daishouli, .icon-yibanshixiang, .icon-jiaofei {
         font-size: 0.44rem;
         color: #1e8af6;
       }
-      .icon-jiaofei{
+      .icon-jiaofei {
         font-size: 0.44rem;
         color: #fe6732
       }
-      .num{
+      .num {
         width: 0.34rem;
         height: 0.34rem;
         line-height: 0.34rem;
@@ -218,7 +261,7 @@ export default {
         font-size: 0.2rem;
       }
     }
-    .linetoo{
+    .linetoo {
       display: inline-block;
       width: 0.02rem;
       height: 0.63rem;
@@ -228,39 +271,41 @@ export default {
       right: 1.4rem;
     }
   }
-  .parttop{
+
+  .parttop {
     background-color: #fff;
   }
-  .particulars{
+
+  .particulars {
     width: 6.72rem;
     height: 0.98rem;
     line-height: 0.98rem;
     background-color: #fff;
     font-size: 0.32rem;
     color: #333;
-    .icon-shijian,.icon-charge,.icon-tousu,.icon-shimingrenzheng,.icon-bangzhu,.icon-shezhi2{
+    .icon-shijian, .icon-charge, .icon-tousu, .icon-shimingrenzheng, .icon-bangzhu, .icon-shezhi2 {
       font-size: 0.41rem;
       color: #F48074;
       margin-right: 0.26rem;
     }
-    .icon-charge{
+    .icon-charge {
       color: #108EE9;
     }
-    .icon-tousu{
+    .icon-tousu {
       color: #50BAA5;
-       font-size: 0.31rem
+      font-size: 0.31rem
     }
-    .icon-shimingrenzheng{
+    .icon-shimingrenzheng {
       color: #FC992C;
       font-size: 0.31rem
     }
-    .icon-bangzhu{
+    .icon-bangzhu {
       color: #FC992C;
     }
-    .icon-shezhi2{
+    .icon-shezhi2 {
       color: #108EE9;
     }
-    .icon-next{
+    .icon-next {
       float: right;
       font-size: 0.29rem;
       vertical-align: -3%;
@@ -268,10 +313,12 @@ export default {
       color: #999;
     }
   }
-  .company{
+
+  .company {
     margin-bottom: 0.24rem;
   }
-  .setting{
+
+  .setting {
     border-top: 1px solid #d9d9d9
   }
 </style>

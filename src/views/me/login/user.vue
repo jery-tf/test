@@ -28,7 +28,7 @@
 
 <script>
   import LoginTop from '../../../components/login/LoginTop.vue'
-  import { Field, Button } from 'mint-ui'
+  import {Field, Button} from 'mint-ui'
   import Api from '../../../api'
   import Util from '../../../util'
   import axios from 'axios'
@@ -50,27 +50,28 @@
 
         //test
         let accessToken = Util.login.getAccessToken();
-        Api.userApi.getUserInfo({access_token:accessToken}).then(res=>{
-          console.log('用户信息->',res);
+        Api.userApi.getUserInfo({access_token: accessToken}).then(res => {
+          console.log('用户信息->', res);
           Util.user.setUserInfo(res)
-          console.log('缓存中的信息-->',Util.user.getUserInfo())
-        }).catch(err=>{
+          console.log('缓存中的信息-->', Util.user.getUserInfo())
+        }).catch(err => {
           console.log(err)
         })
 
       },
       submitLogin(){
-        let data = {
-          clientId:Config.clientId,
-          s:'a6b7YJHba7WrkYKltV4+87+7ybv/VCzdNEeURVxadDA5f6T8ZviUr2tgys3WumdmhspnccLV6Y/i8wpuibeouw=='
-        };
-        Api.loginApi.userLogin(data,'请稍后...').then(res=>{
-          console.log('TOKEN->',res)
-          Util.login.setToken(res);
-
-        }).catch(err=>{
-            console.log(err)
+        let content = {ticket:this.password,account:this.userName,type:'pwd'};
+        content = {content:JSON.stringify(content)};
+        Api.loginApi.getLoginAes(content).then(res => {
+          let data = {clientId:Config.clientId,s:res};
+          console.log('getLoginAes-->', res);
+          console.log('data------->',data);
+          Api.loginApi.userLogin(data).then(res=>{
+            console.log('TOKEN->',res)
+            Util.login.setToken(res);
+          })
         })
+
 
       }
     }
@@ -121,7 +122,7 @@
   .font-middle {
     position: absolute;
     bottom: 1rem;
-    left:0;
+    left: 0;
     width: 100%;
     text-align: center;
     box-sizing: border-box;

@@ -4,4 +4,6 @@
 import * as testApi from './test'
 import * as loginApi from './login'
 import * as userApi from './user'
-export default { testApi ,loginApi ,userApi}
+import * as realNameApi from './realName'
+
+export default { testApi ,loginApi ,userApi ,realNameApi}

@@ -1,7 +1,7 @@
 /**
  * Created by wyg on 2017/9/28.
  */
-import { axiosGet } from './baseApi'
+import { axiosGet ,axiosGetToken} from './baseApi'
 import Config from '../config';
 
 /***
@@ -15,5 +15,5 @@ import Config from '../config';
  * @param params  access_token
  * @param loading
  */
-export const getUserInfo = (params,loading)=>axiosGet(`${Config.loginApiUrl}oauth2/user_info`,params,loading);
+export const getUserInfo = (params,loading)=>axiosGetToken(`${Config.loginUrl}/oauth2/user_info`,params,loading);
 

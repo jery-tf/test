@@ -3,7 +3,9 @@
  */
 
 export default {
-  apiUrl:'http://localhost:8088/',
-  loginApiUrl:'http://172.17.89.21:30069/',
-  clientId:'JQNb9l66Qk22ibryPBATnOg'
+  apiUrl:'http://172.17.89.21:30538',
+  loginUrl:'http://172.17.89.21:30069',
+  clientId:'JQNb9l66Qk22ibryPBATnOg',
+  AppSignUrl:'http://172.16.17.20:8080',
+  C2XApiKey:'sPvuCaUsT2aBuricqor963A'
 }

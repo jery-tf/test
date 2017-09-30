@@ -6,7 +6,7 @@ import proConfig from '../config';
 import MintUI from 'mint-ui';
 import Vue from 'vue'
 let AxiosIns = axios.create({
-  baseURL : proConfig.api,
+  baseURL : proConfig.apiUrl,
   timeout : 20000,
   contentType: 'application/json',
 })
@@ -43,13 +43,13 @@ AxiosIns.interceptors.response.use(response=>{
   MintUI.Indicator.close();
   try{
     //接口预留 401跳登录
-    if(error.response.data.Code === 401){
-      setTimeout(()=>{
-        Vue.$router.push({
-          name : 'userLogin'
-        })
-      },100)
-    }
+    // if(error.response.data.Code === 401){
+    //   setTimeout(()=>{
+    //     Vue.$router.push({
+    //       name : 'userLogin'
+    //     })
+    //   },100)
+    // }
   }catch(e){
     console.log(e);
   }
