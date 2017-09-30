@@ -2,7 +2,7 @@
     <div>
         <div class="regist">
             <router-link to="/register/registerforpeo">
-                <div class="forpeo">
+                <div class="forpeo" disabled="disabled">
                     <div class="peo">
                         <i class="OAIndexIcon  icon-qiyeyonghu"></i>
                     </div>
@@ -29,7 +29,9 @@
 </template>
 <script>
 export default {
-
+    methods:{
+       
+    }
 }
 </script>
 <style  lang='less'>
