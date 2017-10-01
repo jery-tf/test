@@ -1,6 +1,6 @@
 <template>
   <div>
-       <button class="mint-button mint-button--primary mint-button--large ">
+       <button class="mint-button mint-button--primary mint-button--large">
       <!---->
       <label class="mint-button-text">{{msg}}</label>
     </button>
@@ -12,7 +12,19 @@ export default {
   data(){
     return{
     }
-  }
+  },
+ methods:{
+//   ppp(idCard){
+//     let postId=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/i;
+//     if(!postId.test(idCard)){
+//       console.log(idCard)
+////       alert("请输入的合法身份证 ");
+//       return
+//     }
+//     console.log(123)
+//     this.$router.push("/register/registerinfo")
+//   }
+ }
 
 }
 </script>

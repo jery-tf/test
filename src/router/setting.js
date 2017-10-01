@@ -3,7 +3,7 @@
  */
 //设置
 import views from '@/views'
-
+import Util from '../util'
 export default [
     {
         path: '/setting/accountsetting',
@@ -20,6 +20,7 @@ export default [
         meta:{
           title:'账号设置页'
         },
+        beforeEnter:Util.login.checkLogin
       },
       {
         path: '/setting/changenum',
