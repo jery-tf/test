@@ -3,7 +3,7 @@
 */
 
 <template>
-  <div class="flex1 doubleListBox">
+  <div class="doubleListBox">
     <div class="left fff">
       <div v-for="(item,index) in dataList" :key="index"
            :class="item.id==selectedId?'li active':'li'"
@@ -42,10 +42,15 @@
 <style scoped lang="less" rel="stylesheet/less">
   .doubleListBox {
     display: flex;
-    height: 100%;
+    position: absolute;
+    top: .96rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
     .left {
       width: 1.66rem;
       overflow-y: auto;
+      height: 100%;
       .li {
         display: flex;
         align-items: center;
@@ -61,8 +66,9 @@
     }
   }
 
-  .right {
+  .right{
     flex: 1;
+    height: 100%;
     overflow-y: auto;
   }
 </style>

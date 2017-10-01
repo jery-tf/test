@@ -5,30 +5,55 @@ import $axios from './axiosSetting';
 import Util from '../util';
 import Config from '../config'
 
+
+/**************************内部方法*********************************/
+const assignHeader = (config)=>{
+  if(config && config.headers){
+    config.headers = Object.assign({},headers,config.headers);
+  }else{
+    config = Object.assign({},{headers});
+  }
+  return config;
+}
+
+const assignTokenHeaders = (config)=>{
+  if(config && config.headers){
+    config.headers = Object.assign({},tokenHeaders,config.headers);
+  }else{
+    config = Object.assign({},{tokenHeaders});
+  }
+  return config;
+}
+
 /**********************不需要权限认证*****************************/
-let  headers = { 'x-api-key': Config.C2XApiKey};
+const headers = { 'x-api-key': Config.C2XApiKey};
+
 /***
  * 底层get方法
  * @param url
  * @param params
- * @param [loading]
+ * @param [config]
  */
-export const axiosGet = (url,params,loading)=>$axios.get(url,{params,loading,headers});
-
+// export const axiosGet = (url,params,loading)=>$axios.get(url,{params,loading,headers});
+export const axiosGet = (url,params,config)=>{
+  config = assignHeader(config);
+  return $axios.get(url,Object.assign({},config,{params}))
+};
 /***
  * 底层post方法
  * @param url
  * @param data
- * @param [loading]
+ * @param [config]
  */
-export const axiosPost = (url,data,loading)=>$axios.post(url,data,{loading,headers});
-
+// export const axiosPost = (url,data,loading)=>$axios.post(url,data,{loading,headers});
+export const axiosPost = (url,data,config)=>$axios.post(url,data,assignHeader(config));
 /***
  * 底层delete方法
  * @param url
- * @param [loading]
+ * @param [config]
  */
-export const axiosDelete = (url,loading)=>$axios.post(url,{loading,headers});
+// export const axiosDelete = (url,loading)=>$axios.post(url,{loading,headers});
+export const axiosDelete = (url,config)=>$axios.post(url,Object.assign(config,{headers}));
 
 /***
  * 底层put 方法
@@ -48,17 +73,24 @@ let  tokenHeaders = { "Authorization": `Bearer ${Util.login.getAccessToken()}`,'
  * 底层get方法
  * @param url
  * @param params
- * @param [loading]
+ * @param [config]
  */
-export const axiosGetToken = (url,params,loading)=>$axios.get(url,{params,loading,headers:tokenHeaders});
+// export const axiosGetToken = (url,params,loading)=>$axios.get(url,{params,loading,headers:tokenHeaders});
+export const axiosGetToken = (url,params,config)=>{
+  config = assignTokenHeaders(config);
+  return $axios.get(url,Object.assign({},config,{params}));
+}
+
 
 /***
  * 底层post方法
  * @param url
  * @param data
- * @param [loading]
+ * @param [config]
  */
-export const axiosPostToken = (url,data,loading)=>$axios.post(url,data,{loading,headers:tokenHeaders});
+// export const axiosPostToken = (url,data,loading)=>$axios.post(url,data,{loading,headers:tokenHeaders});
+export const axiosPostToken = (url,data,config)=>$axios.post(url,data,assignTokenHeaders(config));
+
 
 /***
  * 底层delete方法
@@ -74,3 +106,6 @@ export const axiosDeleteToken = (url,loading)=>$axios.post(url,{loading,headers:
  * @param [loading]
  */
 export const axiosPutToken = (url,data,loading)=>$axios.put(url,data,{loading,headers:tokenHeaders});
+
+
+

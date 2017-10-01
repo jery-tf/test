@@ -4,26 +4,18 @@
 
 <template>
   <div class="h100 doubleListView">
-    <mt-navbar v-model="selected">
-      <mt-tab-item id="1">按主题</mt-tab-item>
-      <mt-tab-item id="2">按部门</mt-tab-item>
-    </mt-navbar>
+    <div class="contentTop fff border-bottom">
+      <div>顶部</div>
+    </div>
 
-    <mt-tab-container v-model="selected">
-      <mt-tab-container-item id="1">
-        <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
-                        :selectedId="selectedId">
-          <div class="flex1 right">
-            <router-link to="/errand/guide/test" class="center-center">
-              <p>办事指南</p>
-            </router-link>
-          </div>
-        </DoubleListView>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-        222
-      </mt-tab-container-item>
-    </mt-tab-container>
+    <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
+                    :selectedId="selectedId">
+      <div class="flex1 right">
+        <router-link to="/errand/guide/test" class="center-center">
+          <p>办事指南</p>
+        </router-link>
+      </div>
+    </DoubleListView>
   </div>
 </template>
 
@@ -50,6 +42,54 @@
             id: 3,
             icon: 'icon-ertongshouyang',
             name: '求职执业'
+          },{
+            id: 4,
+            icon: 'icon-ertongshouyang',
+            name: '婚育收养'
+          },{
+            id: 5,
+            icon: 'icon-ertongshouyang',
+            name: '教育培训'
+          },{
+            id: 6,
+            icon: 'icon-ertongshouyang',
+            name: '求职执业'
+          },{
+            id: 7,
+            icon: 'icon-ertongshouyang',
+            name: '婚育收养'
+          },{
+            id: 8,
+            icon: 'icon-ertongshouyang',
+            name: '教育培训'
+          },{
+            id: 9,
+            icon: 'icon-ertongshouyang',
+            name: '求职执业'
+          },{
+            id: 10,
+            icon: 'icon-ertongshouyang',
+            name: '婚育收养'
+          },{
+            id: 21,
+            icon: 'icon-ertongshouyang',
+            name: '教育培训'
+          },{
+            id: 31,
+            icon: 'icon-ertongshouyang',
+            name: '求职执业'
+          },{
+            id: 11,
+            icon: 'icon-ertongshouyang',
+            name: '婚育收养'
+          },{
+            id: 22,
+            icon: 'icon-ertongshouyang',
+            name: '教育培训'
+          },{
+            id: 32,
+            icon: 'icon-ertongshouyang',
+            name: '求职执业'
           },
         ],
         selectedId:1
@@ -72,13 +112,13 @@
 
 <style lang="less" rel="stylesheet/less">
   .doubleListView {
-    display: flex;
-    flex-direction: column;
-    .mint-tab-container {
-      flex: 1;
-      .mint-tab-container-wrap {
-        height: 100%;
-      }
+    position: relative;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    .contentTop{
+      height: .96rem;
     }
   }
 
