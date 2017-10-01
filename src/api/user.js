@@ -14,5 +14,7 @@ import Config from '../config';
  * @param params  access_token
  * @param loading
  */
-export const getUserInfo = (params,loading)=>axiosGetToken(`${Config.loginUrl}/oauth2/user_info`,params,loading);
+export const getUserInfo = (params,config)=>axiosGetToken(`${Config.loginUrl}/oauth2/user_info`,params,config);
 
+
+export const getUserDetails = id=>axiosGetToken(`/uop/v1/users/${id}`)
