@@ -9,7 +9,7 @@
     </ul>
     <div class="ableipt common">
       <em>手机号码</em>
-      <input type="text" class="idform" placeholder="15871452145">
+      <input type="text" class="idform" v-model="telp">
     </div>
 
     <div class="yan common">
@@ -19,21 +19,53 @@
     </div>
     <div class="ableipt common secret">
       <em>密码</em>
-      <input type="text" class="idform">
+      <input type="text" class="idform" v-model="secr">
     </div>
     <div class="ableipt common">
       <em>确认密码</em>
       <input type="text" class="idform">
     </div>
     <router-link to="/register/registerfinish">
-      <Btncommon msg="提交"></Btncommon>
+      <button @click="inputgo()">提交</button>
     </router-link>
   </div>
 </template>
 <script>
+  import Api from '../../api'
+  import Util from '../../util'
+  import axios from 'axios'
+  import Config from '../../config'
+  import { axiosPost } from '../../api/baseApi'
 import Btncommon from 'components/btncommon/BtnCommon'
 export default {
  components:{Btncommon},
+  data(){
+    return{
+        telp:"",
+        secr:""
+    }
+  },
+  created(){
+    this.getitems();
+
+  },
+  methods:{
+    getitems(){
+      let pname=window.sessionStorage.getItem("pname");
+      let idcard=window.sessionStorage.getItem("idcard");
+      console.log(idcard)
+    },
+    inputgo(){
+        let cont={idCard:this.idcard,name:name,pwd:this.secr,phone:this.telp};
+        let url="/xndt/svp/v1/userreg"
+        axiosPost(url,cont).then((res)=>{
+              if(res.code=="200"){
+                console.log(res.info)
+              }
+        })
+    }
+  },
+
 }
 </script>
 <style scoped lang='less'>
