@@ -101,6 +101,7 @@
 
 <script>
   import Api from '../../api'
+  import $ from 'jquery'
   export default {
     name: 'myselfinfo',
     components: {},
@@ -111,35 +112,30 @@
     },
     methods: {
       authentication(){
-//        console.log('实名认证');
-//      var url = "<%=url%>";
-//      var args = {
-//        "appid": '<%=appId %>',
-//        "signature": '<%=signature %>',
-//        "redirect": '<%=redirect%>',
-//        "uid": '<%=uid%>',
-//        "type": <%=type%>
-//    };
         let url = 'https://iauth-sandbox.wecity.qq.com/new/cgi-bin/auth.php';
-        let appId = '4454', method = 'auth', secret_key = '741be1730541aaed52899b03a3577485', expired = '600',
-          mySign = '';
-        Api.realNameApi.getAppSign({method:'auth',type:'H5'}).then(res=>{
-            console.log(res);
-        }).catch(err=>{
-            console.log(err);
+        let appId = '4454', method = 'auth';
+        //签名
+        Api.realNameApi.getAppSign({method, type: 'H5'}).then(res => {
+          console.log(res);
+          let _signature = res.signature;
+          if (res.signature == 0) {
+            _signature = '';
+          }
+          let args = {
+            appid: appId, signature: _signature, redirect: 'http://hillwxtest.s1.natapp.cc/',
+            uid: '123', type: 0
+          };
+          let form = $("<form method='post'></form>");
+          form.attr({"action": url});
+          for (let arg in args) {
+            let input = $("<input type='hidden'>")
+            input.attr({"name": arg});
+            input.val(args[arg]);
+            form.append(input);
+          }
+          $(document.body).append(form);
+          form.submit();
         })
-//        let args = {
-//          appid: appId,
-//          signature: signature,
-//          redirect: 'http://wyg.natapp4.cc/',
-//          uid: '123',
-//          type: 0
-//        }
-//        Api.realNameApi.realName(args).then(res=>{
-//            console.log(res);
-//        }).catch(err=>{
-//            console.log(err);
-//        })
       }
     },
     computed: {}
