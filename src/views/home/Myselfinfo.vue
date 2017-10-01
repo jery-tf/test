@@ -74,8 +74,8 @@
         <em class="OAIndexIcon icon-next"></em>
       </div>
     </div>
-    <div class="parttop padding-container-lr" @click="authentication">
-      <div class="particulars ">
+    <div class="parttop padding-container-lr">
+      <div class="particulars " @click="authentication">
         <span>
            <i class="OAIndexIcon icon-shimingrenzheng"></i>实人认证
         </span>
