@@ -23,7 +23,7 @@
     </div>
     <div class="ableipt common">
       <em>确认密码</em>
-      <input type="text" class="idform" v-model="passwordsecond">
+      <input type="password" class="idform" v-model="passwordsecond">
     </div>
     <!--<router-link to="/register/registerfinish">-->
       <button @click="inputgo()" class="btn2">提交</button>
@@ -37,6 +37,7 @@
   import Config from '../../config'
   import Btncommon from 'components/btncommon/BtnCommon'
   import {Toast} from 'mint-ui';
+  import  qs from "qs"
   export default {
     components: {Btncommon},
     data() {
@@ -65,7 +66,7 @@
 //        console.log(cont)
 //        let url="/xndt/svp/v1/userreg"
 //        cont = {cont: JSON.stringify(cont)};
-        console.log(this.passwordfirst,this.telp)
+        console.log(this.idcard,this.telp)
         //判断手机号码是否为11位有效手机号码
         let telphone =/^1[34578]\d{9}$/
         if(!(/^1[34578]\d{9}$/.test(this.telp))){
@@ -82,18 +83,18 @@
         else if(this.passwordfirst != this.passwordsecond){
           Toast("两次输入的密码不一致，请重新输入")
         }
-
         Api.registerApi.registerGo(
-          {
-            idCard:this.idCard,//身份证号
-            name:this.pname, //姓名
-            pwd:this.passwordfirst,//密码
-            phone:this.telp, //手机号码
-            grade:"1", // 认证级别：实名认证
-          }
+         qs.stringify({
+           idcard:this.idcard,//身份证号
+           name:this.pname, //姓名
+           pwd:this.passwordfirst,//密码
+           phone:this.telp, //手机号码
+           grade:"1", // 认证级别：实名认证
+         }),
+          {Headers:{'content-type':'application/x-www-form-urlencoded'}}
         ).then(res => {
-          if (res.code == 200) {
-            console.log(res.info);
+          if (res.code == "200") {
+            Toast("注册成功")
             this.$router.push("/register/registerfinish")
           }
         })

@@ -13,35 +13,40 @@
     </div>
     <div class="ableipt common">
       <em>身份证号码</em>
-      <input type="text" class="idform" placeholder="请输入18位身份证号码" v-model="idCard">
+      <input type="text" class="idform" placeholder="请输入18位身份证号码" v-model="idcard">
     </div>
     <!--<router-link to="/register/registerinfo">-->
-    <button class="btn" @click="postId()">下一步</button>
+    <button class="btn2" @click="postId()">下一步</button>
     <!--</router-link>-->
   </div>
 </template>
 <script>
   import Btncommon from 'components/btncommon/BtnCommon'
-  import { Toast } from 'mint-ui';
+  import {Toast} from 'mint-ui';
+
   export default {
     components: {Btncommon},
     data() {
       return {
         pname: '',
-        idCard: ''
+        idcard: ''
       }
     },
     methods: {
       postId() {
         let postId = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/i;
-        if (!postId.test(this.idCard)) {
+        if (this.pname == '') {
+          Toast("请输入姓名");
+          return
+        }
+        else if (!postId.test(this.idcard)) {
           Toast("请输入合法的身份证号")
           return
         }
-        window.sessionStorage.setItem("pname",this.pname)
-        window.sessionStorage.setItem("idcard",this.idCard)
+//        let orderList=[{"pname":this.pname},{"idcard":this.idCard}]{'pname',this.name;"idcard",this.idcard}
+        let orderList = {'pname': this.pname, "idcard": this.idcard}
+        window.sessionStorage.setItem("orderList", JSON.stringify(orderList))
         this.$router.push("/register/registerinfo");
-
       }
     }
 
@@ -142,13 +147,18 @@
     }
   }
 
-  .btn {
+  .btn2 {
     width: 6.68rem;
     height: 0.94rem;
     line-height: 0.94rem;
-    color: #12b7f5;
+    color: #fff;
+    font-size: 0.32rem;
     margin-left: 0.24rem;
-    margin-top: 0.26rem;
+    margin-top: 0.24rem;
     border-radius: 10px;
+    background-color: #12b7f5;
+    border: 0;
+    outline: 0;
   }
+
 </style>
