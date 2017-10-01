@@ -64,9 +64,16 @@
           Api.loginApi.userLogin(data).then(res=>{
             //获取用户信息
             Api.userApi.getUserInfo({access_token: res.access_token}).then(res => {
+
+              //获取用户详情
+              Api.userApi.getUserDetails(res.userId).then(res=>{
+                 console.log('用户详情->',res);
+                Util.other.setSessionStorage('userDetails',res);
+                //跳转页面
+                _this.toNextPage();
+              });
               Util.user.setUserInfo(res);
-              //跳转页面
-              _this.toNextPage();
+
             });
             Util.login.setToken(res);
           })

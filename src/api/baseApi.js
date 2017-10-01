@@ -20,7 +20,7 @@ const assignTokenHeaders = (config)=>{
   if(config && config.headers){
     config.headers = Object.assign({},tokenHeaders,config.headers);
   }else{
-    config = Object.assign({},{tokenHeaders});
+    config = Object.assign({},{headers:tokenHeaders});
   }
   return config;
 }

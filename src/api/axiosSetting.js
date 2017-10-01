@@ -28,15 +28,16 @@ AxiosIns.interceptors.response.use(response=>{
     clearTimeout(t);
   }
   MintUI.Indicator.close();
-  try{
-    if(response.data){
-      if(response.data.Code !== 0){
-        MintUI.Toast(response.data.Message);
-      }
-    }
-  }catch(e){
-    console.log(e);
-  }
+  // try{
+  //   if(response.data){
+  //     if(response.data.Code !== 0){
+  //       console.log('111');
+  //       MintUI.Toast(response.data.Message);
+  //     }
+  //   }
+  // }catch(e){
+  //   console.log(e);
+  // }
   return response.data;
 },(error)=>{
   for(let t of timer){
