@@ -1,7 +1,13 @@
 /**
  * Created by wyg on 2017/9/20.
  */
-const proConfig = {
-  api:'http://localhost:8088/'
+
+export default {
+  environment:'dev',
+  apiUrl:'http://172.17.89.21:30538',
+  loginUrl:'http://172.17.89.21:30069',
+  clientId:'JQNb9l66Qk22ibryPBATnOg',
+  AppSignUrl:'http://172.16.17.20:8080',
+  C2XApiKey:'sPvuCaUsT2aBuricqor963A'
 }
-module.exports = proConfig;
+

@@ -4,9 +4,9 @@
 import axios from 'axios';
 import proConfig from '../config';
 import MintUI from 'mint-ui';
-import Vue from 'vue'
+
 let AxiosIns = axios.create({
-  baseURL : proConfig.apiUrl,
+  baseURL:proConfig.apiUrl,
   timeout : 20000,
   contentType: 'application/json',
 })
@@ -28,13 +28,15 @@ AxiosIns.interceptors.response.use(response=>{
     clearTimeout(t);
   }
   MintUI.Indicator.close();
-  // try{
-  //   if(response.data.Code !== 0){
-  //     MintUI.Toast(response.data.Message);
-  //   }
-  // }catch(e){
-  //   console.log(e);
-  // }
+  try{
+    if(response.data){
+      if(response.data.Code !== 0){
+        MintUI.Toast(response.data.Message);
+      }
+    }
+  }catch(e){
+    console.log(e);
+  }
   return response.data;
 },(error)=>{
   for(let t of timer){

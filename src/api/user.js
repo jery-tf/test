@@ -3,7 +3,6 @@
  */
 import { axiosGet ,axiosGetToken} from './baseApi'
 import Config from '../config';
-
 /***
  * 用户相关接口
  * 公共参数
