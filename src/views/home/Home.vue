@@ -3,16 +3,16 @@
     <div class="content">
       <mt-tab-container v-model="mySelected">
       <mt-tab-container-item id="bs">
-        <Errand></Errand>
+        <Errand v-if="mySelected=='bs'"></Errand>
       </mt-tab-container-item>
       <mt-tab-container-item id="gk">
-        <Publicitem></Publicitem>
+        <Publicitem v-if="mySelected=='gk'"></Publicitem>
       </mt-tab-container-item>
       <mt-tab-container-item id="bm">
-          <Forpeople></Forpeople>
+          <Forpeople v-if="mySelected=='bm'"></Forpeople>
       </mt-tab-container-item>
       <mt-tab-container-item id="wd">
-          <Myselfinfo></Myselfinfo>
+          <Myselfinfo v-if="mySelected=='wd'"></Myselfinfo>
       </mt-tab-container-item>
     </mt-tab-container>
     </div>
@@ -41,17 +41,13 @@
   import proConfig from '../../config'
   import Vue from 'vue'
   import Api from '../../api'
-  import Publicitem from './publicitem'
-  import Forpeople from './forpeople'
-  import Myselfinfo from './Myselfinfo'
+  import Home from './index'
 
-  import Me from './me.vue'
-  import Errand from './Errand.vue'
   import Util from '../../util'
 export default {
   name: 'hello',
   components: {
-    Me,Errand,Publicitem,Forpeople,Myselfinfo
+    Errand:Home.Errand,Publicitem:Home.Publicitem,Forpeople:Home.Forpeople,Myselfinfo:Home.Myselfinfo
   },
   data () {
     return {
