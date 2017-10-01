@@ -2,7 +2,7 @@
     <div>
         <router-link to="/setting/changenum">
             <div class="safety padding-container-lr firstline" >修改绑定手机
-                <span>18684891234 <i class=" OAIndexIcon icon-xiayiye"></i> </span>
+                <span>{{telphone}}<i class=" OAIndexIcon icon-xiayiye"></i> </span>
             </div>
         </router-link>
          <router-link to="/setting/resetsec">
@@ -31,12 +31,26 @@
                </div>
             </div>
         </a>
-        
+
     </div>
 </template>
 <script>
 export default {
-
+  data(){
+    return{
+      telphone:""
+    }
+  },
+  created(){
+      this.getitems();
+  },
+  methods:{
+    getitems(){
+     const telphone= JSON.parse(sessionStorage.getItem('userInfo')).phone;
+     console.log(telphone)
+      this.telphone=telphone
+    }
+  }
 }
 </script>
 <style scoped lang='less'>
