@@ -4,16 +4,20 @@
 
 <template>
   <div class="h100 doubleListView">
-    <div class="contentTop fff border-bottom">
-      <div>顶部</div>
+    <div class="contentTop fff border-bottom padding-container-lr">
+      <p><i class="OAIndexIcon icon-llmainpageback topIcon"></i></p>
+      <div>
+        顶部
+      </div>
+      <p><i class="OAIndexIcon icon-sousuo_sousuo topIcon"></i></p>
     </div>
 
     <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
                     :selectedId="selectedId">
       <div class="flex1 right">
-        <router-link to="/errand/guide/test" class="center-center">
-          <p>办事指南</p>
-        </router-link>
+        <template v-for="(item,index) in guideList">
+          <GuideLi :data="item"></GuideLi>
+        </template>
       </div>
     </DoubleListView>
   </div>
@@ -21,10 +25,11 @@
 
 <script>
   import DoubleListView from 'components/public/DoubleListView.vue'
+  import GuideLi from 'components/errand/guideLi.vue'
   export default {
     name: 'Errand',
     components: {
-      DoubleListView
+      DoubleListView, GuideLi
     },
     data () {
       return {
@@ -34,65 +39,83 @@
             id: 1,
             icon: 'icon-ertongshouyang',
             name: '婚育收养'
-          },{
+          }, {
             id: 2,
             icon: 'icon-ertongshouyang',
             name: '教育培训'
-          },{
+          }, {
             id: 3,
             icon: 'icon-ertongshouyang',
             name: '求职执业'
-          },{
+          }, {
             id: 4,
             icon: 'icon-ertongshouyang',
             name: '婚育收养'
-          },{
+          }, {
             id: 5,
             icon: 'icon-ertongshouyang',
             name: '教育培训'
-          },{
+          }, {
             id: 6,
             icon: 'icon-ertongshouyang',
             name: '求职执业'
-          },{
+          }, {
             id: 7,
             icon: 'icon-ertongshouyang',
             name: '婚育收养'
-          },{
+          }, {
             id: 8,
             icon: 'icon-ertongshouyang',
             name: '教育培训'
-          },{
+          }, {
             id: 9,
             icon: 'icon-ertongshouyang',
             name: '求职执业'
-          },{
+          }, {
             id: 10,
             icon: 'icon-ertongshouyang',
             name: '婚育收养'
-          },{
+          }, {
             id: 21,
             icon: 'icon-ertongshouyang',
             name: '教育培训'
-          },{
+          }, {
             id: 31,
             icon: 'icon-ertongshouyang',
             name: '求职执业'
-          },{
+          }, {
             id: 11,
             icon: 'icon-ertongshouyang',
             name: '婚育收养'
-          },{
+          }, {
             id: 22,
             icon: 'icon-ertongshouyang',
             name: '教育培训'
-          },{
+          }, {
             id: 32,
             icon: 'icon-ertongshouyang',
             name: '求职执业'
           },
         ],
-        selectedId:1
+        guideList: [
+          {
+            id: 1,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 3,
+            frequency: 10,
+            name: '物价局',
+            isActive: true
+          },
+          {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }
+        ],
+        selectedId: 1
       }
     },
     created(){
@@ -101,8 +124,8 @@
     methods: {
       //点击左侧列表 单元格
       selecedLeftFun(id){
-          //拿着ID 请求数据
-        console.log('selecedLeftFun-->',id);
+        //拿着ID 请求数据
+        console.log('selecedLeftFun-->', id);
         this.selectedId = id;
       }
     }
@@ -111,13 +134,32 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
+  .contentTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .topIcon {
+      font-size: .4rem;
+      color: #999;
+    }
+    .icon-llmainpageback {
+      color: #fff;
+    }
+  }
+  .right div.fff{
+      margin-top: .24rem;
+  }
+  .right div.fff:first-child{
+    margin-top: 0;
+  }
+
   .doubleListView {
     position: relative;
-    top:0;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    .contentTop{
+    .contentTop {
       height: .96rem;
     }
   }
