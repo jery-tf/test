@@ -6,8 +6,11 @@
   <div class="h100 doubleListView">
     <div class="contentTop fff border-bottom padding-container-lr">
       <p><i class="OAIndexIcon icon-llmainpageback topIcon"></i></p>
-      <div>
-        顶部
+      <div class="topTab">
+        <p v-for="(item,index) in topSelect" :class="item.isCurrent?'current':''"
+           @click="topTabClick(item.id)">
+          {{item.name}}
+        </p>
       </div>
       <p><i class="OAIndexIcon icon-sousuo_sousuo topIcon"></i></p>
     </div>
@@ -33,6 +36,9 @@
     },
     data () {
       return {
+        //顶部选主题和部门
+        topSelect: [{isCurrent: true, name: '按主题', id: 'zt'},
+          {isCurrent: false, name: '按部门', id: 'bm'}],
         selected: '1',
         leftDataList: [
           {
@@ -105,8 +111,91 @@
             frequency: 10,
             name: '物价局',
             isActive: true
-          },
-          {
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: true
+          }, {
+            id: 2,
+            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
+            score: 4,
+            frequency: 1,
+            name: '烟草局',
+            isActive: false
+          }, {
             id: 2,
             title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
             score: 4,
@@ -124,9 +213,21 @@
     methods: {
       //点击左侧列表 单元格
       selecedLeftFun(id){
-        //拿着ID 请求数据
+        // @todo 根据Id 渲染右侧数据
         console.log('selecedLeftFun-->', id);
         this.selectedId = id;
+      },
+      //顶部选择的 id
+      topTabClick(id){
+        this.topSelect.forEach((item) => {
+          if (item.id == id) {
+            item.isCurrent = true;
+          } else {
+            item.isCurrent = false;
+          }
+        });
+        console.log(id);
+        // @todo 根据选择的ID 重新加载数据
       }
     }
 
@@ -146,11 +247,9 @@
       color: #fff;
     }
   }
-  .right div.fff{
-      margin-top: .24rem;
-  }
-  .right div.fff:first-child{
-    margin-top: 0;
+
+  .right div.fff {
+    margin-top: .24rem;
   }
 
   .doubleListView {
@@ -161,6 +260,21 @@
     bottom: 0;
     .contentTop {
       height: .96rem;
+    }
+  }
+
+  .topTab {
+    height: 100%;
+    display: flex;
+    p {
+      display: flex;
+      align-items: center;
+      margin: 0 .3rem;
+      font-size: .26rem;
+      border-bottom: 2px solid transparent;
+    }
+    p.current {
+      border-bottom: 2px solid #13b7f6;
     }
   }
 

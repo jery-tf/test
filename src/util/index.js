@@ -4,7 +4,8 @@
 import * as user from './user'
 import * as login from './login'
 import * as home from './home'
+import * as other from './other'
 
 export default {
-  user,login,home
+  user,login,home,other
 }

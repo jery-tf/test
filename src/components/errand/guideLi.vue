@@ -19,13 +19,10 @@
         <i class="OAIndexIcon icon-jigou1"></i>
         <span>{{data.name}}</span>
       </div>
-      <div :class="`btn ${btnActive}`">
+      <div :class="`btn ${btnActive}`" @click="btnFun">
         <span>在线办理</span>
       </div>
     </div>
-    <!--<router-link to="/errand/guide/test" class="center-center">-->
-      <!--<p>办事指南</p>-->
-    <!--</router-link>-->
   </div>
 </template>
 
@@ -36,7 +33,7 @@
   import StarsScore from '../public/StarsScore.vue'
   export default {
     name: 'guideLi',
-    props:['data'],
+    props: ['data'],
     components: {StarsScore},
     data () {
       return {}
@@ -44,57 +41,70 @@
     created(){
 
     },
-    methods: {},
-    computed:{
-        btnActive(){
-            return this.data.isActive?'active':'';
-        }
+    methods: {
+      btnFun(){
+        if (!this.data.isActive) return
+        this.$router.push({path:`/errand/guide/${this.data.id}`})
+      }
+    },
+    computed: {
+      btnActive(){
+        return this.data.isActive ? 'active' : '';
+      }
     }
 
   }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .twoLineFont{
+  .twoLineFont {
     font-size: .28rem;
   }
-  .box-margin-top{
+
+  .box-margin-top {
     font-size: .21rem;
   }
-  .StarsScore{
+
+  .StarsScore {
     display: flex;
     align-items: center;
   }
-  .frequency{
+
+  .frequency {
     display: flex;
     align-items: center;
     margin-left: .3rem;
-    i{
-      color:#29ab91;
+    i {
+      color: #29ab91;
       margin-right: .1rem;
     }
   }
-  .jigou{
+
+  .jigou {
     display: flex;
     align-items: center;
-    color:#999;
-    i{
-      color:#13b7f6;
+    color: #999;
+    i {
+      color: #13b7f6;
       font-size: .24rem;
       margin-right: .1rem;
     }
   }
-  .btn{
+
+  .btn {
     font-size: .2rem;
-    color:#aaa;
-    border:1px solid #aaa;
-    border-radius: .1rem;
+    color: #aaa;
+    border: 1px solid #ccc;
+    border-radius: .05rem;
     padding: .03rem .1rem;
   }
-  .btn.acrive{
 
+  .btn.active {
+    border: 1px solid #ff3e3e;
+    color: #ff3e3e;
   }
-  .mall-warp{
+
+  .mall-warp {
     font-size: .21rem;
   }
 </style>

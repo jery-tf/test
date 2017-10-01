@@ -4,16 +4,16 @@
 
 <template>
   <div class="doubleListBox">
-    <div class="left fff">
+    <div class="left">
       <div v-for="(item,index) in dataList" :key="index"
-           :class="item.id==selectedId?'li active':'li'"
+           :class="item.id==selectedId?'li active':'li fff'"
            @click="liClickFun(item.id)">
         <i :class="`OAIndexIcon ${item.icon}`"></i>
         <span>{{item.name}}</span>
       </div>
 
     </div>
-    <div class="right padding-container">
+    <div class="right padding-container-lr">
       <slot></slot>
     </div>
   </div>
