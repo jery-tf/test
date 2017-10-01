@@ -13,7 +13,7 @@
     </div>
     <div class="ableipt common">
       <em>身份证号码</em>
-      <input type="text" class="idform" placeholder="请输入18位身份证号码" v-model="idcard">
+      <input type="text" class="idform" placeholder="请输入18位身份证号码" v-model="idcard" v-on:blur="changeCount()">
     </div>
     <!--<router-link to="/register/registerinfo">-->
     <button class="btn2" @click="postId()">下一步</button>
@@ -23,7 +23,11 @@
 <script>
   import Btncommon from 'components/btncommon/BtnCommon'
   import {Toast} from 'mint-ui';
-
+  import Api from '../../api'
+  import Util from '../../util'
+  import axios from 'axios'
+  import Config from '../../config'
+  import  qs from "qs"
   export default {
     components: {Btncommon},
     data() {
@@ -33,6 +37,20 @@
       }
     },
     methods: {
+      changeCount(){
+        Api.registerApi.uableRegi(
+          qs.stringify({
+            type:"idcard",
+            idcard:this.idcard,//身份证号
+          }),
+          {Headers:{'content-type':'application/x-www-form-urlencoded'}}
+        ).then(res => {
+          if (res.code == "100") {
+            Toast(res.info);
+            return
+          }
+        })
+      },
       postId() {
         let postId = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/i;
         if (this.pname == '') {
@@ -46,7 +64,24 @@
 //        let orderList=[{"pname":this.pname},{"idcard":this.idCard}]{'pname',this.name;"idcard",this.idcard}
         let orderList = {'pname': this.pname, "idcard": this.idcard}
         window.sessionStorage.setItem("orderList", JSON.stringify(orderList))
-        this.$router.push("/register/registerinfo");
+
+        Api.registerApi.legal(
+          qs.stringify({
+            idcard:this.idcard,//身份证号
+            name:this.pname, //姓名
+          }),
+          {Headers:{'content-type':'application/x-www-form-urlencoded'}}
+        ).then(res => {
+          if (res.code == "703") {
+            Toast(res.info)
+
+          }
+          else if(res.code=="200"){
+            this.$router.push("/register/registerinfo");
+          }
+        })
+
+
       }
     }
 

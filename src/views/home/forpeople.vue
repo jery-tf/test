@@ -4,18 +4,14 @@
 
 <template>
   <div class="h100 doubleListView">
-    <mt-tab-container v-model="selected">
-      <mt-tab-container-item id="1">
-        <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun" :selectedId="selectedId">
-          <div class="flex1 right">
-            <component v-bind:is="currentView" keep-alive>
-              <!-- 组件在 vm.currentview 变化时改变！ -->
-            </component>
-          </div>
-        </DoubleListView>
-      </mt-tab-container-item>
-
-    </mt-tab-container>
+    <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
+                    :selectedId="selectedId">
+      <div class="flex1 right">
+        <component v-bind:is="currentView" keep-alive>
+          <!-- 组件在 vm.currentview 变化时改变！ -->
+        </component>
+      </div>
+    </DoubleListView>
   </div>
 </template>
 
@@ -26,10 +22,10 @@ import Adoption from 'components/convenpeo/Adoption.vue'
 import ApplyJob from 'components/convenpeo/ApplyJob.vue'
 import Ratepay from 'components/convenpeo/Ratepay.vue'
 export default {
-  name: 'Errand',
+  name: 'forpeople',
   components: {
-    DoubleListView,
-     Education:Education, 
+    DoubleListView:DoubleListView,
+     Education:Education,
     Adoption:Adoption
   },
   data() {
@@ -111,14 +107,14 @@ export default {
 </script>
 
 <style lang="less" rel="stylesheet/less">
-.doubleListView {
-  display: flex;
-  flex-direction: column;
-  .mint-tab-container {
-    flex: 1;
-    .mint-tab-container-wrap {
-      height: 100%;
+  .doubleListView {
+    position: relative;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    .contentTop{
+      height: .96rem;
     }
   }
-}
 </style>
