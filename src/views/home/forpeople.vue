@@ -106,15 +106,47 @@ export default {
 }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="less" rel="stylesheet/less" scoped>
+  .contentTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .topIcon {
+      font-size: .4rem;
+      color: #999;
+    }
+    .icon-llmainpageback {
+      color: #fff;
+    }
+  }
+
+  .right div.fff {
+    margin-top: .24rem;
+  }
+
   .doubleListView {
     position: relative;
-    top:0;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    .contentTop{
+    .contentTop {
       height: .96rem;
+    }
+  }
+
+  .topTab {
+    height: 100%;
+    display: flex;
+    p {
+      display: flex;
+      align-items: center;
+      margin: 0 .3rem;
+      font-size: .26rem;
+      border-bottom: 2px solid transparent;
+    }
+    p.current {
+      border-bottom: 2px solid #13b7f6;
     }
   }
 </style>
