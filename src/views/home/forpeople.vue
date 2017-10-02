@@ -3,7 +3,7 @@
 */
 
 <template>
-  <div class="h100 doubleListView">
+  <div class="h100 doubleListView bm">
     <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
                     :selectedId="selectedId">
       <div class="flex1 right">
@@ -117,8 +117,10 @@ export default {
     .contentTop{
       height: .96rem;
     }
-    .doubleListBox{
-      top:0 !important;
+  }
+  .bm{
+    div.doubleListBox{
+      top:0;
     }
   }
 </style>
