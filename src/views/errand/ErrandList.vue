@@ -110,7 +110,8 @@
             score: 3,
             frequency: 10,
             name: '物价局',
-            isActive: true
+            isActive: true,
+            search:'多字'
           }, {
             id: 2,
             title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',

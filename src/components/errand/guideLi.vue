@@ -5,7 +5,7 @@
 <template>
   <div class="fff">
     <div class="padding-container border-bottom">
-      <p class="twoLineFont">{{data.title}}</p>
+      <p class="twoLineFont" v-html="dataSearch"></p>
       <div class="box-margin-top StarsScore">
         <StarsScore :score="data.score"></StarsScore>
         <p class="frequency">
@@ -29,6 +29,8 @@
 <script>
   /***
    * 单个办事指南组件
+   * data属性
+   * title    name    score
    */
   import StarsScore from '../public/StarsScore.vue'
   export default {
@@ -43,13 +45,30 @@
     },
     methods: {
       btnFun(){
-        if (!this.data.isActive) return
+        if (!this.data.isActive) return;
         this.$router.push({path:`/errand/guide/${this.data.id}`})
       }
     },
     computed: {
       btnActive(){
         return this.data.isActive ? 'active' : '';
+      },
+      dataSearch(){
+          let search = this.data.search;
+          let title = this.data.title;
+          if(search){
+              let searchIndex = title.indexOf(search);
+              if(searchIndex!=-1){
+                let start = title.substr(0,searchIndex);
+                let middle = title.substr(searchIndex,search.length);
+                let end = title.substr(searchIndex+search.length);
+                return `<span>${start}</span><span style="color:red">${middle}</span><span>${end}</span>`
+              }else{
+                return `<span>${title}</span>`;
+              }
+          }else{
+              return `<span>${title}</span>`;
+        }
       }
     }
 
@@ -107,4 +126,5 @@
   .mall-warp {
     font-size: .21rem;
   }
+
 </style>
