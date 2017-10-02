@@ -30,8 +30,8 @@
   /***
    * 单个办事指南组件
    * data属性
-   * title    name    score   ID     frequency     [search]
-   * 标题     机构名     分数   主键    到现场次数      突出显示的文字(只匹配一次)
+   * title(str)   name     ID     frequency  score(int)  isActive(bool)       [search](str)
+   * 标题         机构名    主键    到现场次数     分数       按钮是否可操作     突出显示的文字(只匹配一次)
    */
   import StarsScore from '../public/StarsScore.vue'
   export default {
