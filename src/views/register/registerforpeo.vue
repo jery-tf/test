@@ -16,7 +16,7 @@
       <input type="text" class="idform" placeholder="请输入18位身份证号码" v-model="idcard" v-on:blur="changeCount()">
     </div>
     <!--<router-link to="/register/registerinfo">-->
-    <button class="btn2" @click="postId()">下一步</button>
+    <button class="btn2" @click="postId()" v-bind:disabled="dis">下一步</button>
     <!--</router-link>-->
   </div>
 </template>
@@ -33,21 +33,26 @@
     data() {
       return {
         pname: '',
-        idcard: ''
+        idcard: '',
+        dis:false
       }
     },
     methods: {
       changeCount(){
         Api.registerApi.uableRegi(
-          qs.stringify({
+         {
             type:"idcard",
             idcard:this.idcard,//身份证号
-          }),
+          },
           {Headers:{'content-type':'application/x-www-form-urlencoded'}}
         ).then(res => {
           if (res.code == "100") {
             Toast(res.info);
+            this.dis=true
             return
+          }else if(res.code =="200"){
+            Toast(res.info)
+            this.dis=false
           }
         })
       },

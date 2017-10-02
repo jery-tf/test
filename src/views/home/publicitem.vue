@@ -1,11 +1,18 @@
 <template>
 <div id="tmpl">
     <Publicitem :content="item"  :key="index"  v-for="(item,index) in list"></Publicitem>
+  <button @click="getnews()">点击</button>
     <router-link to="">这是暂时放到这里，到时候要调到我的首页去的</router-link>
   </div>
 </template>
-<script>  
+<script>
 import Publicitem from 'components/publicitem/publicitem.vue'
+import {Toast} from 'mint-ui';
+import Api from '../../api'
+import Util from '../../util'
+import axios from 'axios'
+import Config from '../../config'
+import  qs from "qs"
 export default {
   components:{Publicitem},
   data(){
@@ -33,6 +40,32 @@ export default {
           times:'2017-04-06'
         }
       ]
+    }
+  },
+  created(){
+//    this.getnews()
+  },
+  methods:{
+    getnews(){
+      Api.getnewsApi.getnews(
+        {content:btoa(Util.other.Utf8ToUnicode(JSON.stringify({
+          channelId:"2",
+          start:"0",
+          count:"99",
+          grantUserName:"66",
+          userName:"xinxicaiji",
+          site:"yymh"
+        })))},
+        {headers:{'content-type':'application/x-www-form-urlencoded'}}
+      ).then(res => {
+        if (res.resp_code == "1") {
+          Toast(res.resp_desc)
+
+        }
+//        else if(res.code=="200"){
+//          this.$router.push("/register/registerinfo");
+//        }
+      })
     }
   }
 }
