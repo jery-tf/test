@@ -29,6 +29,8 @@
 <script>
   import DoubleListView from 'components/public/DoubleListView.vue'
   import GuideLi from 'components/errand/guideLi.vue'
+  import Api from '../../api'
+  import Util from '../../util'
   export default {
     name: 'Errand',
     components: {
@@ -111,7 +113,7 @@
             frequency: 10,
             name: '物价局',
             isActive: true,
-            search:'多字'
+            search:'发过火'
           }, {
             id: 2,
             title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
@@ -209,9 +211,16 @@
       }
     },
     created(){
-
+      this.getLeftList(Util.errand.getErrandClassName(this.$route.params.id));
     },
     methods: {
+      //获取左侧列表
+      getLeftList(id){
+          console.log(id);
+          Api.errand.getErrandLeftList('',{data:[id]}).then(res=>{
+              console.log('左侧',res);
+          })
+      },
       //点击左侧列表 单元格
       selecedLeftFun(id){
         // @todo 根据Id 渲染右侧数据

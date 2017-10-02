@@ -9,5 +9,9 @@ export default {
   loginUrl:'http://172.17.89.21:30069',
   clientId:'JQNb9l66Qk22ibryPBATnOg',
   AppSignUrl:'http://172.16.17.20:8080',
-  C2XApiKey:'sPvuCaUsT2aBuricqor963A'
+  C2XApiKey:'sPvuCaUsT2aBuricqor963A',
+  errandTable:{//办事列表id 对照表
+    'fr':'法人分类',
+    'zrr':'自然人分类'
+  }
 }

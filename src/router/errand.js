@@ -19,7 +19,7 @@ import views from '@/views'
 
 export default [
   {
-    path:'/errandList',
+    path:'/errandList/:id',
     name:'errandList',
     component:views.Errand.ErrandList,
     meta:{

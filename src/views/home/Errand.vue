@@ -4,10 +4,14 @@
 
 <template>
   <div>
-    <router-link to="/errandList" class="center-center">
-      <p>全部办事页面</p>
+    <router-link to="/errandList/zrr" class="center-center">
+      <p>自然人</p>
     </router-link>
-
+    <p>------------------=---------------</p>
+    <router-link to="/errandList/fr" class="center-center">
+      <p>法人</p>
+    </router-link>
+    <p>-----------------------------------</p>
     <router-link to="/errand/completeData/test" class="center-center">
       <p>补正补齐</p>
     </router-link>
