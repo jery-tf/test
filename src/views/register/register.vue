@@ -1,37 +1,54 @@
 <template>
-    <div>
-        <div class="regist">
-            <router-link to="/register/registerforpeo">
-                <div class="forpeo" disabled="disabled">
-                    <div class="peo">
-                        <i class="OAIndexIcon  icon-qiyeyonghu"></i>
-                    </div>
-                    个人注册
-                </div>
-            </router-link>
-            <router-link to="/register/registerforcmp">
-                <div class="forcmp">
-                    <div class="cmp">
-                        <i class="OAIndexIcon icon-qiye"></i>
-                    </div>
-                    企业注册</div>
-            </router-link>
+  <div>
+    <div class="regist">
+      <div class="forpeo" @click="ableres()">
+        <div class="peo">
+          <i class="OAIndexIcon  icon-qiyeyonghu"></i>
         </div>
-        <div class="agreey padding-container-lr">
-            我同意《互联网+政务 用户服务协议》
-            <mt-switch></mt-switch>
+        个人注册
+      </div>
+      <div class="forcmp" @click="ablerescmp()">
+        <div class="cmp">
+          <i class="OAIndexIcon icon-qiye"></i>
         </div>
-        <div class="reglist padding-container-lr">
-            <p>《互联网+政务 用户服务协议》</p>
-            国家发改委发言人
-        </div>
+        企业注册</div>
     </div>
+    <div class="agreey padding-container-lr">
+      我同意《互联网+政务 用户服务协议》
+      <mt-switch v-model="value"></mt-switch>
+    </div>
+    <div class="reglist padding-container-lr">
+      <p>《互联网+政务 用户服务协议》</p>
+      国家发改委发言人
+    </div>
+  </div>
 </template>
 <script>
+  import { Toast } from 'mint-ui';
 export default {
-    methods:{
-       
+  data() {
+    return {
+      value: true
     }
+  },
+  methods: {
+    ableres() {
+      if (this.value == false) {
+        Toast("请同意用户协议再进行注册");
+        return
+      } else {
+        this.$router.push("/register/registerforpeo")
+      }
+    },
+    ablerescmp() {
+      if (this.value == false) {
+        Toast("请同意用户协议再进行注册");
+        return
+      } else {
+        this.$router.push("/register/registerforcmp")
+      }
+    }
+  }
 }
 </script>
 <style  lang='less'>
@@ -122,7 +139,7 @@ export default {
         background-color: #29ccb7;
         border-radius: 0.27rem;
     }
-    
+
 }
 
 .reglist {

@@ -45,7 +45,13 @@ export default {
       this.ablesee2 = !this.ablesee2
     },
     handleClick: function() {
-      if (this.password1 != this.password2) {
+      if(this.password1==""){
+          Toast("密码输入不能为空")
+      }
+      else if(this.password2==""){
+        Toast("密码输入不能为空")
+      }
+      else if (this.password1 != this.password2) {
         Toast({
           message: '两次密码输入不一致，请重新输入',
           position: 'top',
