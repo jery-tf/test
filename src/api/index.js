@@ -6,5 +6,6 @@ import * as loginApi from './login'
 import * as userApi from './user'
 import * as realNameApi from './realName'
 import * as registerApi from './register'
+import * as getnewsApi from './getnews'
 
-export default { testApi ,loginApi ,userApi ,realNameApi,registerApi}
+export default { testApi ,loginApi ,userApi ,realNameApi,registerApi,getnewsApi}
