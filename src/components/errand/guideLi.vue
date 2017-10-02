@@ -30,7 +30,8 @@
   /***
    * 单个办事指南组件
    * data属性
-   * title    name    score
+   * title    name    score   ID     frequency     [search]
+   * 标题     机构名     分数   主键    到现场次数      突出显示的文字(只匹配一次)
    */
   import StarsScore from '../public/StarsScore.vue'
   export default {
