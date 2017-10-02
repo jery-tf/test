@@ -21,6 +21,7 @@ const assignTokenHeaders = (config)=>{
     config.headers = Object.assign({},tokenHeaders,config.headers);
   }else{
     config = Object.assign({},{headers:tokenHeaders});
+    console.log('assignTokenHeaders',config);
   }
   return config;
 }
@@ -78,7 +79,9 @@ let  tokenHeaders = { "Authorization": `Bearer ${Util.login.getAccessToken()}`,'
 // export const axiosGetToken = (url,params,loading)=>$axios.get(url,{params,loading,headers:tokenHeaders});
 export const axiosGetToken = (url,params,config)=>{
   config = assignTokenHeaders(config);
-  return $axios.get(url,Object.assign({},config,{params}));
+  config = Object.assign({},config,{params});
+  console.log('axiosGetToken-->',config);
+  return $axios.get(url,config);
 }
 
 

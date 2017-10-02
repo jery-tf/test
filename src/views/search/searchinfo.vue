@@ -1,8 +1,8 @@
 <template>
     <div class="seainfo">
-        <input type="text" class="ipt ">
+        <input type="text" class="ipt" v-model="ipt">
         <i class=" OAIndexIcon icon-search"></i>
-        <span class=" OAIndexIcon icon-guanbi2"></span>
+        <span class=" OAIndexIcon icon-guanbi2" @click="dele()"></span>
         <input type="button" value="确定" class="btn">
         <div class="searchmore padding-container-lr">
             <p>非财政性资金<span>建设</span>的信息工程设计施工方案备案建设的信息工程设计</p>
@@ -15,14 +15,23 @@
                     <span><i class="OAIndexIcon icon-gouxuan"></i>最多跑现场一次</span>
             </div>
         </div>
-        <div class="rightnow padding-container-lr"> 
+        <div class="rightnow padding-container-lr">
             <span><em class="OAIndexIcon icon-jigou1"></em>省环保厅</span><button class="btn">在线办理</button>
         </div>
     </div>
 </template>
 <script>
 export default {
-
+      data(){
+        return{
+          ipt:""
+        }
+      },
+  methods:{
+        dele(){
+          this.ipt=""
+        }
+  }
 }
 </script>
 <style scoped lang='less'>
@@ -108,7 +117,7 @@ export default {
                 color: #21bbf7;
                 padding-right: 0.2rem
             }
-           
+
         }
          .btn{
                 border: 0;
