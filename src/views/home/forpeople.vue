@@ -107,6 +107,7 @@ export default {
 </script>
 
 <style lang="less" rel="stylesheet/less">
+
   .doubleListView {
     position: relative;
     top:0;
@@ -115,6 +116,9 @@ export default {
     bottom: 0;
     .contentTop{
       height: .96rem;
+    }
+    .doubleListBox{
+      top:0 !important;
     }
   }
 </style>

@@ -42,172 +42,9 @@
         topSelect: [{isCurrent: true, name: '按主题', id: 'zt'},
           {isCurrent: false, name: '按部门', id: 'bm'}],
         selected: '1',
-        leftDataList: [
-          {
-            id: 1,
-            icon: 'icon-ertongshouyang',
-            name: '婚育收养'
-          }, {
-            id: 2,
-            icon: 'icon-ertongshouyang',
-            name: '教育培训'
-          }, {
-            id: 3,
-            icon: 'icon-ertongshouyang',
-            name: '求职执业'
-          }, {
-            id: 4,
-            icon: 'icon-ertongshouyang',
-            name: '婚育收养'
-          }, {
-            id: 5,
-            icon: 'icon-ertongshouyang',
-            name: '教育培训'
-          }, {
-            id: 6,
-            icon: 'icon-ertongshouyang',
-            name: '求职执业'
-          }, {
-            id: 7,
-            icon: 'icon-ertongshouyang',
-            name: '婚育收养'
-          }, {
-            id: 8,
-            icon: 'icon-ertongshouyang',
-            name: '教育培训'
-          }, {
-            id: 9,
-            icon: 'icon-ertongshouyang',
-            name: '求职执业'
-          }, {
-            id: 10,
-            icon: 'icon-ertongshouyang',
-            name: '婚育收养'
-          }, {
-            id: 21,
-            icon: 'icon-ertongshouyang',
-            name: '教育培训'
-          }, {
-            id: 31,
-            icon: 'icon-ertongshouyang',
-            name: '求职执业'
-          }, {
-            id: 11,
-            icon: 'icon-ertongshouyang',
-            name: '婚育收养'
-          }, {
-            id: 22,
-            icon: 'icon-ertongshouyang',
-            name: '教育培训'
-          }, {
-            id: 32,
-            icon: 'icon-ertongshouyang',
-            name: '求职执业'
-          },
-        ],
-        guideList: [
-          {
-            id: 1,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 3,
-            frequency: 10,
-            name: '物价局',
-            isActive: true,
-            search:'发过火'
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: true
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }, {
-            id: 2,
-            title: '这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字这里很多字',
-            score: 4,
-            frequency: 1,
-            name: '烟草局',
-            isActive: false
-          }
-        ],
-        selectedId: 1
+        leftDataList: [],//左侧列表
+        guideList: [],//右侧列表
+        selectedId: '',
       }
     },
     created(){
@@ -216,16 +53,41 @@
     methods: {
       //获取左侧列表
       getLeftList(id){
-          console.log(id);
-          Api.errand.getErrandLeftList('',{data:[id]}).then(res=>{
-              console.log('左侧',res);
-          })
+        Api.errandApi.getErrandLeftList([id]).then(res => {
+          let arr = [];
+          for (let item of res[Util.errand.getErrandClassName(this.$route.params.id)]) {
+            arr.push({id: item.dictdataName, name: item.dictdataValue, icon: 'icon-ertongshouyang'});
+
+            //列表中的默认值给 selectedId
+            if(!this.selectedId && item.dictdataIsdefault){
+              this.selectedId = item.dictdataName;
+            }
+          }
+          //如果列表中没有默认值 则默认第一个
+          if(!this.selectedId && arr[0]){
+              this.selectedId = arr[0].id;
+          }
+          if(this.selectedId){
+              this.selecedLeftFun(this.selectedId);
+          }
+          this.leftDataList = arr;
+        })
       },
       //点击左侧列表 单元格
       selecedLeftFun(id){
-        // @todo 根据Id 渲染右侧数据
-        console.log('selecedLeftFun-->', id);
+          console.log('id--->',id)
+        let params = {page:1,rows:100,sidx:id};
         this.selectedId = id;
+        Api.errandApi.getErrandList(params,{loading:'请稍后...'}).then(res=>{
+            console.log(res);
+            let arr = [];
+            for(let item of res.contents){
+              let _item = {id:item.approveId,title:item.approveName,score:4,
+                frequency:item.minSeq,name:item.orgName,isActive:true};
+              arr.push(_item);
+            }
+            this.guideList = arr;
+        })
       },
       //顶部选择的 id
       topTabClick(id){
