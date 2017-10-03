@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="range">
-      <h6>小不点</h6>
+      <h6>幼儿园</h6>
       <div class="allbtn" v-for="item in list">
         <!--<input type="button" v-model="msg" class="btn" :class="clicked? 'fullclass':'otherclass'">-->
-        <input type="button" v-model="msg" class="btn" :class="clicked? 'fullclass':'otherclass'">
-        <!--<button class="btn" :class="clicked? 'fullclass':'otherclass'">{{item.msg}}</button>-->
+        <input type="button" v-model="item.msg" class="btn" :class="item.msg.length>=6? 'fullclass':'otherclass'">
+        <!--<button class="btn" :class="clicked? 'fullclass':'otherclass'" ref="aaa">{{item.msg}}</button>-->
       </div>
     </div>
   </div>
@@ -16,30 +16,20 @@
       return {
         msg: "",
         list: [
-          {msg: "这里是一个字"},
+          {msg: "这里是一个字11111"},
           {msg: "这是两个字"},
           {msg: "三个字"},
           {msg: "这里有好多好多字"},
           {msg: "没有"},
-          {msg: "小可爱的叔叔"},
+          {msg: "新加的按钮值"},
         ],
-        clicked: ""
+        clicked: false
       }
     },
     created() {
-      this.changeclass()
     },
     methods: {
-      changeclass() {
-        if (this.msg.length >= 6) {
-          this.clicked = true
-        }
-        else {
-          this.clicked = false
-        }
-      }
     },
-
   }
 </script>
 <style lang="less" scoped>
@@ -60,26 +50,23 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      display: inline-block;
       .btn {
         border: 0;
         outline: 0;
         border-radius: 0.1rem;
         height: 1.18rem;
         border: 1px solid #cecece;
+        background-color: #fff;
+        margin-bottom: 0.24rem;
       }
     }
   }
-
   .fullclass {
     width: 4.59rem;
-    background-color: deeppink;
   }
-
   .otherclass {
-    flex-wrap: wrap;
-    background-color: red;
     width: 2.22rem;
-
   }
 
 </style>
