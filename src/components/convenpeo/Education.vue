@@ -1,106 +1,86 @@
 <template>
   <div>
     <div class="range">
-      <h6>幼儿园</h6>
-      <router-link to="/convenience/police">
-        <button class="btn">
-        <i class="OAIndexIcon icon-mian"></i>免收保育费和伙食费政策</button>
-      </router-link>
-        <router-link to="/convenience/guideto">
-           <button class="litbtn">
-        <i class="OAIndexIcon icon-banshizhinan"></i>办事指南</button>
-        </router-link>
-        <button class="litbtn">
-        <i class="OAIndexIcon icon-youer"></i>幼儿园信息</button>
-        <button class="litbtn">
-        <i class="OAIndexIcon icon-zhengce"></i>入园政策</button>
-        <button class="litbtn">
-        <i class="OAIndexIcon icon-cloud-standard"></i>收费标准</button>
-    </div>
-    <div class="range edu">
-       <h5>小学</h5>
-      <button class="litbtn">
-        <i class="OAIndexIcon icon-xuexiao"></i>学校信息</button>
-        <button class="litbtn">
-        <i class="OAIndexIcon icon-zhengce"></i>就读政策</button>
-    </div>
-     <div class="range edu">
-       <h5>初中</h5>
-      <button class="litbtn">
-        <i class="OAIndexIcon icon-xuexiao"></i>学校信息</button>
-        <button class="litbtn">
-        <i class="OAIndexIcon icon-zhengce"></i>就读政策</button>
+      <h6>小不点</h6>
+      <div class="allbtn" v-for="item in list">
+        <!--<input type="button" v-model="msg" class="btn" :class="clicked? 'fullclass':'otherclass'">-->
+        <input type="button" v-model="msg" class="btn" :class="clicked? 'fullclass':'otherclass'">
+        <!--<button class="btn" :class="clicked? 'fullclass':'otherclass'">{{item.msg}}</button>-->
+      </div>
     </div>
   </div>
 </template>
 <script>
-export default {
+  export default {
+    data() {
+      return {
+        msg: "",
+        list: [
+          {msg: "这里是一个字"},
+          {msg: "这是两个字"},
+          {msg: "三个字"},
+          {msg: "这里有好多好多字"},
+          {msg: "没有"},
+          {msg: "小可爱的叔叔"},
+        ],
+        clicked: ""
+      }
+    },
+    created() {
+      this.changeclass()
+    },
+    methods: {
+      changeclass() {
+        if (this.msg.length >= 6) {
+          this.clicked = true
+        }
+        else {
+          this.clicked = false
+        }
+      }
+    },
 
-}
+  }
 </script>
 <style lang="less" scoped>
-.range {
-  padding: 0.26rem 0.24rem;
-  background-color: #fff;  
-  .btn {
-    border: 1px solid #cecece;
-    outline: 0;
+  .range {
+    padding: 0.26rem 0.24rem;
+    margin-top: 0.24rem;
     background-color: #fff;
-    width: 4.57rem;
-    height: 1.16rem;
-    line-height: 1.16rem;
-    border-radius: 10px;
-    font-size: 0.24rem;
-    color: #333;
-    .icon-mian {
-      color: #f15a4a;
+    width: 5.14rem;
+    h6 {
+      font-size: 0.24rem;
+      color: #333;
+      font-weight: 400;
+      padding-bottom: 0.4rem;
+      font-family: "微软雅黑";
+    }
+    .allbtn {
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .btn {
+        border: 0;
+        outline: 0;
+        border-radius: 0.1rem;
+        height: 1.18rem;
+        border: 1px solid #cecece;
+      }
     }
   }
-}
-.edu{
-  margin-top: 0.18rem;
-}
-h6 {
-  font-size: 0.24rem;
-  color: #333;
-  font-weight: 400;
-  padding-bottom: 0.4rem;
-}
-h5 {
-  font-size: 0.24rem;
-  color: #333;
-  font-weight: 400;
-  padding-bottom: 0.27rem;
-}
 
-.OAIndexIcon {
-  font-size: 0.4rem;
-  vertical-align: middle;
-  margin-right: 0.12rem;
-}
+  .fullclass {
+    width: 4.59rem;
+    background-color: deeppink;
+  }
 
-.litbtn {
-  width: 2.2rem;
-  height: 1.16rem;
-  line-height: 1.16rem;
-  font-size: 0.24rem;
-  color: #333;
-  margin-top: 0.13rem;
-  background-color: #fff;
-  border: 1px solid #cecece;
-  border-radius: 10px;
-}
-.icon-youer{
-  color: #108EE9
-}
-.icon-cloud-standard{
-  color: #29ab91;
-}
-.icon-zhengce{
-  color: #fc992f
-}
-.icon-xuexiao{
-  color:  #29AB91;
-}
+  .otherclass {
+    flex-wrap: wrap;
+    background-color: red;
+    width: 2.22rem;
+
+  }
+
 </style>
 

@@ -2,12 +2,12 @@
     <div id="tmpl">
         <div class="pubnews padding-container">
             <div class="pubhead">
-                <h3>{{content.title}}</h3>
+                <h3>{{content.displayName}}</h3>
                 <span>查看更多
                     <i class="OAIndexIcon icon-fanhui4"></i>
                 </span>
             </div>
-            <ul class="pubcont">
+            <ul class="pubcont" v-for="item1 in list1">
                 <li class="publistone">
                     <router-link to="/publicmore">
                         <img src="../../assets/img/text1.jpg">{{content.contentf}}<br>
@@ -26,7 +26,7 @@
 <script>
 export default {
     name:'Publicitem',
-    props:['content']
+    props:['content','content1','content2','content3',"list1"]
 }
 </script>
 <style lang="less">
