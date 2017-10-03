@@ -77,4 +77,26 @@ export const Utf8ToUnicode = (strUtf8)=>{
   }
 
   return bstr;
-}
+};
+
+//根据key获取字典
+export const getDictionariesByKey = (key)=>{
+  let dictionaries = getSessionStorage('dictionaries');
+  if(dictionaries) {
+    if (dictionaries[key]) {
+      return dictionaries[key];
+    }
+    return false
+  }
+  return false
+};
+
+//设置字典
+export const setDictionaries = (key,value)=>{
+  let dictionaries = getSessionStorage('dictionaries');
+  if(!dictionaries){
+    dictionaries = {};
+  }
+  dictionaries[key] = value;
+  setSessionStorage('dictionaries',dictionaries);
+};
