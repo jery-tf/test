@@ -7,9 +7,7 @@
     <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
                     :selectedId="selectedId">
       <div class="flex1 right">
-        <component v-bind:is="currentView" keep-alive>
-          <!-- 组件在 vm.currentview 变化时改变！ -->
-        </component>
+        <Education></Education>
       </div>
     </DoubleListView>
   </div>
@@ -18,15 +16,11 @@
 <script>
 import DoubleListView from 'components/public/DoubleListView.vue'
 import Education from 'components/convenpeo/Education.vue'
-import Adoption from 'components/convenpeo/Adoption.vue'
-import ApplyJob from 'components/convenpeo/ApplyJob.vue'
-import Ratepay from 'components/convenpeo/Ratepay.vue'
 export default {
   name: 'forpeople',
   components: {
     DoubleListView:DoubleListView,
      Education:Education,
-    Adoption:Adoption
   },
   data() {
     return {
@@ -76,6 +70,37 @@ export default {
           icon: 'icon-bus',
           name: '交通旅游'
         },
+        {
+          id: 9,
+          icon: 'icon-bus',
+          name: '交通旅游'
+        },
+        {
+          id: 9,
+          icon: 'icon-bus',
+          name: '交通旅游'
+        },
+        {
+          id: 9,
+          icon: 'icon-bus',
+          name: '交通旅游'
+        },
+        {
+          id: 9,
+          icon: 'icon-bus',
+          name: '交通旅游'
+        },
+        {
+          id: 9,
+          icon: 'icon-bus',
+          name: '交通旅游'
+        },
+        {
+          id: 9,
+          icon: 'icon-bus',
+          name: '交通旅游'
+        },
+
       ],
       selectedId: 1
     }
@@ -88,18 +113,6 @@ export default {
     selecedLeftFun(id) {
       //左侧列表发生变化  右侧组件变化成不同组件
       this.selectedId = id;
-      if (id == "1") {
-        this.currentView=Education
-      }
-      if (id == "2") {
-        this.currentView=Adoption
-      }
-      if (this.selectedId == "3") {
-        this.currentView=ApplyJob
-      }
-       if (this.selectedId == "4") {
-        this.currentView=Ratepay
-      }
     }
   }
 
