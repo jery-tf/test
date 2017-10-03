@@ -4,5 +4,5 @@
 import Config from '../config'
 
 export const getErrandClassName = (id)=>{
-  return Config.errandTable[id];
+  return Config.Dictionaries[id];
 }

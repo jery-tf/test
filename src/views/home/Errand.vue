@@ -4,11 +4,11 @@
 
 <template>
   <div>
-    <router-link to="/errandList/zrr" class="center-center">
+    <router-link to="/errandList/zrrfl" class="center-center">
       <p>自然人</p>
     </router-link>
     <p>------------------=---------------</p>
-    <router-link to="/errandList/fr" class="center-center">
+    <router-link to="/errandList/frfl" class="center-center">
       <p>法人</p>
     </router-link>
     <p>-----------------------------------</p>

@@ -1,7 +1,6 @@
 /**
  * Created by wyg on 2017/9/29.
  */
-import {getUserInfo} from './user'
 import {setSessionStorage,getSessionStorage} from './other'
 //内部方法
 const isLogin = ()=>{

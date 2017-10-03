@@ -67,7 +67,7 @@ export const axiosPut = (url,data,loading)=>$axios.put(url,data,{loading,headers
 
 
 /**********************需要权限认证*****************************/
-// 'x-api-key': Config.C2XApiKey
+
 let  tokenHeaders = { "Authorization": `Bearer ${Util.login.getAccessToken()}`,'x-api-key': Config.C2XApiKey};
 
 /***
