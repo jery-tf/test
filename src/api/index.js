@@ -8,5 +8,5 @@ import * as realNameApi from './realName'
 import * as registerApi from './register'
 import * as getnewsApi from './getnews'
 import * as errandApi from './errand'
-
-export default { testApi ,loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi}
+import * as opacityApi from './opacity'
+export default { testApi ,loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi,opacityApi}
