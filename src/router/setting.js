@@ -54,4 +54,12 @@ export default [
           title:'重置新手机发送验证码'
         },
       },
+  {
+    path: '/setting/forgetpwd',
+    name: 'forgetpwd',
+    component: views.Setting.ForgetPwd,
+    meta:{
+      title:'忘记密码重置密码'
+    },
+  },
 ]
