@@ -8,15 +8,12 @@
     </div>
     <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal" v-if="isshow" pop-transition="popup-fade">
      <h3> <i class="icon-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
-      <ul>
-        <li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">中央驻苏单位和省属单位集体合同审查生效情况查询</a></li>
-        <li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">种子生产地点检疫证明</a></li>
-        <li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">委托种子生产合同复印件或自行组织种子生产的情况说明和证明材料</a></li>
-        <li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">种子生产、加工贮藏、检验专业技术人员的基本情况及其企业缴纳的社保证明复印件...</a></li>
+      <ul v-for="(item1,index) in datainfolist">
+        <li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">{{item1.name}}</a></li>
+        <!--<li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">种子生产地点检疫证明</a></li>-->
+        <!--<li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">委托种子生产合同复印件或自行组织种子生产的情况说明和证明材料</a></li>-->
+        <!--<li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">种子生产、加工贮藏、检验专业技术人员的基本情况及其企业缴纳的社保证明复印件...</a></li>-->
       </ul>
-    </mt-popup>
-      <mt-popup v-model="popupVisible"  v-if="showModel" :showModel="showModel">
-        <Popupname></Popupname>
     </mt-popup>
   </div>
 </template>
@@ -32,7 +29,7 @@
         clicked: false,
         showModel:false,
         popupVisible:'',
-        isshow:true,
+        isshow:false,
         showModel:false
       }
     },
@@ -48,7 +45,7 @@
       },
       popupup(item1){
         if(item1.channelId=="24"){
-          this.showModel=true
+          this.isshow=true
           console.log(this.showModel)
         }else if(item1.channelId==25){
           alert("我是25")

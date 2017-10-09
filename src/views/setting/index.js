@@ -5,4 +5,5 @@ export default {
     Newphone:resolve =>require(['./newphone.vue'],resolve),//设置新手机号码
     Resetsec:resolve =>require(['./resetsec.vue'],resolve),//重置手机密码
     Lastphone:resolve =>require(['./lastphone.vue'],resolve),//设置手机号码发送新验证码
+  ForgetPwd:resolve =>require(['./forgetpwd.vue'],resolve),//忘记密码找回密码
   }
