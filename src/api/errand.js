@@ -13,6 +13,9 @@ export const getErrandDetails = (approveId,config)=>axiosGet(`/approveinterface/
 //根据Id查询事项名称
 export const getApproveName = (approveId,config)=>axiosGetToken(`/approveinterface/v1/approveAdvanced/getById/${approveId}`,config);
 
+//获取事项 材料列表
+export const getMaterialList = (params,config)=>axiosGet(`/approveinterface/v1/approveMaterial${reqParms(params)}`,'',config);
+
 const reqParms = (params)=>{
   let qs = '?';
   for(let index in params){

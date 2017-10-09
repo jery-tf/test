@@ -49,14 +49,15 @@
               <Subtitle title="设定依据" :content="approve.settingGist"></Subtitle>
             </div>
           </div>
-          <!--<mt-cell v-for="n in 10" :title="'内容 ' + n" />-->
         </mt-tab-container-item>
 
         <mt-tab-container-item id="application">
           <div class="box-margin-top fff">
             <p class="padding-container" style="font-size: .24rem;color:#333">申请材料</p>
-            <applicationMaterials :name="`建设单位申请`" :number="1" :source="`申请人自备`">
-            </applicationMaterials>
+            <template v-for="item in materialList">
+              <applicationMaterials :name="item.materialTitle" :number="item.copiesNum" :source="item.sourceChannel">
+              </applicationMaterials>
+            </template>
           </div>
         </mt-tab-container-item>
 
@@ -89,6 +90,7 @@
         selected: 'info',
         approve: {},//办事指南详细数据
         dictionariesXZLB: {},
+        materialList:[],//材料列表
       }
     },
     created(){
@@ -96,6 +98,7 @@
 
 
       this.getDictionaries();
+      this.getMaterialList();
     },
     methods: {
       testBtn(){
@@ -109,7 +112,6 @@
             this.approve = Object.assign({}, res[0], res[1]);
             console.log(Object.assign({}, res[0], res[1]));
           })
-
       },
       //获取字典
       getDictionaries(){
@@ -127,7 +129,29 @@
             }
           })
         }
+      },
+      //获取材料列表
+      getMaterialList(){
+        let cond = {
+          filters: {
+            groupOp: 'AND',
+            rules: [
+              {
+                field: 'approveId',
+                op: 'eq',
+                data: this.$route.params.id
+              }
+            ]
+          }
+        };
+        let params = {page: 1, rows: 100, cond: encodeURI(JSON.stringify(cond))};
+        Api.errandApi.getMaterialList(params).then(res => {
+          console.log('材料列表',JSON.parse(JSON.stringify(res.contents)));
+          if(res.contents){
+            this.materialList = res.contents;
+          }
 
+        })
       }
     },
     computed: {
@@ -145,7 +169,7 @@
 //      办件形式
       CtransactionFrom(){
         let transactionFrom = {
-            '1':'网上办理'
+          '1': '网上办理'
         };
         return transactionFrom[this.approve.transactionFrom];
       }

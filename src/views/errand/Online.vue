@@ -5,9 +5,8 @@
 <template>
   <div class="h100">
     <div class="soll">
-      <ErrandHead :score="3" :workDay="30" :workNo="2"
-                  title="这里很多中文这里很多中文这里很多中文这里很多中文这里很多中文这里很多中文这里很多中文这里">
-      </ErrandHead>
+      <ErrandHead :score="3" :workDay="approve.commitmentLimit" :workNo="approve.minSeq"
+                  :title="approve.approveName"></ErrandHead>
 
       <div class="isSubmitList box-margin-top">
         <ErrandSubmitLi title='测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下下看看测试下下看看测试下看看测试下看看'
@@ -35,11 +34,15 @@
   import ErrandSubmitLi from 'components/errand/SubmitLi.vue'
   import ErrandAddress from 'components/errand/address.vue'
   import ErrandFoot from 'components/errand/footer.vue'
+  import MintUI from 'mint-ui'
+  import Util from '../../util'
+  import Api from '../../api'
   export default {
     name: 'Online',
     components: {ErrandHead, ErrandSubmitLi, ErrandAddress,ErrandFoot},
     data () {
       return {
+        approve:{},
         option: {
           userName: '张三',
           phone: '123123123',
@@ -59,7 +62,7 @@
       }
     },
     created(){
-      console.log('created执行了')
+      this.getErrandDetails(this.$route.params.id);
     },
     methods: {
       testBtn(data){
@@ -67,7 +70,16 @@
       },
       testAddress(){
           console.log(22)
-      }
+      },
+      //数据初始化
+      getErrandDetails(id){
+        MintUI.Indicator.open('请稍后...');
+        Promise.all([Api.errandApi.getErrandDetails(id), Api.errandApi.getApproveName(id)])
+          .then(res => {
+            this.approve = Object.assign({}, res[0], res[1]);
+            console.log('qqq',Object.assign({}, res[0], res[1]));
+          })
+      },
     }
 
   }

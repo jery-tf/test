@@ -11,7 +11,8 @@ import Setting from './setting'
 import Gk from './gk'
 import Selfinfo from './selfinfo'
 import Convenience from './convenience'
+import Collection from './collection' //收藏
 import Me from './me'
 export default {
-  Errand,Home,noPage,Search,Persondata,Register,Setting,Gk,Selfinfo,Me,Convenience
+  Errand,Home,noPage,Search,Persondata,Register,Setting,Gk,Selfinfo,Me,Convenience,Collection
 }
