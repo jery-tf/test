@@ -21,7 +21,7 @@
     <p class="flex font-middle">
       <span>立即注册</span>
       <span>|</span>
-      <span>忘记密码</span>
+      <router-link to="/setting/forgetpwd">忘记密码</router-link>
     </p>
   </div>
 </template>
