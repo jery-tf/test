@@ -4,37 +4,41 @@
 
 <template>
   <div class="h100 doubleListView bm">
-    <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
+    <LeftView :dataList="leftDataList" :liClickFun="selecedLeftFun"
                     :selectedId="selectedId">
-      <div class="flex1 right">
-        <Education></Education>
+      <div class="flex1 right" >
+       <template  v-if="selectedId ==14" :selectedId="selectedId"  >
+          <Education :datainfoto="list" :datainfolist="list1" ></Education>
+       </template>
       </div>
-    </DoubleListView>
+    </LeftView>
+
   </div>
 </template>
 
 <script>
-import DoubleListView from 'components/public/DoubleListView.vue'
+import LeftView from 'components/convenpeo/LeftView.vue'
 import Education from 'components/convenpeo/Education.vue'
 import Api from '../../api'
 import Util from '../../util'
 import axios from 'axios'
 import Config from '../../config'
 import qs from "qs"
+import {Toast} from 'mint-ui';
 export default {
   name: 'forpeople',
   components: {
-    DoubleListView:DoubleListView,
+    LeftView:LeftView,
      Education:Education,
   },
   data() {
     return {
-      selected: '1',
+      selected: '13',
       currentView: 'Education',
-      leftDataList: [
-
-      ],
-      selectedId: 13
+      leftDataList: [],
+      selectedId: 13,
+      list:[],
+      list1:[],
     }
   },
   created() {
@@ -56,16 +60,53 @@ export default {
         },
         {headers: {'content-type': 'application/x-www-form-urlencoded'}}
       ).then(res => {
-        console.log(res.data)
         this.leftDataList = res.data
-        this.leftDataList.id=res.data.channelId
+//        this.leftDataList.id=this.leftDataList.channelId
+        console.log( this.leftDataList)
       })
     },
 
     //点击左侧列表 单元格
-    selecedLeftFun(id) {
+    selecedLeftFun(channelId) {
       //左侧列表发生变化  右侧组件变化成不同组件
-      this.selectedId = id;
+      this.selectedId = channelId;
+     if(this.selectedId=="14"){
+       Api.getnewsApi.getnews(
+         {
+           content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
+             channelId: "14",
+             start: "0",
+             count: "99",
+             grantUserName: "xxld",
+             userName: "xxld",
+             site: "hunanzhengwu"
+           })))
+         },
+         {headers: {'content-type': 'application/x-www-form-urlencoded'}}
+       ).then(res => {
+         this.list=res.data;
+         console.log(this.list)
+         Api.getnewsApi.getnews(
+           {
+             content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
+               channelId: "21",
+               start: "0",
+               count: "99",
+               grantUserName: "xxld",
+               userName: "xxld",
+               site: "hunanzhengwu"
+             })))
+           },
+           {headers: {'content-type': 'application/x-www-form-urlencoded'}}
+         ).then(res => {
+           this.list1=res.data;
+           console.log(this.list1)
+         })
+       })
+     }
+     else{
+       Toast("没有内容")
+     }
     }
   }
 

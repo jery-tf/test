@@ -3,12 +3,13 @@
     <h3>在华外国人集体进行临时宗教活动地点的审批</h3>
     <Approve :approve="item"  :key="index" v-for="(item,index) in list"></Approve>
   </div>
-  
+
 </template>
 <script>
-import Approve from "components/convenpeo/approve"
+import Approve from "components/convenpeo/Approve.vue"
 export default {
   components: { Approve },
+  name:'police',
   data() {
     return {
       list: [
@@ -23,7 +24,7 @@ export default {
       ]
     }
   },
- 
+
 }
 </script>
 <style lang="less" scoped>
