@@ -11,24 +11,24 @@ export default
     name: 'newsmore',
     component: views.Gk.Publicmore,
     meta:{
-      title:'公开详情页'
+      title:'第一项查看更多'
     },
   },
 
   {
     path: '/publicmore1',
-    name: 'newsmore',
+    name: 'newsmoreone',
     component: views.Gk.Publicmore1,
     meta:{
-      title:'公开详情页'
+      title:'第二项查看更多'
     },
   },
   {
     path: '/publicmore2',
-    name: 'newsmore',
+    name: 'newsmoretwo',
     component: views.Gk.Publicmore2,
     meta:{
-      title:'公开详情页'
+      title:'第三项查看更多'
     },
   }
 
