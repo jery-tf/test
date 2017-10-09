@@ -10,6 +10,7 @@ import * as getnewsApi from './getnews'
 import * as errandApi from './errand'
 import * as otherApi from './other'
 import * as opacityApi from './opacity'
+import * as collectionApi from './collection'
 export default { testApi, loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi,opacityApi,
-  otherApi}
+  otherApi,collectionApi}
 

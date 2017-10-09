@@ -3,6 +3,7 @@
  */
 //收藏
 import views from '@/views'
+import Util from '../util'
 
 export default [
   {
@@ -12,5 +13,6 @@ export default [
     meta:{
       title:'我的收藏'
     },
+    beforeEnter:Util.login.checkLogin
   }
 ]

@@ -13,7 +13,15 @@
     </router-link>
     <p>-----------------------------------</p>
     <router-link to="/errand/completeData/test" class="center-center">
-      <p>补正补齐</p>
+      <p>详情</p>
+    </router-link>
+    <p>-----------------------------------</p>
+    <router-link to="/collection" class="center-center">
+      <p>收藏</p>
+    </router-link>
+    <p>-----------------------------------</p>
+    <router-link to="/me/myDo" class="center-center">
+      <p>我的办件</p>
     </router-link>
 
   </div>

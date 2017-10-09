@@ -35,6 +35,8 @@
    * 收藏
    */
   import CellSwipe from 'components/public/CellSwipe.vue'
+  import Api from '../../api'
+  import Util from '../../util'
   export default {
     name: 'collection',
     components: {CellSwipe},
@@ -45,7 +47,7 @@
       }
     },
     created(){
-
+      this.getMatterCollection();
     },
     methods: {
       topTabClick(id){
@@ -59,8 +61,20 @@
         console.log(id);
         // @todo 根据选择的ID 重新加载数据
       },
+      getMatterCollection(){
+        let userInfo = Util.user.getUserInfo();
+        let params = {Certificate_no: userInfo.certificateNum};
+        Api.collectionApi.getMatterCollection(params).then(res => {
+          if (res.TotalSize) {
+            console.log('OK');
+          }else{
+            console.log('-------事项查询没有数据-----', res);
+            // todo  事项查询数据为空操作
+          }
+        });
+      },
       testFun(){
-          console.log(11)
+        console.log(11)
       }
     }
 
@@ -80,6 +94,7 @@
       color: #fff;
     }
   }
+
   .doubleListView {
     position: relative;
     top: 0;
