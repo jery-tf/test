@@ -3,12 +3,12 @@
     <div class="public padding-container-lr" v-for="item in list">
           <div class="title" >
             <h3>{{item.displayName}}</h3>
-            <router-link to="/publicmore">
-              <span>
+            <!--<router-link to="/publicmore">-->
+              <span @click="getMore(item)">
               查看更多
               <i class="OAIndexIcon icon-fanhui4"></i>
             </span>
-            </router-link>
+            <!--</router-link>-->
           </div>
           <ul class="pubcont">
            <template v-for="item1 in list1" v-if="item.channelId ==10">
@@ -86,7 +86,7 @@
           },
           {headers: {'content-type': 'application/x-www-form-urlencoded'}}
         ).then(res => {
-          console.log(res.data)
+//          console.log(res.data)
           this.list = res.data
 //        else if(res.code=="200"){
 //          this.$router.push("/register/registerinfo");
@@ -154,6 +154,16 @@
 //          this.$router.push("/register/registerinfo");
 //        }
         })
+      },
+      getMore(item){
+        if(item.channelId==10){
+          this.$router.push("/publicmore")
+        }else if(item.channelId==11){
+          this.$router.push("/publicmore1")
+        }
+        else if(item.channelId==12){
+          this.$router.push("/publicmore2")
+        }
       }
     }
   }

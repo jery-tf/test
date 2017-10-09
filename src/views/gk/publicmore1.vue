@@ -1,21 +1,22 @@
 <template>
   <div id="tmpl">
-    <div class="public padding-container-lr" >
+    <div class="public padding-container-lr">
       <ul class="pubcont">
-        <template v-for="item1 in list1">
+        <template v-for="item2 in list2">
           <li class="publist">
-            <a href="http://172.16.17.83:8100/hunanzhengwu/2/10/content_13.html" v-if="item1.type==2">
-              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
-              <span>{{item1.time}}</span>
+            <a href="http://172.16.17.83:8100/hunanzhengwu/2/11/content_15.html" v-if="item2.type==1">
+              <img :src="item2.imageUrls" v-if="item2.imageUrls"> <p>{{item2.title}}</p><br>
+              <span>{{item2.time}}</span>
             </a>
-            <a href="http://172.16.17.83:8100/hunanzhengwu/2/10/content_12.html" v-if="item1.type==1">
-              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
-              <span>{{item1.time}}</span>
+            <a href="http://172.16.17.83:8100/hunanzhengwu/2/11/content_14.html" v-if="item2.type==2">
+              <img :src="item2.imageUrls" v-if="item2.imageUrls"> <p>{{item2.title}}</p><br>
+              <span>{{item2.time}}</span>
             </a>
           </li>
         </template>
       </ul>
     </div>
+
   </div>
 
 </template>
@@ -32,7 +33,7 @@
 //  components:{Publicitem},
     data() {
       return {
-        list1: [],
+        list2: [],
       }
     },
     created() {
@@ -43,7 +44,7 @@
         Api.getnewsApi.getnewsinfo(
           {
             content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
-              channelId: "10",
+              channelId: "11",
               start: "0",
               count: "99",
               grantUserName: "xxld",
@@ -54,8 +55,7 @@
           {headers: {'content-type': 'application/x-www-form-urlencoded'}}
         ).then(res => {
           if (res.resp_code == "1") {
-            this.list1 = res.data
-            this.$router.push("")
+            this.list2 = res.data
           }
 //        else if(res.code=="200"){
 //          this.$router.push("/register/registerinfo");
