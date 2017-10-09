@@ -27,7 +27,7 @@
     },
     methods:{
       close(){
-
+        this.showModel=false;
       }
     }
 
