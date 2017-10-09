@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
       <router-link to="personlist/personinfo">
           <div class="information padding-container-lr">
                 <i class="OAIndexIcon icon-gerenxinxi"></i>个人信息
@@ -24,12 +24,12 @@
                 </span>
           </div>
       </a>
-      
+
   </div>
 </template>
 <script>
 export default {
-  
+
 }
 </script>
 <style scoped lang="less">
@@ -41,14 +41,18 @@ export default {
         font-size: 0.32rem;
         color: #333;
         background-color: #fff;
+      font-family: "微软雅黑";
+      border-top:1px solid #d9d9d9;
+      border-bottom:1px solid #d9d9d9;
         .icon-gerenxinxi,.icon-wodezhengjianzhao,.icon-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming{
             font-size: 0.41rem;
             color: #f9ae0f;
             margin-right: 0.25rem;
+          vertical-align: middle;
         }
          .icon-wodezhengjianzhao{
             font-size: 0.41rem;
-            color: #f62e63;
+            color: #f72e64;
             margin-right: 0.25rem;
         }
        .icon-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming{
@@ -62,7 +66,7 @@ export default {
             color:#ff3e3e;
             .icon-next{
                 font-size: 0.3rem;
-                color: #a3a3a3
+                color: #cbcbcb
             }
         }
     }

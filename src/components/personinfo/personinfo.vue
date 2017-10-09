@@ -38,7 +38,7 @@ export default {
     width: 3rem;
     height: 0.8rem;
      font-size: 0.23rem;
-    color: #333;
+    color: #aaa;
 }
 
 .common {

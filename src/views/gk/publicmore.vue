@@ -68,7 +68,7 @@
 </script>
 <style scoped lang="less">
   #tmpl {
-    background-color: #f2f2f2;
+    background-color: #ffffff;
     .public {
       width: 7.2rem;
       background-color: #fff;

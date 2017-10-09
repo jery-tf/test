@@ -72,7 +72,7 @@ export default {
     width: 0.33rem;
     height: 0.24rem;
     font-size: 0.24rem;
-    color: #12b7f5
+    color: #11b7f3
   }
   .ipt {
     width: 7.2rem;
@@ -117,7 +117,7 @@ export default {
 .mint-button--large {
   width: 6.72rem;
   height: 0.93rem;
-  border-radius: 10px;
+  border-radius: 0.1rem;
 }
 
 .mint-button-text {

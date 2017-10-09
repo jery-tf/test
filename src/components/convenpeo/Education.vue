@@ -63,8 +63,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
-
     h6 {
       font-size: 0.24rem;
       color: #333;
