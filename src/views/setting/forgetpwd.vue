@@ -74,6 +74,7 @@
                   {Headers:{'content-type':'application/x-www-form-urlencoded'}}
                 ).then(res => {
                   if (res.code == "100") {
+                    Util.other.setSessionStorage('newPersonId',res.data[0]);
                     this.dis=true;
                     this.$router.push("/setting/forgetpwdnum")
                     return

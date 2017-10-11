@@ -1,4 +1,4 @@
-import {axiosPostToken ,axiosGetToken} from './baseApi'
+import {axiosPostToken ,axiosGetToken,axiosPost} from './baseApi'
 //修改密码
 export const checkPwd = (userId,params,config)=>axiosPostToken(`/sso/v1/userpwd/${userId}${reqParms(params)}`,params,config);
 const reqParms = (params)=>{
@@ -17,3 +17,4 @@ const reqParmsfor = (paramsfor)=>{
   }
   return qs.join('/');
 };
+

@@ -49,12 +49,16 @@ export default {
       this.ablesee2 = !this.ablesee2
     },
     handleClick: function() {
-      if(this.password1==""){
-          Toast("密码输入不能为空");
+      if(this.oldpwd==""){
+        Toast("请输入原始密码");
+        return;
+      }
+      else if(this.password1==""){
+          Toast("新密码输入不能为空");
           return;
       }
       else if(this.password2==""){
-        Toast("密码输入不能为空")
+        Toast("新密码输入不能为空")
         return
       }
       else if (this.password1 != this.password2) {
@@ -68,18 +72,18 @@ export default {
       let params={password:this.password1}
       let paramsfor={userpwd:this.userId,password:this.oldpwd}
       Api.checkPwdApi.searchPwd(paramsfor).then(res=>{
-        if(res.body=='false'){
-          console.log("123")
-        }
-      })
-      Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
-        if(res.body==false){
-          Toast("密码错误！请重新输入")
-          return
-        }else if(res.body==true){
+        if(res==false){
+              Toast("原密码错误，请重新输入")
+          return;
+        }else if(res==true){
+          Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
+               Toast("修改密码成功，即将跳转...")
 
+          })
         }
+
       })
+
     },
 
   }

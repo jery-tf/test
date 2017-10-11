@@ -18,16 +18,24 @@
            @click="showPassword1"></i>
       </mt-field>
     </div>
-    <Btncommon msg="提交" ></Btncommon>
+    <div class="top52">
+      <mint-button type="primary" size="large" @click="restPwd">提交</mint-button>
+    </div>
   </div>
 </template>
 
 <script>
-  import Btncommon from 'components/btncommon/BtnCommon'
+  import { Button} from 'mint-ui'
+  import {Toast} from 'mint-ui';
+  import Api from '../../api'
+  import Util from '../../util'
+  import axios from 'axios'
+  import Config from '../../config'
+  import  qs from "qs"
 
   export default {
     name: 'settingpwd',
-    components: {Btncommon},
+    components:{'mint-button': Button},
     data() {
       return {
         oldpwd: "",
@@ -46,6 +54,14 @@
       showPassword1() {
         this.isShowPasswordtwo = !this.isShowPasswordtwo;
       },
+      restPwd(){
+        this.userId = JSON.parse(sessionStorage.getItem('newPersonId')).id
+        console.log( this.userId)
+        let params={password:this.oldpwd}
+        Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
+          Toast("设置密码成功，即将跳转")
+        })
+      }
     }
 
   }
@@ -80,5 +96,19 @@
       color: #ccc;
       font-size: 0.32rem;
     }
+  }
+  .mint-button {
+    margin: 0 0.24rem;
+    margin-top: 0.24rem ;
+  }
+
+  .mint-button--large {
+    width: 6.72rem;
+    height: 0.93rem;
+    border-radius: 10px;
+  }
+
+  .mint-button-text {
+    font-size: 0.3rem;
   }
 </style>

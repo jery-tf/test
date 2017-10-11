@@ -53,6 +53,7 @@
           }else if(res.code =="200"){
             Toast(res.info)
             this.dis=false
+            return
           }
         })
       },
@@ -82,6 +83,7 @@
 
           }
           else if(res.code=="200"){
+
             this.$router.push("/register/registerinfo");
           }
         })
