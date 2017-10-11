@@ -2,21 +2,46 @@
   <div>
     <div class="warming">
       <p class="checknum">我们已发送了校验码到你的手机:</p>
-      <span>152*******62</span>
+      <span>{{totelName}}</span>
     </div>
     <div class="yan">
       <input type="text" class=" padding-container-lr ipt" placeholder="请输入验证码">
       <button class="btn">52秒后重新获取</button>
     </div>
-   <router-link to="#">
-      <Btncommon msg="保存"></Btncommon>
-   </router-link>
+   <!--<router-link to="#">-->
+      <!--<Btncommon msg="保存"></Btncommon>-->
+   <!--</router-link>-->
+    <div class="top52 box-margin-top">
+    <router-link to="">
+      <mint-button type="primary" size="large" @click="successchange">保存</mint-button>
+    </router-link>
+      </div>
   </div>
 </template>
 <script>
-import Btncommon from 'components/btncommon/BtnCommon'
+  import { Button} from 'mint-ui'
+import  Util from  '../../util'
+  import {Toast} from 'mint-ui';
 export default {
- components:{Btncommon},
+  data(){
+    return{
+      data:'18684892246'
+    }
+  },
+ components:{'mint-button': Button},
+  methods:{
+    successchange(){
+      Toast("修改手机号码成功！")
+    }
+  },
+  computed:{
+    totelName(){
+      let str =Util.other.getSessionStorage('newphone')
+      let start = str.slice(0,3);
+      let end = str.slice(-2);
+      return `${start}******${end}`;
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -67,5 +92,18 @@ export default {
     border-radius: 10px;
     font-size: 0.2rem;
   }
+}
+.mint-button {
+  margin: 0 0.24rem;
+}
+
+.mint-button--large {
+  width: 6.72rem;
+  height: 0.93rem;
+  border-radius: 10px;
+}
+
+.mint-button-text {
+  font-size: 0.3rem;
 }
 </style>

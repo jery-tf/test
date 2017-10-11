@@ -115,7 +115,6 @@
       font-family: "微软雅黑";
       li{
         vertical-align: bottom;
-        padding-bottom: 0.5rem;
         padding-left: 0.22rem;
         font-size: 0.24rem;
         color: #666;

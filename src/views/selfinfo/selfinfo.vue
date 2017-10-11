@@ -2,18 +2,18 @@
   <div class="tmpl">
     <div class="headport padding-container-lr">
       头像
-      <span class="OAIndexIcon icon-yonghu21"></span>
+        <img src="../../assets/img/hport.png" alt="">
     </div>
     <div class="pname">
       <div class="adminpname">
         用户名
-        <span class="">陈主任</span>
+        <span class="">{{username}}</span>
       </div>
     </div>
     <div class="pname address">
       <div class="adminpname">
         手机号码
-        <span class="">15899662258</span>
+        <span class="">{{telphone}}</span>
       </div>
     </div>
     <div class="pname padding-container-lr">
@@ -23,7 +23,27 @@
   </div>
 </template>
 <script>
-  export default {}
+  import  Util from '../../util'
+  export default {
+    data(){
+      return{
+          telphone:'',
+        username:""
+      }
+    },
+    created(){
+      this.getitems()
+    },
+    methods:{
+        getitems(){
+          const telphone= JSON.parse(sessionStorage.getItem('userInfo')).phone;
+          this.telphone=telphone
+          const username= JSON.parse(sessionStorage.getItem('userInfo')).name;
+          this.username=username
+        }
+    }
+
+  }
 </script>
 <style lang="less" scoped>
   .tmpl {
@@ -35,9 +55,14 @@
       font-size: 0.32rem;
       color: #333;
       background-color: #fff;
-      span {
-        float: right;
-      }
+        img{
+          width: 1.01rem;
+          height: 1.01rem;
+          display: inline-block;
+          position: absolute;
+          top:0.5rem;
+          right: 0.24rem;
+        }
       .icon-yonghu21 {
         font-size: 1.01rem;
         color: #ccc
@@ -52,7 +77,6 @@
       width: 7.2rem;
       height: 0.97rem;
       line-height: 0.97rem;
-
       span {
         float: right;
         font-size: 0.28rem;
