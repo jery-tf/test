@@ -53,6 +53,16 @@
         <div class="num">5</div>
       </li>
     </ul>
+
+    <div class="padding-container-lr officework">
+      <span class="myoffice">相关企业/单位(3)</span>
+      <span class="checkall">查看全部<i class="OAIndexIcon icon-next"></i></span>
+    </div>
+    <div class="contentsall padding-container-lr" v-for="item in list">
+      <AboutCompany :data="item"></AboutCompany>
+    </div>
+
+
     <div class="parttop  padding-container-lr">
 
       <div class="particulars ">
@@ -102,16 +112,22 @@
 <script>
   import Api from '../../api'
   import $ from 'jquery'
+  import AboutCompany from '../../components/aboutCompany/company.vue'
+
   export default {
     name: 'myselfinfo',
-    components: {},
-    data () {
-      return {}
+    components: {AboutCompany},
+    data() {
+      return {
+        list:[
+          {contents:"湖南科创信息技术有限公司",time:'2017-07-05',star:'法定代表人',status:'开业'}
+        ]
+      }
     },
-    created(){
+    created() {
     },
     methods: {
-      authentication(){
+      authentication() {
         let url = 'https://iauth.wecity.qq.com/new/cgi-bin/auth.php';
         let appId = '4454', method = 'auth';
         //签名
@@ -125,7 +141,7 @@
             appid: appId, signature: _signature, redirect: 'http://hillwxtest.s1.natapp.cc/wxAuthentication-test.html',
             uid: '123', type: 0
           };
-          sessionStorage.setItem('wxSignatures',_signature);
+          sessionStorage.setItem('wxSignatures', _signature);
           let form = $("<form method='post'></form>");
           form.attr({"action": url});
           for (let arg in args) {
@@ -205,13 +221,14 @@
 
   .officework {
     width: 7.2rem;
-    height: 0.93rem;
-    line-height: 0.93rem;
+    height: 0.92rem;
+    line-height: 0.92rem;
     background-color: #fff;
     border-bottom: 1px solid #d9d9d9;
     .myoffice {
       font-size: 0.32rem;
       color: #333;
+      font-family: "微软雅黑";
     }
     .checkall {
       float: right;
@@ -224,6 +241,14 @@
         color: #cdcdcd;
       }
     }
+  }
+
+  .contentsall {
+    width: 7.2rem;
+    height: 2.36rem;
+    background-color: #fff;
+    margin-bottom: 0.24rem;
+    padding-top: 0.27rem;
   }
 
   .unoffice {
@@ -310,7 +335,7 @@
       float: right;
       font-size: 0.29rem;
       vertical-align: -3%;
-      margin-left: 0.26rem;
+      /*margin-left: 0.26rem;*/
       color: #999;
     }
   }
