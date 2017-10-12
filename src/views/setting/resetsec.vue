@@ -1,6 +1,6 @@
 <template>
   <div id="tmpl">
-    <mt-field label="请输入原始密码" class="ipt" :type="ablesee?'text':'password'">
+    <mt-field label="请输入原始密码" class="ipt" :type="ablesee?'text':'password'" v-model="oldpwd">
       <span class="OAIndexIcon icon-yanjing1" @click="isshow()"></span>
     </mt-field>
     <div class="sect">
@@ -10,22 +10,26 @@
       <mt-field label="请再次输入新密码" class="ipt" :type="ablesee2?'text':'password'" v-model="password2">
         <span class="OAIndexIcon icon-yanjing1" @click="isshow2()"></span>
       </mt-field>
-
-      <Btncommon msg="保存" @click.native="handleClick"></Btncommon>
+      <div class="top52">
+        <mint-button type="primary" size="large" @click.native="handleClick">保存</mint-button>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import Btncommon from 'components/btncommon/BtnCommon'
+  import {Field, Button} from 'mint-ui'
 import { Toast } from 'mint-ui';
+  import Api from '../../api'
+  import Util from '../../util'
+  import axios from 'axios'
+  import Config from '../../config'
+  import  qs from "qs"
 export default {
-  components: {
-    Btncommon,
-  },
+  components:{'mint-button': Button},
 
   data() {
     return {
-      password: '',
+      oldpwd: '',
       ablesee: false,
       ablesee1: false,
       ablesee2: false,
@@ -45,23 +49,43 @@ export default {
       this.ablesee2 = !this.ablesee2
     },
     handleClick: function() {
-      if(this.password1==""){
-          Toast("密码输入不能为空")
+      if(this.oldpwd==""){
+        Toast("请输入原始密码");
+        return;
+      }
+      else if(this.password1==""){
+          Toast("新密码输入不能为空");
+          return;
       }
       else if(this.password2==""){
-        Toast("密码输入不能为空")
+        Toast("新密码输入不能为空")
+        return
       }
       else if (this.password1 != this.password2) {
         Toast({
           message: '两次密码输入不一致，请重新输入',
           position: 'top',
         });
-      }else
-       Toast({
-          message: '修改密码成功',
-          position: 'top',
-        });
-    }
+        return
+      }
+      this.userId =JSON.parse(sessionStorage.getItem('userInfo')).userId;
+      let params={password:this.password1}
+      let paramsfor={userpwd:this.userId,password:this.oldpwd}
+      Api.checkPwdApi.searchPwd(paramsfor).then(res=>{
+        if(res==false){
+              Toast("原密码错误，请重新输入")
+          return;
+        }else if(res==true){
+          Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
+               Toast("修改密码成功，即将跳转...")
+
+          })
+        }
+
+      })
+
+    },
+
   }
 }
 </script>
@@ -72,7 +96,7 @@ export default {
     width: 0.33rem;
     height: 0.24rem;
     font-size: 0.24rem;
-    color: #12b7f5
+    color: #11b7f3
   }
   .ipt {
     width: 7.2rem;
@@ -117,7 +141,7 @@ export default {
 .mint-button--large {
   width: 6.72rem;
   height: 0.93rem;
-  border-radius: 10px;
+  border-radius: 0.1rem;
 }
 
 .mint-button-text {

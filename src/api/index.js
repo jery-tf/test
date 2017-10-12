@@ -11,6 +11,7 @@ import * as errandApi from './errand'
 import * as otherApi from './other'
 import * as opacityApi from './opacity'
 import * as collectionApi from './collection'
+import * as checkPwdApi from './checkPwd'
 export default { testApi, loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi,opacityApi,
-  otherApi,collectionApi}
+  otherApi,collectionApi,checkPwdApi}
 

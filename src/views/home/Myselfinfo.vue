@@ -55,7 +55,7 @@
     </ul>
     <div class="parttop  padding-container-lr">
 
-      <div class="particulars">
+      <div class="particulars ">
         <span>
            <i class="OAIndexIcon icon-shijian"></i>我的预约
         </span>
@@ -159,6 +159,7 @@
       color: #999;
       .icon-yonghu11 {
         font-size: 1.01rem;
+        color: #ccc;
       }
     }
     .spanceclt {
@@ -179,8 +180,8 @@
         text-align: center;
         .icon-ziliao-copy {
           font-size: 0.4rem;
+          color: #666;
         }
-      ;
         p {
           font-size: 0.24rem;
           color: #666;
@@ -192,6 +193,7 @@
         text-align: center;
         .icon-shoucang {
           font-size: 0.4rem;
+          color: #666;
         }
         p {
           font-size: 0.24rem;
@@ -219,6 +221,7 @@
         font-size: 0.29rem;
         vertical-align: -3%;
         margin-left: 0.26rem;
+        color: #cdcdcd;
       }
     }
   }
@@ -238,11 +241,11 @@
       color: #666;
       position: relative;
       .icon-savetemp, .icon-daishouli1, .icon-daishouli, .icon-yibanshixiang, .icon-jiaofei {
-        font-size: 0.44rem;
-        color: #1e8af6;
+        font-size: 0.4rem;
+        color: #12b8f6;
       }
       .icon-jiaofei {
-        font-size: 0.44rem;
+        font-size: 0.4rem;
         color: #fe6732
       }
       .num {
@@ -280,6 +283,7 @@
     background-color: #fff;
     font-size: 0.32rem;
     color: #333;
+    border-bottom: 1px solid #d9d9d9;
     .icon-shijian, .icon-charge, .icon-tousu, .icon-shimingrenzheng, .icon-bangzhu, .icon-shezhi2 {
       font-size: 0.41rem;
       color: #F48074;
@@ -313,9 +317,5 @@
 
   .company {
     margin-bottom: 0.24rem;
-  }
-
-  .setting {
-    border-top: 1px solid #d9d9d9
   }
 </style>

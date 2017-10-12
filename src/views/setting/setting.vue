@@ -12,19 +12,33 @@
           搜索详情
         </div>
       </div>
-    </router-link to='/setting/accountsetting'>
+    </router-link >
      <router-link to="/register">
       <div class="safety padding-container-lr">关于</div>
      </router-link>
-     <a href="javascript:void(0)">
-      <div class="safety padding-container-lr outsec">账号退出</div>
-    </a>
+      <div class="safety padding-container-lr outsec" @click="outlogin">账号退出</div>
+
   </div>
 </template>
 
 <script>
 export default {
-  
+  data(){
+    return{
+
+    }
+  },
+  created(){
+
+  },
+  methods:{
+    outlogin(){
+      alert('退出成功')
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("userInfo")
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 <style scoped lang='less'>
@@ -36,11 +50,11 @@ export default {
       background-color: #fff;
       .lastline{
         border-bottom: 1px solid #d9d9d9;
-        height: 0.97rem;  
+        height: 0.97rem;
       }
     }
     .linet{
-      margin: 0.2rem 0;   
+      margin: 0.2rem 0;
     }
     .outsec{
       margin-top: 0.4rem;

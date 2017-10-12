@@ -2,7 +2,7 @@
   <div class="cmp">
        <div class="ableipt common">
                 <em>{{person.name}}</em>
-                <input type="text" class="idform" :placeholder="person.pname">
+                <input type="text" class="idform" :placeholder="person.phone">
          </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
     width: 3rem;
     height: 0.8rem;
      font-size: 0.23rem;
-    color: #333;
+    color: #aaa;
 }
 
 .common {

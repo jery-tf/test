@@ -10,28 +10,6 @@
                 <span>已设置 <i class=" OAIndexIcon icon-xiayiye"></i> </span>
             </div>
          </router-link>
-         <a href="javascript:void(0)">
-            <div class="safety padding-container-lr " >支付密码
-                <span> <i class=" OAIndexIcon icon-xiayiye"></i> </span>
-            </div>
-        </a>
-         <a href="javascript:void(0)">
-            <div class="safety padding-container-lr " >
-               <div class="bottomline">
-                   手势解锁
-                    <span>已设置 <i class=" OAIndexIcon icon-xiayiye"></i> </span>
-               </div>
-            </div>
-        </a>
-         <a href="javascript:void(0)">
-            <div class="safety padding-container-lr" >
-                <div class="bottomline">
-                    指纹解锁
-                    <span> <i class=" OAIndexIcon icon-xiayiye"></i> </span>
-               </div>
-            </div>
-        </a>
-
     </div>
 </template>
 <script>
@@ -62,13 +40,14 @@ export default {
       background-color: #fff;
       span{
         float: right;
-        color: #999;
+        color: #c2c2c2;
         font-size: 0.28rem;
+        font-family: "微软雅黑";
       }
-       .icon-xiayiye:before{
+       .icon-xiayiye{
             float: right;
             vertical-align: 2%;
-            color: #999;
+            color: #ccc;
             font-size: 0.29rem;
             font-weight: 900;
             padding-left: 0.2rem;

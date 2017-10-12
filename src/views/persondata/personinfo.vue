@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="box-margin-top ">
         <Personinfo :person='item'  :key="index"  v-for="(item,index) in list"></Personinfo>
        <Btncommon msg="保存"></Btncommon>
     </div>
@@ -28,12 +28,12 @@ export default {
 <style lang="less">
 
  .mint-button {
-        margin: 0.26rem 0.24rem 0 0.24rem; 
+        margin: 0.26rem 0.24rem 0 0.24rem;
     }
     .mint-button--large {
         width: 6.72rem;
         height: 0.93rem;
-        border-radius: 10px;
+        border-radius: 0.1rem;
     }
     .mint-button-text {
         font-size: 0.32rem;

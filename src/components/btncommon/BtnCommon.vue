@@ -36,7 +36,7 @@ export default {
     color: #12b7f5;
     margin-left: 0.24rem;
     margin-top: 0.26rem;
-    border-radius: 10px;
+    border-radius: 0.1rem;
   }
   .mint-button-text{
     font-size: 0.32rem;

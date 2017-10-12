@@ -53,11 +53,12 @@
           }else if(res.code =="200"){
             Toast(res.info)
             this.dis=false
+            return
           }
         })
       },
       postId() {
-        let postId = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/i;
+        let postId = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
         if (this.pname == '') {
           Toast("请输入姓名");
           return
@@ -82,6 +83,7 @@
 
           }
           else if(res.code=="200"){
+
             this.$router.push("/register/registerinfo");
           }
         })

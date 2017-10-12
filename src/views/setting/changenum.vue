@@ -4,22 +4,46 @@
       <p>
         <i class="OAIndexIcon icon-zhuyi1"></i>为确保是你本人操作，请完成以下验证</p>
       <p class="checknum">我们已发送了校验码到你的手机:</p>
-      <span>152*******62</span>
+      <span>{{totelName}}</span>
     </div>
     <div class="yan">
       <input type="text" class=" padding-container-lr ipt" placeholder="请输入验证码">
       <button class="btn">52秒后重新获取</button>
     </div>
-   <router-link to="/setting/newphone">
-       <Btncommon msg="下一步"></Btncommon>
-    </button>
-   </router-link>
+   <!--<router-link to="/setting/newphone">-->
+       <!--<Btncommon msg="下一步" @click="forman"></Btncommon>-->
+   <!--</router-link>-->
+    <router-link to="/setting/newphone">
+    <div class="top52">
+      <mint-button type="primary" size="large" @click="forman">下一步</mint-button>
+    </div>
+    </router-link>
   </div>
+
 </template>
 <script>
-import Btncommon from 'components/btncommon/BtnCommon'
+  import { Button} from 'mint-ui'
 export default {
- components:{Btncommon},
+  data(){
+    return{
+      telphone:''
+    }
+  },
+ components:{'mint-button': Button},
+  methods:{
+    forman(){
+
+    }
+  },
+  computed:{
+    totelName(){
+      const telphone= JSON.parse(sessionStorage.getItem('userInfo')).phone;
+      this.telphone=telphone
+      let start = telphone.slice(0,3);
+      let end = telphone.slice(-2);
+      return `${start}******${end}`;
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
