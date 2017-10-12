@@ -24,7 +24,7 @@ export default [
   {
     path:'/me/doDetails/:id',
     name:'myPiece',
-    mata:{
+    meta:{
       title:"我的办件",
     },
     component:views.Me.MyPiece,
@@ -32,7 +32,7 @@ export default [
   {
     path:'/me/wxAuthenticationResult',
     name:'WxAuthenticationResult',
-    mata:{
+    meta:{
       title:"实人认证",
     },
     component:views.Me.WxAuthenticationResult,
