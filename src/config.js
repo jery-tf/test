@@ -5,8 +5,8 @@
 import dictionaries from './dictionaries'
 
 export default {
-  environment:'dev',
-  apiUrl:'/api', //代理 http://172.17.89.21:30538
+  environment:'production',
+  apiUrl:'http://hillwxtest.s1.natapp.cc',
   cmsUrl:'http://172.16.17.83:8100',
   loginUrl:'http://172.17.89.21:30069',
   clientId:'JQNb9l66Qk22ibryPBATnOg',
@@ -14,3 +14,4 @@ export default {
   C2XApiKey:'sPvuCaUsT2aBuricqor963A',
   Dictionaries:dictionaries
 }
+

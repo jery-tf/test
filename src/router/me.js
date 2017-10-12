@@ -10,7 +10,7 @@ export default [
     name:'enterpriseLogin',
     component:views.Me.UserLogin,
     meta:{
-      title:'企业登录'
+      title:'个人登录'
     }
   },
   {
@@ -28,5 +28,13 @@ export default [
       title:"我的办件",
     },
     component:views.Me.MyPiece,
-  }
+  },
+  {
+    path:'/me/wxAuthenticationResult',
+    name:'WxAuthenticationResult',
+    mata:{
+      title:"实人认证",
+    },
+    component:views.Me.WxAuthenticationResult,
+  },
 ]

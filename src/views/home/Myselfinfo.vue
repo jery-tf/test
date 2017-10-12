@@ -112,7 +112,7 @@
     },
     methods: {
       authentication(){
-        let url = 'https://iauth-sandbox.wecity.qq.com/new/cgi-bin/auth.php';
+        let url = 'https://iauth.wecity.qq.com/new/cgi-bin/auth.php';
         let appId = '4454', method = 'auth';
         //签名
         Api.realNameApi.getAppSign({method, type: 'H5'}).then(res => {
@@ -122,9 +122,10 @@
             _signature = '';
           }
           let args = {
-            appid: appId, signature: _signature, redirect: 'http://hillwxtest.s1.natapp.cc/',
+            appid: appId, signature: _signature, redirect: 'http://hillwxtest.s1.natapp.cc/wxAuthentication-test.html',
             uid: '123', type: 0
           };
+          sessionStorage.setItem('wxSignatures',_signature);
           let form = $("<form method='post'></form>");
           form.attr({"action": url});
           for (let arg in args) {

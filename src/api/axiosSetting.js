@@ -45,7 +45,7 @@ AxiosIns.interceptors.response.use(response=>{
   }
   MintUI.Indicator.close();
   try{
-    //接口预留 401跳登录
+    //401跳登录
     // if(error.response.data.Code === 401){
     //   setTimeout(()=>{
     //     Vue.$router.push({

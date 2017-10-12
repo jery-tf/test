@@ -3,10 +3,12 @@
  */
 //实名认证
 import { axiosGetToken ,axiosGet } from './baseApi'
-import $axios from './axiosSetting';
 
 
 export const realName = (params)=>$axios.post(url,params);
 
-//实人认证加密
-export const getAppSign = (params,loading)=>axiosGet(`/wechat/util/appSign`,params,{loading});
+//签名
+export const getAppSign = (params,config)=>axiosGet(`/wechat/util/appSign`,params,config);
+
+//获取实人认证结果
+export const getWxAuthenticationResult = (params,config)=>axiosGetToken(`/wechat/util/getdetectinfo`,params,config);

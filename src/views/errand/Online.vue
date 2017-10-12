@@ -25,7 +25,8 @@
       </div>
     </div>
 
-    <ErrandFoot tel="0731-231224223" :btnClick="testBtn" btnName="在线提交"></ErrandFoot>
+    <ErrandFoot tel="0731-231224223" :btnClick="testBtn" btnName="在线提交"
+                :errandId="$route.params.id"></ErrandFoot>
   </div>
 </template>
 
@@ -39,25 +40,25 @@
   import Api from '../../api'
   export default {
     name: 'Online',
-    components: {ErrandHead, ErrandSubmitLi, ErrandAddress,ErrandFoot},
+    components: {ErrandHead, ErrandSubmitLi, ErrandAddress, ErrandFoot},
     data () {
       return {
-        approve:{},
+        approve: {},
         option: {
           userName: '张三',
           phone: '123123123',
           address: '这是地址很长很长这是地址很长很长下看看测试下下看看测试下这是地址很长很长这是地址很长很长这是地址很长很长',
           isDefault: true,
-          type:1,
-          id:'zs'
+          type: 1,
+          id: 'zs'
         },
         option2: {
-          id:'ls',
+          id: 'ls',
           userName: '李四',
           phone: '4322423423',
           address: '木有地址',
           isDefault: false,
-          type:2
+          type: 2
         }
       }
     },
@@ -66,10 +67,10 @@
     },
     methods: {
       testBtn(data){
-        this.$router.push({path:`/errand/fileUpload/test`})
+        this.$router.push({path: `/errand/fileUpload/test`})
       },
       testAddress(){
-          console.log(22)
+        console.log(22)
       },
       //数据初始化
       getErrandDetails(id){
@@ -77,17 +78,18 @@
         Promise.all([Api.errandApi.getErrandDetails(id), Api.errandApi.getApproveName(id)])
           .then(res => {
             this.approve = Object.assign({}, res[0], res[1]);
-            console.log('qqq',Object.assign({}, res[0], res[1]));
+            console.log('qqq', Object.assign({}, res[0], res[1]));
           })
       },
+
     }
 
   }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .h100{
-    .soll{
+  .h100 {
+    .soll {
       height: 100%;
       padding-bottom: 1rem;
       overflow-y: auto;

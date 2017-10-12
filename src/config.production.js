@@ -6,7 +6,7 @@ import dictionaries from './dictionaries'
 
 export default {
   environment:'production',
-  apiUrl:'http://172.17.89.21:30069',
+  apiUrl:'http://hillwxtest.s1.natapp.cc',
   cmsUrl:'http://172.16.17.83:8100',
   loginUrl:'http://172.17.89.21:30069',
   clientId:'JQNb9l66Qk22ibryPBATnOg',
