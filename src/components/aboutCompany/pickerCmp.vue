@@ -3763,7 +3763,7 @@
     color: #333;
     line-height: 0.88rem;
     margin-left: 0.32rem;
-  }
+  } 
   .myAddress .cont section{
     float:left;
   }
