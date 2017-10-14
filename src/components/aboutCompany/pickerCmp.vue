@@ -6,7 +6,7 @@
   <!--居住地址三级联动选项-->
   <section class="showChose" v-show="showChose">
     <section class="address">
-      <section class="title">
+      <section class="title addresst">
         <h4>企业地址</h4>
         <span @click="closeAdd()">×</span>
       </section>
@@ -3644,19 +3644,33 @@
               {id: 2861, name: '青河县'},
               {id: 2862, name: '吉木乃县'}
             ]},
-            {id: 339, name: '石河子市', district: []},
-            {id: 340, name: '阿拉尔市', district: []},
-            {id: 341, name: '图木舒克市', district: []},
-            {id: 342, name: '五家渠市', district: []}
+            {id: 339, name: '石河子市', district: [
+              {id: 2863, name: '无'}
+            ]},
+            {id: 340, name: '阿拉尔市', district: [
+              {id: 2864, name: '无'}
+            ]},
+            {id: 341, name: '图木舒克市', district: [
+              {id: 2865, name: '无'}
+            ]},
+            {id: 342, name: '五家渠市', district: [
+              {id: 2866, name: '无'}
+            ]}
           ]},
           {id: 32, name: '香港', city: [
-            {id: 343, name: '香港', district: []}
+            {id: 343, name: '香港', district: [
+              {id: 2867, name: '无'}
+            ]}
           ]},
           {id: 33, name: '澳门', city: [
-            {id: 344, name: '澳门', district: []}
+            {id: 344, name: '澳门', district: [
+              {id: 2868, name: '无'}
+            ]}
           ]},
           {id: 34, name: '台湾', city: [
-            {id: 345, name: '台湾', district: []}
+            {id: 345, name: '台湾', district: [
+              {id: 2869, name: '无'}
+            ]}
           ]}
         ]
       }
@@ -3727,7 +3741,7 @@
         this.showDistrictList[index].selected = true;
         // 选取市区选项之后关闭弹层
         this.showChose = false;
-        this.$emit('child-say',this.Province);
+        this.$emit('increment',this.Province,this.City,this.District);
       },
       districtSelected: function() {
         this.showProvince=false;
@@ -3763,7 +3777,7 @@
     color: #333;
     line-height: 0.88rem;
     margin-left: 0.32rem;
-  } 
+  }
   .myAddress .cont section{
     float:left;
   }
@@ -3800,6 +3814,12 @@
     background:#fff;
     width:100%;
   }
+  .title{
+    width: 7.2rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-bottom: 1px solid #ededed;
+  }
   .title h4{
     display:inline-block;
     margin-left:3.2rem;
@@ -3807,40 +3827,50 @@
     line-height:0.88rem;
     font-weight:normal;
     color:#000;
+    font-family: "微软雅黑";
+
   }
   .title span{
+    display: inline-block;
     margin:0.42rem 0 0 2.2rem;
-    font-size:0.45rem;
-    line-height:0.34rem;
+    width: 0.24rem;
+    height: 0.24rem;
+    line-height:0.24rem;
     color:#D8D8D8;
   }
   .area{
     display:inline-block;
     font-size:0.24rem;
     line-height:0.88rem;
-    margin-left:0.42rem;
-    color:#333;
+    padding-left: 0.24rem;
+    color:#000;
+    font-family: '微软雅黑';
+    padding-right: 0.42rem;
   }
   .addList{
     width:100%;
     /*padding-left:0.32rem;*/
     font-size:0.26rem;
     line-height:0.8rem;
-    color:#333;
+    color:#000;
   }
   /* 修改的格式 */
   .address ul{
-    width:95%;
+    width:7.2rem;
     height:100%;
     max-height: 4.4rem;
     overflow:auto;
   }
   .address ul li{
-    margin-left:5%;
+    padding-left:0.24rem;
+    width: 6.94rem;
+    font-size: 0.26rem;
+    color: #000;
+    border-bottom:1px solid #ededed;
   }
   .address .title .active{
     color:#f74c4c;
-    border-bottom:0.02rem solid #0071B8;
+    border-bottom:0.03rem solid #f74c4c;
   }
   .address ul .active{
     color:#f74c4c;

@@ -25,7 +25,7 @@
       </div>
     <div class="mycollect">
       <span class="OAIndexIcon icon-shoucang"></span>
-      <p>我的收藏</p>
+      <p>企业办件</p>
     </div>
   </div>
   <div class="accredit ">
