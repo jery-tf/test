@@ -33,10 +33,10 @@
        <h5 class="padding-container-lr">授权用户</h5>
      </div>
     <div class="accrepeo padding-container-lr">
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="first">法定代表人</div>
-      </div>
+        <div class="peo">
+          <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
+          <div class="first">法定代表人</div>
+        </div>
       <div class="peo">
         <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
         <div class="one">一级被授权人</div>
@@ -219,7 +219,7 @@
     background-color: #fff5e9;
     font-size: 0.2rem;
     text-align: center;
-    width: 2.04rem;
+    width: 2rem;
     height: 0.55rem;
     line-height:0.55rem;
   }
@@ -228,7 +228,7 @@
     color: #108ee9;
     font-size: 0.2rem;
     text-align: center;
-    width: 2.04rem;
+    width: 2rem;
     height: 0.55rem;
     line-height:0.55rem;
   }
@@ -237,7 +237,7 @@
     color: #29ab91;
     font-size: 0.2rem;
     text-align: center;
-    width: 2.04rem;
+    width: 2rem;
     height: 0.55rem;
     line-height:0.55rem;
   }
@@ -246,7 +246,7 @@
           color: #fa5a4a;
           font-size: 0.2rem;
           text-align: center;
-          width: 2.04rem;
+          width: 2rem;
           height: 0.55rem;
           line-height:0.55rem;
         }

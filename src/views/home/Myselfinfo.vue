@@ -3,8 +3,10 @@
     <div class="myheader">
       <router-link to="/selfinfo">
         <div class="hport">
-          <h3 class=" OAIndexIcon icon-yonghu11"></h3>
-          请登录
+          <h3 :class="islogin ? 'classa' : 'OAIndexIcon icon-yonghu21' "></h3>
+          <!--<img :src="'islogin'?'../../assets/img/hport.png':'../../assets/img/img1.png'">-->
+          <!--<img src="../../assets/img/hport.png" alt="">-->
+          <span :class="text?'classc':'classd'">{{pname}}</span><i class="OAIndexIcon icon-fanhui2" v-if="isshow"></i>
         </div>
       </router-link>
       <div class="spanceclt">
@@ -61,14 +63,16 @@
     <div class="contentsall padding-container-lr" v-for="item in list">
       <!--<AboutCompany :data="item"></AboutCompany>-->
       <!--<mt-swipe :auto="0" :show-indicators="false">-->
-        <!--<mt-swipe-item><AboutCompany :data="item"></AboutCompany></mt-swipe-item>-->
-        <!--<mt-swipe-item>123</mt-swipe-item>-->
-        <!--<mt-swipe-item>3</mt-swipe-item>-->
+      <!--<mt-swipe-item><AboutCompany :data="item"></AboutCompany></mt-swipe-item>-->
+      <!--<mt-swipe-item>123</mt-swipe-item>-->
+      <!--<mt-swipe-item>3</mt-swipe-item>-->
       <!--</mt-swipe>-->
       <ul>
-        <li @click="getcompany()">
-          <AboutCompany :data="item" ></AboutCompany>
-        </li>
+        <router-link to='/aboutcmp/aboutcmp'>
+          <li>
+            <AboutCompany :data="item"></AboutCompany>
+          </li>
+        </router-link>
         <li>
           <AboutCompany :data="item"></AboutCompany>
         </li>
@@ -125,19 +129,25 @@
   import Api from '../../api'
   import $ from 'jquery'
   import AboutCompany from '../../components/aboutCompany/company.vue'
-  import { Swipe, SwipeItem } from 'mint-ui';
+  import {Swipe, SwipeItem} from 'mint-ui';
+  import Util from '../../util'
 
   export default {
     name: 'myselfinfo',
     components: {AboutCompany},
     data() {
       return {
-        list:[
-          {contents:"湖南科创信息技术有限公司",time:'2017-07-05',star:'法定代表人',status:'开业'}
-        ]
+        list: [
+          {contents: "湖南科创信息技术有限公司", time: '2017-07-05', star: '法定代表人', status: '开业'}
+        ],
+        islogin: false,
+        pname: '',
+        isshow:'false',
+        text:false
       }
     },
     created() {
+      this.getimgs()
     },
     methods: {
       authentication() {
@@ -167,8 +177,22 @@
           form.submit();
         })
       },
-      getcompany(){
-          this.$router.push('/aboutcmp/aboutcmp')
+//      getcompany() {
+//        this.$router.push('/aboutcmp/aboutcmp')
+//      },
+      getimgs() {
+        let token = Util.login.getAccessToken();
+        let userInfo = Util.user.getUserAllInfo();
+        let username = userInfo.name;
+        console.log(userInfo)
+        if (token && userInfo) {
+          this.islogin = true
+          this.pname=username
+          this.text=true
+        }else{
+          this.pname='请登陆'
+          this.isshow=false
+        }
       }
     },
     computed: {}
@@ -189,9 +213,45 @@
       padding-bottom: 0.66rem;
       font-size: 0.32rem;
       color: #999;
-      .icon-yonghu11 {
+      span{
+        vertical-align: middle;
+      }
+      .icon-fanhui2{
+        color:#333;
+        display: inline-block;
+        width: 0.1rem;
+        height: 0.17rem;
+        font-size: 0.17rem;
+        vertical-align: middle;
+      }
+      h3 {
+        margin-bottom: 0.14rem;
+      }
+      .icon-yonghu21,.classa{
+        width: 1.01rem;
+        height: 1.01rem;
+        text-align: center;
+        border-radius: 0.01rem;
         font-size: 1.01rem;
-        color: #ccc;
+      }
+      .classa {
+        background-image: url(../../assets/img/hport.png);
+        -webkit-background-size: 1.01rem;
+        background-size: 1.01rem;
+      }
+      .classb {
+        /*background-image: url(../../assets/img/text1.jpg);*/
+        -webkit-background-size: 1.01rem;
+        background-size: 1.01rem;
+        width: 1.01rem;
+        height: 1.01rem;
+        text-align: center;
+        border-radius: 0.01rem;
+      }
+      .classc{
+        font-size: 0.32rem;
+        color: #333;
+        font-family: "微软雅黑";
       }
     }
     .spanceclt {
@@ -265,12 +325,12 @@
     background-color: #fff;
     margin-bottom: 0.24rem;
     padding-top: 0.27rem;
-    overflow-x:scroll;
-    ul{
+    overflow-x: scroll;
+    ul {
       width: 1000px;
-      li{
+      li {
         display: inline-block;
-    }
+      }
     }
   }
 
@@ -365,5 +425,8 @@
 
   .company {
     margin-bottom: 0.24rem;
+  }
+
+  .active {
   }
 </style>
