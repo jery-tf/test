@@ -1,39 +1,42 @@
 <template>
   <div class="flex lingheight">
     <div class="content">
-      <mt-tab-container v-model="mySelected">
-      <mt-tab-container-item id="bs">
-        <Errand v-if="mySelected=='bs'"></Errand>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="gk">
-        <Publicitem v-if="mySelected=='gk'"></Publicitem>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="bm">
-          <Forpeople v-if="mySelected=='bm'"></Forpeople>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="wd">
-          <Myselfinfo v-if="mySelected=='wd'"></Myselfinfo>
-      </mt-tab-container-item>
-    </mt-tab-container>
+      <router-link to="/errand" class="center-center">
+        <p>办事</p>
+      </router-link>
+      <!--<router-link to="/errandList/zrrfl" class="center-center">-->
+        <!--<p>>>自然人</p>-->
+      <!--</router-link>-->
+      <!--<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;=-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+      <!--<router-link to="/errandList/frfl" class="center-center">-->
+        <!--<p>>>法人</p>-->
+      <!--</router-link>-->
+      <!--<p>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+      <!--<router-link to="/errand/completeData/test" class="center-center">-->
+        <!--<p>>>详情</p>-->
+      <!--</router-link>-->
+      <!--<p>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+      <!--<router-link to="/collection" class="center-center">-->
+        <!--<p>>>收藏</p>-->
+      <!--</router-link>-->
+      <!--<p>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+      <!--<router-link to="/me/myDo" class="center-center">-->
+        <!--<p>>>我的办件</p>-->
+      <!--</router-link>-->
+
+      <p>---------------------------------</p>
+      <router-link to="/publicitem" class="center-center">
+        <p>公开</p>
+      </router-link>
+      <p>---------------------------------</p>
+      <router-link to="/forpeople" class="center-center">
+        <p>便民</p>
+      </router-link>
+      <p>---------------------------------</p>
+      <router-link to="/mySelfInfo" class="center-center">
+        <p>我的</p>
+      </router-link>
     </div>
-    <mt-tabbar v-model="mySelected" class="_tabbar">
-      <mt-tab-item id="bs" class="_tabItem">
-        <i class="OAIndexIcon icon-daibanshiyi tabbarIcon"></i>
-        <p class="tabbarLabel">办事</p>
-      </mt-tab-item>
-      <mt-tab-item id="gk" class="_tabItem">
-        <i class="OAIndexIcon icon-zhengwugongkai tabbarIcon"></i>
-        <p class="tabbarLabel">公开</p>
-      </mt-tab-item>
-      <mt-tab-item id="bm" class="_tabItem">
-        <i class="OAIndexIcon icon-bianminfuwu tabbarIcon"></i>
-        <p class="tabbarLabel">便民</p>
-      </mt-tab-item>
-      <mt-tab-item id="wd" class="_tabItem">
-        <i class="OAIndexIcon icon-touxiang-copy-copy tabbarIcon"></i>
-        <p class="tabbarLabel">我的</p>
-      </mt-tab-item>
-    </mt-tabbar>
   </div>
 </template>
 
@@ -42,7 +45,6 @@
   import Vue from 'vue'
   import Api from '../../api'
   import Home from './index'
-
   import Util from '../../util'
 export default {
   name: 'hello',
@@ -73,42 +75,7 @@ export default {
 </script>
 
 <style scoped>
-._tabbar{
-  height: .88rem;
-}
-._tabItem{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.OAIndexIcon.tabbarIcon{
-  width: .4rem;
-  height: .4rem;
-}
-.mint-tabbar > .mint-tab-item{
-  color:#666;
-}
-.mint-tabbar > .mint-tab-item.is-selected{
-  color: #29a1f7;
-}
-.tabbarLabel{
-  padding-top: .1rem;
-}
-
-.testDiv>p{
-  padding: 15px;
-}
-.lingheight{
-  max-height: 100%;
-}
 .content{
-  padding-bottom: .88rem;
-  height: 100%;
-  overflow-y: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  padding: .24rem;
 }
 </style>
