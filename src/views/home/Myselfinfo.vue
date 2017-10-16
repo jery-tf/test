@@ -59,9 +59,21 @@
       <span class="checkall">查看全部<i class="OAIndexIcon icon-next"></i></span>
     </div>
     <div class="contentsall padding-container-lr" v-for="item in list">
-      <AboutCompany :data="item"></AboutCompany>
+      <!--<AboutCompany :data="item"></AboutCompany>-->
+      <!--<mt-swipe :auto="0" :show-indicators="false">-->
+        <!--<mt-swipe-item><AboutCompany :data="item"></AboutCompany></mt-swipe-item>-->
+        <!--<mt-swipe-item>123</mt-swipe-item>-->
+        <!--<mt-swipe-item>3</mt-swipe-item>-->
+      <!--</mt-swipe>-->
+      <ul>
+        <li @click="getcompany()">
+          <AboutCompany :data="item" ></AboutCompany>
+        </li>
+        <li>
+          <AboutCompany :data="item"></AboutCompany>
+        </li>
+      </ul>
     </div>
-
 
     <div class="parttop  padding-container-lr">
 
@@ -113,6 +125,7 @@
   import Api from '../../api'
   import $ from 'jquery'
   import AboutCompany from '../../components/aboutCompany/company.vue'
+  import { Swipe, SwipeItem } from 'mint-ui';
 
   export default {
     name: 'myselfinfo',
@@ -153,6 +166,9 @@
           $(document.body).append(form);
           form.submit();
         })
+      },
+      getcompany(){
+          this.$router.push('/aboutcmp/aboutcmp')
       }
     },
     computed: {}
@@ -249,6 +265,13 @@
     background-color: #fff;
     margin-bottom: 0.24rem;
     padding-top: 0.27rem;
+    overflow-x:scroll;
+    ul{
+      width: 1000px;
+      li{
+        display: inline-block;
+    }
+    }
   }
 
   .unoffice {

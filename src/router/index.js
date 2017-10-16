@@ -12,6 +12,7 @@ import selfinfo from './selfinfo'
 import convenience from "./convenience"
 import collection from './collection'
 import me from './me'
+import aboutcmp from "./aboutcmp";
 
 Vue.use(Router)
 
@@ -33,7 +34,7 @@ let router = new Router({
         title:'首页'
       },
     },...errand,...me,...search,...persondata,...register,...setting,...gk,selfinfo,...convenience,
-    ...collection
+    ...collection,...aboutcmp
   ]
 })
 

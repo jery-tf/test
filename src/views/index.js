@@ -13,6 +13,7 @@ import Selfinfo from './selfinfo'
 import Convenience from './convenience'
 import Collection from './collection' //收藏
 import Me from './me'
+import  AboutCmp from './aboutCmp'
 export default {
-  Errand,Home,noPage,Search,Persondata,Register,Setting,Gk,Selfinfo,Me,Convenience,Collection
+  Errand,Home,noPage,Search,Persondata,Register,Setting,Gk,Selfinfo,Me,Convenience,Collection,AboutCmp
 }
