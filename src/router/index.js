@@ -48,6 +48,9 @@ router.beforeEach((to, from, next) => {
   next();
 })
 
+let arr = [1,2,3];
+arr[arr.length] = JSON.parse(JSON.stringify(arr[0]))
+
 router.beforeEach((to, from, next) => {
   //设置title
   if(to.meta.title){
