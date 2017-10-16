@@ -29,8 +29,8 @@ let router = new Router({
     },
     {
       path: '/',
-      name: 'home',
-      component: views.Home,
+      name: 'menu',
+      component: views.Home.Menu,
       meta:{
         title:'首页'
       },

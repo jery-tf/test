@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 import MintUI from 'mint-ui'
+
 require('./style/base.less');
 Vue.config.productionTip = false
 
 Vue.use(MintUI)
+
 
 /* eslint-disable no-new */
 new Vue({

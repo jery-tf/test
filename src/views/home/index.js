@@ -6,5 +6,6 @@ export default {
   Forpeople:resolve => require(['./forpeople.vue'], resolve),
   Publicitem:resolve => require(['./publicitem.vue'], resolve),
   Myselfinfo:resolve => require(['./Myselfinfo.vue'], resolve),
-  Errand:resolve => require(['./Errand.vue'], resolve)
+  Errand:resolve => require(['./Errand.vue'], resolve),
+  Menu:resolve => require(['./Home.vue'], resolve)
 }
