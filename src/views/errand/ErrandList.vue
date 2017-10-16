@@ -54,6 +54,8 @@
       //获取左侧列表
       getLeftList(id){
         Api.otherApi.getDictionaries(id).then(res => {
+
+          console.log('左侧', res);
           let arr = [];
           for (let item of res[Util.errand.getErrandClassName(this.$route.params.id)]) {
             arr.push({id: item.dictdataName, name: item.dictdataValue, icon: 'icon-ertongshouyang'});
@@ -80,15 +82,13 @@
 
         let cond = {
           filters: {
-            groupOp: 'AND',
+            groupOp: 'OR',
             rules: [
-              {
-                field: 'approveId',
-                op: 'eq',
-//                data: id
-                // todo 临时数据
-                data: 2128
-              }
+              {field:this.catalog,op:"eq",data:id},
+              {field:this.catalog,op:"bw",data:id+","},
+              {field:this.catalog,op:"cn",data:","+id+","},
+              //todo 办事列表
+              //{field:this.catalog,op:"ew",data:","+id} 该运算符有问题，暂不使用该条件
             ]
           }
         };
@@ -98,7 +98,7 @@
           let arr = [];
           for (let item of res.contents) {
             let _item = {
-              id: item.approveId, title: item.approveName, score: 4,
+              id: item.approveId, title: item.approveName, score: parseInt(item.transactLevel),
               frequency: item.minSeq, name: item.orgName, isActive: true
             };
             arr.push(_item);
@@ -117,6 +117,15 @@
         });
         console.log(id);
         // @todo 根据选择的ID 重新加载数据
+      },
+    },
+    computed:{
+      catalog(){
+        const _catalog = {
+          frfl: 'themeType',
+          zrrfl: 'naturalpersonType'
+        };
+        return _catalog[this.$route.params.id];
       }
     }
 

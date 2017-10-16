@@ -3,11 +3,11 @@
 */
 
 <template>
-  <div class="fff">
+  <div class="fff" @click="btnFun">
     <div class="padding-container border-bottom">
       <p class="twoLineFont" v-html="dataSearch"></p>
       <div class="box-margin-top StarsScore">
-        <StarsScore :score="data.score"></StarsScore>
+        <StarsScore :score="data.score+1"></StarsScore>
         <p class="frequency">
           <i class="OAIndexIcon icon-gouxuan"></i>
           <span>最多跑现场 {{data.frequency}} 次</span>
@@ -19,7 +19,7 @@
         <i class="OAIndexIcon icon-jigou1"></i>
         <span>{{data.name}}</span>
       </div>
-      <div :class="`btn ${btnActive}`" @click="btnFun">
+      <div :class="`btn ${btnActive}`">
         <span>在线办理</span>
       </div>
     </div>
@@ -30,8 +30,8 @@
   /***
    * 单个办事指南组件
    * data属性
-   * title(str)   name     ID     frequency  score(int)  isActive(bool)       [search](str)
-   * 标题         机构名    主键    到现场次数     分数       按钮是否可操作     突出显示的文字(只匹配一次)
+   * title(str)   name    ID     frequency   score(int)  isActive(bool)    [search](str)
+   * 标题         机构名    主键    到现场次数     分数         按钮是否可操作     突出显示的文字(只匹配一次)
    */
   import StarsScore from '../public/StarsScore.vue'
   export default {

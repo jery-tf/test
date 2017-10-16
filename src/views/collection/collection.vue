@@ -17,15 +17,19 @@
 
     <div class="box-margin-top">
       <div v-if="topSelect[0].isCurrent">
-        <div class="border-bottom">
-          <CellSwipe title="婚育收养-幼儿园" :rightFun="testFun" label="2017-05-12" :type="2"></CellSwipe>
-        </div>
-        <div class="border-bottom">
-          <CellSwipe title="婚育收养-幼儿园" :rightFun="testFun" label="2017-05-12" :type="2"></CellSwipe>
-        </div>
-
+        <template v-for="(item,index) in collectListErrand">
+          <div class="border-bottom">
+            <CellSwipeErrand :rightFun="testFun" :data="item"></CellSwipeErrand>
+          </div>
+        </template>
       </div>
-      <div v-else>222</div>
+      <div v-else>
+        <template v-for="(item,index) in collectList">
+          <div class="border-bottom">
+            <CellSwipe :title="item.orgName" :rightFun="testFun" label="2017-05-12" :type="2"></CellSwipe>
+          </div>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -35,15 +39,19 @@
    * 收藏
    */
   import CellSwipe from 'components/public/CellSwipe.vue'
+  import CellSwipeErrand from 'components/public/CellSwipeErrand.vue'
   import Api from '../../api'
   import Util from '../../util'
   export default {
     name: 'collection',
-    components: {CellSwipe},
+    components: {CellSwipe,CellSwipeErrand},
     data () {
       return {
         topSelect: [{isCurrent: true, name: '事项', id: 'sx'},
           {isCurrent: false, name: '便民', id: 'bm'}],
+        collectList:[],
+        //办事的收藏列表
+        collectListErrand:[],
       }
     },
     created(){
@@ -63,18 +71,47 @@
       },
       getMatterCollection(){
         let userInfo = Util.user.getUserInfo();
-        let params = {Certificate_no: userInfo.certificateNum};
+        let params = {certificate_no: userInfo.certificateNum};
         Api.collectionApi.getMatterCollection(params).then(res => {
-          if (res.TotalSize) {
-            console.log('OK');
+          if (res.code='200') {
+            let list = [];
+            for(let item of res.list){
+                list.push(item.business_id);
+            }
+            let cond = {
+              filters: {
+                groupOp: 'OR',
+                rules: [
+                  {field:'approveId',op:"in",data:list},
+                ]
+              }
+            };
+            let params = {page: 1, rows: 100, cond: encodeURI(JSON.stringify(cond))};
+            //根据ID集合 获取列表
+            Api.errandApi.getErrandList(params).then(res=>{
+              this.collectList = res.contents;
+              let collectListErrand = [];
+              for(let item of res.contents){
+                  let _item = {
+                    title:item.approveName,
+                    name:item.orgName,
+                    id:item.approveId,
+                    score:parseInt(item.transactLevel),
+                    isActive:true,
+                    frequency:item.minSeq
+                  };
+                collectListErrand.push(_item);
+              }
+              this.collectListErrand = collectListErrand;
+            });
           }else{
             console.log('-------事项查询没有数据-----', res);
             // todo  事项查询数据为空操作
           }
         });
       },
-      testFun(){
-        console.log(11)
+      testFun(id){
+        console.log('删除的id--->',id);
       }
     }
 

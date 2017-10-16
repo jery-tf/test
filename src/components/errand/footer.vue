@@ -4,7 +4,7 @@
 
 <template>
   <div class="foot fff font-large">
-    <p @click="addCollectionClick">添加收藏</p>
+    <p @click.one="addCollectionClick">添加收藏</p>
     <div class="right">
         <div class="box-margin-left" @click="callPhone">
           <i class="OAIndexIcon icon-dianhua1 font-large"></i>
@@ -20,6 +20,8 @@
    * 办事指南及在线办理 底部电话及按钮 为固定在底部 高度为1rem
    */
   import Util from '../../util'
+  import Api from '../../api'
+  import { Toast } from 'mint-ui';
   export default {
     name: 'footer',
     props: ['tel', 'btnClick', 'btnName','errandId'],
@@ -43,20 +45,26 @@
         let token = Util.login.getAccessToken();
         let userInfo = Util.user.getUserAllInfo();
         console.log('userInfo->',userInfo)
-//        if(token && userInfo){
-//          let params = {
-//            Apply_id:'',
-//            Apply_type:'',
-//            Collect_type:'',
-//            Business_id:'',
-//            Collect_time:''
-//          };
-//            Api.collectionApi.addCollection().then(res=>{
-//
-//            });
-//        }else{
-//          this.$router.push({path:''})
-//        }
+        if(token && userInfo){
+          let params = {
+            apply_id:userInfo.certificateNum,
+            apply_type:1,
+            collect_type:1,
+            business_id:this.errandId,
+            collect_time:new Date().getTime(),
+            apply_name:userInfo.username
+          };
+          // todo 参数Apply_type 暂写1
+            Api.collectionApi.addCollection(params).then(res=>{
+              console.log('添加收藏',res);
+              if(res.code=='200'){
+                Toast(res.info);
+              }
+            });
+        }else{
+          console.log('登录');
+          this.$router.push({path:''})
+        }
 
       }
     },

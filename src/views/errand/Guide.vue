@@ -4,73 +4,75 @@
 
 <template>
   <div class="h100">
-    <ErrandHead :score="3" :workDay="approve.commitmentLimit" :workNo="approve.minSeq"
-                :title="approve.approveName"></ErrandHead>
+    <div class="h100" style="overflow-y: auto">
+      <ErrandHead :score="3" :workDay="approve.commitmentLimit" :workNo="approve.minSeq"
+                  :title="approve.approveName"></ErrandHead>
 
-    <div class="mall-warp fff padding-container shoufei h88">
-      <div>
-        <p>
-          <i class="OAIndexIcon icon-charge red-color"></i>
-        </p>
-        <span>收费标准:{{approve.chargeStandard}}元</span>
+      <div class="mall-warp fff padding-container shoufei h88">
+        <div>
+          <p>
+            <i class="OAIndexIcon icon-charge red-color"></i>
+          </p>
+          <span>收费标准:{{approve.chargeStandard}}元</span>
+        </div>
+        <i class="OAIndexIcon icon-gengduo11 red-color"></i>
       </div>
-      <i class="OAIndexIcon icon-gengduo11 red-color"></i>
+
+      <div class="box-margin-top fff padding-container dingwei h88">
+        <p>
+          <i class="OAIndexIcon icon-dingwei"></i>
+        </p>
+        <p class="oneLineFont">{{approve.transactAddress}}</p>
+      </div>
+
+      <div class="box-margin-top">
+        <mt-navbar v-model="selected">
+          <mt-tab-item id="info">基本信息</mt-tab-item>
+          <mt-tab-item id="application">申请材料</mt-tab-item>
+          <mt-tab-item id="process">办理流程</mt-tab-item>
+        </mt-navbar>
+        <mt-tab-container v-model="selected">
+          <mt-tab-container-item id="info">
+            <div class="padding-container fff box-margin-top">
+              <div>
+                <Subtitle title="事项类型" :content="CdictionariesXZLB"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="实施机关" :content="approve.orgName||''"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="法定时限" :content="`${approve.approveLimit ||''}个工作日`"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="办理形式" :content="CtransactionFrom||''"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="设定依据" :content="approve.settingGist||''"></Subtitle>
+              </div>
+            </div>
+          </mt-tab-container-item>
+
+          <mt-tab-container-item id="application">
+            <div class="box-margin-top fff">
+              <p class="padding-container" style="font-size: .24rem;color:#333">申请材料</p>
+              <template v-for="item in materialList">
+                <applicationMaterials :name="item.materialTitle" :number="item.copiesNum" :source="item.sourceChannel">
+                </applicationMaterials>
+              </template>
+            </div>
+          </mt-tab-container-item>
+
+          <mt-tab-container-item id="process">
+            <div class="box-margin-top fff">
+              <p class="padding-container" style="font-size: .24rem;color:#333">办理流程</p>
+
+            </div>
+          </mt-tab-container-item>
+        </mt-tab-container>
+      </div>
     </div>
-
-    <div class="box-margin-top fff padding-container dingwei h88">
-      <p>
-        <i class="OAIndexIcon icon-dingwei"></i>
-      </p>
-      <p class="oneLineFont">{{approve.transactAddress}}</p>
-    </div>
-
-    <div class="box-margin-top">
-      <mt-navbar v-model="selected">
-        <mt-tab-item id="info">基本信息</mt-tab-item>
-        <mt-tab-item id="application">申请材料</mt-tab-item>
-        <mt-tab-item id="process">办理流程</mt-tab-item>
-      </mt-navbar>
-      <mt-tab-container v-model="selected">
-        <mt-tab-container-item id="info">
-          <div class="padding-container fff box-margin-top">
-            <div>
-              <Subtitle title="事项类型" :content="CdictionariesXZLB"></Subtitle>
-            </div>
-            <div class="box-margin-top">
-              <Subtitle title="实施机关" :content="approve.orgName"></Subtitle>
-            </div>
-            <div class="box-margin-top">
-              <Subtitle title="法定时限" :content="`${approve.approveLimit}个工作日`"></Subtitle>
-            </div>
-            <div class="box-margin-top">
-              <Subtitle title="办理形式" :content="CtransactionFrom"></Subtitle>
-            </div>
-            <div class="box-margin-top">
-              <Subtitle title="设定依据" :content="approve.settingGist"></Subtitle>
-            </div>
-          </div>
-        </mt-tab-container-item>
-
-        <mt-tab-container-item id="application">
-          <div class="box-margin-top fff">
-            <p class="padding-container" style="font-size: .24rem;color:#333">申请材料</p>
-            <template v-for="item in materialList">
-              <applicationMaterials :name="item.materialTitle" :number="item.copiesNum" :source="item.sourceChannel">
-              </applicationMaterials>
-            </template>
-          </div>
-        </mt-tab-container-item>
-
-        <mt-tab-container-item id="process">
-          <div class="box-margin-top fff">
-            <p class="padding-container" style="font-size: .24rem;color:#333">办理流程</p>
-
-          </div>
-        </mt-tab-container-item>
-      </mt-tab-container>
-    </div>
-
-    <ErrandFoot tel="0731-231224223" :btnClick="testBtn" btnName="在线提交"></ErrandFoot>
+    <ErrandFoot tel="0731-231224223" :btnClick="testBtn"
+                btnName="在线提交" :errandId="$route.params.id"></ErrandFoot>
   </div>
 </template>
 
@@ -186,6 +188,7 @@
   .icon-charge {
     font-size: .25rem;
     margin-right: .15rem;
+    color:#f56262;
   }
 
   .icon-gengduo11 {
@@ -197,11 +200,11 @@
   }
 
   .shoufei {
-    > div {
+    >div {
       display: flex;
       align-items: center;
     }
-    p {
+    p{
       width: .5rem;
     }
   }
@@ -213,14 +216,14 @@
       font-size: .24rem;
       color: #fc992c;
     }
-    > p:first-child {
+    >p:first-child {
       width: .5rem;
       height: .3rem;
       display: flex;
       justify-content: flex-start;
       align-items: center;
     }
-    > p:last-child {
+    >p:last-child {
       flex: 1;
     }
   }
