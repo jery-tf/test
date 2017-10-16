@@ -19,7 +19,9 @@
       <mint-button type="primary" size="large" @click="submitLogin">登录</mint-button>
     </div>
     <p class="flex font-middle">
-      <span>立即注册</span>
+      <router-link to="/register">
+        <span>立即注册</span>
+      </router-link>
       <span>|</span>
       <router-link to="/setting/forgetpwd">忘记密码</router-link>
     </p>

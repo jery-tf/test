@@ -13,9 +13,7 @@
         </div>
       </div>
     </router-link >
-     <router-link to="/register">
       <div class="safety padding-container-lr">关于</div>
-     </router-link>
       <div class="safety padding-container-lr outsec" @click="outlogin">账号退出</div>
   </div>
 </template>
