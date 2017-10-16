@@ -10,7 +10,7 @@ export default [
         name: 'personlist',
         component:views.Persondata.Personlist,
         meta:{
-          title:'个人资料列表页'
+          title:'列表页'
         },
       },
       {
@@ -18,7 +18,7 @@ export default [
         name: 'personinfo',
         component: views.Persondata.Personinfo,
         meta:{
-          title:'个人资料信息页'
+          title:'信息页'
         },
       },
       {
@@ -26,7 +26,7 @@ export default [
         name: 'personcam',
         component: views.Persondata.Personcam,
         meta:{
-          title:'个人资料证照'
+          title:'证照'
         },
       },
 ]

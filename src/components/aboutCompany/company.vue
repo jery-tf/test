@@ -3,7 +3,7 @@
 */
 
 <template>
-  <div class="company">
+  <div class="company" >
       <p>{{data.contents}}</p>
     <span class="datat">注册日期：{{data.time}}</span>
     <span class="star">授权等级：{{data.star}}</span>

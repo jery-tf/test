@@ -18,7 +18,7 @@ export default [
         name: 'registerforpeo',
         component: views.Register.Registerforpeo,
         meta:{
-          title:'个人用户注册页'
+          title:'注册页'
         },
       },
       {
@@ -26,7 +26,7 @@ export default [
         name: 'registerinfo',
         component:views.Register.Registerinfo,
         meta:{
-          title:'个人用户注册基本信息'
+          title:'注册基本信息'
         },
       },
       {
@@ -34,7 +34,7 @@ export default [
         name: 'registerfinish',
         component:views.Register.Registerfinish,
         meta:{
-          title:'个人用户注册完成页'
+          title:'注册完成'
         },
       },
       {
@@ -42,7 +42,7 @@ export default [
         name: 'registerforcmp',
         component:views.Register.Registerforcmp,
         meta:{
-          title:'企业用户注册页'
+          title:'注册'
         },
       },
 ]

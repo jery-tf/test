@@ -11,7 +11,7 @@ export default
         name: 'selfinfo',
         component: views.Selfinfo.Selfinfo,
         meta:{
-          title:'个人信息页'
+          title:'个人信息'
         },
         beforeEnter:Util.login.checkLogin
       }

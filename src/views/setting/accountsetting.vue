@@ -25,7 +25,11 @@ export default {
   methods:{
     getitems(){
      const telphone= JSON.parse(sessionStorage.getItem('userInfo')).phone;
-     console.log(telphone)
+//     console.log(telphone)
+      if(telphone==''){
+        alert("您没有绑定手机号，请绑定手机号")
+        return
+      }
       this.telphone=telphone
     }
   }
