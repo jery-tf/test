@@ -85,14 +85,15 @@ export default {
     width: 4.5rem;
   }
   .btn {
-    border: 1px solid #a0a0a0;
+    border: 1px solid #ccc;
     outline: 0;
     background-color: #f8f8f8;
     width: 1.82rem;
     height: 0.68rem;
     vertical-align: 20%;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 0.2rem;
+    color: #666;
   }
 }
 
