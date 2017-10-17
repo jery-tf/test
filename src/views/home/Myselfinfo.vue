@@ -79,7 +79,7 @@
       </div>
       <div class="particulars ">
         <span>
-           <i class="OAIndexIcon icon-charge"></i>缴费记录
+           <i class="OAIndexIcon icon-qianbao"></i>缴费记录
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
@@ -213,7 +213,7 @@
         width: 0.1rem;
         height: 0.17rem;
         font-size: 0.17rem;
-        vertical-align: middle;
+        /*vertical-align: middle;*/
       }
       h3 {
         margin-bottom: 0.14rem;
@@ -383,21 +383,22 @@
     font-size: 0.32rem;
     color: #333;
     border-bottom: 1px solid #d9d9d9;
-    .icon-shijian, .icon-charge, .icon-tousu, .icon-shimingrenzheng, .icon-bangzhu, .icon-shezhi2 {
+    font-family: "微软雅黑";
+    .icon-shijian, .icon-qianbao, .icon-tousu, .icon-shimingrenzheng, .icon-bangzhu, .icon-shezhi2 {
       font-size: 0.41rem;
       color: #F48074;
       margin-right: 0.26rem;
     }
-    .icon-charge {
+    .icon-qianbao{
       color: #108EE9;
     }
     .icon-tousu {
       color: #50BAA5;
-      font-size: 0.31rem
+      font-size: 0.35rem
     }
     .icon-shimingrenzheng {
       color: #FC992C;
-      font-size: 0.31rem
+      font-size: 0.30rem
     }
     .icon-bangzhu {
       color: #FC992C;
@@ -410,7 +411,7 @@
       font-size: 0.29rem;
       vertical-align: -3%;
       /*margin-left: 0.26rem;*/
-      color: #999;
+      color: #cdcdcd;
     }
   }
 

@@ -3,9 +3,13 @@
     <router-link to='/setting/accountsetting'>
       <div class="safety padding-container-lr linet">账户安全设置</div>
     </router-link>
-     <router-link to="/search/searchinfo">
-      <div class="safety padding-container-lr">推送设置</div>
-     </router-link>
+    <router-link to="/setting/pushsetting">
+      <div class="safety padding-container-lr">
+        <div class="lastline">
+          推送设置
+        </div>
+      </div>
+    </router-link>
      <router-link to='/search/searchlist'>
       <div class="safety padding-container-lr lastline">
         <div class="lastline">
@@ -13,7 +17,9 @@
         </div>
       </div>
     </router-link >
+    <router-link to="/search/searchinfo">
       <div class="safety padding-container-lr">关于</div>
+    </router-link>
       <div class="safety padding-container-lr outsec" @click="outlogin">账号退出</div>
   </div>
 </template>

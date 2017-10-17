@@ -1,5 +1,5 @@
 <template>
-  <div id="tmpl">
+  <div id="tmpl" class="box-margin-top">
     <mt-field label="请输入原始密码" class="ipt" :type="ablesee?'text':'password'" v-model="oldpwd">
       <span class="OAIndexIcon icon-yanjing1" @click="isshow()"></span>
     </mt-field>

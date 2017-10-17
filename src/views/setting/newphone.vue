@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="changep">
     <div class="padding-container-lr changephone">修改手机号码</div>
     <div class="idpost">
       <mt-field label="手机号码" class="ipt" v-model="phone" placeholder="手机号码"></mt-field>
@@ -43,24 +43,29 @@ export default {
 }
 </script>
 <style lang="less" >
-.changephone {
-  width: 7.2rem;
-  height: 0.92rem;
-  line-height: 0.92rem;
-  font-size: 0.24rem;
-  color: #999;
-}
-.mint-button {
-  margin: 0 0.24rem;
-}
+.changep{
+  .changephone {
+    width: 7.2rem;
+    height: 0.92rem;
+    line-height: 0.92rem;
+    font-size: 0.24rem;
+    color: #bdbdbd;
+  }
+  .mint-button {
+    margin: 0 0.24rem;
+  }
 
-.mint-button--large {
-  width: 6.72rem;
-  height: 0.93rem;
-  border-radius: 10px;
-}
+  .mint-button--large {
+    width: 6.72rem;
+    height: 0.93rem;
+    border-radius: 10px;
+  }
 
-.mint-button-text {
-  font-size: 0.3rem;
+  .mint-button-text {
+    font-size: 0.3rem;
+  }
+  .mint-field-core{
+    color: #a3a3a3;
+  }
 }
 </style>

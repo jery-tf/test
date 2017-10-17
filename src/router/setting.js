@@ -79,4 +79,12 @@ export default [
       title: '重置密码'
     },
   },
+  {
+    path: '/setting/pushsetting',
+    name: 'pushsetting',
+    component: views.Setting.PushSetting,
+    meta: {
+      title: '推送设置'
+    },
+  },
 ]

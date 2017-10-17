@@ -89,6 +89,7 @@
     .ipt {
       .icon-next {
         float: right;
+        color: #c9c9c9;
       }
     }
   }

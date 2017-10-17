@@ -24,7 +24,7 @@
         <p>资料空间</p>
       </div>
     <div class="mycollect">
-      <span class="OAIndexIcon icon-shoucang"></span>
+      <span class="OAIndexIcon icon-suoyoubanjian"></span>
       <p>企业办件</p>
     </div>
   </div>
@@ -180,7 +180,7 @@
             float: right;
             width: 50%;
             text-align: center;
-            .icon-shoucang {
+            .icon-suoyoubanjian {
               font-size: 0.4rem;
               color: #666;
             }
