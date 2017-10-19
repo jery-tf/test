@@ -10,7 +10,7 @@ export default [
         name: 'searchlist',
         component: views.Search.Searchlist,
         meta:{
-          title:'搜索列表页'
+          title:'列表页'
         },
       },
       {
@@ -18,7 +18,7 @@ export default [
         name: 'searchinfo',
         component: views.Search.Searchinfo,
         meta:{
-          title:'搜索详情页'
+          title:'详情页'
         },
       },
 ]

@@ -105,6 +105,7 @@
       float: left;
       padding-right: 0.48rem;
       font-size: 0.26rem;
+      color: #666;
     }
   }
 

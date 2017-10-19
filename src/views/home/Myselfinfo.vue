@@ -60,25 +60,15 @@
       <span class="myoffice">相关企业/单位(3)</span>
       <span class="checkall">查看全部<i class="OAIndexIcon icon-next"></i></span>
     </div>
-    <div class="contentsall padding-container-lr" v-for="item in list">
-      <!--<AboutCompany :data="item"></AboutCompany>-->
-      <!--<mt-swipe :auto="0" :show-indicators="false">-->
-      <!--<mt-swipe-item><AboutCompany :data="item"></AboutCompany></mt-swipe-item>-->
-      <!--<mt-swipe-item>123</mt-swipe-item>-->
-      <!--<mt-swipe-item>3</mt-swipe-item>-->
-      <!--</mt-swipe>-->
-      <ul>
-        <router-link to='/aboutcmp/aboutcmp'>
+    <div class="contentsall padding-container-lr" >
+      <ul v-for="item in list">
           <li>
+            <router-link v-bind="{to:'/aboutcmp/aboutcmp/'+item.id}">
             <AboutCompany :data="item"></AboutCompany>
+            </router-link>
           </li>
-        </router-link>
-        <li>
-          <AboutCompany :data="item"></AboutCompany>
-        </li>
       </ul>
     </div>
-
     <div class="parttop  padding-container-lr">
 
       <div class="particulars ">
@@ -89,7 +79,7 @@
       </div>
       <div class="particulars ">
         <span>
-           <i class="OAIndexIcon icon-charge"></i>缴费记录
+           <i class="OAIndexIcon icon-qianbao"></i>缴费记录
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
@@ -144,7 +134,8 @@
     data() {
       return {
         list: [
-          {contents: "湖南科创信息技术有限公司", time: '2017-07-05', star: '法定代表人', status: '开业'}
+          {id:1,contents: "湖南科创信息技术有限公司", time: '2017-07-05', star: '法定代表人', status: '开业'},
+          {id:2,contents: "企业技术改造项目有限公司企业技术改造项目有限公司", time: '2017-07-05', star: '法定代表人', status: '注销'}
         ],
         islogin: false,
         pname: '',
@@ -228,9 +219,9 @@
       getimgs() {
         let token = Util.login.getAccessToken();
         let userInfo = Util.user.getUserAllInfo();
-        let username = userInfo.name;
         console.log(userInfo)
         if (token && userInfo) {
+          let username = userInfo.name;
           this.islogin = true
           this.pname=username
           this.text=true
@@ -267,7 +258,7 @@
         width: 0.1rem;
         height: 0.17rem;
         font-size: 0.17rem;
-        vertical-align: middle;
+        /*vertical-align: middle;*/
       }
       h3 {
         margin-bottom: 0.14rem;
@@ -374,7 +365,7 @@
     ul {
       width: 1000px;
       li {
-        display: inline-block;
+        float: left;
       }
     }
   }
@@ -437,21 +428,22 @@
     font-size: 0.32rem;
     color: #333;
     border-bottom: 1px solid #d9d9d9;
-    .icon-shijian, .icon-charge, .icon-tousu, .icon-shimingrenzheng, .icon-bangzhu, .icon-shezhi2 {
+    font-family: "微软雅黑";
+    .icon-shijian, .icon-qianbao, .icon-tousu, .icon-shimingrenzheng, .icon-bangzhu, .icon-shezhi2 {
       font-size: 0.41rem;
       color: #F48074;
       margin-right: 0.26rem;
     }
-    .icon-charge {
+    .icon-qianbao{
       color: #108EE9;
     }
     .icon-tousu {
       color: #50BAA5;
-      font-size: 0.31rem
+      font-size: 0.35rem
     }
     .icon-shimingrenzheng {
       color: #FC992C;
-      font-size: 0.31rem
+      font-size: 0.30rem
     }
     .icon-bangzhu {
       color: #FC992C;
@@ -464,7 +456,7 @@
       font-size: 0.29rem;
       vertical-align: -3%;
       /*margin-left: 0.26rem;*/
-      color: #999;
+      color: #cdcdcd;
     }
   }
 

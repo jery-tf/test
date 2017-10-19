@@ -11,7 +11,7 @@ export default [
     name: 'accountsetting',
     component: views.Setting.Accountsetting,
     meta: {
-      title: '账号设置页'
+      title: '账号设置'
     },
   },
   {
@@ -19,7 +19,7 @@ export default [
     name: 'Setting',
     component: views.Setting.Setting,
     meta: {
-      title: '账号设置页'
+      title: '账号设置'
     },
     beforeEnter: Util.login.checkLogin
   },
@@ -28,7 +28,7 @@ export default [
     name: 'Changenum',
     component: views.Setting.Changenum,
     meta: {
-      title: '修改手机号码第一页'
+      title: '修改手机号码'
     },
   },
   {
@@ -52,7 +52,7 @@ export default [
     name: 'lastphone',
     component: views.Setting.Lastphone,
     meta: {
-      title: '重置新手机发送验证码'
+      title: '发送验证码'
     },
   },
   {
@@ -60,7 +60,7 @@ export default [
     name: 'forgetpwd',
     component: views.Setting.ForgetPwd,
     meta: {
-      title: '忘记密码重置密码'
+      title: '重置密码'
     },
   },
   {
@@ -68,7 +68,7 @@ export default [
     name: 'forgetpwdnum',
     component: views.Setting.ForgetPwdNum,
     meta: {
-      title: '忘记密码发送验证码'
+      title: '发送验证码'
     },
   },
   {
@@ -76,7 +76,15 @@ export default [
     name: 'settingpwd',
     component: views.Setting.SettingPwd,
     meta: {
-      title: '忘记密码重置密码'
+      title: '重置密码'
+    },
+  },
+  {
+    path: '/setting/pushsetting',
+    name: 'pushsetting',
+    component: views.Setting.PushSetting,
+    meta: {
+      title: '推送设置'
     },
   },
 ]

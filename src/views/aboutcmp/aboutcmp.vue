@@ -24,7 +24,7 @@
         <p>资料空间</p>
       </div>
     <div class="mycollect">
-      <span class="OAIndexIcon icon-shoucang"></span>
+      <span class="OAIndexIcon icon-suoyoubanjian"></span>
       <p>企业办件</p>
     </div>
   </div>
@@ -32,39 +32,41 @@
      <div class="accred">
        <h5 class="padding-container-lr">授权用户</h5>
      </div>
-    <div class="accrepeo padding-container-lr">
-        <div class="peo">
-          <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-          <div class="first">法定代表人</div>
+    <div class="accrepeo" v-for="item in list">
+      <router-link v-bind="{to:'/aboutcmp/aboutlist/'+item.id}">
+        <div class="peo" >
+          <img src="../../assets/img/hport.png" alt=""><span>{{item.listname}}</span>
+          <div class="waite" :style="`background:${item.backgroundcolor};color:${item.colorcolorfor}`">{{item.idcar}}</div>
         </div>
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="one">一级被授权人</div>
-      </div>
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="two">二级被授权人</div>
-      </div>
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="first">法定代表人</div>
-      </div>
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="two">二级被授权人</div>
-      </div>
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="two">二级被授权人</div>
-      </div>
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="three">三级被授权人</div>
-      </div>
-      <div class="peo">
-        <img src="../../assets/img/hport.png" alt=""><span>陈在人</span>
-        <div class="one">一级被授权人</div>
-      </div>
+      </router-link>
+      <!--<div class="peo">-->
+        <!--<img src="../../assets/img/hport.png" alt=""><span>陈在人</span>-->
+        <!--<div class="one">一级被授权人</div>-->
+      <!--</div>-->
+      <!--<div class="peo">-->
+        <!--<img src="../../assets/img/hport.png" alt=""><span>陈在人</span>-->
+        <!--<div class="two">二级被授权人</div>-->
+      <!--</div>-->
+      <!--<div class="peo">-->
+        <!--<img src="../../assets/img/hport.png" alt=""><span>陈在人</span>-->
+        <!--<div class="first">法定代表人</div>-->
+      <!--</div>-->
+      <!--<div class="peo">-->
+        <!--<img src="../../assets/img/hport.png" alt=""><span>陈在人</span>-->
+        <!--<div class="two">二级被授权人</div>-->
+      <!--</div>-->
+      <!--<div class="peo">-->
+        <!--<img src="../../assets/img/hport.png" alt=""><span>陈在人</span>-->
+        <!--<div class="two">二级被授权人</div>-->
+      <!--</div>-->
+      <!--<div class="peo">-->
+        <!--<img src="../../assets/img/hport.png" alt=""><span>陈在人</span>-->
+        <!--<div class="three">三级被授权人</div>-->
+      <!--</div>-->
+      <!--<div class="peo">-->
+        <!--<img src="../../assets/img/hport.png" alt=""><span>陈在人</span>-->
+        <!--<div class="one">一级被授权人</div>-->
+      <!--</div>-->
     </div>
   </div>
 </div>
@@ -75,10 +77,22 @@
         name: 'aboutcmp',
         components: {},
         data() {
-            return {}
+            return {
+              list:[
+                {id:1,listname:'陈在人',idcar:'法定代表人',backgroundcolor:'#e7f3fd',colorcolorfor:'#108ee9'},
+                {id:2,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
+                {id:3,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
+                {id:4,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
+                {id:5,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
+                {id:6,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
+                {id:7,listname:'陈在人',idcar:'二级被授权人',backgroundcolor:'#feeeed',colorcolorfor:'#f15a4a'},
+                {id:8,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
+              ],
+              idcard:1
+            }
         },
         created() {
-
+          this.idcard = this.$route.params.id;
         },
         methods: {}
 
@@ -166,7 +180,7 @@
             float: right;
             width: 50%;
             text-align: center;
-            .icon-shoucang {
+            .icon-suoyoubanjian {
               font-size: 0.4rem;
               color: #666;
             }
@@ -179,6 +193,8 @@
         .accredit{
           background-color: #fff;
           width: 7.2rem;
+          display: flex;
+          flex-wrap:wrap;
          .accred{
            border-bottom: 1px solid #d9d9d9;
            h5{
@@ -192,16 +208,23 @@
            }
          }
           .accrepeo{
-            display: flex;
-            flex-wrap:wrap;
+            /*display: flex;*/
+            /*flex-wrap:wrap;*/
             padding-bottom: 0.24rem;
+            padding-left: 0.24rem;
             .peo{
               margin-top: 0.25rem;
               width: 2.02rem;
               height: 1.48rem;
               border: 1px solid #d9d9d9;
               border-radius: 0.1rem;
-              margin-right: 0.22rem;
+              /*margin-right: 0.22rem;*/
+              .waite{
+                font-size: 0.27rem;
+                text-align: center;
+                height: 0.5rem;
+                line-height: 0.5rem;
+              }
               img{
                 width: 0.54rem;
                 height: 0.54rem;
@@ -214,40 +237,40 @@
             }
           }
         }
-  .three{
-    color: #fc992c;
-    background-color: #fff5e9;
-    font-size: 0.2rem;
-    text-align: center;
-    width: 2rem;
-    height: 0.55rem;
-    line-height:0.55rem;
-  }
-  .first{
-    background-color: #e7f3fb;
-    color: #108ee9;
-    font-size: 0.2rem;
-    text-align: center;
-    width: 2rem;
-    height: 0.55rem;
-    line-height:0.55rem;
-  }
-  .one{
-    background-color: #e9f6f4;
-    color: #29ab91;
-    font-size: 0.2rem;
-    text-align: center;
-    width: 2rem;
-    height: 0.55rem;
-    line-height:0.55rem;
-  }
-        .two{
-          background-color: #feeeed;
-          color: #fa5a4a;
-          font-size: 0.2rem;
-          text-align: center;
-          width: 2rem;
-          height: 0.55rem;
-          line-height:0.55rem;
-        }
+  /*.three{*/
+    /*color: #fc992c;*/
+    /*background-color: #fff5e9;*/
+    /*font-size: 0.2rem;*/
+    /*text-align: center;*/
+    /*width: 2rem;*/
+    /*height: 0.55rem;*/
+    /*line-height:0.55rem;*/
+  /*}*/
+  /*.first{*/
+    /*background-color: #e7f3fb;*/
+    /*color: #108ee9;*/
+    /*font-size: 0.2rem;*/
+    /*text-align: center;*/
+    /*width: 2rem;*/
+    /*height: 0.55rem;*/
+    /*line-height:0.55rem;*/
+  /*}*/
+  /*.one{*/
+    /*background-color: #e9f6f4;*/
+    /*color: #29ab91;*/
+    /*font-size: 0.2rem;*/
+    /*text-align: center;*/
+    /*width: 2rem;*/
+    /*height: 0.55rem;*/
+    /*line-height:0.55rem;*/
+  /*}*/
+        /*.two{*/
+          /*background-color: #feeeed;*/
+          /*color: #fa5a4a;*/
+          /*font-size: 0.2rem;*/
+          /*text-align: center;*/
+          /*width: 2rem;*/
+          /*height: 0.55rem;*/
+          /*line-height:0.55rem;*/
+        /*}*/
 </style>
