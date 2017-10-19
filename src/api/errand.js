@@ -2,7 +2,7 @@
  * Created by wyg on 2017/10/2.
  */
 
-import {axiosGet,axiosGetToken} from './baseApi'
+import {axiosGet,axiosGetToken,axiosPost} from './baseApi'
 
 //根据事项id 获取事项接口
 export const getErrandList = (params,config)=>axiosGet(`/approveinterface/v1/approveinfo${reqParms(params)}`,'',config);
@@ -16,7 +16,8 @@ export const getApproveName = (approveId,config)=>axiosGetToken(`/approveinterfa
 //获取事项 材料列表
 export const getMaterialList = (params,config)=>axiosGet(`/approveinterface/v1/approveMaterial${reqParms(params)}`,'',config);
 
-
+//附件上传接口 /minio/apk/attach/upload
+export const uploadFile = (params,config)=>axiosPost('/minio/apk/attach/upload',params,config)
 
 const reqParms = (params)=>{
   let qs = '?';

@@ -33,14 +33,14 @@ export default [
       title:'办事指南'
     }
   },{
-    path:'/errand/online/:id',
+    path:'/errand/online/:id/:exampleId',
     name:'online',
     component:views.Errand.Online,
     meta:{
       title:'在线办理'
     }
   },{
-    path:'/errand/fileUpload/:id',
+    path:'/errand/fileUpload/:id/:filesId',
     name:'fileUpload',
     component:views.Errand.FileUpload,
     meta:{

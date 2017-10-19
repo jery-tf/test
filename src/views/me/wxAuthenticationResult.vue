@@ -27,6 +27,7 @@
   //微信认证结果
   import Api from '../../api'
   import $ from 'jquery'
+  import Util from '../../util'
   import {Toast} from 'mint-ui'
   export default {
     name: 'wxAuthenticationResult',
@@ -44,20 +45,22 @@
     methods: {
       //初始化
       init(){
-        let wxAuthen = sessionStorage.getItem('wxAuthen');
-        wxAuthen = JSON.parse(wxAuthen);
+//        let wxAuthen = localStorage.getItem('wxAuthen');
+//        wxAuthen = JSON.parse(wxAuthen);
 //        if (!wxAuthen) {
 //          this.errormsg = '认证失败,请重试!';
 //          this.testData = '缓存获取失败';
 //          return
 //        }
         //'{2ADEB344-C5B7-46A4-9F89-95DDDC05643B}'
-        Api.realNameApi.getWxAuthenticationResult({token: '{2ADEB344-C5B7-46A4-9F89-95DDDC05643B}',type:'H5'}, {loading: '请稍后...'})
-//        Api.realNameApi.getWxAuthenticationResult({token: wxAuthen.token,type:'H5'}, {loading: '请稍后...'})
+//        Api.realNameApi.getWxAuthenticationResult({token: '{8486D7FB-4F73-42C9-95EB-C12D665F96B2}',type:'H5'}, {loading: '请稍后...'})
+        Api.realNameApi.getWxAuthenticationResult({token: wxAuthen.token,type:'H5'}, {loading: '请稍后...'})
           .then(res => {
             if (res.errorcode === 0) {
+              Util.other.setLocalStorage('wxAuthenUserInfo',res.data);
               //成功
               this.testData = JSON.stringify(res.data);
+
               this.wxAuthenResult = res.data;
             } else {
               //失败

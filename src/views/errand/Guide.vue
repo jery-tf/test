@@ -104,7 +104,7 @@
     },
     methods: {
       testBtn(){
-        this.$router.push({path: `/errand/online/${this.$route.params.id}`})
+        this.$router.push({path: `/errand/online/${this.$route.params.id}/new`})
       },
       //数据初始化
       getErrandDetails(id){

@@ -107,6 +107,12 @@
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
+      <div class="particulars " @click="authenticationTwo">
+        <span>
+           <i class="OAIndexIcon icon-shimingrenzheng"></i>二次认证
+        </span>
+        <em class="OAIndexIcon icon-next"></em>
+      </div>
       <div class="particulars">
         <span>
            <i class="OAIndexIcon icon-bangzhu"></i>帮助与反馈
@@ -129,7 +135,7 @@
   import Api from '../../api'
   import $ from 'jquery'
   import AboutCompany from '../../components/aboutCompany/company.vue'
-  import {Swipe, SwipeItem} from 'mint-ui';
+  import {Swipe, SwipeItem,Toast} from 'mint-ui';
   import Util from '../../util'
 
   export default {
@@ -163,6 +169,45 @@
           let args = {
             appid: appId, signature: _signature, redirect: 'http://hillwxtest.s1.natapp.cc/wxAuthentication-test.html',
             uid: '123', type: 0
+          };
+          sessionStorage.setItem('wxSignatures', _signature);
+          let form = $("<form method='post'></form>");
+          form.attr({"action": url});
+          for (let arg in args) {
+            let input = $("<input type='hidden'>")
+            input.attr({"name": arg});
+            input.val(args[arg]);
+            form.append(input);
+          }
+          $(document.body).append(form);
+          form.submit();
+        })
+      },
+      authenticationTwo(){
+        if(!Util.other.getLocalStorage('wxAuthenUserInfo')){
+          Toast('请先做实人认证');
+          return;
+        }
+        let wxAuthen = localStorage.getItem('wxAuthen');
+        let wxAuthenUserInfo = Util.other.getLocalStorage('wxAuthenUserInfo');
+
+
+        wxAuthen = JSON.parse(wxAuthen);
+
+        let url = 'https://iauth.wecity.qq.com/new/cgi-bin/auth.php';
+        let appId = '4454', method = 'auth';
+
+
+          //签名
+        Api.realNameApi.getAppSign({method, type: 'H5'}).then(res => {
+          console.log(res);
+          let _signature = res.signature;
+          if (res.signature == 0) {
+            _signature = '';
+          }
+          let args = {
+            appid: appId, signature: _signature, redirect: 'http://hillwxtest.s1.natapp.cc/wxAuthentication-test.html',
+            uid: '123', type: 1,pic_key:wxAuthen.token,ID:wxAuthenUserInfo.ID,name:wxAuthenUserInfo.name
           };
           sessionStorage.setItem('wxSignatures', _signature);
           let form = $("<form method='post'></form>");
