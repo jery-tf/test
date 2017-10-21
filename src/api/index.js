@@ -12,6 +12,7 @@ import * as otherApi from './other'
 import * as opacityApi from './opacity'
 import * as collectionApi from './collection'
 import * as checkPwdApi from './checkPwd'
+import * as AddressApi from './address'
 export default { testApi, loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi,opacityApi,
-  otherApi,collectionApi,checkPwdApi}
+  otherApi,collectionApi,checkPwdApi,AddressApi}
 

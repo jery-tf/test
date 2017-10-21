@@ -77,7 +77,7 @@ export default {
           return;
         }else if(res==true){
           Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
-               Toast("修改密码成功，即将跳转...")
+               Toast(res)
 
           })
         }

@@ -6,7 +6,7 @@
         <input type="button" v-model="item1.name" class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)">
       </div>
     </div>
-    <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal" v-if="isshow" pop-transition="popup-fade">
+    <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal"  pop-transition="popup-fade">
      <h3> <i class="icon-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
       <ul v-for="(item1,index) in datainfolist">
         <li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">{{item1.name}}</a></li>
@@ -28,8 +28,7 @@
         list1:[],
         clicked: false,
         showModel:false,
-        popupVisible:'',
-        isshow:false,
+        popupVisible:false,
         showModel:false
       }
     },
@@ -41,11 +40,11 @@
     },
     methods: {
       close(){
-        this.isshow=!this.isshow
+        this.popupVisible=!this.popupVisible
       },
       popupup(item1){
         if(item1.channelId=="24"){
-          this.isshow=true
+          this.popupVisible=true
           console.log(this.showModel)
         }else if(item1.channelId==25){
           alert("我是25")

@@ -34,7 +34,7 @@ let router = new Router({
       meta:{
         title:'首页'
       },
-    },...errand,...me,...search,...persondata,...register,...setting,...gk,selfinfo,...convenience,
+    },...errand,...me,...search,...persondata,...register,...setting,...gk,...selfinfo,...convenience,
     ...collection,...aboutcmp,...home
   ]
 })
