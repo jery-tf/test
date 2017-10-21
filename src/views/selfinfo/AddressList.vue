@@ -90,7 +90,6 @@
           }
         }
       },
-      //编辑地址
       updatAddrFun(id) {
 //        console.log('要编辑的地址id', id)
         Api.AddressApi.addressMoreList(
