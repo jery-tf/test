@@ -22,7 +22,7 @@
    */
   export default {
     name: 'CellSwipe',
-    props: ['title', 'rightFun', 'label', 'type','id'],
+    props: ['title', 'rightFun', 'label', 'type'],
     components: {},
     data () {
       return {}
@@ -36,7 +36,7 @@
         let _rightArr = [{
           content: '删除',
           style: {background: 'red', color: '#fff',width:'1rem'},
-          handler: () => this.rightFun(this.id)
+          handler: () => this.rightFun()
         }];
         return _rightArr;
       },

@@ -34,7 +34,7 @@ let router = new Router({
       meta:{
         title:'首页'
       },
-    },...errand,...me,...search,...persondata,...register,...setting,...gk,selfinfo,...convenience,
+    },...errand,...me,...search,...persondata,...register,...setting,...gk,...selfinfo,...convenience,
     ...collection,...aboutcmp,...home
   ]
 })
@@ -48,7 +48,8 @@ router.beforeEach((to, from, next) => {
   next();
 })
 
-
+let arr = [1,2,3];
+arr[arr.length] = JSON.parse(JSON.stringify(arr[0]))
 
 router.beforeEach((to, from, next) => {
   //设置title

@@ -12,7 +12,7 @@ import * as otherApi from './other'
 import * as opacityApi from './opacity'
 import * as collectionApi from './collection'
 import * as checkPwdApi from './checkPwd'
-import * as wechatApi from './wechat'
+import * as AddressApi from './address'
 export default { testApi, loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi,opacityApi,
-  otherApi,collectionApi,checkPwdApi,wechatApi}
+  otherApi,collectionApi,checkPwdApi,AddressApi}
 

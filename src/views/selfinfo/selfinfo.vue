@@ -2,7 +2,7 @@
   <div class="tmpl">
     <div class="headport padding-container-lr">
       头像
-        <img src="../../assets/img/hport.png" alt="">
+      <img src="../../assets/img/hport.png" alt="">
     </div>
     <div class="pname">
       <div class="adminpname">
@@ -16,33 +16,38 @@
         <span class="">{{telphone}}</span>
       </div>
     </div>
-    <div class="pname padding-container-lr">
-      地址管理
-      <span class="OAIndexIcon icon-next"></span>
-    </div>
+    <router-link v-bind="{to:'/selfinfo/AddressList/'+this.certificateNum}">
+      <div class="pname padding-container-lr">
+        地址管理
+        <span class="OAIndexIcon icon-next"></span>
+      </div>
+    </router-link>
   </div>
 </template>
 <script>
-  import  Util from '../../util'
+  import Util from '../../util'
+
   export default {
-    data(){
-      return{
-          telphone:'',
-        username:""
+    data() {
+      return {
+        telphone: '',
+        username: ""
       }
     },
-    created(){
+    created() {
       this.getitems()
     },
-    methods:{
-        getitems(){
-          const telphone= JSON.parse(sessionStorage.getItem('userInfo')).phone;
-          this.telphone=telphone
-          const username= JSON.parse(sessionStorage.getItem('userInfo')).name;
-          this.username=username
-        }
+    methods: {
+      getitems() {
+        const telphone = JSON.parse(sessionStorage.getItem('userInfo')).phone;
+        this.telphone = telphone
+        const username = JSON.parse(sessionStorage.getItem('userInfo')).name;
+        this.username = username
+        const certificateNum = JSON.parse(sessionStorage.getItem('userInfo')).certificateNum;
+        this.certificateNum = certificateNum;
+        console.log(this.certificateNum)
+      }
     }
-
   }
 </script>
 <style lang="less" scoped>
@@ -55,14 +60,14 @@
       font-size: 0.32rem;
       color: #333;
       background-color: #fff;
-        img{
-          width: 1.01rem;
-          height: 1.01rem;
-          display: inline-block;
-          position: absolute;
-          top:0.5rem;
-          right: 0.24rem;
-        }
+      img {
+        width: 1.01rem;
+        height: 1.01rem;
+        display: inline-block;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.24rem;
+      }
       .icon-yonghu21 {
         font-size: 1.01rem;
         color: #ccc
