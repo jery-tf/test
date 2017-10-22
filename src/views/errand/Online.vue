@@ -86,7 +86,8 @@
       //跳转到上传文件页面
       toLoadFile(obj){
         sessionStorage.setItem('errandTitle',obj.materialTitle);
-        this.$router.push({path: `/errand/fileUpload/${this.$route.params.id}/${obj.materialId}`})
+//        this.$router.push({path: `/errand/fileUpload/${this.$route.params.id}/new`});
+        this.$router.push({path: `/errand/fileUpload/${this.$route.params.id}/${obj.materialId}`});
       },
       testAddress(){
         console.log(22)
@@ -227,7 +228,7 @@
 
       //监听返回事件
       bindPopstate(e){
-        console.log('返回');
+        console.log('返回 暂存');
 //        MessageBox.confirm('需要暂存之前的数据么?','提示').then(active=>{
 //          console.log('确定',active);
 //          //开始保存

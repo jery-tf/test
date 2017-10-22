@@ -40,7 +40,7 @@ export default [
       title:'在线办理'
     }
   },{
-    path:'/errand/fileUpload/:id',
+    path:'/errand/fileUpload/:id/:filesId',
     name:'fileUpload',
     component:views.Errand.FileUpload,
     meta:{

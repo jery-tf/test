@@ -39,14 +39,14 @@ let router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  // console.log('indexRouter to==>',to)
-  //拦截404
-  if(!to.name){
-    next({path:'/404'})
-  }
-  next();
-})
+// router.beforeEach((to, from, next) => {
+//   // console.log('indexRouter to==>',to)
+//   //拦截404
+//   if(!to.name){
+//     next({path:'/404'})
+//   }
+//   next();
+// })
 
 let arr = [1,2,3];
 arr[arr.length] = JSON.parse(JSON.stringify(arr[0]))

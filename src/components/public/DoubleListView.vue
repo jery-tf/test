@@ -4,7 +4,7 @@
 
 <template>
   <div class="doubleListBox">
-    <div class="left">
+    <div class="left fff">
       <div v-for="(item,index) in dataList" :key="index"
            :class="item.id==selectedId?'li active':'li fff'"
            @click="liClickFun(item.id)">
@@ -51,6 +51,9 @@
       width: 1.66rem;
       overflow-y: auto;
       height: 100%;
+      position: relative;
+      top:0;
+      bottom: 0;
       .li {
         display: flex;
         align-items: center;

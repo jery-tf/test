@@ -4,7 +4,7 @@
 
 <template>
   <div class="h100">
-    <div class="h100" style="overflow-y: auto">
+    <div class="h100 guideContent">
       <ErrandHead :score="3" :workDay="approve.commitmentLimit" :workNo="approve.minSeq"
                   :title="approve.approveName"></ErrandHead>
 
@@ -49,6 +49,33 @@
               <div class="box-margin-top">
                 <Subtitle title="设定依据" :content="approve.settingGist||''"></Subtitle>
               </div>
+              <div class="box-margin-top">
+                <Subtitle title="收费依据" :content="approve.chargeGist||''"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="审查标准" :content="approve.examinationStandard||''"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="通办范围" :content="approve.doScope||''"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="预约办理" :content="approve.makeTransaction == 'N' ? '不支持' : '支持'"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="网上支付" :content="approve.onlinePayment == 'N' ? '不支持' : '支持'"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="物流快递" :content="approve.logisticsExpress == 'N' ? '不支持' : '支持'"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="办理时间" :content="approve.workTime||''"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="监督电话" :content="approve.complaintTel||''"></Subtitle>
+              </div>
+              <div class="box-margin-top">
+                <Subtitle title="办理流程" :content="approve.handingProcedures||''"></Subtitle>
+              </div>
             </div>
           </mt-tab-container-item>
 
@@ -92,7 +119,7 @@
         selected: 'info',
         approve: {},//办事指南详细数据
         dictionariesXZLB: {},
-        materialList:[],//材料列表
+        materialList: [],//材料列表
       }
     },
     created(){
@@ -148,8 +175,8 @@
         };
         let params = {page: 1, rows: 100, cond: encodeURI(JSON.stringify(cond))};
         Api.errandApi.getMaterialList(params).then(res => {
-          console.log('材料列表',JSON.parse(JSON.stringify(res.contents)));
-          if(res.contents){
+          console.log('材料列表', JSON.parse(JSON.stringify(res.contents)));
+          if (res.contents) {
             this.materialList = res.contents;
           }
 
@@ -184,27 +211,31 @@
   .fff {
     font-size: .28rem;
   }
+  .guideContent{
+    padding-bottom: 1rem;
+    overflow-y: auto;
+  }
 
   .icon-charge {
     font-size: .25rem;
     margin-right: .15rem;
-    color:#f56262;
+    color: #f56262;
   }
 
   .icon-gengduo11 {
     color: #999;
   }
 
-  .h88 {
+  .h88{
     height: .88rem;
   }
 
   .shoufei {
-    >div {
+    >div{
       display: flex;
       align-items: center;
     }
-    p{
+    p {
       width: .5rem;
     }
   }
@@ -216,14 +247,14 @@
       font-size: .24rem;
       color: #fc992c;
     }
-    >p:first-child {
+    > p:first-child {
       width: .5rem;
       height: .3rem;
       display: flex;
       justify-content: flex-start;
       align-items: center;
     }
-    >p:last-child {
+    > p:last-child {
       flex: 1;
     }
   }
@@ -234,8 +265,6 @@
   }
 
   .h100 {
-    display: flex;
-    flex-direction: column;
     .flex1 {
       flex: 1;
       display: flex;
