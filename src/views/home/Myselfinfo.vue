@@ -182,7 +182,6 @@
         let wxAuthen = localStorage.getItem('wxAuthen');
         let wxAuthenUserInfo = Util.other.getLocalStorage('wxAuthenUserInfo');
 
-
         wxAuthen = JSON.parse(wxAuthen);
 
         let url = 'https://iauth.wecity.qq.com/new/cgi-bin/auth.php';

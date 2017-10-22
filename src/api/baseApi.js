@@ -21,7 +21,7 @@ const assignTokenHeaders = (config)=>{
     config.headers = Object.assign({},tokenHeaders,config.headers);
   }else{
     config = Object.assign({},{headers:tokenHeaders});
-    console.log('assignTokenHeaders',config);
+    // console.log('assignTokenHeaders',config);
   }
   return config;
 }
@@ -80,7 +80,7 @@ let  tokenHeaders = { "Authorization": `Bearer ${Util.login.getAccessToken()}`,'
 export const axiosGetToken = (url,params,config)=>{
   config = assignTokenHeaders(config);
   config = Object.assign({},config,{params});
-  console.log('axiosGetToken-->',config);
+  // console.log('axiosGetToken-->',config);
   return $axios.get(url,config);
 }
 
@@ -100,7 +100,7 @@ export const axiosPostToken = (url,data,config)=>$axios.post(url,data,assignToke
  * @param url
  * @param [loading]
  */
-export const axiosDeleteToken = (url,loading)=>$axios.post(url,{loading,headers:tokenHeaders});
+export const axiosDeleteToken = (url,config)=>$axios.post(url,assignTokenHeaders(config));
 
 /***
  * 底层put 方法
@@ -108,7 +108,5 @@ export const axiosDeleteToken = (url,loading)=>$axios.post(url,{loading,headers:
  * @param data
  * @param [loading]
  */
-export const axiosPutToken = (url,data,loading)=>$axios.put(url,data,{loading,headers:tokenHeaders});
-
-
+export const axiosPutToken = (url,data,loading)=>$axios.put(url,data,assignTokenHeaders(config));
 

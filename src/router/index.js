@@ -40,7 +40,7 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('indexRouter to==>',to)
+  // console.log('indexRouter to==>',to)
   //拦截404
   if(!to.name){
     next({path:'/404'})

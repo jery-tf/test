@@ -45,8 +45,8 @@
     methods: {
       //初始化
       init(){
-//        let wxAuthen = localStorage.getItem('wxAuthen');
-//        wxAuthen = JSON.parse(wxAuthen);
+        let wxAuthen = localStorage.getItem('wxAuthen');
+        wxAuthen = JSON.parse(wxAuthen);
 //        if (!wxAuthen) {
 //          this.errormsg = '认证失败,请重试!';
 //          this.testData = '缓存获取失败';

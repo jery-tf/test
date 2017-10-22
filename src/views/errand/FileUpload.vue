@@ -70,8 +70,8 @@
       //文件上传
       fileUploadFun(e){
         let files = e.target.files;
-        console.log('files-->',files)
-        console.log('-->',files[0])
+//        console.log('files-->',files)
+//        console.log('-->',files[0])
 
         let formData = new FormData();
         formData.append('file', files[0]);
@@ -96,7 +96,7 @@
             'Content-Type': 'multipart/form-data',
           }
         };
-        console.log('li----->',li);
+//        console.log('li----->',li);
 //        Api.errandApi.uploadFile(formData,config).then(res=>{
 //          console.log('文件',res);
 //
@@ -136,7 +136,9 @@
       //保存上传的文件
       saveUploadData(data){
         let id = this.errandDataId;
+//        console.log('id--->',id);
         let errandData = Util.other.getSessionStorage('errandData');
+//        console.log('errandData',errandData);
         let isMatching = false;
         if(errandData){
           for(let key in errandData){
@@ -147,7 +149,8 @@
             }
           }
           if(!isMatching){
-            errandData[id] = data;
+            errandData[id]=[];
+            errandData[id].push(data);
           }
         }else{
           errandData = {};
@@ -160,7 +163,6 @@
     },
     watch:{
       'selectFiles':()=>{
-        console.log(this.selectValue);
       }
     },
     computed:{

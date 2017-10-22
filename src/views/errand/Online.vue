@@ -11,7 +11,7 @@
       <div class="isSubmitList box-margin-top">
         <template v-for="(item,index) in materialList">
           <ErrandSubmitLi :title='item.materialTitle'
-          :isSubmint="true" :btnClick="toLoadFile.bind(this,item)"></ErrandSubmitLi>
+          :isSubmint="isSubmint(item.materialId)" :btnClick="toLoadFile.bind(this,item)"></ErrandSubmitLi>
         </template>
         <!--<ErrandSubmitLi title='测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下下看看测试下下看看测试下看看测试下看看'-->
                         <!--:isSubmint="true" :btnClick="toLoadFile.bind(this,1)"></ErrandSubmitLi>-->
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <ErrandFoot tel="0731-231224223" :btnClick="testBtn" btnName="在线提交"
+    <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" btnName="在线提交"
                 :errandId="$route.params.id"></ErrandFoot>
   </div>
 </template>
@@ -49,6 +49,8 @@
     data () {
       return {
         approve: {},
+        currentFileList:{},//当前已上传的文件列表
+        currentFlieKey:[],//当前已上传的文件列表id
         materialList:[],//材料列表
         option: {
           userName: '张三',
@@ -72,6 +74,8 @@
       this.getErrandDetails(this.$route.params.id);
 
       this.getFileListById(this.$route.params.id);
+
+      this.isSubmint();
 
       window.addEventListener("popstate", this.bindPopstate, false);
     },
@@ -108,6 +112,8 @@
         Promise.all([Api.errandApi.getErrandDetails(id), Api.errandApi.getApproveName(id),
           Api.errandApi.getMaterialList(params)])
           .then(res => {
+
+            console.log('approve',Object.assign({}, res[0], res[1]));
             this.approve = Object.assign({}, res[0], res[1]);
 
             //材料列表
@@ -118,13 +124,105 @@
       //获取当前id下的所有材料列表
       getFileListById(id){
         let errandData = Util.other.getSessionStorage('errandData');
-        let data = [];
+        console.log('errandData',errandData);
+        let data = {};
         for(let key in errandData){
-            if(key.indexOf(id)){
-              data.push(errandData[key]);
+            if(key.indexOf(id)!=-1){
+              let filesId = key.split('-')[1];
+              if(data[filesId]){
+                data[filesId].push(errandData[key]);
+              }else{
+                data[filesId] = [];
+                data[filesId].push(errandData[key]);
+              }
+              this.currentFlieKey.push(filesId);
             }
         }
-        console.log(data);
+//        console.log('已提交的材料列表',JSON.parse(JSON.stringify(data)));
+        this.currentFileList = data;
+      },
+      //判断是否已经提交
+      isSubmint(materialId){
+        if(!materialId) return;
+        return this.currentFlieKey.indexOf(materialId)!=-1;
+      },
+      //提交数据
+      onlineSubmit(){
+
+          console.log('提交的材料列表',this.currentFileList);
+          if(this.currentFlieKey.length==0||this.materialList.length<this.currentFlieKey.length){
+              console.log('去暂存');
+          }
+          let approveInfo = this.approve;
+          let userInfo = Object.assign({},Util.user.getUserInfo(),Util.user.getUserDetails());
+          console.log('userInfo',userInfo);
+          let params = {
+            "approveCode": approveInfo.approveCode,
+            "applyId": userInfo.id,
+            "applyType": 1,
+            "applyName": userInfo.username,
+            "orgId": userInfo.orgs[0].orgnumber,
+            "areaCode": userInfo.orgs[0].xzqm,
+            "projectState": 0,
+//            "queueCode": "string",
+//            "queryCode": "string",
+//            "notacceptReason": "string",
+//            "correctionTime": "2017-10-21T03:09:18.915Z",
+            "approveName": approveInfo.approveName,
+            "orgName": approveInfo.orgName,
+            "approveId": this.$route.params.id,
+//            "acceptId": "string",
+//            "endId": "string",
+//            "nextExecutor": "string",
+//            "formInstanceList": [
+//              {
+//                "formInsId": "string",
+//                "formId": "string",
+//                "instanceId": "string",
+//                "engName": "string",
+//                "formValue": "string"
+//              }
+//            ],
+            "materialList": [
+              {
+                "materialInsId": "string",
+                "materialId": "string",
+                "instanceId": "string",
+                "materialName": "string",
+                "copiesNum": 0,
+                "commitWay": "string",
+                "submitTime": "2017-10-21T03:09:18.915Z",
+                "isMust": "string",
+                "orderNum": 0,
+                "submitState": "string",
+                "typeId": "string",
+                "isValid": "string",
+                "attachList": [
+                  {
+                    "attachId": "string",
+                    "attachCode": "string",
+                    "businessId": "string",
+                    "attachName": "string",
+                    "attachType": "string",
+                    "attachPath": "string",
+                    "attachSize": 0,
+                    "isValid": "string",
+                    "attachContent": [
+                      "string"
+                    ],
+                    "attachConStr": "string"
+                  }
+                ]
+              }
+            ]
+          }
+//        console.log('approve',this.approve);
+
+//          Api.errandApi.addErrandExample().then(res=>{
+//              console.log(res);
+//          }).catch(e=>{
+//              console.log(e);
+//          })
       },
 
       //监听返回事件
