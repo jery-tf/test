@@ -30,10 +30,9 @@
 
 <script>
   import LoginTop from '../../../components/login/LoginTop.vue'
-  import {Field, Button} from 'mint-ui'
+  import {Field, Button,Toset,Toast} from 'mint-ui'
   import Api from '../../../api'
   import Util from '../../../util'
-  import axios from 'axios'
   import Config from '../../../config'
 
   export default {
@@ -62,22 +61,26 @@
         //获取登录加密
         Api.loginApi.getLoginAes(content).then(res => {
           let data = {clientId:Config.clientId,s:res};
-//          登录
+          //登录
           Api.loginApi.userLogin(data).then(res=>{
             //获取用户信息
             Api.userApi.getUserInfo({access_token: res.access_token}).then(res => {
-
               //获取用户详情
               Api.userApi.getUserDetails(res.userId).then(res=>{
-                 console.log('用户详情->',res);
                 Util.other.setSessionStorage('userDetails',res);
                 //跳转页面
                 _this.toNextPage();
+              }).catch(err=>{ //获取用户详情失败
+                console.log('获取用户详情失败');
               });
               Util.user.setUserInfo(res);
-
+            }).catch(err=>{ //获取用户信息失败
+              console.log('获取用户详情失败');
             });
             Util.login.setToken(res);
+          }).catch(err=>{  //登录失败
+            console.log('登录失败,原因->',err.errorMessage);
+            Toast(err.errorMessage);
           })
         })
       }
@@ -94,7 +97,6 @@
   .padding-container {
     background: #fff;
     min-height: 100%;
-    /*position: relative;*/
   }
 
   .logo {

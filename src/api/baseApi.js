@@ -3,15 +3,14 @@
  */
 import $axios from './axiosSetting';
 import Util from '../util';
-import Config from '../config'
 
 
 /**************************内部方法*********************************/
 const assignHeader = (config)=>{
   if(config && config.headers){
-    config.headers = Object.assign({},headers,config.headers);
+    config.headers = Object.assign({},config.headers);
   }else{
-    config = Object.assign({},{headers});
+    config = {};
   }
   return config;
 }
@@ -27,7 +26,7 @@ const assignTokenHeaders = (config)=>{
 }
 
 /**********************不需要权限认证*****************************/
-const headers = { 'x-api-key': Config.C2XApiKey};
+// const headers = { 'x-api-key': Config.C2XApiKey};
 
 /***
  * 底层get方法
@@ -37,7 +36,6 @@ const headers = { 'x-api-key': Config.C2XApiKey};
  */
 // export const axiosGet = (url,params,loading)=>$axios.get(url,{params,loading,headers});
 export const axiosGet = (url,params,config)=>{
-  config = assignHeader(config);
   return $axios.get(url,Object.assign({},config,{params}))
 };
 /***
@@ -47,14 +45,14 @@ export const axiosGet = (url,params,config)=>{
  * @param [config]
  */
 // export const axiosPost = (url,data,loading)=>$axios.post(url,data,{loading,headers});
-export const axiosPost = (url,data,config)=>$axios.post(url,data,assignHeader(config));
+export const axiosPost = (url,data,config)=>$axios.post(url,data,config);
 /***
  * 底层delete方法
  * @param url
  * @param [config]
  */
 // export const axiosDelete = (url,loading)=>$axios.post(url,{loading,headers});
-export const axiosDelete = (url,config)=>$axios.post(url,Object.assign(config,{headers}));
+export const axiosDelete = (url,config)=>$axios.post(url,config);
 
 /***
  * 底层put 方法
@@ -62,13 +60,13 @@ export const axiosDelete = (url,config)=>$axios.post(url,Object.assign(config,{h
  * @param data
  * @param [loading]
  */
-export const axiosPut = (url,data,loading)=>$axios.put(url,data,{loading,headers});
+export const axiosPut = (url,data,config)=>$axios.put(url,data,config);
 
 
 
 /**********************需要权限认证*****************************/
 
-let  tokenHeaders = { "Authorization": `Bearer ${Util.login.getAccessToken()}`,'x-api-key': Config.C2XApiKey};
+let  tokenHeaders = { "Authorization": `Bearer ${Util.login.getAccessToken()}`};
 
 /***
  * 底层get方法

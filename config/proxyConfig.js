@@ -3,11 +3,11 @@
  */
 module.exports = {
   proxy: {
-    '/api': {
+    '/proxy': {
       target: 'http://172.17.89.21:30538',
       changeOrigin: true,
       pathRewrite: {
-        '^/api': ''
+        '^/proxy': ''
       }
     }
   }
