@@ -7,7 +7,7 @@
        <img src="../../assets/img/logo.png" alt="" class="imgs">
       <p class="wx">湖南政务公众号</p>
       <div class="qrcode">
-        <img src="../../assets/img/code.png" alt="" class="code">
+        <img src="../../assets/img/code1.png" alt="" class="code">
       </div>
       <span>扫描二维码，关注湖南政务微信公众号</span>
       <p>Copyright 2017</p>
