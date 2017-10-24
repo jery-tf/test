@@ -33,6 +33,12 @@ export const checkLogin = (to,from,next)=>{
   if(isLogin()){
     next();
   }else{
-    next({path:`/me/userLogin/${to.name}`});
+    if(to.fullPath.split('/').length<=2){
+      next({path:`/me/userLogin${to.fullPath}`});
+    }else{
+      let arr = to.fullPath.split('/');
+      arr.shift();
+      next({path:`/me/userLogin/${arr.join('-')}`});
+    }
   }
 };

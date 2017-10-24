@@ -12,7 +12,9 @@
           {{item.name}}
         </p>
       </div>
-      <p><i class="OAIndexIcon icon-sousuo_sousuo topIcon"></i></p>
+      <p>
+        <!--<i class="OAIndexIcon icon-sousuo_sousuo topIcon"></i>-->
+      </p>
     </div>
 
     <DoubleListView :dataList="leftDataList" :liClickFun="selecedLeftFun"
@@ -53,6 +55,7 @@
     methods: {
       //获取左侧列表
       getLeftList(id){
+        console.log('请求左侧',id)
         Api.otherApi.getDictionaries(id).then(res => {
 
           console.log('左侧', res);

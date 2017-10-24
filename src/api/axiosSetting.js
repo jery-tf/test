@@ -53,7 +53,11 @@ AxiosIns.interceptors.response.use(response => {
       console.log('其他401')
     }
   }
-  return Promise.reject(error.response.data);
+  if(error.response){
+    return Promise.reject(error.response.data);
+  }
+  console.log('error',error);
+
 });
 
 export default AxiosIns;

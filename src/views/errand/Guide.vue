@@ -98,8 +98,8 @@
         </mt-tab-container>
       </div>
     </div>
-    <ErrandFoot tel="0731-231224223" :btnClick="testBtn"
-                btnName="在线提交" :errandId="$route.params.id"></ErrandFoot>
+    <ErrandFoot tel="0731-231224223" :btnClick="testBtn" :isShowCollection="true" :isCollection="isCollection"
+                btnName="在线提交" :errandId="$route.params.id" :updataIsCollection="updataIsCollection"></ErrandFoot>
   </div>
 </template>
 
@@ -120,6 +120,7 @@
         approve: {},//办事指南详细数据
         dictionariesXZLB: {},
         materialList: [],//材料列表
+        isCollection:false,
       }
     },
     created(){
@@ -181,6 +182,10 @@
           }
 
         })
+      },
+      //修改收藏状态
+      updataIsCollection(state){
+        this.isCollection = state;
       }
     },
     computed: {
@@ -201,7 +206,8 @@
           '1': '网上办理'
         };
         return transactionFrom[this.approve.transactionFrom];
-      }
+      },
+
     }
 
   }
