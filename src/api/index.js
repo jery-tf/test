@@ -13,6 +13,7 @@ import * as opacityApi from './opacity'
 import * as collectionApi from './collection'
 import * as checkPwdApi from './checkPwd'
 import * as AddressApi from './address'
+import * as pickerAreaApi from './pickerArea'
 export default { testApi, loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi,opacityApi,
-  otherApi,collectionApi,checkPwdApi,AddressApi}
+  otherApi,collectionApi,checkPwdApi,AddressApi,pickerAreaApi}
 

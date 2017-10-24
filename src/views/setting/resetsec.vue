@@ -77,8 +77,10 @@ export default {
           return;
         }else if(res==true){
           Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
-               Toast(res)
-
+               Toast('修改密码成功，即将跳转到首页')
+            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("userInfo")
+            this.$router.push('/')
           })
         }
 

@@ -71,22 +71,22 @@
         let orderList = {'pname': this.pname, "idcard": this.idcard}
         window.sessionStorage.setItem("orderList", JSON.stringify(orderList))
 
-        Api.registerApi.legal(
-          qs.stringify({
-            idcard:this.idcard,//身份证号
-            name:this.pname, //姓名
-          }),
-          {Headers:{'content-type':'application/x-www-form-urlencoded'}}
-        ).then(res => {
-          if (res.code == "703") {
-            Toast(res.info)
-
-          }
-          else if(res.code=="200"){
-            this.$router.push("/register/registerinfo");
-          }
-        })
-
+//        Api.registerApi.legal(
+//          qs.stringify({
+//            idcard:this.idcard,//身份证号
+//            name:this.pname, //姓名
+//          }),
+//          {Headers:{'content-type':'application/x-www-form-urlencoded'}}
+//        ).then(res => {
+//          if (res.code == "703") {
+//            Toast(res.info)
+//
+//          }
+//          else if(res.code=="200"){
+//            this.$router.push("/register/registerinfo");
+//          }
+//        })
+        this.$router.push("/register/registerinfo");
 
       }
     }
