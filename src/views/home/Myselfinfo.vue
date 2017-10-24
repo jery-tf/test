@@ -390,6 +390,9 @@
       font-size: 0.24rem;
       color: #666;
       position: relative;
+      p{
+        margin-top: 0.2rem;
+      }
       .icon-savetemp, .icon-daishouli1, .icon-daishouli, .icon-yibanshixiang, .icon-jiaofei {
         font-size: 0.4rem;
         color: #12b8f6;
