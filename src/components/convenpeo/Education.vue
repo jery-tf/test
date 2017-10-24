@@ -2,9 +2,10 @@
   <div>
     <div class="range"  v-for="item in datainfoto"  >
       <h6>{{item.name}}</h6>
-      <div class="allbtn" v-for="(item1,index) in datainfolist" :key="index" v-if="item.channelId==21">
+      <div class="allbtn" v-for="(item1,index) in datainfolist" :key="index"   v-if="item.channelId==21">
         <!--<input type="button" v-model="item1.name" class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)">-->
-        <a href="javascript:void(0)"class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)" >{{item1.name}}</a>
+        <a href="javascript:void(0)"class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)">
+          <i></i>{{item1.name}}</a>
       </div>
     </div>
     <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal"  pop-transition="popup-fade">
@@ -21,6 +22,7 @@
 <script>
   import { Popup } from 'mint-ui'
   import Popupname from './popupname.vue'
+  import {Toast} from 'mint-ui';
   export default {
     data() {
       return {
@@ -47,8 +49,8 @@
         if(item1.channelId=="24"){
           this.popupVisible=true
           console.log(this.showModel)
-        }else if(item1.channelId==25){
-          alert("我是25")
+        }else{
+          alert("功能正在开发中，敬请期待")
         }
   }
     },
@@ -83,6 +85,8 @@
         border: 1px solid #cecece;
         background-color: #fff;
         margin-bottom: 0.24rem;
+        font-size: 0.24rem;
+        color: #333;
       }
     }
   }

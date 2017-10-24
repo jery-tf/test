@@ -56,16 +56,9 @@
     },
     methods: {
       getitems() {
-//     this.pname=window.sessionStorage.getItem("orderList");
-//     let  orderlist=window.sessionStorage.getItem("orderList");
-//     this.pname=orderlist.pname
 
       },
       inputgo() {
-//        let cont = {idCard: this.idcard, name: this.pname, pwd: this.secr, phone: this.telp, grade: 1};
-//        console.log(cont)
-//        let url="/xndt/svp/v1/userreg"
-//        cont = {cont: JSON.stringify(cont)};
         console.log(this.idcard,this.telp)
         //判断手机号码是否为11位有效手机号码
         let telphone =/^1[34578]\d{9}$/
