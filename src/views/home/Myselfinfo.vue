@@ -71,24 +71,29 @@
     </div>
     <div class="parttop  padding-container-lr">
 
-      <div class="particulars ">
+        <!--<div class="particulars ">-->
+          <!--<span>-->
+             <!--<i class="OAIndexIcon icon-shijian"></i>我的预约-->
+          <!--</span>-->
+          <!--<em class="OAIndexIcon icon-next"></em>-->
+        <!--</div>-->
+      <router-link to="/setting/paycost">
+        <div class="particulars">
+          <span>
+             <i class="OAIndexIcon icon-qianbao"></i>公共缴费
+          </span>
+          <em class="OAIndexIcon icon-next"></em>
+        </div>
+      </router-link>
+      <router-link to="/setting/consulting">
+        <div class="particulars company setting">
         <span>
-           <i class="OAIndexIcon icon-shijian"></i>我的预约
+           <i class="OAIndexIcon icon-tousu"></i>我的咨询
         </span>
-        <em class="OAIndexIcon icon-next"></em>
-      </div>
-      <div class="particulars ">
-        <span>
-           <i class="OAIndexIcon icon-qianbao"></i>缴费记录
-        </span>
-        <em class="OAIndexIcon icon-next"></em>
-      </div>
-      <div class="particulars company setting">
-        <span>
-           <i class="OAIndexIcon icon-tousu"></i>我的投诉
-        </span>
-        <em class="OAIndexIcon icon-next"></em>
-      </div>
+          <em class="OAIndexIcon icon-next"></em>
+        </div>
+      </router-link>
+
     </div>
     <div class="parttop padding-container-lr">
       <div class="particulars " @click="authentication">
@@ -97,18 +102,18 @@
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
-      <div class="particulars " @click="authenticationTwo">
-        <span>
-           <i class="OAIndexIcon icon-shimingrenzheng"></i>二次认证
-        </span>
-        <em class="OAIndexIcon icon-next"></em>
-      </div>
-      <div class="particulars">
-        <span>
-           <i class="OAIndexIcon icon-bangzhu"></i>帮助与反馈
-        </span>
-        <em class="OAIndexIcon icon-next"></em>
-      </div>
+      <!--<div class="particulars " @click="authenticationTwo">-->
+        <!--<span>-->
+           <!--<i class="OAIndexIcon icon-shimingrenzheng"></i>二次认证-->
+        <!--</span>-->
+        <!--<em class="OAIndexIcon icon-next"></em>-->
+      <!--</div>-->
+      <!--<div class="particulars">-->
+        <!--<span>-->
+           <!--<i class="OAIndexIcon icon-bangzhu"></i>帮助与反馈-->
+        <!--</span>-->
+        <!--<em class="OAIndexIcon icon-next"></em>-->
+      <!--</div>-->
       <router-link to="/setting/setting">
         <div class="particulars company setting">
         <span>
@@ -256,7 +261,7 @@
         display: inline-block;
         width: 0.1rem;
         height: 0.17rem;
-        font-size: 0.17rem;
+        font-size: 0.34rem;
         /*vertical-align: middle;*/
       }
       h3 {

@@ -3,7 +3,8 @@
     <div class="range"  v-for="item in datainfoto"  >
       <h6>{{item.name}}</h6>
       <div class="allbtn" v-for="(item1,index) in datainfolist" :key="index" v-if="item.channelId==21">
-        <input type="button" v-model="item1.name" class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)">
+        <!--<input type="button" v-model="item1.name" class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)">-->
+        <a href="javascript:void(0)"class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)" >{{item1.name}}</a>
       </div>
     </div>
     <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal"  pop-transition="popup-fade">
@@ -73,10 +74,12 @@
     .allbtn {
       text-align: center;
       .btn {
+        display: inline-block;
         border: 0;
         outline: 0;
         border-radius: 0.1rem;
         height: 1.18rem;
+        line-height: 1.18rem;
         border: 1px solid #cecece;
         background-color: #fff;
         margin-bottom: 0.24rem;
