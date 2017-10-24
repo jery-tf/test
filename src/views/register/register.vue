@@ -44,12 +44,14 @@
         }
       },
       ablerescmp() {
-        if (this.value == false) {
-          Toast("请同意用户协议再进行注册");
-          return
-        } else {
-          this.$router.push("/register/registerforcmp")
-        }
+//        if (this.value == false) {
+//          Toast("请同意用户协议再进行注册");
+//          return
+//        } else {
+//          this.$router.push("/register/registerforcmp")
+//        }
+        alert('功能暂未开放，敬请期待')
+        return
       }
     }
   }

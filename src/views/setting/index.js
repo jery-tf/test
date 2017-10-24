@@ -8,5 +8,7 @@ export default {
   ForgetPwd: resolve => require(['./forgetpwd.vue'], resolve),//忘记密码找回密码
   ForgetPwdNum: resolve => require(['./forgetpwdnum.vue'], resolve),//忘记密码手机发送验证码
   SettingPwd: resolve => require(['./settingpwd.vue'], resolve),//忘记密码重新设置
-  PushSetting: resolve => require(['./pushsetting.vue'], resolve),//推送设置
+  RegardTo: resolve => require(['./regardto.vue'], resolve),//关于设置
+  PayCost: resolve => require(['./paycost.vue'], resolve),//公共缴费
+  Consulting: resolve => require(['./consulting.vue'], resolve),//我的咨询
 }

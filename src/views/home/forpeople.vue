@@ -72,7 +72,7 @@
         //左侧列表发生变化  右侧组件变化成不同组件
         this.selectedId = channelId;
         console.log(channelId)
-        if (this.selectedId == channelId) {
+        if (this.selectedId == 14) {
           Api.getnewsApi.getnews(
             {
               content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
@@ -107,7 +107,7 @@
           })
         }
         else {
-          Toast("没有内容")
+          alert("没有内容")
         }
       }
     }

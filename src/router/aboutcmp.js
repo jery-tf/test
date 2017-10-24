@@ -8,7 +8,7 @@ export default [
     name: 'aboutcmp',
     component: views.AboutCmp.aboutcmp,
     meta:{
-      title:'相关企业授权详情页'
+      title:'授权页'
     },
   },
  {

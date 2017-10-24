@@ -8,7 +8,7 @@
       <div v-for="(item,index) in dataList" :key="index"
            :class="item.channelId==selectedId?'li active':'li fff'"
            @click="liClickFun(item.channelId)">
-        <i :class="`OAIndexIcon ${item.icon}`"></i>
+        <i class="OAIndexIcon icon-ertongshouyang"></i>
         <span>{{item.name}}</span>
       </div>
 
@@ -51,6 +51,10 @@
       width: 1.66rem;
       overflow-y: auto;
       height: 100%;
+      position: relative;
+      top:0;
+      bottom: 0;
+      background-color: #fff;
       .li {
         display: flex;
         align-items: center;

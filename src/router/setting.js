@@ -44,7 +44,7 @@ export default [
     name: 'resetsec',
     component: views.Setting.Resetsec,
     meta: {
-      title: '重置手机密码'
+      title: '重置密码'
     },
   },
   {
@@ -80,11 +80,27 @@ export default [
     },
   },
   {
-    path: '/setting/pushsetting',
-    name: 'pushsetting',
-    component: views.Setting.PushSetting,
+    path: '/setting/regardto',
+    name: 'regardto',
+    component: views.Setting.RegardTo,
     meta: {
-      title: '推送设置'
+      title: '关于'
+    },
+  },
+  {
+    path: '/setting/paycost',
+    name: 'paycost',
+    component: views.Setting.PayCost,
+    meta: {
+      title: '公共缴费'
+    },
+  },
+  {
+    path: '/setting/consulting',
+    name: 'consulting',
+    component: views.Setting.Consulting,
+    meta: {
+      title: '公共缴费'
     },
   },
 ]
