@@ -17,10 +17,12 @@
             <p>资料空间</p>
           </div>
         </router-link>
-        <div class="mycollect">
-          <span class="OAIndexIcon icon-shoucang"></span>
-          <p>我的收藏</p>
-        </div>
+        <router-link to="/collection">
+          <div class="mycollect">
+            <span class="OAIndexIcon icon-shoucang"></span>
+            <p>我的收藏</p>
+          </div>
+        </router-link>
       </div>
     </div>
     <div class="officework padding-container-lr" @click="$router.push({path:'/me/myDo'})">

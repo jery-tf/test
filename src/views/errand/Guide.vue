@@ -126,6 +126,8 @@
     created(){
       this.getErrandDetails(this.$route.params.id);
 
+      //获取收藏状态
+      this.isCollectionFun();
 
       this.getDictionaries();
       this.getMaterialList();
@@ -186,6 +188,28 @@
       //修改收藏状态
       updataIsCollection(state){
         this.isCollection = state;
+      },
+      //判断是否已经收藏
+      isCollectionFun(){
+        let userInfo = Util.user.getUserAllInfo();
+        let params = {certificate_no: userInfo.certificateNum};
+        if(userInfo){
+          Api.collectionApi.getMatterCollection(params).then(res=>{
+            console.log('收藏',res);
+            if(res.code === '200'){
+                if(res.TotalSize){
+                  for(let data of res.list){
+                    console.log('res.list',data)
+                     if(data.business_id == this.$route.params.id) {
+                         console.log('已经收藏')
+                         this.isCollection = true;
+                         break
+                     }
+                  }
+                }
+            }
+          })
+        }
       }
     },
     computed: {
