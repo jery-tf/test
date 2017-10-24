@@ -51,7 +51,9 @@
         this.isShowPassword = !this.isShowPassword;
       },
       toNextPage(){
-        this.$router.replace({name:this.nextPath})
+//        let params = Util.user.getRouterUrl();
+        console.log('this.nextPath',this.nextPath);
+        this.$router.replace({path:'/'+this.nextPath})
       },
       //点击完成操作
       submitLogin(){
@@ -87,7 +89,14 @@
     },
     computed:{
       nextPath(){
+        console.log('this.$route.params.url',this.$route.params.url);
+        if(this.$route.params.url.indexOf('-')===-1){
           return this.$route.params.url||'home';
+        }else{
+          let arr = this.$route.params.url.split('-');
+          return arr.join('/');
+        }
+
       }
     }
   }

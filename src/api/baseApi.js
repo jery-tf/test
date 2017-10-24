@@ -98,7 +98,7 @@ export const axiosPostToken = (url,data,config)=>$axios.post(url,data,assignToke
  * @param url
  * @param [loading]
  */
-export const axiosDeleteToken = (url,config)=>$axios.post(url,assignTokenHeaders(config));
+export const axiosDeleteToken = (url,config)=>$axios.delete(url,assignTokenHeaders(config));
 
 /***
  * 底层put 方法

@@ -4,21 +4,21 @@
 
 <template>
   <div class="h100 doubleListView">
-    <div class="contentTop fff border-bottom padding-container-lr">
-      <p><i class="OAIndexIcon icon-llmainpageback topIcon"></i></p>
-      <div class="topTab">
-        <p v-for="(item,index) in topSelect" :class="item.isCurrent?'current':''"
-           @click="topTabClick(item.id)">
-          {{item.name}}
-        </p>
-      </div>
-      <p><i class="OAIndexIcon icon-sousuo_sousuo topIcon"></i></p>
-    </div>
-
-    <div class="box-margin-top">
+    <!--<div class="contentTop fff border-bottom padding-container-lr">-->
+      <!--<p><i class="OAIndexIcon icon-llmainpageback topIcon"></i></p>-->
+      <!--<div class="topTab">-->
+        <!--<p v-for="(item,index) in topSelect" :class="item.isCurrent?'current':''"-->
+           <!--@click="topTabClick(item.id)">-->
+          <!--{{item.name}}-->
+        <!--</p>-->
+      <!--</div>-->
+      <!--<p><i class="OAIndexIcon icon-sousuo_sousuo topIcon"></i></p>-->
+    <!--</div>-->
+    <div>
+    <!--<div class="box-margin-top">-->
       <div v-if="topSelect[0].isCurrent">
         <template v-for="(item,index) in collectListErrand">
-          <div class="border-bottom">
+          <div class="border-bottom marTop">
             <CellSwipeErrand :rightFun="testFun" :data="item"></CellSwipeErrand>
           </div>
         </template>
@@ -42,6 +42,7 @@
   import CellSwipeErrand from 'components/public/CellSwipeErrand.vue'
   import Api from '../../api'
   import Util from '../../util'
+  import {Toast} from 'mint-ui'
   export default {
     name: 'collection',
     components: {CellSwipe,CellSwipeErrand},
@@ -112,6 +113,19 @@
       },
       testFun(id){
         console.log('删除的id--->',id);
+        let userInfo = Util.user.getUserAllInfo();
+        let params = {
+          apply_id: userInfo.certificateNum,
+          apply_type: 1,
+          collect_type: 1,
+          business_id: id
+        };
+        Api.collectionApi.deleteCollection(params).then(res => {
+          if (res.code == '200') {
+            Toast(res.info);
+            this.getMatterCollection();
+          }
+        });
       }
     }
 
@@ -138,8 +152,15 @@
     left: 0;
     right: 0;
     bottom: 0;
+    overflow-y: auto;
     .contentTop {
       height: .96rem;
+    }
+    .marTop{
+      margin-top: .23rem;
+    }
+    .marTop:first-child{
+      margin-top: 0;
     }
   }
 
