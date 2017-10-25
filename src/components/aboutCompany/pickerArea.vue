@@ -220,7 +220,6 @@
         this.showCity = false;
         this.showDistrict = false;
         this.showStreet=true;
-
       }
     },
     watch: {
