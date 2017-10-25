@@ -11,22 +11,22 @@
           <i class="icon-guanbi1 OAIndexIcon" @click="closeAdd()"></i>
         </h4>
       </section>
-      <div>
-        {{pickermore.name}}
-      </div>
       <section></section>
       <section class="title" :province1="this.Province">
         <!--<div class="area" @click="provinceSelected()">{{City?City:'请选择'}}</div>-->
         <div class="area" @click="provinceSelected()" :class="Province?'':'active'">{{Province ? Province : '请选择'}}
         </div>
-        <div class="area" @click="citySelected()" :class="City?'':'active'">{{City ? City : '请选择'}}</div>
+        <div class="area" @click="citySelected()" :class="City?'':'active'"  v-show="Province">{{City ? City : '请选择'}}</div>
         <div class="area" @click="districtSelected()" :class="District?'':'active'" v-show="City">
           {{District ? District : '请选择'}}
         </div>
+        <div class="area" @click="streetSelected()" :class="Street?'':'active'" v-show="District">
+          {{Street ? Street : '请选择'}}
+        </div>
       </section>
       <ul>
-        <li class="addList" v-for="(v,k) in pickermore" @click="getProvinceId(v.id, v.name, k)" v-show="showProvince"
-            :class="v.selected ? 'active' : ''">{{v.name}}
+        <li class="addList" @click="getProvinceId(pickermore.id, pickermore.name)" v-show="showProvince"
+            :class="pickermore.selected ? 'active' : ''">{{pickermore.name}}
         </li>
         <li class="addList" v-for="(v,k) in showCityList" @click="getCityId(v.id, v.name, k)" v-show="showCity"
             :class="v.selected ? 'active' : ''">{{v.name}}
@@ -34,12 +34,19 @@
         <li class="addList" v-for="(v,k) in showDistrictList" @click="getDistrictId(v.id, v.name, k)"
             v-show="showDistrict" :class="v.selected ? 'active' : ''">{{v.name}}
         </li>
+        <li class="addList" v-for="(v,k) in showStreetList" @click="getStreetId(v.id, v.name, k)"
+            v-show="showStreet" :class="v.selected ? 'active' : ''">{{v.name}}
+        </li>
       </ul>
     </section>
   </section>
 </template>
 
 <script>
+  import Api from '../../api'
+  import Util from '../../util'
+  import axios from 'axios'
+  import qs from "qs"
   export default {
     name: 'myAddress',
     props: ['invator','pickermore'],
@@ -49,19 +56,23 @@
 //        showChose: true,
         showProvince: true,
         showCity: false,
+        showStreet:false,
         showDistrict: false,
         showCityList: false,
         showDistrictList: false,
+        showStreetList:false,
         province: 5,
         city: 3,
         district: 57,
+        street:1,
         GetProvinceId: 2,
         District: false,
         Province: false,
         City: false,
+        Street:false,
         // v-for循环判断是否为当前
         selected: false,
-        info: []
+        info: [],
       }
     },
     methods: {
@@ -90,9 +101,19 @@
         this.showCity = true;
         this.showDistrict = false;
         this.showCityList = this._filter(this.info, 'city', this.province);
-        // 点击选择当前
-        this.info.map(a => a.selected = false);
-        this.info[index].selected = true;
+//         点击选择当前
+        this.showCityList.map(a => a.selected = false);
+        this.showCityList.selected = true;
+         this.nameid=this.province
+//        console.log(this.nameid)
+        Api.pickerAreaApi.pickerAreas(this.nameid).then(res=>{
+         this.showCityList=res
+//          let arr=[]
+//          for(let data of res){
+//            arr.push(data)
+//          }
+//          console.log(arr)
+        })
       },
       provinceSelected: function () {
         // 清除市级和区级列表
@@ -105,6 +126,7 @@
         this.showProvince = true;
         this.showCity = false;
         this.showDistrict = false;
+        this.showStreet=false;
       },
       getCityId: function (code, input, index) {
         this.city = code;
@@ -112,30 +134,93 @@
         this.showProvince = false;
         this.showCity = false;
         this.showDistrict = true;
+        this.showStreet=false;
         this.showDistrictList = this._filter(this.showCityList, 'district', this.city);
         // 选择当前添加active
         this.showCityList.map(a => a.selected = false);
         this.showCityList[index].selected = true;
+        this.nameid=this.city;
+       if(this.nameid==4){
+         this.showChose = false;
+         this.showCityList='';
+         this.$emit('increment', this.Province, this.City);
+         this.City=false
+         return
+       }
+        Api.pickerAreaApi.pickerAreas(this.nameid).then(res=>{
+          this.showDistrictList=res
+        })
       },
       citySelected: function () {
-        this.showProvince = false;
         this.showCity = true;
         this.showDistrict = false;
+        this.showStreet=false;
+        this.City=false;
       },
       getDistrictId: function (code, input, index) {
         this.district = code;
         this.District = input;
+        this.showProvince = false;
+        this.showCity = false;
+        this.showDistrict = false;
+        this.showStreet=true;
+        this.showStreetList = this._filter(this.showDistrict, 'street', this.district);
         // 选择当前添加active
         this.showDistrictList.map(a => a.selected = false);
         this.showDistrictList[index].selected = true;
-        // 选取市区选项之后关闭弹层
-        this.showChose = false;
-        this.$emit('increment', this.Province, this.City, this.District);
+        this.nameid=this.district;
+        Api.pickerAreaApi.pickerAreas(this.nameid).then(res=>{
+          let arr=['5','3da984d332d64eac801706b2b60cf90a','7100f34bba254518885c225022c83a84','fb0b69f8473748ad9512b2081839a13d',
+            '8042e70c013d428b9456d394b91d7d37','1cd83e5c26c449f89cd687f2ffe11cc5','e6796767f9d94683a19ee64d45255f42','34c330204fac4f649df5a2f02681462e',
+            'e78060d4635d4128892f31c7b6d2ee4c','f420382f76c948809f409c905ae3771a','4b5c1ffb848041739efe4d00d2fb9f34','85db8269da254cf99627389702d43e05',
+            '36d351f50ad8457eb180dfc3d50f3c1f','2328dd64349e4cad8ec5635f28926c8a']
+          this.showStreetList=res
+//          console.log(this.district+'')
+         for(let i=0;i<arr.length;i++){
+           if(arr.indexOf( (this.district+''))!=-1){
+             this.showChose = false;
+             this.$emit('increment', this.Province, this.City, this.District);
+             this.showStreetList=true
+             return
+           }
+         }
+          if(this.showStreetList==''){
+            this.showChose = false;
+            this.$emit('increment', this.Province, this.City, this.District,'');
+          }
+        })
+
       },
       districtSelected: function () {
         this.showProvince = false;
         this.showCity = false;
         this.showDistrict = true;
+        this.showStreet=false;
+        this.Street=false;
+        this.District=false
+      },
+      getStreetId:function(code, input, index){
+        this.street = code;
+        this.Street = input;
+        this.showStreetList.map(a => a.selected = false);
+        this.showStreetList[index].selected = true;
+//        this.showStreetList = this._filter(this.showStreet, 'street', this.street);
+        this.nameid= this.street
+        Api.pickerAreaApi.pickerAreas(this.nameid).then(res=>{
+          this.showStreetList=res
+        })
+        // 选取镇级选项之后关闭弹层
+        this.showChose = false;
+        this.$emit('increment', this.Province, this.City, this.District,this.Street);
+//        this.showStreetList=true;
+//        this.showStreet=true
+      },
+      streetSelected:function () {
+        this.showProvince = false;
+        this.showCity = false;
+        this.showDistrict = false;
+        this.showStreet=true;
+
       }
     },
     watch: {
@@ -149,7 +234,6 @@
     ,
   }
 </script>
-
 <style scoped lang="less" rel="stylesheet/less">
   .myAddress {
     width: 100%;
@@ -198,9 +282,9 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 0;
+    bottom:0;
     left: 0;
-    z-index: 120;
+    background-color: blue;
     background: rgba(0, 0, 0, 0.5);
     height: 9rem;
   }

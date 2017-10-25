@@ -9,6 +9,7 @@
       <mt-field label="手机号码" class="ipt" v-model="phone" ></mt-field>
       <div class="pname" @click="selected">
         行政区域
+        {{Province}}-{{City}}-{{District}}-{{Street}}
         <span class="OAIndexIcon icon-next"></span>
       </div>
       <div class="pname">
@@ -56,6 +57,7 @@
               Province: null,
               City:null,
               District:null,
+              Street:null,
               colorRed:false,
               isDefault:false,
               pname:'',
@@ -64,8 +66,8 @@
             }
         },
         created() {
-//          this.pname = JSON.parse(sessionStorage.getItem('userInfo')).name
-//          this.phone = JSON.parse(sessionStorage.getItem('userInfo')).phone
+          this.pname = JSON.parse(sessionStorage.getItem('userInfo')).name
+          this.phone = JSON.parse(sessionStorage.getItem('userInfo')).phone
           console.log(this.pname)
           console.log(this.phone)
         },
@@ -74,14 +76,15 @@
             this.showChose = !this.showChose
             Api.pickerAreaApi.pickerAreaf().then(res=>{
               this.list=res
-              console.log(this.list)
+//              console.log(this.list)
             })
           },
           //省市区三级联动数据
-          listenToMyBoy(Province, City, District) {
-//            this.addlist.province = Province,
-//              this.addlist.city = City,
-//              this.addlist.county = District
+          listenToMyBoy(Province, City, District,Street) {
+            this.Province = Province,
+              this.City = City,
+              this.District = District
+            this.Street = Street
           },
         }
 
