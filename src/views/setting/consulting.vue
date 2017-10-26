@@ -66,8 +66,8 @@
             }
         },
         created() {
-          this.pname = JSON.parse(sessionStorage.getItem('userInfo')).name
-          this.phone = JSON.parse(sessionStorage.getItem('userInfo')).phone
+          this.pname = JSON.parse(localStorage.getItem('userInfo')).name
+          this.phone = JSON.parse(localStorage.getItem('userInfo')).phone
           console.log(this.pname)
           console.log(this.phone)
         },

@@ -37,7 +37,7 @@ export default {
       }
       let newphone =this.phone;
       console.log(newphone)
-      Util.other.setSessionStorage('newphone',newphone);
+      Util.other.setLocalStorage('newphone',newphone);
     }
   }
 }

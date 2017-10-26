@@ -39,11 +39,11 @@
     },
     methods: {
       getitems() {
-        const telphone = JSON.parse(sessionStorage.getItem('userInfo')).phone;
+        const telphone = JSON.parse(localStorage.getItem('userInfo')).phone;
         this.telphone = telphone
-        const username = JSON.parse(sessionStorage.getItem('userInfo')).name;
+        const username = JSON.parse(localStorage.getItem('userInfo')).name;
         this.username = username
-        const certificateNum = JSON.parse(sessionStorage.getItem('userInfo')).certificateNum;
+        const certificateNum = JSON.parse(localStorage.getItem('userInfo')).certificateNum;
         this.certificateNum = certificateNum;
         console.log(this.certificateNum)
       }

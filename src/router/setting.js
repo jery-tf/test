@@ -100,7 +100,7 @@ export default [
     name: 'consulting',
     component: views.Setting.Consulting,
     meta: {
-      title: '公共缴费'
+      title: '我的咨询'
     },
   },
 ]

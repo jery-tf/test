@@ -18,3 +18,5 @@ const reqParmsfor = (paramsfor)=>{
   return qs.join('/');
 };
 
+//修改手机号码
+export const changeNum = (userId,params,config)=>axiosPostToken(`/uop/v1/users/${userId}`,params,config);

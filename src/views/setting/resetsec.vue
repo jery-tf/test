@@ -68,7 +68,7 @@ export default {
         });
         return
       }
-      this.userId =JSON.parse(sessionStorage.getItem('userInfo')).userId;
+      this.userId =JSON.parse(localStorage.getItem('userInfo')).userId;
       let params={password:this.password1}
       let paramsfor={userpwd:this.userId,password:this.oldpwd}
       Api.checkPwdApi.searchPwd(paramsfor).then(res=>{
@@ -78,8 +78,7 @@ export default {
         }else if(res==true){
           Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
                Toast('修改密码成功，即将跳转到首页')
-            sessionStorage.removeItem("token")
-            sessionStorage.removeItem("userInfo")
+            Util.login.clearUserInfo();
             this.$router.push('/')
           })
         }
