@@ -21,7 +21,7 @@
     </router-link>
     <div class="foot padding-container">
       <div>
-        <i v-if="option.state=='1'" class="OAIndexIcon icon-wuliu"></i>
+        <i v-if="option.state=='1'" class="OAIndexIcon C2-wuliu"></i>
         <p v-if="option.state=='1'">{{option.logisticsNo || ''}}</p>
       </div>
       <p>

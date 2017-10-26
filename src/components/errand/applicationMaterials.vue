@@ -11,7 +11,7 @@
         <span style="margin-left: .2rem">{{source}}</span>
       </div>
     </div>
-    <i class="OAIndexIcon icon-yanjing1"></i>
+    <i class="OAIndexIcon C2-yanjing1"></i>
   </div>
 </template>
 

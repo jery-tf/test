@@ -5,23 +5,23 @@
 <template>
   <div class="consulting ">
       <div class="checked">
-        <i class="OAIndexIcon icon-shuifei"></i><br>
+        <i class="OAIndexIcon C2-shuifei"></i><br>
         <span>水费</span>
       </div>
     <div class="checked">
-      <i class="OAIndexIcon icon-dianfei"></i><br>
+      <i class="OAIndexIcon C2-dianfei"></i><br>
       <span>电费</span>
     </div>
     <div class="checked">
-      <i class="OAIndexIcon icon-dianhua"></i><br>
+      <i class="OAIndexIcon C2-dianhua"></i><br>
       <span>固话费</span>
     </div>
     <div class="checked">
-      <i class="OAIndexIcon icon-jiayouka"></i><br>
+      <i class="OAIndexIcon C2-jiayouka"></i><br>
       <span>油卡充值</span>
     </div>
     <div class="checked">
-      <i class="OAIndexIcon icon-qiche"></i><br>
+      <i class="OAIndexIcon C2-qiche"></i><br>
       <span>交通违法</span>
     </div>
 
@@ -55,16 +55,16 @@
         .OAIndexIcon{
           font-size: 0.61rem;
         }
-        .icon-shuifei{
+        .C2-shuifei{
           color: #fc992c;
         }
-        .icon-dianfei,.icon-qiche{
+        .C2-dianfei,.C2-qiche{
           color: #108ee9;
         }
-        .icon-dianhua{
+        .C2-dianhua{
           color: #f15a4a;
         }
-        .icon-jiayouka{
+        .C2-jiayouka{
           color: #29ab91;
         }
         span{

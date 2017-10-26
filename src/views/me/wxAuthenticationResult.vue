@@ -7,11 +7,11 @@
     <div class="padding-container fff">
       <div v-if="isError||isOk">
         <div class="icon" v-if="isError">
-          <i class="OAIndexIcon icon-guanbi"></i>
+          <i class="OAIndexIcon C2-guanbi"></i>
           <p>认证失败!</p>
         </div>
         <div class="icon" v-if="isOk">
-          <i class="OAIndexIcon icon-xuanzhong"></i>
+          <i class="OAIndexIcon C2-xuanzhong"></i>
           <p>认证成功!</p>
         </div>
       </div>
@@ -137,7 +137,7 @@
       font-size: 1.08rem;
       color: #f56262;
     }
-    i.icon-xuanzhong {
+    i.C2-xuanzhong {
       color: #4caf50;
     }
     p {

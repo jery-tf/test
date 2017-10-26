@@ -18,19 +18,19 @@
     </div>
     <mt-tabbar v-model="mySelected" class="_tabbar">
       <mt-tab-item id="bs" class="_tabItem">
-        <i class="OAIndexIcon icon-daibanshiyi tabbarIcon"></i>
+        <i class="OAIndexIcon C2-daibanshiyi tabbarIcon"></i>
         <p class="tabbarLabel">办事</p>
       </mt-tab-item>
       <mt-tab-item id="gk" class="_tabItem">
-        <i class="OAIndexIcon icon-zhengwugongkai tabbarIcon"></i>
+        <i class="OAIndexIcon C2-zhengwugongkai tabbarIcon"></i>
         <p class="tabbarLabel">公开</p>
       </mt-tab-item>
       <mt-tab-item id="bm" class="_tabItem">
-        <i class="OAIndexIcon icon-bianminfuwu tabbarIcon"></i>
+        <i class="OAIndexIcon C2-bianminfuwu tabbarIcon"></i>
         <p class="tabbarLabel">便民</p>
       </mt-tab-item>
       <mt-tab-item id="wd" class="_tabItem">
-        <i class="OAIndexIcon icon-touxiang-copy-copy tabbarIcon"></i>
+        <i class="OAIndexIcon C2-touxiang-copy-copy tabbarIcon"></i>
         <p class="tabbarLabel">我的</p>
       </mt-tab-item>
     </mt-tabbar>

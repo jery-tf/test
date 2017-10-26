@@ -13,11 +13,11 @@
       </p>
       <div>
         <p>
-          <i class="OAIndexIcon icon-gouxuan"></i>
+          <i class="OAIndexIcon C2-gouxuan"></i>
           <span class="font-small">承诺期限{{workDay}}工作日</span>
         </p>
         <p>
-          <i class="OAIndexIcon icon-gouxuan"></i>
+          <i class="OAIndexIcon C2-gouxuan"></i>
           <span class="font-small">最多跑现场{{workNo}}次</span>
         </p>
       </div>
@@ -51,12 +51,12 @@
     font-size: .28rem;
   }
 
-  .icon-charge {
+  .C2-charge {
     font-size: .25rem;
     margin-right: .15rem;
   }
 
-  .icon-gengduo11 {
+  .C2-gengduo11 {
     color: #999;
   }
 
@@ -82,7 +82,7 @@
     }
   }
 
-  .icon-gouxuan {
+  .C2-gouxuan {
     color: #29ab91;
     margin-left: .15rem;
   }

@@ -5,7 +5,7 @@
 <template>
   <div class="errandCellswipe">
     <mt-cell-swipe :right="rightArr">
-      <i class="OAIndexIcon icon-shezhi4"></i>
+      <i class="OAIndexIcon C2-shezhi4"></i>
       <slot>
         <GuideLi :data="this.data"></GuideLi>
       </slot>
@@ -46,7 +46,7 @@
     .mint-cell-title{
       flex: none;
     }
-    .icon-shezhi4{
+    .C2-shezhi4{
       display: none !important;
     }
     .mint-cell-value{

@@ -4,9 +4,9 @@
 
 import {hashCode} from './cache'
 
-const iconNames = ['icon-yonghu','icon-richengbiao','icon-orders','icon-yonghuzu','icon-shezhi',
-  'icon-shijian','icon-yonghuming','icon-gongwenbao','icon-youjian','icon-gongwenbao1','icon-qiyeyonghu',
-  'icon-bangongyongpin','icon-02xingzhengbangong'
+const iconNames = ['C2-yonghu','C2-richengbiao','C2-orders','C2-yonghuzu','C2-shezhi',
+  'C2-shijian','C2-yonghuming','C2-gongwenbao','C2-youjian','C2-gongwenbao1','C2-qiyeyonghu',
+  'C2-bangongyongpin','C2-02xingzhengbangong'
 ];
 
 export const getValueBySeed = (seed)=>{

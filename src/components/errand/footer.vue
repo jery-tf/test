@@ -7,16 +7,16 @@
     <div class="iconAll">
       <template v-if="isShowCollection">
         <div class="icon" v-if="!isCollection" @click.one="addCollectionClick">
-          <i class="OAIndexIcon icon-aixin1"></i>
+          <i class="OAIndexIcon C2-aixin1"></i>
           <span>收藏</span>
         </div>
         <div class="icon current" @click.one="deleteCollectionClick" v-else>
-          <i class="OAIndexIcon icon-aixin1"></i>
+          <i class="OAIndexIcon C2-aixin1"></i>
           <span>收藏</span>
         </div>
       </template>
       <div class="telPhone icon" @click="callPhone">
-        <i class="OAIndexIcon icon-dianhua1"></i>
+        <i class="OAIndexIcon C2-dianhua1"></i>
         <span>咨询</span>
       </div>
     </div>
@@ -146,7 +146,7 @@
     i {
       position: relative;
       font-size: .32rem;
-      margin-bottom: .1rem;
+      /*margin-bottom: .1rem;*/
     }
     div {
       display: flex;

@@ -11,7 +11,7 @@
     <div>
       <Field placeholder="登录密码" v-model="password" :disableClear="true"
              :type="isShowPassword?'text':'password'">
-        <i :class="`OAIndexIcon icon-yanjing1 ${isShowPassword?'passwordIcon':'textIcon'}`"
+        <i :class="`OAIndexIcon C2-yanjing1 ${isShowPassword?'passwordIcon':'textIcon'}`"
            @click="showPassword"></i>
       </Field>
     </div>

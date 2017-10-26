@@ -7,7 +7,7 @@
     <p class="twoLineFont font-middle">{{title}}</p>
     <div class="right">
       <span :class="`font-small ${fontContent._class}`">{{fontContent.content}}</span>
-      <i class="OAIndexIcon icon-fanhui4"></i>
+      <i class="OAIndexIcon C2-fanhui4"></i>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@
     .right{
       padding-left: .2rem;
     }
-    .icon-fanhui4 {
+    .C2-fanhui4 {
       font-size: .29rem;
       color:#ccc;
     }

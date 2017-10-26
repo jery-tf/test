@@ -1,14 +1,14 @@
 <template>
   <div id="tmpl" class="box-margin-top">
     <mt-field label="请输入原始密码" class="ipt" :type="ablesee?'text':'password'" v-model="oldpwd">
-      <span class="OAIndexIcon icon-yanjing1" @click="isshow()"></span>
+      <span class="OAIndexIcon C2-yanjing1" @click="isshow()"></span>
     </mt-field>
     <div class="sect">
       <mt-field label="请输入新密码" class="ipt" :type="ablesee1?'text':'password'" v-model="password1">
-        <span class="OAIndexIcon icon-yanjing1" @click="isshow1()"></span>
+        <span class="OAIndexIcon C2-yanjing1" @click="isshow1()"></span>
       </mt-field>
       <mt-field label="请再次输入新密码" class="ipt" :type="ablesee2?'text':'password'" v-model="password2">
-        <span class="OAIndexIcon icon-yanjing1" @click="isshow2()"></span>
+        <span class="OAIndexIcon C2-yanjing1" @click="isshow2()"></span>
       </mt-field>
       <div class="top52">
         <mint-button type="primary" size="large" @click.native="handleClick">保存</mint-button>
@@ -92,7 +92,7 @@ export default {
 </script>
 <style  lang='less'>
 #tmpl {
-  .icon-yanjing1 {
+  .C2-yanjing1 {
     display: block;
     width: 0.33rem;
     height: 0.24rem;

@@ -7,14 +7,14 @@
     <div class="checkpwd">
       <mt-field label="输入新密码" v-model="oldpwd" :disableClear="true"
                 :type="isShowPassword?'text':'password'">
-        <i :class="`OAIndexIcon icon-yanjing1 ${isShowPassword?'passwordIcon':'textIcon'}`"
+        <i :class="`OAIndexIcon C2-yanjing1 ${isShowPassword?'passwordIcon':'textIcon'}`"
            @click="showPassword"></i>
       </mt-field>
     </div>
     <div class="checkpwd">
       <mt-field label="确认新密码" v-model="newpwd" :disableClear="true"
                 :type="isShowPasswordtwo?'text':'password'">
-        <i :class="`OAIndexIcon icon-yanjing1 ${isShowPasswordtwo?'passwordIcon':'textIcon'}`"
+        <i :class="`OAIndexIcon C2-yanjing1 ${isShowPasswordtwo?'passwordIcon':'textIcon'}`"
            @click="showPassword1"></i>
       </mt-field>
     </div>

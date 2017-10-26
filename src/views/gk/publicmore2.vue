@@ -88,7 +88,7 @@
           color: #999;
           top: 0.45rem;
           right: 0.24rem;
-          .icon-fanhui4{
+          .C2-fanhui4{
             font-style: normal;
             font-size: 0.21rem;
             vertical-align: 5%;

@@ -1,6 +1,6 @@
 <template>
     <div class="tmpl">
-        <input type="text" class="ipt " placeholder="请输入搜索内容" v-model="getcont"><i class="OAIndexIcon icon-sousuo" v-show="isshow"></i>
+        <input type="text" class="ipt " placeholder="请输入搜索内容" v-model="getcont"><i class="OAIndexIcon C2-sousuo" v-show="isshow"></i>
         <div class="history padding-container-lr">
             历史搜索
         </div>
@@ -36,7 +36,7 @@ export default {
 input::-webkit-input-placeholder{
     color: #bbb;
 }
-.icon-sousuo{
+.C2-sousuo{
     position: absolute;
     top: 0.13rem;
     left: 2.4rem;

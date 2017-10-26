@@ -9,17 +9,17 @@
         <p>补正补齐</p>
         <div class="box-margin-top font21">
           <p>
-            <i class="OAIndexIcon icon-chuangkou"></i><span>3号窗口</span>
-            <i class="OAIndexIcon icon-icon21"></i><span>张三</span>
-            <i class="OAIndexIcon icon-shijian"></i><span>2017-9-23</span>
+            <i class="OAIndexIcon C2-chuangkou"></i><span>3号窗口</span>
+            <i class="OAIndexIcon C2-icon21"></i><span>张三</span>
+            <i class="OAIndexIcon C2-shijian"></i><span>2017-9-23</span>
           </p>
         </div>
       </div>
-      <p><i class="OAIndexIcon icon-fanhui2"></i></p>
+      <p><i class="OAIndexIcon C2-fanhui2"></i></p>
     </div>
 
     <p class="remind fff padding-container">
-      <i class="OAIndexIcon icon-guanyu1"></i>
+      <i class="OAIndexIcon C2-guanyu1"></i>
       <span>XXXX材料缺失,请于2017年12月12日之前进行重新提交</span>
     </p>
 
@@ -137,7 +137,7 @@
     .font21 {
       font-size: .21rem;
     }
-    .icon-fanhui2 {
+    .C2-fanhui2 {
       font-size: .5rem;
     }
   }

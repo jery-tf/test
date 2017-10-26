@@ -16,7 +16,7 @@
       </template>
     </div>
     <p class="add fff box-margin-top">
-      <i class="OAIndexIcon icon-xinjian" @click="fileUploadBtn"></i>
+      <i class="OAIndexIcon C2-xinjian" @click="fileUploadBtn"></i>
       <input id="fileUpInput" type="file" class="fileUp" @change="fileUploadFun">
     </p>
     <div class="padding-container">

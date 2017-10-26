@@ -4,7 +4,7 @@
             <div class="pubhead">
                 <h3>{{content.displayName}}</h3>
                 <span>查看更多
-                    <i class="OAIndexIcon icon-fanhui4"></i>
+                    <i class="OAIndexIcon C2-fanhui4"></i>
                 </span>
             </div>
             <ul class="pubcont" v-for="item1 in list1">
@@ -56,7 +56,7 @@ export default {
   right: 0;
 }
 
-.pubnews .pubhead .icon-fanhui4 {
+.pubnews .pubhead .C2-fanhui4 {
   font-style: normal;
   font-size: 0.21rem;
   vertical-align: 5%;

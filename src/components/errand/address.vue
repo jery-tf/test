@@ -9,7 +9,7 @@
       <mt-switch v-model="isShow"></mt-switch>
     </div>
     <div v-if="isShow" class="info box-margin-top" @click="selectAddress">
-      <i class="OAIndexIcon icon-dingwei"></i>
+      <i class="OAIndexIcon C2-dingwei"></i>
       <div class="box-margin-left font-middle flex1">
         <p class="color333">
           <span>{{userInfo}}</span>
@@ -17,7 +17,7 @@
         </p>
         <div class="color999 box-margin-top mall-warp">
           <p class="twoLineFont">{{option.address}}</p>
-          <i class="OAIndexIcon icon-fanhui4"></i>
+          <i class="OAIndexIcon C2-fanhui4"></i>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .icon-fanhui4 {
+  .C2-fanhui4 {
     font-size: .29rem;
     margin-left: .1rem;
     color: #ccc;
@@ -86,7 +86,7 @@
     color: #333;
   }
 
-  .icon-dingwei {
+  .C2-dingwei {
     font-size: .4rem;
   }
 

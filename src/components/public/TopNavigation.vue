@@ -4,11 +4,11 @@
 
 <template>
   <div class="mall-warp color">
-    <i class="OAIndexIcon icon-guanbi1 .icon-fanhui1" @click="returnBtn"></i>
+    <i class="OAIndexIcon C2-guanbi1 .C2-fanhui1" @click="returnBtn"></i>
     <p>{{title}}</p>
     <router-link class="mall-warp" :to="rightLink">
       <span class="font color">{{rightName}}</span>
-      <i class="OAIndexIcon icon-fanhui4 color"></i>
+      <i class="OAIndexIcon C2-fanhui4 color"></i>
     </router-link>
   </div>
 </template>

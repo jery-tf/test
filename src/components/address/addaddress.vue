@@ -10,14 +10,14 @@
         <em>所属区域</em>
         {{addlist.province}}-{{addlist.city}}-{{addlist.county}}
         <span class="ipt">
-                    <i class="OAIndexIcon icon-next common"></i>
+                    <i class="OAIndexIcon C2-next common"></i>
                 </span>
         <pickerCmp :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"></pickerCmp>
       </div>
       <mt-field label="详细地址" class="ipt" v-model="addlist.addressee" ></mt-field>
       <mt-field label="邮政编码" class="ipt" v-model="zipcode" placeholder="414400"></mt-field>
       <div class="addressorder"  :class="isDefault?'colorRed':''"  @click="_selecedAddFun" >
-        <span>设为默认地址</span><i class="OAIndexIcon icon-check-R"></i>
+        <span>设为默认地址</span><i class="OAIndexIcon C2-check-R"></i>
       </div>
 
       <div class="box-margin-top">

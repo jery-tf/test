@@ -9,12 +9,12 @@
       </div>
     </div>
     <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal"  pop-transition="popup-fade">
-     <h3> <i class="icon-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
+     <h3> <i class="C2-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
       <ul v-for="(item1,index) in datainfolist">
-        <li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">{{item1.name}}</a></li>
-        <!--<li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">种子生产地点检疫证明</a></li>-->
-        <!--<li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">委托种子生产合同复印件或自行组织种子生产的情况说明和证明材料</a></li>-->
-        <!--<li><i class="OAIndexIcon icon-ZHicon-"></i><a href="#">种子生产、加工贮藏、检验专业技术人员的基本情况及其企业缴纳的社保证明复印件...</a></li>-->
+        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">{{item1.name}}</a></li>
+        <!--<li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">种子生产地点检疫证明</a></li>-->
+        <!--<li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">委托种子生产合同复印件或自行组织种子生产的情况说明和证明材料</a></li>-->
+        <!--<li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">种子生产、加工贮藏、检验专业技术人员的基本情况及其企业缴纳的社保证明复印件...</a></li>-->
       </ul>
     </mt-popup>
   </div>
@@ -107,7 +107,7 @@
      height: 0.92rem;
      line-height: 0.92rem ;
      border-bottom: 1px solid #d9d9d9;
-     .icon-guanbi1{
+     .C2-guanbi1{
        font-size: 0.32rem;
        position: absolute;
        top:0;
@@ -126,7 +126,7 @@
         color: #666;
         line-height:0.4rem;
         position: relative;
-        .icon-ZHicon-{
+        .C2-ZHicon-{
           font-size: 0.07rem;
           display: inline-block;
           position: absolute;

@@ -1,7 +1,7 @@
 <template>
   <div class="police padding-container-lr">
     <h3>在华外国人集体进行临时宗教活动地点的审批</h3>
-    <i class="icon-guanbi1 OAIndexIcon" @click="close()"></i>
+    <i class="C2-guanbi1 OAIndexIcon" @click="close()"></i>
     <!--<Approve :approve="item"  :key="index" v-for="(item,index) in list"></Approve>-->
     <div class="flow" v-for="(item,index) in list">
       <div class="title">{{item.title}}</div><div class="content"  v-html="item.content"></div>
@@ -45,7 +45,7 @@
       font-size: 0.32rem;
       color: #000;
     }
-    .icon-guanbi1{
+    .C2-guanbi1{
       position: absolute;
       top:0.3rem;
       right:0.6rem;

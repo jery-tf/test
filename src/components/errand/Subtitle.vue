@@ -6,7 +6,7 @@
   <div class="font-middle">
     <p class="title">{{title}}</p>
     <p class="content">
-      <i class="OAIndexIcon icon-ZHicon-"></i>
+      <i class="OAIndexIcon C2-ZHicon-"></i>
       <span>{{content}}</span>
     </p>
   </div>

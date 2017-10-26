@@ -20,11 +20,11 @@
   <div class="spanceclt">
     <span class="line"></span>
       <div class="myspace">
-        <span class=" OAIndexIcon icon-ziliao-copy"></span>
+        <span class=" OAIndexIcon C2-ziliao-copy"></span>
         <p>资料空间</p>
       </div>
     <div class="mycollect">
-      <span class="OAIndexIcon icon-suoyoubanjian"></span>
+      <span class="OAIndexIcon C2-suoyoubanjian"></span>
       <p>企业办件</p>
     </div>
   </div>
@@ -167,7 +167,7 @@
             float: left;
             width: 50%;
             text-align: center;
-            .icon-ziliao-copy {
+            .C2-ziliao-copy {
               font-size: 0.4rem;
               color: #666;
             }
@@ -180,7 +180,7 @@
             float: right;
             width: 50%;
             text-align: center;
-            .icon-suoyoubanjian {
+            .C2-suoyoubanjian {
               font-size: 0.4rem;
               color: #666;
             }

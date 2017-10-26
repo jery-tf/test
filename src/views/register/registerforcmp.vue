@@ -5,7 +5,7 @@
         <em>证件类型</em>
         <span class="ipt">
                     统一社会信用代码
-                    <i class="OAIndexIcon icon-next common"></i>
+                    <i class="OAIndexIcon C2-next common"></i>
                 </span>
       </div>
       <div class="ableipt common">
@@ -20,7 +20,7 @@
         <em>所属区域</em>
         {{Province}}-{{City}}-{{District}}-{{Street}}
         <span class="ipt">
-                    <i class="OAIndexIcon icon-next common"></i>
+                    <i class="OAIndexIcon C2-next common"></i>
                 </span>
       </div>
       <AbleInput content='详细地址'></AbleInput>
@@ -96,7 +96,7 @@
     border-top: 1px solid #d9d9d9;
     background-color: #fff;
     .ipt {
-      .icon-next {
+      .C2-next {
         float: right;
         color: #c9c9c9;
       }

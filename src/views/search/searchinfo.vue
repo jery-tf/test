@@ -3,24 +3,24 @@
     <div class="isfixed">
       <div class="ufix">
         <input type="text" class="ipt" v-model="ipt">
-        <i class=" OAIndexIcon icon-search"></i>
-        <span class=" OAIndexIcon icon-guanbi2" @click="dele()"></span>
+        <i class=" OAIndexIcon C2-search"></i>
+        <span class=" OAIndexIcon C2-guanbi2" @click="dele()"></span>
         <input type="button" value="确定" class="btn" @click="inquire">
       </div>
     </div>
     <!--<div class="searchmore padding-container-lr">-->
     <!--<p>非财政性资金<span>建设</span>的信息工程设计施工方案备案建设的信息工程设计</p>-->
     <!--<div class="appraise">-->
-    <!--<i class="OAIndexIcon icon-iconfontshoucang"></i>-->
-    <!--<i class="OAIndexIcon icon-iconfontshoucang"></i>-->
-    <!--<i class="OAIndexIcon icon-iconfontshoucang"></i>-->
-    <!--<i class="OAIndexIcon icon-iconfontshoucang"></i>-->
-    <!--<i class="OAIndexIcon icon-shoucang"></i>-->
-    <!--<span><i class="OAIndexIcon icon-gouxuan"></i>最多跑现场一次</span>-->
+    <!--<i class="OAIndexIcon C2-iconfontshoucang"></i>-->
+    <!--<i class="OAIndexIcon C2-iconfontshoucang"></i>-->
+    <!--<i class="OAIndexIcon C2-iconfontshoucang"></i>-->
+    <!--<i class="OAIndexIcon C2-iconfontshoucang"></i>-->
+    <!--<i class="OAIndexIcon C2-shoucang"></i>-->
+    <!--<span><i class="OAIndexIcon C2-gouxuan"></i>最多跑现场一次</span>-->
     <!--</div>-->
     <!--</div>-->
     <!--<div class="rightnow padding-container-lr">-->
-    <!--<span><em class="OAIndexIcon icon-jigou1"></em>省环保厅</span><button class="btn">在线办理</button>-->
+    <!--<span><em class="OAIndexIcon C2-jigou1"></em>省环保厅</span><button class="btn">在线办理</button>-->
     <!--</div>-->
     <template v-for="(item,index) in guideList">
       <GuideInp :data="item"></GuideInp>
@@ -101,14 +101,14 @@
         padding-left: 0.6rem;
         font-size: 0.24rem
       }
-      .icon-search {
+      .C2-search {
         position: absolute;
         top: 0.33rem;
         left: 0.4rem;
         font-size: 0.26rem;
         color: #c2c2c2
       }
-      .icon-guanbi2 {
+      .C2-guanbi2 {
         position: absolute;
         top: 0.33rem;
         right: 1.24rem;
@@ -135,18 +135,18 @@
           }
         }
         .appraise {
-          .icon-iconfontshoucang {
+          .C2-iconfontshoucang {
             color: #ff9900;
             font-size: 0.22rem;
           }
-          .icon-shoucang {
+          .C2-shoucang {
             color: #ff9900;
             font-size: 0.30rem;
           }
           span {
             font-size: 0.21rem;
             color: #999;
-            .icon-gouxuan {
+            .C2-gouxuan {
               margin-left: 0.33rem;
               margin-right: 0.05rem;
               color: #29ab91;
@@ -162,7 +162,7 @@
         span {
           font-size: 0.21rem;
           color: #999;
-          .icon-jigou1 {
+          .C2-jigou1 {
             font-size: 0.24rem;
             color: #21bbf7;
             padding-right: 0.2rem

@@ -5,14 +5,14 @@
 <template>
   <div class="h100 doubleListView">
     <!--<div class="contentTop fff border-bottom padding-container-lr">-->
-      <!--<p><i class="OAIndexIcon icon-llmainpageback topIcon"></i></p>-->
+      <!--<p><i class="OAIndexIcon C2-llmainpageback topIcon"></i></p>-->
       <!--<div class="topTab">-->
         <!--<p v-for="(item,index) in topSelect" :class="item.isCurrent?'current':''"-->
            <!--@click="topTabClick(item.id)">-->
           <!--{{item.name}}-->
         <!--</p>-->
       <!--</div>-->
-      <!--<p><i class="OAIndexIcon icon-sousuo_sousuo topIcon"></i></p>-->
+      <!--<p><i class="OAIndexIcon C2-sousuo_sousuo topIcon"></i></p>-->
     <!--</div>-->
     <div>
     <!--<div class="box-margin-top">-->
@@ -141,7 +141,7 @@
       font-size: .4rem;
       color: #999;
     }
-    .icon-llmainpageback {
+    .C2-llmainpageback {
       color: #fff;
     }
   }

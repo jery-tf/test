@@ -24,12 +24,12 @@
       return {
         id: 1,
         list: [
-          {classn:'icon-ertongshouyang',backgroundcolor:'#29ab91',title:'结婚生育',datatime:'2017-02-20-2017-06-15'},
-          {classn:'icon-jiaoyu',backgroundcolor:'#fc992c',title:'教育培训',datatime:'2017-02-20-2017-06-15'},
-          {classn:'icon-weibiaoti9',backgroundcolor:'#108ee9',title:'求职执业',datatime:'2017-02-20-2017-06-15'},
-          {classn:'icon-jiuyifuwu',backgroundcolor:'#f15a4a',title:'就医保健',datatime:'2017-02-20-2017-06-15'},
-          {classn:'icon-weibiaoti9',backgroundcolor:'#108ee9',title:'求职执业',datatime:'2017-02-20-2017-06-15'},
-          {classn:'icon-jiuyifuwu',backgroundcolor:'#f15a4a',title:'就医保健',datatime:'2017-02-20-2017-06-15'},
+          {classn:'C2-ertongshouyang',backgroundcolor:'#29ab91',title:'结婚生育',datatime:'2017-02-20-2017-06-15'},
+          {classn:'C2-jiaoyu',backgroundcolor:'#fc992c',title:'教育培训',datatime:'2017-02-20-2017-06-15'},
+          {classn:'C2-weibiaoti9',backgroundcolor:'#108ee9',title:'求职执业',datatime:'2017-02-20-2017-06-15'},
+          {classn:'C2-jiuyifuwu',backgroundcolor:'#f15a4a',title:'就医保健',datatime:'2017-02-20-2017-06-15'},
+          {classn:'C2-weibiaoti9',backgroundcolor:'#108ee9',title:'求职执业',datatime:'2017-02-20-2017-06-15'},
+          {classn:'C2-jiuyifuwu',backgroundcolor:'#f15a4a',title:'就医保健',datatime:'2017-02-20-2017-06-15'},
         ]
       }
     },

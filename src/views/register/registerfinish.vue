@@ -8,14 +8,14 @@
       <li class="peoselect">完成注册</li>
     </ul>
     <div class="regsuc">
-      <span class="OAIndexIcon icon-gouxuanjian"></span>
+      <span class="OAIndexIcon C2-gouxuanjian"></span>
       <h3>注册成功</h3>
       <p>您可以使用身份证号码和手机号码进行登录</p>
     </div>
     <p>为了更好的使用网上大厅的功能，建议您完成用户认证</p>
     <div class="certification">
       <div class="certifpcname">
-        <span class="OAIndexIcon icon-shimingrenzheng"></span>
+        <span class="OAIndexIcon C2-shimingrenzheng"></span>
       </div>
       <div class="pushc">
         <span class="certic">实人认证</span>
@@ -55,7 +55,7 @@
       text-align: center;
       margin-top: 0.8rem;
       margin-bottom: 1.14rem;
-      .icon-gouxuanjian {
+      .C2-gouxuanjian {
         font-size: 1.07rem;
         color: #29ccb7;
       }
@@ -97,7 +97,7 @@
         background-color: #3b9ac6;
         text-align: center;
         margin-right: 0.45rem;
-        .icon-shimingrenzheng {
+        .C2-shimingrenzheng {
           display: inline-block;
           font-size: 0.4rem;
           color: #fff;

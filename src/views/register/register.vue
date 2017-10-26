@@ -3,13 +3,13 @@
     <div class="regist">
       <div class="forpeo" @click="ableres()">
         <div class="peo">
-          <i class="OAIndexIcon  icon-qiyeyonghu"></i>
+          <i class="OAIndexIcon  C2-qiyeyonghu"></i>
         </div>
         个人注册
       </div>
       <div class="forcmp" @click="ablerescmp()">
         <div class="cmp">
-          <i class="OAIndexIcon icon-qiye"></i>
+          <i class="OAIndexIcon C2-qiye"></i>
         </div>
         企业注册
       </div>

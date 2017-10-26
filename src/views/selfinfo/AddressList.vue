@@ -10,13 +10,13 @@
                    :selecedAddFun="selecedAddFun"></AddressMang>
     </template>
     <p class="add fff box-margin-top" @click="addAddress">
-      <i class="OAIndexIcon icon-xinjian"></i>
+      <i class="OAIndexIcon C2-xinjian"></i>
     </p>
     <mt-popup
       v-model="popupVisible"
       popup-transition="popup-fade"
     position="bottom">
-      <h3> {{ordername}}<i class="icon-guanbi1 OAIndexIcon" @click="close()"></i></h3>
+      <h3> {{ordername}}<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
       <template>
         <AddAddress :addlist="list" :selecedAddFun="selecedAddFun"  v-on:increment="addaddress"></AddAddress>
       </template>
@@ -155,7 +155,7 @@
         height: 1rem;
         line-height:1rem;
         border-bottom: 1px solid #d9d9d9;
-        .icon-guanbi1 {
+        .C2-guanbi1 {
           position: absolute;
           top: -0.02rem;
           right: 0.24rem;

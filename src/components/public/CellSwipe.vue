@@ -5,7 +5,7 @@
 <template>
   <div class="myCellSwipe">
     <mt-cell-swipe :title="title" :right="rightArr" :label="label">
-      <i class="OAIndexIcon icon-shezhi4"></i>
+      <i class="OAIndexIcon C2-shezhi4"></i>
       <slot name="icon">
         <img v-if="type==1" class="icon" src="../../assets/img/fileIcon.png">
         <img v-if="type==2" class="icon" src="../../assets/img/pdfIcon.png">

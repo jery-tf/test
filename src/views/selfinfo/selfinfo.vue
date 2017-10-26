@@ -19,7 +19,7 @@
     <router-link v-bind="{to:'/selfinfo/AddressList/'+this.certificateNum}">
       <div class="pname padding-container-lr">
         地址管理
-        <span class="OAIndexIcon icon-next"></span>
+        <span class="OAIndexIcon C2-next"></span>
       </div>
     </router-link>
   </div>
@@ -68,7 +68,7 @@
         top: 0.5rem;
         right: 0.24rem;
       }
-      .icon-yonghu21 {
+      .C2-yonghu21 {
         font-size: 1.01rem;
         color: #ccc
       }
@@ -87,7 +87,7 @@
         font-size: 0.28rem;
         color: #c2c2c2;
       }
-      .icon-next {
+      .C2-next {
         color: #cbcbcb;
       }
     }

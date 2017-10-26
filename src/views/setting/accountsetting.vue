@@ -2,12 +2,12 @@
     <div>
         <router-link to="/setting/changenum">
             <div class="safety padding-container-lr firstline" >修改绑定手机
-                <span>{{telphone}}<i class=" OAIndexIcon icon-xiayiye"></i> </span>
+                <span>{{telphone}}<i class=" OAIndexIcon C2-xiayiye"></i> </span>
             </div>
         </router-link>
          <router-link to="/setting/resetsec">
             <div class="safety padding-container-lr " >登录密码
-                <span>已设置 <i class=" OAIndexIcon icon-xiayiye"></i> </span>
+                <span>已设置 <i class=" OAIndexIcon C2-xiayiye"></i> </span>
             </div>
          </router-link>
     </div>
@@ -48,7 +48,7 @@ export default {
         font-size: 0.28rem;
         font-family: "微软雅黑";
       }
-       .icon-xiayiye{
+       .C2-xiayiye{
             float: right;
             vertical-align: 2%;
             color: #ccc;

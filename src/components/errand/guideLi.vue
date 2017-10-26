@@ -9,14 +9,14 @@
       <div class="box-margin-top StarsScore">
         <StarsScore :score="data.score+1"></StarsScore>
         <p class="frequency">
-          <i class="OAIndexIcon icon-gouxuan"></i>
+          <i class="OAIndexIcon C2-gouxuan"></i>
           <span>最多跑现场 {{data.frequency}} 次</span>
         </p>
       </div>
     </div>
     <div class="mall-warp padding-container">
       <div class="jigou">
-        <i class="OAIndexIcon icon-jigou1"></i>
+        <i class="OAIndexIcon C2-jigou1"></i>
         <span>{{data.name}}</span>
       </div>
       <div :class="`btn ${btnActive}`">

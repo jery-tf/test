@@ -3,23 +3,23 @@
     <div class="myheader">
       <router-link to="/selfinfo">
         <div class="hport">
-          <h3 :class="islogin ? 'classa' : 'OAIndexIcon icon-yonghu21' "></h3>
+          <h3 :class="islogin ? 'classa' : 'OAIndexIcon C2-yonghu21' "></h3>
           <!--<img :src="'islogin'?'../../assets/img/hport.png':'../../assets/img/img1.png'">-->
           <!--<img src="../../assets/img/hport.png" alt="">-->
-          <span :class="text?'classc':'classd'">{{pname}}</span><i class="OAIndexIcon icon-fanhui2" v-if="isshow"></i>
+          <span :class="text?'classc':'classd'">{{pname}}</span><i class="OAIndexIcon C2-fanhui2" v-if="isshow"></i>
         </div>
       </router-link>
       <div class="spanceclt">
         <span class="line"></span>
         <router-link to="/persondata/personlist">
           <div class="myspace">
-            <span class=" OAIndexIcon icon-ziliao-copy"></span>
+            <span class=" OAIndexIcon C2-ziliao-copy"></span>
             <p>资料空间</p>
           </div>
         </router-link>
         <router-link to="/collection">
           <div class="mycollect">
-            <span class="OAIndexIcon icon-shoucang"></span>
+            <span class="OAIndexIcon C2-shoucang"></span>
             <p>我的收藏</p>
           </div>
         </router-link>
@@ -27,32 +27,32 @@
     </div>
     <div class="officework padding-container-lr" @click="$router.push({path:'/me/myDo'})">
       <span class="myoffice">我的办件</span>
-      <span class="checkall">查看全部<i class="OAIndexIcon icon-next"></i></span>
+      <span class="checkall">查看全部<i class="OAIndexIcon C2-next"></i></span>
     </div>
     <ul class="unoffice">
       <li>
-        <em class="icon-savetemp OAIndexIcon"></em>
+        <em class="C2-savetemp OAIndexIcon"></em>
         <p>暂存</p>
         <div class="num">12</div>
       </li>
       <li>
-        <em class="icon-daishouli1 OAIndexIcon"></em>
+        <em class="C2-daishouli1 OAIndexIcon"></em>
         <p>待受理</p>
         <div class="num">6</div>
       </li>
       <li>
-        <em class="icon-daishouli OAIndexIcon"></em>
+        <em class="C2-daishouli OAIndexIcon"></em>
         <p>待审核</p>
         <div class="num">1</div>
       </li>
       <li>
-        <em class="icon-yibanshixiang OAIndexIcon"></em>
+        <em class="C2-yibanshixiang OAIndexIcon"></em>
         <p>已办结</p>
         <div class="num">3</div>
       </li>
       <li>
         <span class="linetoo"></span>
-        <em class="icon-jiaofei OAIndexIcon"></em>
+        <em class="C2-jiaofei OAIndexIcon"></em>
         <p>待您处理</p>
         <div class="num">5</div>
       </li>
@@ -60,7 +60,7 @@
 
     <div class="padding-container-lr officework">
       <span class="myoffice">相关企业/单位(3)</span>
-      <span class="checkall">查看全部<i class="OAIndexIcon icon-next"></i></span>
+      <span class="checkall">查看全部<i class="OAIndexIcon C2-next"></i></span>
     </div>
     <div class="contentsall padding-container-lr" >
       <ul v-for="item in list">
@@ -75,24 +75,24 @@
 
         <!--<div class="particulars ">-->
           <!--<span>-->
-             <!--<i class="OAIndexIcon icon-shijian"></i>我的预约-->
+             <!--<i class="OAIndexIcon C2-shijian"></i>我的预约-->
           <!--</span>-->
-          <!--<em class="OAIndexIcon icon-next"></em>-->
+          <!--<em class="OAIndexIcon C2-next"></em>-->
         <!--</div>-->
       <router-link to="/setting/paycost">
         <div class="particulars">
           <span>
-             <i class="OAIndexIcon icon-qianbao"></i>公共缴费
+             <i class="OAIndexIcon C2-qianbao"></i>公共缴费
           </span>
-          <em class="OAIndexIcon icon-next"></em>
+          <em class="OAIndexIcon C2-next"></em>
         </div>
       </router-link>
       <router-link to="/setting/consulting">
         <div class="particulars company setting">
         <span>
-           <i class="OAIndexIcon icon-tousu"></i>我的咨询
+           <i class="OAIndexIcon C2-tousu"></i>我的咨询
         </span>
-          <em class="OAIndexIcon icon-next"></em>
+          <em class="OAIndexIcon C2-next"></em>
         </div>
       </router-link>
 
@@ -100,28 +100,28 @@
     <div class="parttop padding-container-lr">
       <div class="particulars " @click="authentication">
         <span>
-           <i class="OAIndexIcon icon-shimingrenzheng"></i>实人认证
+           <i class="OAIndexIcon C2-shimingrenzheng"></i>实人认证
         </span>
-        <em class="OAIndexIcon icon-next"></em>
+        <em class="OAIndexIcon C2-next"></em>
       </div>
       <div class="particulars " @click="authenticationTwo">
         <span>
-           <i class="OAIndexIcon icon-shimingrenzheng"></i>二次认证
+           <i class="OAIndexIcon C2-shimingrenzheng"></i>二次认证
         </span>
-        <em class="OAIndexIcon icon-next"></em>
+        <em class="OAIndexIcon C2-next"></em>
       </div>
       <!--<div class="particulars">-->
         <!--<span>-->
-           <!--<i class="OAIndexIcon icon-bangzhu"></i>帮助与反馈-->
+           <!--<i class="OAIndexIcon C2-bangzhu"></i>帮助与反馈-->
         <!--</span>-->
-        <!--<em class="OAIndexIcon icon-next"></em>-->
+        <!--<em class="OAIndexIcon C2-next"></em>-->
       <!--</div>-->
       <router-link to="/setting/setting">
         <div class="particulars company setting">
         <span>
-           <i class="OAIndexIcon icon-shezhi2"></i>设置
+           <i class="OAIndexIcon C2-shezhi2"></i>设置
         </span>
-          <em class="OAIndexIcon icon-next"></em>
+          <em class="OAIndexIcon C2-next"></em>
         </div>
       </router-link>
     </div>
@@ -258,7 +258,7 @@
       span{
         vertical-align: middle;
       }
-      .icon-fanhui2{
+      .C2-fanhui2{
         color:#333;
         display: inline-block;
         width: 0.1rem;
@@ -269,7 +269,7 @@
       h3 {
         margin-bottom: 0.14rem;
       }
-      .icon-yonghu21,.classa{
+      .C2-yonghu21,.classa{
         width: 1.01rem;
         height: 1.01rem;
         text-align: center;
@@ -312,7 +312,7 @@
         float: left;
         width: 50%;
         text-align: center;
-        .icon-ziliao-copy {
+        .C2-ziliao-copy {
           font-size: 0.4rem;
           color: #666;
         }
@@ -325,7 +325,7 @@
         float: right;
         width: 50%;
         text-align: center;
-        .icon-shoucang {
+        .C2-shoucang {
           font-size: 0.4rem;
           color: #666;
         }
@@ -352,7 +352,7 @@
       float: right;
       font-size: 0.24rem;
       color: #999;
-      .icon-next {
+      .C2-next {
         font-size: 0.29rem;
         vertical-align: -3%;
         margin-left: 0.26rem;
@@ -393,11 +393,11 @@
       p{
         margin-top: 0.2rem;
       }
-      .icon-savetemp, .icon-daishouli1, .icon-daishouli, .icon-yibanshixiang, .icon-jiaofei {
+      .C2-savetemp, .C2-daishouli1, .C2-daishouli, .C2-yibanshixiang, .C2-jiaofei {
         font-size: 0.4rem;
         color: #12b8f6;
       }
-      .icon-jiaofei {
+      .C2-jiaofei {
         font-size: 0.4rem;
         color: #fe6732
       }
@@ -438,29 +438,29 @@
     color: #333;
     border-bottom: 1px solid #d9d9d9;
     font-family: "微软雅黑";
-    .icon-shijian, .icon-qianbao, .icon-tousu, .icon-shimingrenzheng, .icon-bangzhu, .icon-shezhi2 {
+    .C2-shijian, .C2-qianbao, .C2-tousu, .C2-shimingrenzheng, .C2-bangzhu, .C2-shezhi2 {
       font-size: 0.41rem;
       color: #F48074;
       margin-right: 0.26rem;
     }
-    .icon-qianbao{
+    .C2-qianbao{
       color: #108EE9;
     }
-    .icon-tousu {
+    .C2-tousu {
       color: #50BAA5;
       font-size: 0.35rem
     }
-    .icon-shimingrenzheng {
+    .C2-shimingrenzheng {
       color: #FC992C;
       font-size: 0.30rem
     }
-    .icon-bangzhu {
+    .C2-bangzhu {
       color: #FC992C;
     }
-    .icon-shezhi2 {
+    .C2-shezhi2 {
       color: #108EE9;
     }
-    .icon-next {
+    .C2-next {
       float: right;
       font-size: 0.29rem;
       vertical-align: -3%;

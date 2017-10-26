@@ -17,22 +17,22 @@
     <div class="padding-container mall-warp addressMan" v-if="isManagement">
       <div class="letf">
         <p v-if="addressInfo.isDefault" class="colorRed" @click="_selecedAddFun">
-          <i class="OAIndexIcon icon-check-R check"></i>
+          <i class="OAIndexIcon C2-check-R check"></i>
           <span>默认地址</span>
         </p>
         <p v-else @click="_selecedAddFun">
-          <i class="OAIndexIcon icon-gouxuankuang check"></i>
+          <i class="OAIndexIcon C2-gouxuankuang check"></i>
           <span>设为默认</span>
         </p>
 
       </div>
       <div class="right">
         <p @click="_updatAddrFun">
-          <i class="OAIndexIcon icon-bianji check"></i>
+          <i class="OAIndexIcon C2-bianji check"></i>
           <span>编辑</span>
         </p>
         <p @click="_deleltAddrFun">
-          <i class="OAIndexIcon icon-lajixiang check"></i>
+          <i class="OAIndexIcon C2-lajixiang check"></i>
           <span>删除</span>
         </p>
       </div>
@@ -102,7 +102,7 @@
         margin-left: .15rem;
       }
     }
-    .icon-lajixiang{
+    .C2-lajixiang{
       font-size:.38rem;
       position: relative;
       bottom:2px;

@@ -2,7 +2,7 @@
   <div>
     <div class="warming">
       <p>
-        <i class="OAIndexIcon icon-zhuyi1"></i>为确保是你本人操作，请完成以下验证</p>
+        <i class="OAIndexIcon C2-zhuyi1"></i>为确保是你本人操作，请完成以下验证</p>
       <p class="checknum">我们已发送了校验码到你的手机:</p>
       <span>{{totelName}}</span>
     </div>
@@ -55,7 +55,7 @@ export default {
   padding-top: 0.55rem;
   font-size: 0.24rem;
   color: #999;
-  .icon-zhuyi1 {
+  .C2-zhuyi1 {
     font-size: 0.28rem;
     color: #12B7F5;
     margin-right: 0.1rem;

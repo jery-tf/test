@@ -8,7 +8,7 @@
     <section class="address">
       <section class="title addresst">
         <h4>企业地址
-        <i class="icon-guanbi1 OAIndexIcon" @click="closeAdd()"></i>
+        <i class="C2-guanbi1 OAIndexIcon" @click="closeAdd()"></i>
         </h4>
       </section>
       <section class="title" :province1="this.Province">
@@ -4609,7 +4609,7 @@
     border-bottom: 1px solid #d9d9d9;
     font-size: 0.38rem;
     position: relative;
-    .icon-guanbi1 {
+    .C2-guanbi1 {
       position: absolute;
       top: -0.02rem;
       right: 0.24rem;

@@ -12,7 +12,7 @@
         ></AddressManage>
       </template>
       <p class="add fff box-margin-top" @click="addAddress">
-        <i class="OAIndexIcon icon-xinjian"></i>
+        <i class="OAIndexIcon C2-xinjian"></i>
       </p>
     </div>
     <p @click="addressManFun" class="foot">{{addressManLable}}</p>

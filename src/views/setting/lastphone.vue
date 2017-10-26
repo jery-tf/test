@@ -65,7 +65,7 @@
     padding-top: 0.55rem;
     font-size: 0.24rem;
     color: #999;
-    .icon-zhuyi1 {
+    .C2-zhuyi1 {
       font-size: 0.28rem;
       color: #12B7F5;
       margin-right: 0.1rem;

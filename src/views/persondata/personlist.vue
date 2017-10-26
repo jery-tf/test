@@ -2,25 +2,25 @@
   <div>
     <router-link to="personlist/personinfo">
       <div class="information padding-container-lr">
-        <i class="OAIndexIcon icon-gerenxinxi"></i>个人信息
+        <i class="OAIndexIcon C2-gerenxinxi"></i>个人信息
         <span class="infornext">
-                    <em class="OAIndexIcon icon-next"></em>
+                    <em class="OAIndexIcon C2-next"></em>
                 </span>
       </div>
     </router-link>
     <router-link to="personlist/personcam">
       <div class="information padding-container-lr">
-        <i class="OAIndexIcon icon-wodezhengjianzhao"></i>证照
+        <i class="OAIndexIcon C2-wodezhengjianzhao"></i>证照
         <span class="infornext">
-                    2 <em class="OAIndexIcon icon-next"></em>
+                    2 <em class="OAIndexIcon C2-next"></em>
                 </span>
       </div>
     </router-link>
     <a href="#">
       <div class="information padding-container-lr">
-        <i class="OAIndexIcon icon-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming"></i>证明函
+        <i class="OAIndexIcon C2-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming"></i>证明函
         <span class="infornext">
-                   13 <em class="OAIndexIcon icon-next"></em>
+                   13 <em class="OAIndexIcon C2-next"></em>
                 </span>
       </div>
     </a>
@@ -44,18 +44,18 @@
     border-bottom: 1px solid #d9d9d9;
     vertical-align: middle;
     font-family: "微软雅黑";
-    .icon-gerenxinxi, .icon-wodezhengjianzhao, .icon-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming {
+    .C2-gerenxinxi, .C2-wodezhengjianzhao, .C2-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming {
       font-size: 0.5rem;
       color: #f9af12;
       margin-right: 0.25rem;
       vertical-align: middle;
     }
-    .icon-wodezhengjianzhao {
+    .C2-wodezhengjianzhao {
       font-size: 0.41rem;
       color: #f72e64;
       margin-right: 0.35rem;
     }
-    .icon-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming {
+    .C2-shenqingkaijuwaichujingyinghuodongshuishouguanlizhengming {
       font-size: 0.5rem;
       color: #18c5c0;
       margin-right: 0.25rem;
@@ -64,7 +64,7 @@
       float: right;
       font-size: 0.32rem;
       color: #ff3e3e;
-      .icon-next {
+      .C2-next {
         font-size: 0.3rem;
         color: #cbcbcb
       }

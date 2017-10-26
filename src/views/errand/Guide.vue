@@ -11,16 +11,16 @@
       <div class="mall-warp fff padding-container shoufei h88">
         <div>
           <p>
-            <i class="OAIndexIcon icon-charge red-color"></i>
+            <i class="OAIndexIcon C2-charge red-color"></i>
           </p>
           <span>收费标准:{{approve.chargeStandard}}元</span>
         </div>
-        <i class="OAIndexIcon icon-gengduo11 red-color"></i>
+        <i class="OAIndexIcon C2-gengduo11 red-color"></i>
       </div>
 
       <div class="box-margin-top fff padding-container dingwei h88">
         <p>
-          <i class="OAIndexIcon icon-dingwei"></i>
+          <i class="OAIndexIcon C2-dingwei"></i>
         </p>
         <p class="oneLineFont">{{approve.transactAddress}}</p>
       </div>
@@ -246,13 +246,13 @@
     overflow-y: auto;
   }
 
-  .icon-charge {
+  .C2-charge {
     font-size: .25rem;
     margin-right: .15rem;
     color: #f56262;
   }
 
-  .icon-gengduo11 {
+  .C2-gengduo11 {
     color: #999;
   }
 
@@ -273,7 +273,7 @@
   .dingwei {
     display: flex;
     align-items: center;
-    .icon-dingwei {
+    .C2-dingwei {
       font-size: .24rem;
       color: #fc992c;
     }

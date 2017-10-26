@@ -6,7 +6,7 @@
             <!--<router-link to="/publicmore">-->
               <span @click="getMore(item)">
               查看更多
-              <i class="OAIndexIcon icon-fanhui4"></i>
+              <i class="OAIndexIcon C2-fanhui4"></i>
             </span>
             <!--</router-link>-->
           </div>
@@ -196,7 +196,7 @@
         color: #999;
         top: 0.45rem;
         right: 0.24rem;
-        .icon-fanhui4{
+        .C2-fanhui4{
           font-style: normal;
           font-size: 0.21rem;
           vertical-align: 5%;

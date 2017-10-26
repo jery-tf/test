@@ -40,15 +40,15 @@
         leftDataList: [
           {
             id: 1,
-            icon: 'icon-ertongshouyang',
+            icon: 'C2-ertongshouyang',
             name: '婚育收养'
           },{
             id: 2,
-            icon: 'icon-ertongshouyang',
+            icon: 'C2-ertongshouyang',
             name: '教育培训'
           },{
             id: 3,
-            icon: 'icon-ertongshouyang',
+            icon: 'C2-ertongshouyang',
             name: '求职执业'
           },
         ],
