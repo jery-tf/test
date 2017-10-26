@@ -32,13 +32,13 @@ export const getCacheDataByKey=(key)=>{
 };
 
 //根据KEY设置缓存数据
-export const setCacheData = (key,value)=>{
+export const setCacheData = (key,data)=>{
   if(!key){
     console.warn('请检查参数 setCacheData');
     return
   }
   let cacheData = getCacheData();
   if(!cacheData) cacheData = {};
-  cacheData[key] = {code:hashCode(JSON.stringify(value)),value};
+  cacheData[key] = data;
   setLocalStorage('cacheData',cacheData);
 };

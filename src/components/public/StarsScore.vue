@@ -5,8 +5,8 @@
 <template>
   <div>
     <template v-for="i in 5">
-      <i v-if="score>=i" class="OAIndexIcon icon-shoucangshangpin stars"></i>
-      <i class="OAIndexIcon icon-shoucang2 stars" v-else></i>
+      <i v-if="score>=i" class="OAIndexIcon C2-shoucangshangpin stars"></i>
+      <i class="OAIndexIcon C2-shoucang2 stars" v-else></i>
     </template>
   </div>
 </template>

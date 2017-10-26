@@ -55,24 +55,61 @@
     methods: {
       //获取左侧列表
       getLeftList(id){
-        console.log('请求左侧',id);
+        console.log('请求左侧', id);
         let leftList = Util.cache.getCacheDataByKey(id);
-        if(leftList){ //是否有此缓存
-          this.initLeftData(leftList.value);
-        }else{
-          Api.otherApi.getDictionaries(id).then(res => {
-            if(res && res[id]){
-              this.initLeftData(res[id]);
-              Util.cache.setCacheData(id,res[id]);
-            }
-          })
+        let params = {
+          url: `/approveinterface/v1/dicttypes/dictdatas/${id}`,
+          type: 'GET',
+          hashCode:''
+        };
+        if(leftList && leftList.code){
+          params.hashCode = leftList.code;
         }
+        Api.cacheApi.getCacheData(params).then(res => {
+          //接口是否返回了数据
+          if(res.respData){
+            //取接口数据
+            let data = JSON.parse(res.respData);
+            this.initLeftData(data[id]);
+            Util.cache.setCacheData(id,{code:res.hashCode,value:data[id]});
+          }else{
+            //取缓存
+            let leftList = Util.cache.getCacheDataByKey(id);
+            this.initLeftData(leftList.value);
+          }
+        }).catch(err=>{
+          //请求出错  取缓存数据
+          let leftList = Util.cache.getCacheDataByKey(id);
+          if(leftList && leftList.value){
+            this.initLeftData(leftList.value);
+          }
+        });
+
+//        let leftList = Util.cache.getCacheDataByKey(id);
+//        if (leftList) { //是否有此缓存
+//          this.initLeftData(leftList.value);
+//        } else {
+//
+//          Api.cacheApi.getCacheData(params).then(res => {
+//            console.log('调用接口-->',res);
+//          })
+//          Api.otherApi.getDictionaries(id).then(res => {
+//            if(res && res[id]){
+//              this.initLeftData(res[id]);
+//              Util.cache.setCacheData(id,res[id]);
+//            }
+//          })
+//        }
       },
       //初始化左侧列表
       initLeftData(list){
         let arr = [];
         for (let item of list) {
-          arr.push({id: item.dictdataName, name: item.dictdataValue, icon: Util.icon.getValueBySeed(item.dictdataName)});
+          arr.push({
+            id: item.dictdataName,
+            name: item.dictdataValue,
+            icon: Util.icon.getValueBySeed(item.dictdataName)
+          });
 
           //列表中的默认值给 selectedId
           if (!this.selectedId && item.dictdataIsdefault) {
@@ -97,9 +134,9 @@
           filters: {
             groupOp: 'OR',
             rules: [
-              {field:this.catalog,op:"eq",data:id},
-              {field:this.catalog,op:"bw",data:id+","},
-              {field:this.catalog,op:"cn",data:","+id+","},
+              {field: this.catalog, op: "eq", data: id},
+              {field: this.catalog, op: "bw", data: id + ","},
+              {field: this.catalog, op: "cn", data: "," + id + ","},
               //todo 办事列表
               //{field:this.catalog,op:"ew",data:","+id} 该运算符有问题，暂不使用该条件
             ]
@@ -132,7 +169,7 @@
         // @todo 根据选择的ID 重新加载数据
       },
     },
-    computed:{
+    computed: {
       catalog(){
         const _catalog = {
           frfl: 'themeType',

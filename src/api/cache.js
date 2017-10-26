@@ -5,4 +5,4 @@
 import {axiosPost} from './baseApi'
 
 //获取缓存数据接口
-export const getCacheData = (url,params,config)=>axiosPost(url,params,config);
+export const getCacheData = (params,config)=>axiosPost('/apiDataCache/checkRequestData',params,config);
