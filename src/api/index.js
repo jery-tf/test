@@ -14,6 +14,7 @@ import * as collectionApi from './collection'
 import * as checkPwdApi from './checkPwd'
 import * as AddressApi from './address'
 import * as cacheApi from './cache'
+import * as pickerAreaApi from './pickerArea'
 export default { testApi, loginApi ,userApi ,realNameApi,registerApi,getnewsApi,errandApi,opacityApi,
-  otherApi,collectionApi,checkPwdApi,AddressApi,cacheApi}
+  otherApi,collectionApi,checkPwdApi,AddressApi,pickerAreaApi,cacheApi}
 

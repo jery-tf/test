@@ -12,9 +12,7 @@
       <!--<Btncommon msg="保存"></Btncommon>-->
    <!--</router-link>-->
     <div class="top52 box-margin-top">
-    <router-link to="">
       <mint-button type="primary" size="large" @click="successchange">保存</mint-button>
-    </router-link>
       </div>
   </div>
 </template>
@@ -31,7 +29,8 @@ export default {
  components:{'mint-button': Button},
   methods:{
     successchange(){
-      Toast("修改手机号码成功！")
+      Toast("修改手机号码成功,即将跳转到首页")
+      this.$router.push("/")
     }
   },
   computed:{

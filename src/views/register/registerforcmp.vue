@@ -18,11 +18,10 @@
       <AbleInput content='法人身份证号码'></AbleInput>
       <div class="regi padding-container-lr common" @click="selected">
         <em>所属区域</em>
-        {{Province}}-{{City}}-{{District}}
+        {{Province}}-{{City}}-{{District}}-{{Street}}
         <span class="ipt">
                     <i class="OAIndexIcon icon-next common"></i>
                 </span>
-        <pickerCmp :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"></pickerCmp>
       </div>
       <AbleInput content='详细地址'></AbleInput>
     </div>
@@ -35,13 +34,17 @@
     <AbleInput content='密码'></AbleInput>
     <AbleInput content='确认密码'></AbleInput>
     <Btncommon msg="提交"></Btncommon>
+    <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy" :pickermore="list"></pickerArea>
   </div>
 </template>
 <script>
   import Btncommon from 'components/btncommon/BtnCommon'
   import AbleInput from 'components/iptinput/ableinput'
-  import pickerCmp from 'components/aboutCompany/pickerCmp'
-
+  import pickerArea from 'components/aboutCompany/pickerArea'
+  import Api from '../../api'
+  import Util from '../../util'
+  import axios from 'axios'
+  import qs from "qs"
   export default {
     data() {
       return {
@@ -52,22 +55,28 @@
         Province: null,
         City:null,
         District:null,
+        Street:null,
+        list:[]
       }
     },
-    components: {Btncommon, AbleInput, pickerCmp},
+    components: {Btncommon, AbleInput, pickerArea},
     created() {
       this.listenToMyBoy()
     },
     methods: {
       selected() {
         this.showChose = !this.showChose
+        Api.pickerAreaApi.pickerAreaf().then(res=>{
+          this.list=res
+          console.log(this.list)
+        })
       },
-      //省市区三级联动数据
-      listenToMyBoy(Province, City, District) {
+//      省市区三级联动数据
+      listenToMyBoy(Province, City, District,Street) {
         this.Province = Province,
           this.City = City,
           this.District = District
-        console.log(this.City)
+        this.Street = Street
       }
     },
   }
