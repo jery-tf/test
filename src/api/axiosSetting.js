@@ -4,6 +4,7 @@
 import axios from 'axios';
 import proConfig from '../config';
 import MintUI from 'mint-ui';
+import Util from '../util'
 
 let AxiosIns = axios.create({
   baseURL: proConfig.apiUrl,
@@ -22,7 +23,6 @@ AxiosIns.interceptors.request.use(config => {
       config = {headers: {'x-api-key': proConfig.C2XApiKey}};
     }
   }
-
 
   if (config.loading) {
     timer.push(setTimeout(() => {
@@ -53,11 +53,12 @@ AxiosIns.interceptors.response.use(response => {
       console.log('其他401')
     }
   }
+  console.log('error',error.response);
   if(error.response){
     return Promise.reject(error.response.data);
   }
-  console.log('error',error);
-
 });
+
+
 
 export default AxiosIns;

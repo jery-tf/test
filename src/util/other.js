@@ -125,3 +125,5 @@ export const setDictionaries = (key,value)=>{
   dictionaries[key] = value;
   setSessionStorage('dictionaries',dictionaries);
 };
+
+

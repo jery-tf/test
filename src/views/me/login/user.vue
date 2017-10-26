@@ -69,7 +69,7 @@
             Api.userApi.getUserInfo({access_token: res.access_token}).then(res => {
               //获取用户详情
               Api.userApi.getUserDetails(res.userId).then(res=>{
-                Util.other.setSessionStorage('userDetails',res);
+                Util.other.setLocalStorage('userDetails',res);
                 //跳转页面
                 _this.toNextPage();
               }).catch(err=>{ //获取用户详情失败
@@ -79,6 +79,10 @@
             }).catch(err=>{ //获取用户信息失败
               console.log('获取用户详情失败');
             });
+            let tokenTime = new Date().getTime();
+            res = Object.assign({},res,{tokenTime});
+            sessionStorage.setItem('isRefreshToken',true);
+            console.log('token=>',res);
             Util.login.setToken(res);
           }).catch(err=>{  //登录失败
             console.log('登录失败,原因->',err.errorMessage);

@@ -5,15 +5,18 @@
 <template>
   <div>
     <div class="padding-container fff">
-      <div class="icon" v-if="errormsg">
-        <i class="OAIndexIcon icon-guanbi"></i>
-        <p>认证失败!</p>
+      <div v-if="isError||isOk">
+        <div class="icon" v-if="isError">
+          <i class="OAIndexIcon icon-guanbi"></i>
+          <p>认证失败!</p>
+        </div>
+        <div class="icon" v-if="isOk">
+          <i class="OAIndexIcon icon-xuanzhong"></i>
+          <p>认证成功!</p>
+        </div>
       </div>
-      <div class="icon" v-else>
-        <i class="OAIndexIcon icon-xuanzhong"></i>
-        <p>认证成功!</p>
-      </div>
-      <p class="error">{{errormsg}}</p>
+      <div v-else style="text-align: center">获取中...</div>
+      <p class="error" v-if="isError">{{errormsg}}</p>
     </div>
     <div class="btn padding-container-lr" @click="resultBtn">
       <p v-if="errormsg">重新上传</p>
@@ -34,9 +37,11 @@
     components: {},
     data () {
       return {
+        isOk: false,
+        isError: false,
         errormsg: null,//失败原因
         wxAuthenResult: {},//微信实人返回结果
-        testData:''
+        testData: ''
       }
     },
     created(){
@@ -52,21 +57,36 @@
 //          this.testData = '缓存获取失败';
 //          return
 //        }
-        //'{2ADEB344-C5B7-46A4-9F89-95DDDC05643B}'
-//        Api.realNameApi.getWxAuthenticationResult({token: '{8486D7FB-4F73-42C9-95EB-C12D665F96B2}',type:'H5'}, {loading: '请稍后...'})
+//        '{2ADEB344-C5B7-46A4-9F89-95DDDC05643B}' '1FC32218-EED9-4343-B13D-3974FD854AF5'
+//        Api.realNameApi.getWxAuthenticationResult({
+//          token: '{EA741876-F1E0-48EF-9098-14A11CF857E0}',
+//          type: 'H5'
+//        }, {loading: '请稍后...'})
         Api.realNameApi.getWxAuthenticationResult({token: wxAuthen.token,type:'H5'}, {loading: '请稍后...'})
           .then(res => {
+            console.log('res---->', JSON.parse(JSON.stringify(res)));
             if (res.errorcode === 0) {
-              Util.other.setLocalStorage('wxAuthenUserInfo',res.data);
-              //成功
-              this.testData = JSON.stringify(res.data);
+              if (res.data.yt_errorcode == '0') {
+                Util.other.setLocalStorage('wxAuthenUserInfo', res.data);
+                //成功
+                this.testData = JSON.stringify(res.data);
 
-              this.wxAuthenResult = res.data;
+                this.wxAuthenResult = res.data;
+                this.isOk = true;
+              } else {
+                this.errormsg = res.data.yt_errormsg;
+                this.isError = true;
+              }
+
             } else {
               //失败
               this.errormsg = res.errormsg;
+              this.isError = true;
             }
-          });
+          }).catch(err => {
+          this.errormsg = '网络异常';
+          this.isError = true;
+        });
       },
       //底部按钮
       resultBtn(){
@@ -81,10 +101,13 @@
               _signature = '';
             }
             let args = {
-              appid: appId, signature: _signature, redirect: 'http://hillwxtest.s1.natapp.cc/wxAuthentication-test.html',
-              uid: '123', type: 0
+              appid: appId,
+              signature: _signature,
+              redirect: 'http://hillwxtest.s1.natapp.cc/wxAuthentication-test.html',
+              uid: '123',
+              type: 0
             };
-            sessionStorage.setItem('wxSignatures',_signature);
+            sessionStorage.setItem('wxSignatures', _signature);
             let form = $("<form method='post'></form>");
             form.attr({"action": url});
             for (let arg in args) {

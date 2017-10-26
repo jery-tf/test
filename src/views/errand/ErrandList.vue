@@ -55,28 +55,38 @@
     methods: {
       //获取左侧列表
       getLeftList(id){
-        console.log('请求左侧',id)
-        Api.otherApi.getDictionaries(id).then(res => {
-
-          console.log('左侧', res);
-          let arr = [];
-          for (let item of res[Util.errand.getErrandClassName(this.$route.params.id)]) {
-            arr.push({id: item.dictdataName, name: item.dictdataValue, icon: 'icon-ertongshouyang'});
-
-            //列表中的默认值给 selectedId
-            if (!this.selectedId && item.dictdataIsdefault) {
-              this.selectedId = item.dictdataName;
+        console.log('请求左侧',id);
+        let leftList = Util.cache.getCacheDataByKey(id);
+        if(leftList){ //是否有此缓存
+          this.initLeftData(leftList.value);
+        }else{
+          Api.otherApi.getDictionaries(id).then(res => {
+            if(res && res[id]){
+              this.initLeftData(res[id]);
+              Util.cache.setCacheData(id,res[id]);
             }
+          })
+        }
+      },
+      //初始化左侧列表
+      initLeftData(list){
+        let arr = [];
+        for (let item of list) {
+          arr.push({id: item.dictdataName, name: item.dictdataValue, icon: Util.icon.getValueBySeed(item.dictdataName)});
+
+          //列表中的默认值给 selectedId
+          if (!this.selectedId && item.dictdataIsdefault) {
+            this.selectedId = item.dictdataName;
           }
-          //如果列表中没有默认值 则默认第一个
-          if (!this.selectedId && arr[0]) {
-            this.selectedId = arr[0].id;
-          }
-          if (this.selectedId) {
-            this.selecedLeftFun(this.selectedId);
-          }
-          this.leftDataList = arr;
-        })
+        }
+        //如果列表中没有默认值 则默认第一个
+        if (!this.selectedId && arr[0]) {
+          this.selectedId = arr[0].id;
+        }
+        if (this.selectedId) {
+          this.selecedLeftFun(this.selectedId);
+        }
+        this.leftDataList = arr;
       },
       //点击左侧列表 单元格
       selecedLeftFun(id){

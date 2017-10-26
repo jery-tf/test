@@ -104,12 +104,12 @@
         </span>
         <em class="OAIndexIcon icon-next"></em>
       </div>
-      <!--<div class="particulars " @click="authenticationTwo">-->
-        <!--<span>-->
-           <!--<i class="OAIndexIcon icon-shimingrenzheng"></i>二次认证-->
-        <!--</span>-->
-        <!--<em class="OAIndexIcon icon-next"></em>-->
-      <!--</div>-->
+      <div class="particulars " @click="authenticationTwo">
+        <span>
+           <i class="OAIndexIcon icon-shimingrenzheng"></i>二次认证
+        </span>
+        <em class="OAIndexIcon icon-next"></em>
+      </div>
       <!--<div class="particulars">-->
         <!--<span>-->
            <!--<i class="OAIndexIcon icon-bangzhu"></i>帮助与反馈-->

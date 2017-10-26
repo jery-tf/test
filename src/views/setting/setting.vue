@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import Util from '../../util'
 export default {
   data(){
     return{
@@ -38,8 +39,8 @@ export default {
   methods:{
     outlogin(){
       alert('退出成功')
-      sessionStorage.removeItem("token")
-      sessionStorage.removeItem("userInfo")
+      //清除用户相关信息
+      Util.login.clearUserInfo();
       this.$router.push('/')
     }
   }
