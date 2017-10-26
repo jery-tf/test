@@ -230,7 +230,6 @@
         }
       },
     }
-    ,
   }
 </script>
 <style scoped lang="less" rel="stylesheet/less">
