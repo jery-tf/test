@@ -144,6 +144,7 @@
          this.showChose = false;
          this.showCityList='';
          this.$emit('increment', this.Province, this.City);
+         Util.other.setSessionStorage('cityId',this.city);
          this.City=false
          return
        }
@@ -180,6 +181,8 @@
            if(arr.indexOf( (this.district+''))!=-1){
              this.showChose = false;
              this.$emit('increment', this.Province, this.City, this.District);
+             console.log(this.district)
+             Util.other.setSessionStorage('cityId',this.district);
              this.showStreetList=true
              return
            }
@@ -212,8 +215,7 @@
         // 选取镇级选项之后关闭弹层
         this.showChose = false;
         this.$emit('increment', this.Province, this.City, this.District,this.Street);
-//        this.showStreetList=true;
-//        this.showStreet=true
+        Util.other.setSessionStorage('cityId',this.street);
       },
       streetSelected:function () {
         this.showProvince = false;

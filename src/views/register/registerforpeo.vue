@@ -69,7 +69,7 @@
         }
 //        let orderList=[{"pname":this.pname},{"idcard":this.idCard}]{'pname',this.name;"idcard",this.idcard}
         let orderList = {'pname': this.pname, "idcard": this.idcard}
-        window.sessionStorage.setItem("orderList", JSON.stringify(orderList))
+       localStorage.setItem("orderList", JSON.stringify(orderList))
 
 //        Api.registerApi.legal(
 //          qs.stringify({

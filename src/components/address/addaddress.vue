@@ -72,7 +72,7 @@
           },
           //编辑修改地址列表
           addaddress(addlist){
-            this.certificateNum = JSON.parse(sessionStorage.getItem('userInfo')).certificateNum;
+            this.certificateNum = JSON.parse(localStorage.getItem('userInfo')).certificateNum;
             Api.AddressApi.addresscheck(
               qs.stringify({
                 addr_id:this.addlist.addr_id,

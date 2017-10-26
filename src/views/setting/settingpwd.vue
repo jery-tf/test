@@ -55,7 +55,7 @@
         this.isShowPasswordtwo = !this.isShowPasswordtwo;
       },
       restPwd(){
-        this.userId = JSON.parse(sessionStorage.getItem('newPersonId')).id
+        this.userId = JSON.parse(localStorage.getItem('newPersonId')).id
         console.log( this.userId)
         let params={password:this.oldpwd}
         Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{

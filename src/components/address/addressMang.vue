@@ -63,7 +63,7 @@
     methods: {
       _selecedAddFun(){
         this.selecedAddFun(this.addressInfo.addr_id);
-        this.certificateNum = JSON.parse(sessionStorage.getItem('userInfo')).certificateNum;
+        this.certificateNum = JSON.parse(localStorage.getItem('userInfo')).certificateNum;
         Api.AddressApi.addresscheck(
           qs.stringify({
             addr_id:this.addressInfo.addr_id,
