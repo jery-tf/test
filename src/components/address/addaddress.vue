@@ -8,7 +8,7 @@
       <mt-field label="手机号码" class="ipt" v-model="addlist.mobilephone"></mt-field>
       <div class="regi " @click="selected">
         <em>所属区域</em>
-        {{addlist.province}}-{{addlist.city}}-{{addlist.county}}
+        {{addlist.province}} <span v-show="addlist.province">-</span> {{addlist.city}} <span v-show="addlist.province">-</span>{{addlist.county}}
         <span class="ipt">
                     <i class="OAIndexIcon C2-next common"></i>
                 </span>
@@ -129,8 +129,8 @@
         color: #333;
         padding-left: 0.24rem;
         position: absolute;
-        top:0;
-        right: 0;
+        top:0.35rem;
+        right:0.24rem;
       }
       em {
         display: inline-block;
@@ -151,8 +151,8 @@
       position: relative;
       .OAIndexIcon{
         position: absolute;
-        top:0;
-        right:0;
+        top:0.35rem;
+        right:0.24rem;
       }
     }
     .colorRed{

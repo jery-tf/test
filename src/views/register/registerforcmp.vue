@@ -2,49 +2,76 @@
   <div>
     <div class="cmp">
       <div class="regi padding-container-lr common">
+        <em>企业类型</em><select name="企业类型" id="select_k1" class="xla_k">
+        <option value="选择品牌">企业法人</option>
+        <option value="选择品牌1">社团法人</option>
+        <option value="选择品牌2">机关事业单位法人</option>
+      </select>
+      </div>
+      <div class="regi padding-container-lr common">
         <em>证件类型</em>
         <span class="ipt">
-                    统一社会信用代码
-                    <i class="OAIndexIcon C2-next common"></i>
+                   统一社会信用代码 <i class="OAIndexIcon C2-next common"></i>
                 </span>
       </div>
-      <div class="ableipt common">
-        <em>证件代码</em>
-        <input type="text" class="idform" placeholder="12146319864936587326587">
+      <div class="regi">
+        <mt-field label="证件代码" class="ipt" v-model="socialno"></mt-field>
       </div>
-      <AbleInput content='公司/单位名称'></AbleInput>
-      <AbleInput content='公司单位/性质'></AbleInput>
-      <AbleInput content='法人名称'></AbleInput>
-      <AbleInput content='法人身份证号码'></AbleInput>
+      <div class="regi">
+        <mt-field label="公司/单位名称" class="ipt" v-model="cmpname"></mt-field>
+      </div>
+      <div class="regi">
+        <mt-field label="公司单位/性质" class="ipt"></mt-field>
+      </div>
+      <div class="regi">
+        <mt-field label="法人名称" class="ipt" v-model="corporator"></mt-field>
+      </div>
+      <div class="regi">
+        <mt-field label="法人身份证号码" class="ipt" v-model="cnpmidcard"></mt-field>
+      </div>
       <div class="regi padding-container-lr common" @click="selected">
         <em>所属区域</em>
-        {{Province}}-{{City}}-{{District}}-{{Street}}
+        {{Province}}<strong v-show="Province">-</strong>{{City}}<strong v-show="District">-</strong>{{District}}<strong
+        v-show="Street">-</strong>{{Street}}
         <span class="ipt">
                     <i class="OAIndexIcon C2-next common"></i>
                 </span>
       </div>
-      <AbleInput content='详细地址'></AbleInput>
+      <div class="regi">
+        <mt-field label="详细地址" class="ipt" v-model="address"></mt-field>
+      </div>
     </div>
-    <AbleInput content='手机号码'></AbleInput>
+    <div class="regi">
+      <mt-field label="手机号码" class="ipt" v-model="cmpphone"></mt-field>
+    </div>
     <div class="yan common">
       <strong>验证码</strong>
       <input type="text" class=" padding-container-lr ipt" placeholder="请输入短信验证码">
       <button class="btn">52秒后重新获取</button>
     </div>
-    <AbleInput content='密码'></AbleInput>
-    <AbleInput content='确认密码'></AbleInput>
-    <Btncommon msg="提交"></Btncommon>
-    <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy" :pickermore="list"></pickerArea>
+    <div class="regi">
+      <mt-field label="密码" class="ipt" v-model="cmppwd"></mt-field>
+    </div>
+    <div class="regi">
+      <mt-field label="确认密码" class="ipt" v-model="ispwd"></mt-field>
+    </div>
+    <div class="top52">
+      <mint-button type="primary" size="large" @click="registercmp">提交</mint-button>
+    </div>
+    <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
+                :pickermore="list" :selectAreaa="selectAreaa"></pickerArea>
   </div>
 </template>
 <script>
-  import Btncommon from 'components/btncommon/BtnCommon'
+  import {Field, Button} from 'mint-ui'
   import AbleInput from 'components/iptinput/ableinput'
   import pickerArea from 'components/aboutCompany/pickerArea'
   import Api from '../../api'
   import Util from '../../util'
   import axios from 'axios'
   import qs from "qs"
+  import {Toast} from 'mint-ui';
+
   export default {
     data() {
       return {
@@ -53,52 +80,156 @@
         province: '',
         showChose: false,
         Province: null,
-        City:null,
-        District:null,
-        Street:null,
-        list:[]
+        City: null,
+        city: '',
+        street: '',
+        district: '',
+        District: null,
+        Street: null,
+        list: [],
+        phone: '',
+        cmpname: '',
+        cnpmidcard: '',
+        cmppwd: '',
+        corporator: '',
+        cmpphone: '',
+        ispwd: '',
+        address: '',
+        socialno: ''
       }
     },
-    components: {Btncommon, AbleInput, pickerArea},
+    components: {'mint-button': Button, AbleInput, pickerArea},
     created() {
       this.listenToMyBoy()
     },
     methods: {
+      selectAreaa(){
+        console.log(address)
+      },
       selected() {
         this.showChose = !this.showChose
-        Api.pickerAreaApi.pickerAreaf().then(res=>{
-          this.list=res
+        Api.pickerAreaApi.pickerAreaf().then(res => {
+          this.list = res
           console.log(this.list)
         })
       },
 //      省市区三级联动数据
-      listenToMyBoy(Province, City, District,Street) {
+      listenToMyBoy(Province, City, District, Street, district, street, city) {
         this.Province = Province,
           this.City = City,
           this.District = District
         this.Street = Street
+        this.street = street
+        this.district = district
+        this.city = city
+      },
+      registercmp() {
+        let postId = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+        if (this.socialno == "") {
+          Toast("请输入社会统一信息代码");
+          return;
+        }
+        else if (this.cmpname == "") {
+          Toast("请输入企业名称");
+          return;
+        }
+        else if (!postId.test(this.cnpmidcard)) {
+          Toast("请输入合法的身份证号")
+          return
+        }
+
+        else if (this.cmpphone == "") {
+          Toast("请输入手机号码");
+          return;
+        }
+
+        else if (!(/^1[34578]\d{9}$/.test(this.cmpphone))) {
+          Toast("请输入有效的11位手机号码")
+          return;
+        }
+        else if (this.cmppwd == "") {
+          Toast("请输入密码");
+          return;
+        }
+        else if (this.ispwd == "") {
+          Toast("请输入密码");
+          return;
+        }
+        else if (this.cmppwd != this.ispwd) {
+          Toast({
+            message: '两次密码输入不一致，请重新输入',
+            position: 'top',
+          });
+          return
+        }
+        Api.registerApi.registerCmp(
+          qs.stringify({
+            type: 1,  //法人类型
+            corp_name: this.cmpname, //企业名称
+            idcard: this.cnpmidcard,//企业身份证号
+            pwd: this.cmppwd,
+            corporator: this.corporator,
+            phone: this.cmpphone,
+            socialno: this.socialno,
+            city: this.City,
+            area: this.District,
+            street: this.Street
+          }),
+          {Headers: {'content-type': 'application/x-www-form-urlencoded'}}
+        ).then(res => {
+          if (res.code = 200) {
+            Toast(res.info)
+            this.$router.push('/')
+          } else {
+            alert(res.info)
+          }
+        })
       }
     },
   }
 </script>
-<style scoped lang='less'>
+<style lang='less'>
   .cmp {
     margin: 0.19rem 0;
     width: 7.2rem;
     background-color: #fff;
+
+    .xla_k {
+      width: 4.7rem;
+      height: 0.98rem;
+      border: 0;
+      outline: 0;
+      font-size: 0.23rem;
+      color: #333;
+    }
   }
 
   .regi,
   .ableipt {
+    font-size: 0;
     width: 7.2rem;
     height: 0.97rem;
     line-height: 0.97rem;
     border-top: 1px solid #d9d9d9;
     background-color: #fff;
+    position: relative;
     .ipt {
       .C2-next {
-        float: right;
         color: #c9c9c9;
+        position: absolute;
+        top: 0.35rem;
+        right: 0.24rem;
+      }
+    }
+    .mint-cell-wrapper {
+      padding: 0 0.24rem;
+      .mint-field-core {
+        font-size: 0.23rem;
+      }
+    }
+    .mint-field {
+      .mint-cell-text {
+        font-size: 0.23rem;
       }
     }
   }
@@ -158,5 +289,6 @@
       border-radius: 10px;
       font-size: 0.2rem;
     }
+
   }
 </style>

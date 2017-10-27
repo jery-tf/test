@@ -4611,8 +4611,8 @@
     position: relative;
     .C2-guanbi1 {
       position: absolute;
-      top: -0.02rem;
-      right: 0.24rem;
+      top:0.35rem;
+      right:0.24rem;
       font-size: 0.45rem;
     }
   }

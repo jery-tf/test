@@ -18,7 +18,7 @@
     position="bottom">
       <h3> {{ordername}}<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
       <template>
-        <AddAddress :addlist="list" :selecedAddFun="selecedAddFun"  v-on:increment="addaddress"></AddAddress>
+        <AddAddress :addlist="list" :selecedAddFun="selecedAddFun"  v-on:increment="addaddress" ></AddAddress>
       </template>
     </mt-popup>
   </div>
@@ -33,7 +33,7 @@
   import axios from 'axios'
   import qs from "qs"
   import {Popup} from 'mint-ui';
-
+  import { MessageBox } from 'mint-ui';
   export default {
     name: 'AdeeressList',
     components: {AddressMang, AddAddress},
@@ -107,6 +107,26 @@
       },
       //删除地址
       deleltAddrFun(id) {
+        MessageBox.confirm('', {
+          message: '确定删除地址吗？',
+          title: '',
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(action => {
+          if (action == 'confirm') {
+            Api.AddressApi.deleteaddress({
+                addr_id: id
+              }).then(res => {
+              if (res.code == 200) {
+               history.go(0)
+              }
+            })
+          }
+        }).catch(err => {
+          if (err == 'cancel') {
+            return
+          }
+        });
 //        console.log('要删除的地址Id', id)
       },
       //添加地址
@@ -128,7 +148,7 @@
   }
 </script>
 
-<style scoped lang="less" rel="stylesheet/less">
+<style  lang="less" rel="stylesheet/less">
   .popup{
     position: relative;
     .add {
@@ -157,12 +177,15 @@
         border-bottom: 1px solid #d9d9d9;
         .C2-guanbi1 {
           position: absolute;
-          top: -0.02rem;
-          right: 0.24rem;
+          top:0.35rem;
+          right:0.24rem;
           font-size: 0.45rem;
         }
       }
     }
-
+    .mint-msgbox{
+      border-radius: 0.1rem;
+      background-color: blue;
+    }
   }
 </style>

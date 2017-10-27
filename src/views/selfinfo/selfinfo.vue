@@ -82,12 +82,16 @@
       width: 7.2rem;
       height: 0.97rem;
       line-height: 0.97rem;
+      position: relative;
       span {
         float: right;
         font-size: 0.28rem;
         color: #c2c2c2;
       }
       .C2-next {
+        position: absolute;
+        top:0.35rem;
+        right:0.24rem;
         color: #cbcbcb;
       }
     }

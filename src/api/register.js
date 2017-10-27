@@ -8,3 +8,5 @@ export const registerGo = (params,config)=>axiosPost(`/xndt/svp/v1/userreg`,para
 export const legal = (params,loading)=>axiosPost(`/xndt/svp/v1/userreal`,params,loading);
 
 export const uableRegi = (params,loading)=>axiosGet(`/xndt/svp/v1/userexists`,params,loading);
+// 企业注册
+export const registerCmp = (params,config)=>axiosPost(`/xndt/v1/enterprisereg`,params,config);

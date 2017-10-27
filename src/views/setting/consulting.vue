@@ -3,17 +3,17 @@
 */
 
 <template>
-  <div class="box-margin-top ">
+  <div class="box-margin-top citysel">
     <div class="koukou">
       <mt-field label="我的姓名" class="ipt" v-model="pname"></mt-field>
       <mt-field label="手机号码" class="ipt" v-model="phone"></mt-field>
       <div class="pname" @click="selected">
         <span>行政区域</span>
-        {{Province}}-{{City}}-{{District}}-{{Street}}
+        {{Province}}<strong v-show="Province">-</strong>{{City}}<strong v-show="District">-</strong>{{District}}<strong v-show="Street">-</strong>{{Street}}
         <i class="OAIndexIcon C2-next"></i>
       </div>
       <div class="pname consult" @click="department">
-        <span> 咨询部门</span>
+        <span> 咨询部门</span>{{Apartment}}
         <i class="OAIndexIcon C2-next"></i>
       </div>
       <div class="pname consult">
@@ -27,7 +27,7 @@
     <div class="addressorder padding-container-lr pname consult">
       <span>是否公开</span><i class="OAIndexIcon C2-check-R"></i>
     </div>
-    <div class="box-margin-top about">
+    <div class="box-margin-top about top52">
       <mint-button type="primary" size="large">提交</mint-button>
     </div>
     <p class="autions">提示：本栏目接受办事群众和企业对进驻各级政务服务中心政务服务大厅的部门行政审批服务过程中有关法规，政策程序等问题的咨询</p>
@@ -39,7 +39,7 @@
       position="center">
       <h3>咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
       <template>
-        <DepartPro></DepartPro>
+        <DepartPro :cityshow="cityshow"  v-on:increments="addaddress"></DepartPro>
       </template>
     </mt-popup>
   </div>
@@ -75,7 +75,8 @@
         phone: '',
         list: {},
         popupVisible: false,
-        cityshow:[]
+        cityshow:[],
+        Apartment:null
       }
     },
     created() {
@@ -92,7 +93,7 @@
         this.showChose = !this.showChose
         Api.pickerAreaApi.pickerAreaf().then(res => {
           this.list = res
-//              console.log(this.list)
+              console.log(this.list)
         })
       },
       //省市区三级联动数据
@@ -108,8 +109,12 @@
         console.log(this.nameid)
         Api.pickerAreaApi.pickerAreas(this.nameid).then(res => {
           this.cityshow = res
-          console.log(this.data)
+          console.log(this.cityshow)
         })
+      },
+      addaddress(Apartment){
+        this.Apartment = Apartment,
+        this.popupVisible = false
       }
     }
 
@@ -117,84 +122,93 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-  .koukou {
-    margin-bottom: 0.1rem;
-    .mint-cell-wrapper {
-      padding: 0 0.24rem;
+  .citysel{
+    .koukou {
+      margin-bottom: 0.1rem;
+      .mint-cell-wrapper {
+        padding: 0 0.24rem;
+      }
+      .mint-cell-title {
+        font-size: 0.24rem;
+        color: #333;
+      }
+      .ipt {
+        border-top: 1px solid #d9d9d9;
+        width: 7.2rem;
+      }
+      .pname {
+        font-size: 0.24rem;
+        color: #333;
+        padding: 0 0.24rem;
+        border-top: 1px solid #d9d9d9;
+        background-color: #fff;
+        width: 7.2rem;
+        height: 0.97rem;
+        line-height: 0.97rem;
+        position: relative;
+        span {
+          margin-right: 0.6rem;
+        }
+        i {
+          float: right;
+          font-size: 0.28rem;
+          color: #c2c2c2;
+        }
+        .C2-next {
+          position: absolute;
+          top:0.35rem;
+          right:0.24rem;
+          color: #cbcbcb;
+        }
+      }
+      .content {
+        width: 7.2rem;
+        height: 1rem;
+        background-color: #fff;
+      }
+      textarea {
+        border: 0;
+        outline: 0;
+        width: 6.96rem;
+        height: 1rem;
+        padding-left: 0.24rem;
+        border-bottom: 1px solid #d9d9d9;
+        font-family: "微软雅黑";
+      }
+
     }
-    .mint-cell-title {
-      font-size: 0.24rem;
-      color: #333;
-    }
-    .ipt {
-      border-top: 1px solid #d9d9d9;
-      width: 7.2rem;
-    }
-    .pname {
-      font-size: 0.24rem;
-      color: #333;
-      padding: 0 0.24rem;
-      border-top: 1px solid #d9d9d9;
-      background-color: #fff;
+
+    .addressorder {
       width: 7.2rem;
       height: 0.97rem;
       line-height: 0.97rem;
-      span {
-        margin-right: 0.9rem;
-      }
-      i {
-        float: right;
-        font-size: 0.28rem;
-        color: #c2c2c2;
-      }
-      .C2-next {
-        color: #cbcbcb;
-      }
-    }
-    .content {
-      width: 7.2rem;
-      height: 1rem;
+      font-size: 0.24rem;
+      position: relative;
       background-color: #fff;
+      .OAIndexIcon {
+        position: absolute;
+        top: 0.4rem;
+        right: 0.24rem;
+      }
     }
-    textarea {
-      border: 0;
-      outline: 0;
-      width: 6.96rem;
-      height: 1rem;
-      padding-left: 0.24rem;
-      border-bottom: 1px solid #d9d9d9;
-      font-family: "微软雅黑";
+    .about {
+      width: 6.72rem;
+      margin: 0.24rem 0.24rem 0;
+    }
+    .autions {
+      padding: 0 0.24rem;
+      font-size: 0.21rem;
+      color: #999;
+      margin-top: 0.26rem;
     }
 
-  }
+    .consult {
+      padding-left:;
+    }
+    .mint-popup{
+      width: 7.2rem;
 
-  .addressorder {
-    width: 7.2rem;
-    height: 0.97rem;
-    line-height: 0.97rem;
-    font-size: 0.24rem;
-    position: relative;
-    background-color: #fff;
-    .OAIndexIcon {
-      position: absolute;
-      top: 0;
-      right: 0.24rem;
     }
   }
 
-  .about {
-    width: 6.72rem;
-    margin: 0.24rem 0.24rem 0;
-  }
-
-  .autions {
-    padding: 0 0.24rem;
-    font-size: 0.21rem;
-    color: #999;
-    margin-top: 0.26rem;
-  }
-
-  .consult {
-    padding-left:;
-  }
 </style>

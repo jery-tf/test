@@ -52,7 +52,7 @@ export const axiosPost = (url,data,config)=>$axios.post(url,data,config);
  * @param [config]
  */
 // export const axiosDelete = (url,loading)=>$axios.post(url,{loading,headers});
-export const axiosDelete = (url,config)=>$axios.post(url,config);
+export const axiosDelete = (url,config)=>$axios.delete(url,config);
 
 /***
  * 底层put 方法

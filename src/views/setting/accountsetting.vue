@@ -42,19 +42,24 @@ export default {
       line-height: 0.97rem;
       font-size: 0.32rem;
       background-color: #fff;
+      position: relative;
       span{
         float: right;
         color: #c2c2c2;
         font-size: 0.28rem;
+        padding-right: 0.44rem;
         font-family: "微软雅黑";
       }
        .C2-xiayiye{
-            float: right;
-            vertical-align: 2%;
+            /*float: right;*/
+            /*vertical-align: 2%;*/
             color: #ccc;
             font-size: 0.29rem;
             font-weight: 900;
             padding-left: 0.2rem;
+         position: absolute;
+         top: 0.32rem;
+         right: 0.24rem;
         }
  }
  .firstline{

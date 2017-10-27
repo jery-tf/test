@@ -19,7 +19,7 @@
         </router-link>
         <router-link to="/collection">
           <div class="mycollect">
-            <span class="OAIndexIcon C2-shoucang"></span>
+            <span class="OAIndexIcon C2-shoucang2"></span>
             <p>我的收藏</p>
           </div>
         </router-link>
@@ -255,16 +255,16 @@
       padding-bottom: 0.66rem;
       font-size: 0.32rem;
       color: #999;
-      span{
-        vertical-align: middle;
-      }
+      position: relative;
       .C2-fanhui2{
         color:#333;
         display: inline-block;
         width: 0.1rem;
         height: 0.17rem;
         font-size: 0.34rem;
-        /*vertical-align: middle;*/
+       position: absolute;
+        top:1.6rem;
+        right:0;
       }
       h3 {
         margin-bottom: 0.14rem;
@@ -325,7 +325,7 @@
         float: right;
         width: 50%;
         text-align: center;
-        .C2-shoucang {
+        .C2-shoucang2 {
           font-size: 0.4rem;
           color: #666;
         }
@@ -438,6 +438,7 @@
     color: #333;
     border-bottom: 1px solid #d9d9d9;
     font-family: "微软雅黑";
+    position: relative;
     .C2-shijian, .C2-qianbao, .C2-tousu, .C2-shimingrenzheng, .C2-bangzhu, .C2-shezhi2 {
       font-size: 0.41rem;
       color: #F48074;
@@ -463,9 +464,11 @@
     .C2-next {
       float: right;
       font-size: 0.29rem;
-      vertical-align: -3%;
       /*margin-left: 0.26rem;*/
       color: #cdcdcd;
+      position: absolute;
+      top:0.35rem;
+      right:0;
     }
   }
 
