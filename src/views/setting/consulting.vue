@@ -76,7 +76,7 @@
         list: {},
         popupVisible: false,
         cityshow:[],
-        Apartment:null
+        Apartment:null,
       }
     },
     created() {
@@ -97,19 +97,43 @@
         })
       },
       //省市区三级联动数据
-      listenToMyBoy(Province, City, District, Street) {
-        this.Province = Province,
-          this.City = City,
-          this.District = District
-        this.Street = Street
+      listenToMyBoy(addressInfo) {
+        if(addressInfo.street){
+          this.Province = addressInfo.province.value
+          this.City = addressInfo.city.value
+          this.District = addressInfo.district.value
+          this.Street = addressInfo.street.value
+          this.addressInfo={}
+      }
+        else if(addressInfo.district){
+          this.Province = addressInfo.province.value
+          this.City = addressInfo.city.value
+          this.District = addressInfo.district.value
+          this.Street=''
+          this.addressInfo={}
+        }
+        else if(addressInfo.city){
+          this.Province = addressInfo.province.value
+          this.City = addressInfo.city.value
+          this.District = ''
+          this.Street=''
+          this.addressInfo={}
+        }
+        else if(addressInfo.province){
+          this.Province = addressInfo.province.value
+          this.City =''
+          this.District = ''
+          this.Street=''
+          this.addressInfo={}
+        }
       },
       department() {
         this.popupVisible = !this.popupVisible
         this.nameid = Util.other.getSessionStorage('cityId')
-        console.log(this.nameid)
+        this.cityshow=""
         Api.pickerAreaApi.pickerAreas(this.nameid).then(res => {
           this.cityshow = res
-          console.log(this.cityshow)
+          console.log(res)
         })
       },
       addaddress(Apartment){

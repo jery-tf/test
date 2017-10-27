@@ -114,14 +114,35 @@
         })
       },
 //      省市区三级联动数据
-      listenToMyBoy(Province, City, District, Street, district, street, city) {
-        this.Province = Province,
-          this.City = City,
-          this.District = District
-        this.Street = Street
-        this.street = street
-        this.district = district
-        this.city = city
+      listenToMyBoy(addressInfo) {
+        if(addressInfo.street){
+          this.Province = addressInfo.province.value
+          this.City = addressInfo.city.value
+          this.District = addressInfo.district.value
+          this.Street = addressInfo.street.value
+          this.addressInfo={}
+        }
+        else if(addressInfo.district){
+          this.Province = addressInfo.province.value
+          this.City = addressInfo.city.value
+          this.District = addressInfo.district.value
+          this.Street=''
+          this.addressInfo={}
+        }
+        else if(addressInfo.city){
+          this.Province = addressInfo.province.value
+          this.City = addressInfo.city.value
+          this.District = ''
+          this.Street=''
+          this.addressInfo={}
+        }
+        else if(addressInfo.province){
+          this.Province = addressInfo.province.value
+          this.City =''
+          this.District = ''
+          this.Street=''
+          this.addressInfo={}
+        }
       },
       registercmp() {
         let postId = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;

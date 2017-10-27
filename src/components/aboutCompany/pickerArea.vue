@@ -73,6 +73,7 @@
         // v-for循环判断是否为当前
         selected: false,
         info: [],
+        addressInfo:{province:null,city:null,district:null,street:null}
       }
     },
     methods: {
@@ -129,22 +130,35 @@
         this.showStreet=false;
       },
       getCityId: function (code, input, index) {
+        console.log(123)
         this.city = code;
         this.City = input;
-        this.showProvince = false;
-        this.showCity = false;
+//        this.showProvince = true;
+        this.showCity = true;
+        this.showCityList=true
         this.showDistrict = true;
         this.showStreet=false;
         this.showDistrictList = this._filter(this.showCityList, 'district', this.city);
         // 选择当前添加active
-        this.showCityList.map(a => a.selected = false);
-        this.showCityList[index].selected = true;
+//        this.showCityList.map(a => a.selected = false);
+//        this.showCityList[index].selected = true;
         this.nameid=this.city;
+        //判断是否是省本级
        if(this.nameid==4){
+         this.addressInfo={}
          this.showChose = false;
          this.showCityList='';
-         this.$emit('increment', this.Province, this.City);
-         Util.other.setSessionStorage('cityId',this.city,this.city);
+         this.addressInfo.province = {
+           id:this.province,
+           value:this.Province
+         }
+         this.addressInfo.city = {
+           id:this.city,
+           value:this.City
+         }
+         console.log( this.addressInfo)
+         this.$emit('increment', this.addressInfo);
+         Util.other.setSessionStorage('cityId',this.city);
          this.City=false
          return
        }
@@ -158,7 +172,8 @@
         this.showCity = true;
         this.showDistrict = false;
         this.showStreet=false;
-        this.City=false;
+//        this.City=false;
+        this.District = false;
       },
       getDistrictId: function (code, input, index) {
         this.district = code;
@@ -172,6 +187,7 @@
         this.showDistrictList.map(a => a.selected = false);
         this.showDistrictList[index].selected = true;
         this.nameid=this.district;
+
         Api.pickerAreaApi.pickerAreas(this.nameid).then(res=>{
           let arr=['5','3da984d332d64eac801706b2b60cf90a','7100f34bba254518885c225022c83a84','fb0b69f8473748ad9512b2081839a13d',
             '8042e70c013d428b9456d394b91d7d37','1cd83e5c26c449f89cd687f2ffe11cc5','e6796767f9d94683a19ee64d45255f42','34c330204fac4f649df5a2f02681462e',
@@ -179,19 +195,48 @@
             '36d351f50ad8457eb180dfc3d50f3c1f','2328dd64349e4cad8ec5635f28926c8a']
           this.showStreetList=res
           //选择区域
-          console.log(this.district+'')
+//          console.log(this.district+'')
+          //判断是否是属于市直部门
          for(let i=0;i<arr.length;i++){
            if(arr.indexOf( (this.district+''))!=-1){
+             this.addressInfo={}
+             console.log(456)
              this.showChose = false;
-             this.$emit('increment', this.Province, this.City, this.District,this.district,this.city,this.province);
+             this.addressInfo.province = {
+               id:this.province,
+               value:this.Province
+             }
+             this.addressInfo.city={
+               id:this.city,
+               value:this.City
+             }
+             this.addressInfo.district={
+               id:this.district,
+               value:this.District
+             }
+             console.log( this.addressInfo)
+             this.$emit('increment', this.addressInfo);
              Util.other.setSessionStorage('cityId',this.district);
              this.showStreetList=true
              return
            }
          }
           if(this.showStreetList==''){
+            this.addressInfo={}
             this.showChose = false;
-            this.$emit('increment', this.Province, this.City, this.District,'',this.province,this.city,this.district);
+            this.addressInfo.province = {
+              id:this.province,
+              value:this.Province
+            }
+            this.addressInfo.city={
+              id:this.city,
+              value:this.City
+            }
+            this.addressInfo.district={
+              id:this.district,
+              value:this.District
+            }
+            this.$emit('increment', this.addressInfo);
           }
         })
 
@@ -205,6 +250,7 @@
         this.District=false
       },
       getStreetId:function(code, input, index){
+        this.addressInfo={}
         this.street = code;
         this.Street = input;
         this.showStreetList.map(a => a.selected = false);
@@ -216,7 +262,23 @@
         })
         // 选取镇级选项之后关闭弹层
         this.showChose = false;
-        this.$emit('increment', this.Province, this.City, this.District,this.Street,this.province,this.city,this.district,this.street);
+        this.addressInfo.province = {
+          id:this.province,
+          value:this.Province
+        }
+        this.addressInfo.city={
+          id:this.city,
+          value:this.City
+        }
+        this.addressInfo.district={
+          id:this.district,
+          value:this.District
+        }
+        this.addressInfo.street={
+          id:this.street,
+          value:this.Street
+        }
+        this.$emit('increment',this.addressInfo);
         Util.other.setSessionStorage('cityId',this.street);
       },
       streetSelected:function () {
@@ -324,7 +386,7 @@
     position: relative;
     .C2-guanbi1 {
       position: absolute;
-      top: -0.02rem;
+      top: 0.2rem;
       right: 0.24rem;
       font-size: 0.45rem;
     }
