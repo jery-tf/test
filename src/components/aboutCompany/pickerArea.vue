@@ -130,16 +130,18 @@
         this.showStreet=false;
       },
       getCityId: function (code, input, index) {
+        console.log(123)
         this.city = code;
         this.City = input;
-        this.showProvince = false;
-        this.showCity = false;
+//        this.showProvince = true;
+        this.showCity = true;
+        this.showCityList=true
         this.showDistrict = true;
         this.showStreet=false;
         this.showDistrictList = this._filter(this.showCityList, 'district', this.city);
         // 选择当前添加active
-        this.showCityList.map(a => a.selected = false);
-        this.showCityList[index].selected = true;
+//        this.showCityList.map(a => a.selected = false);
+//        this.showCityList[index].selected = true;
         this.nameid=this.city;
         //判断是否是省本级
        if(this.nameid==4){
