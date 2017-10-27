@@ -36,6 +36,9 @@ export const updataErrandInstance = (instanceId,params,config)=>
 export const deleteErrandInstance = (instanceId,config)=>
   axiosDeleteToken(`/accept/v1/instance/${instanceId}`,config);
 
+//根据部门查询机构列表
+export const getOrgsList = (orgId,params,config) => axiosGet(`/uop/v1/orgs/${orgId}/children`,params,config);
+
 
 //参数处理函数
 const reqParms = (params)=>{

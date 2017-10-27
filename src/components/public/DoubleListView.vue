@@ -9,7 +9,9 @@
            :class="item.id==selectedId?'li active':'li fff'"
            @click="liClickFun(item.id)">
         <i :class="`OAIndexIcon ${item.icon}`"></i>
-        <span>{{item.name}}</span>
+        <p>
+          <span>{{item.name}}</span>
+        </p>
       </div>
 
     </div>
@@ -59,12 +61,21 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        height: 1.15rem;
+        min-height: 1.15rem;
         font-size: .24rem;
+        padding: .1rem;
       }
       .li.active {
         background: #f2f2f2;
         color: #13b7f6;
+      }
+      p{
+        width: 100%;
+        text-align: center;
+      }
+      span{
+        display: inline-block;
+        /*max-width: 2rem;*/
       }
     }
   }

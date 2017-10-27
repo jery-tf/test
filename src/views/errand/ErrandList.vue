@@ -7,13 +7,12 @@
     <div class="contentTop fff border-bottom padding-container-lr">
       <p><i class="OAIndexIcon C2-llmainpageback topIcon"></i></p>
       <div class="topTab">
-        <p v-for="(item,index) in topSelect" :class="item.isCurrent?'current':''"
+        <p v-for="(item,index) in topSelect" :class="(item.id == selectType)?'current':''"
            @click="topTabClick(item.id)">
           {{item.name}}
         </p>
       </div>
       <p>
-        <!--<i class="OAIndexIcon C2-sousuo_sousuo topIcon"></i>-->
       </p>
     </div>
 
@@ -38,13 +37,7 @@
       v-model="isShowAddressSelect" position="bottom"
       popup-transition="popup-fade">
       <div class="popupContent">
-        <p class="popupTop padding-container-lf">
-          <i></i>
-          <span @click="isShowAddressSelectFun(false)">
-            <i class="C2-guanbi1"></i>
-          </span>
-        </p>
-        <pickerArea :invator="showChose" v-on:increment="listenToMyBoy"
+        <pickerArea v-on:increment="listenToMyBoy" :isShowFun="isShowAddressSelectFun" title="地址选择"
                     :pickermore="pickermoreList"></pickerArea>
       </div>
     </mt-popup>
@@ -53,84 +46,112 @@
 
 <script>
   import DoubleListView from 'components/public/DoubleListView.vue'
-  import pickerArea from 'components/aboutCompany/pickerArea'
+  import pickerArea from 'components/aboutCompany/pickerAreaTwo'
   import GuideLi from 'components/errand/guideLi.vue'
   import Api from '../../api'
   import Util from '../../util'
   export default {
     name: 'Errand',
     components: {
-      DoubleListView, GuideLi,pickerArea
+      DoubleListView, GuideLi, pickerArea
     },
     data () {
       return {
         //顶部选主题和部门
-        topSelect: [{isCurrent: true, name: '按主题', id: 'zt'},
-          {isCurrent: false, name: '按部门', id: 'bm'}],
+        topSelect: [{isCurrent: true, name: '按主题', id:'zt'},
+          {isCurrent: false, name: '按部门', id:'bm'}],
         selected: '1',
         leftDataList: [],//左侧列表
         guideList: [],//右侧列表
         selectedId: '',
-        currentAddress:'长沙市',
-        errandName:Util.errand.getErrandClassName(this.$route.params.id),
+        currentAddress: '长沙市',
+        errandName: Util.errand.getErrandClassName(this.$route.params.id),
         //是否显示地址选择器
-        isShowAddressSelect:false,
+        isShowAddressSelect: false,
         //联动 数据
-        pickermoreList:[],
-        showChose:true
+        pickermoreList: [],
+        // 联动选择后的数据
+        addressInfo: null,
+        selectType:Util.other.getSessionStorage('errandSelectType')||'zt'
       }
     },
     created(){
       this.getLeftList(this.errandName);
 
       Api.pickerAreaApi.pickerAreaf().then(res => {
-        console.log('pickerAreaf-->',JSON.parse(JSON.stringify(res)));
+//        console.log('pickerAreaf-->', JSON.parse(JSON.stringify(res)));
         this.pickermoreList = res;
       })
     },
     methods: {
-      selectedTest() {
-//        this.showChose = !this.showChose;
-
-      },
       //省市区三级联动回调数据
-      listenToMyBoy(Province, City, District, Street) {
-        console.log('Province-->',Province)
+      listenToMyBoy(address) {
+        this.isShowAddressSelectFun(false);
+        this.addressInfo = address;
+//        if(!address.sdfxxx){
+//
+//        }
+        console.log('Province-->', address)
       },
       //获取左侧列表
       getLeftList(id){
         console.log('请求左侧', id);
-        let leftList = Util.cache.getCacheDataByKey(id);
-        let params = {
-          url: `/approveinterface/v1/dicttypes/dictdatas/${id}`,
-          type: 'GET',
-          hashCode:'',
-        };
-        if(leftList && leftList.code){
-          params.hashCode = leftList.code;
-          //先展示缓存数据
-          this.initLeftData(leftList.value);
+        if (this.selectType === 'zt') { //按主题
+          let leftList = Util.cache.getCacheDataByKey(id);
+          let params = {
+            url: `/approveinterface/v1/dicttypes/dictdatas/${id}`,
+            type: 'GET',
+            hashCode: '',
+          };
+          if (leftList && leftList.code) {
+            params.hashCode = leftList.code;
+            console.log('主题', JSON.parse(JSON.stringify(leftList.value)));
+            //先展示缓存数据
+            this.initLeftData(leftList.value);
+          }
+          Api.cacheApi.getCacheData(params).then(res => {
+            //接口是否返回了数据
+            if (res.respData) {
+              //取接口数据
+              let data = JSON.parse(res.respData);
+              this.initLeftData(data[id]);
+              Util.cache.setCacheData(id, {code: res.hashCode, value: data[id]});
+            } else {
+              //取缓存
+              this.initLeftData(leftList.value);
+            }
+          }).catch(err => {
+            //请求出错  取缓存数据;
+            if (leftList && leftList.value) {
+              this.initLeftData(leftList.value);
+            }
+          });
+        } else {//按部门
+          let serveOjbect = 0;//法人
+          if (this.$route.params.id === 'zrrfl') {//自然人
+            serveOjbect = 1;
+          }
+          Api.errandApi.getOrgsList(5, {cascade: false, categoryId: "10-Z", serveOjbect}).then(res => {
+            console.log('getOrgsList', res);
+            let list = [];
+            for (let data of res) {
+              let _data = {
+                dictdataId: "",
+                dictdataIsdefault: false,
+                dictdataName: data.id,
+                dictdataOrder: null,
+                dictdataValue: data.name,
+                dicttypeId: ""
+              };
+              list.push(_data);
+            }
+            this.initLeftData(list);
+          });
         }
-        Api.cacheApi.getCacheData(params).then(res => {
-          //接口是否返回了数据
-          if(res.respData){
-            //取接口数据
-            let data = JSON.parse(res.respData);
-            this.initLeftData(data[id]);
-            Util.cache.setCacheData(id,{code:res.hashCode,value:data[id]});
-          }else{
-            //取缓存
-            this.initLeftData(leftList.value);
-          }
-        }).catch(err=>{
-          //请求出错  取缓存数据;
-          if(leftList && leftList.value){
-            this.initLeftData(leftList.value);
-          }
-        });
       },
       //初始化左侧列表
       initLeftData(list){
+        console.log('左侧list-->', list);
         let arr = [];
         for (let item of list) {
           arr.push({
@@ -155,56 +176,71 @@
       },
       //点击左侧列表 单元格
       selecedLeftFun(id){
-        console.log('i---d',id)
+        console.log('i---d', id)
         this.selectedId = id;
+
         //缓存用的key
         let cacheKey = `${this.errandName}-${id}`;
         let cacheList = Util.cache.getCacheDataByKey(cacheKey);
-        let cond = {
-          filters: {
-            groupOp: 'OR',
-            rules: [
-              {field: this.catalog, op: "eq", data: id},
-              {field: this.catalog, op: "bw", data: id + ","},
-              {field: this.catalog, op: "cn", data: "," + id + ","},
-              //todo 办事列表
-              //{field:this.catalog,op:"ew",data:","+id} 该运算符有问题，暂不使用该条件
-            ]
+
+        let cond = {};
+        if(this.selectType === 'zt'){
+          cond = {
+            filters: {
+              groupOp: 'OR',
+              rules: [
+                {field: this.catalog, op: "eq", data: id},
+                {field: this.catalog, op: "bw", data: id + ","},
+                {field: this.catalog, op: "cn", data: "," + id + ","},
+                //todo 办事列表
+                //{field:this.catalog,op:"ew",data:","+id} 该运算符有问题，暂不使用该条件
+              ]
+            }
+          };
+        }else{
+          cond = {
+            filters: {
+              groupOp: "AND",
+              rules: [
+                { field: 'orgId', op: "eq", data: id }
+              ]
+            }
           }
-        };
+        }
         let _params = {page: 1, rows: 100, cond: encodeURI(JSON.stringify(cond))};
+
         let params = {
           url: `/approveinterface/v1/approveinfo${Util.other.reqParms(_params)}`,
           type: 'GET',
-          hashCode:'',
+          hashCode: '',
         };
-        if(cacheList && cacheList.code){
+        if (cacheList && cacheList.code) {
           params.hashCode = cacheList.code;
           //先取缓存数据
           this.guideList = cacheList.value;
         }
         Api.cacheApi.getCacheData(params).then(res => {
-            console.log('右侧数据',res)
-          if(res.respData){
+          console.log('右侧数据', res)
+          if (res.respData) {
             //取接口数据
             let data = JSON.parse(res.respData);
             let arr = [];
             for (let item of data.contents) {
               let _item = {
-                id: item.approveId, title: item.approveName, score: parseInt(item.transactLevel)+1,
+                id: item.approveId, title: item.approveName, score: parseInt(item.transactLevel) + 1,
                 frequency: item.minSeq, name: item.orgName, isActive: true
               };
               arr.push(_item);
             }
             this.guideList = arr;
 
-            Util.cache.setCacheData(cacheKey,{code:res.hashCode,value:arr});
-          }else{
+            Util.cache.setCacheData(cacheKey, {code: res.hashCode, value: arr});
+          } else {
             //取缓存
             this.guideList = cache.value;
           }
-        }).catch(err=>{
-          if(cacheList && cacheList.value){
+        }).catch(err => {
+          if (cacheList && cacheList.value) {
             this.guideList = cacheList.value;
           }
         })
@@ -238,6 +274,9 @@
       },
       //顶部选择的 id
       topTabClick(id){
+        console.log('123123', id)
+        //取消左侧当前选择
+        this.selectedId = null;
         this.topSelect.forEach((item) => {
           if (item.id == id) {
             item.isCurrent = true;
@@ -245,7 +284,15 @@
             item.isCurrent = false;
           }
         });
-        console.log(id);
+        if (id == 'bm') { //按部门查询
+          this.selectType = 'bm';
+        }else{
+          this.selectType = 'zt';
+        }
+        Util.other.setSessionStorage('errandSelectType',this.selectType);
+
+        //重新渲染数据
+        this.getLeftList(this.errandName);
         // @todo 根据选择的ID 重新加载数据
       },
 
@@ -268,18 +315,19 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-  .popupContent{
-    .popupTop{
+  .popupContent {
+    .popupTop {
       display: flex;
       justify-content: space-between;
-      span{
+      span {
         padding: .2rem;
-        i{
+        i {
           font-size: .3rem;
         }
       }
     }
   }
+
   .contentTop {
     display: flex;
     align-items: center;
@@ -308,13 +356,15 @@
       height: .96rem;
     }
   }
-  .doubleListViewClass{
+
+  .doubleListViewClass {
     position: absolute;
     width: 100%;
-    top:0;
+    top: .96rem;
     bottom: 0;
   }
-  .foot{
+
+  .foot {
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -325,20 +375,19 @@
     height: .8rem;
     align-items: center;
     justify-content: center;
-    p{
+    p {
       /*display: flex;*/
       /*align-items: center;*/
       /*justify-content: center;*/
     }
-    .addressIcon{
+    .addressIcon {
       font-size: .16rem;
-      color:#666;
+      color: #666;
     }
-    .addressIcon::before{
+    .addressIcon::before {
       transform: rotate(180);
     }
   }
-
 
   .topTab {
     height: 100%;

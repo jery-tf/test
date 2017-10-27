@@ -1,7 +1,4 @@
 /**
- * Created by wyg on 2017/9/28.
- */
-/**
  * Created by wyg on 2017/9/21.
  */
 import { axiosPost ,axiosGet,axiosGetToken} from './baseApi'

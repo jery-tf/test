@@ -80,7 +80,7 @@ router.beforeEach((to,from,next)=>{
 });
 
 router.beforeEach((to, from, next) => {
-  console.log('indexRouter to==>',to)
+  // console.log('indexRouter to==>',to)
   //设置title
   if(to.meta.title){
     Util.home.setTitle(to.meta.title)
