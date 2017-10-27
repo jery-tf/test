@@ -58,8 +58,7 @@
           this.showChose=!this.showChose
             this.$emit('increments', this.Apartment);
           },
-          provinceSelected: function () {
-          },
+
         }
 
     }
