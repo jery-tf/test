@@ -144,12 +144,14 @@
          this.showChose = false;
          this.showCityList='';
          this.$emit('increment', this.Province, this.City);
-         Util.other.setSessionStorage('cityId',this.city);
+         Util.other.setSessionStorage('cityId',this.city,this.city);
          this.City=false
          return
        }
         Api.pickerAreaApi.pickerAreas(this.nameid).then(res=>{
           this.showDistrictList=res
+          //选择的城市
+//          console.log(this.city)
         })
       },
       citySelected: function () {
@@ -176,12 +178,12 @@
             'e78060d4635d4128892f31c7b6d2ee4c','f420382f76c948809f409c905ae3771a','4b5c1ffb848041739efe4d00d2fb9f34','85db8269da254cf99627389702d43e05',
             '36d351f50ad8457eb180dfc3d50f3c1f','2328dd64349e4cad8ec5635f28926c8a']
           this.showStreetList=res
-//          console.log(this.district+'')
+          //选择区域
+          console.log(this.district+'')
          for(let i=0;i<arr.length;i++){
            if(arr.indexOf( (this.district+''))!=-1){
              this.showChose = false;
-             this.$emit('increment', this.Province, this.City, this.District);
-             console.log(this.district)
+             this.$emit('increment', this.Province, this.City, this.District,this.district,this.city,this.province);
              Util.other.setSessionStorage('cityId',this.district);
              this.showStreetList=true
              return
@@ -189,7 +191,7 @@
          }
           if(this.showStreetList==''){
             this.showChose = false;
-            this.$emit('increment', this.Province, this.City, this.District,'');
+            this.$emit('increment', this.Province, this.City, this.District,'',this.province,this.city,this.district);
           }
         })
 
@@ -214,7 +216,7 @@
         })
         // 选取镇级选项之后关闭弹层
         this.showChose = false;
-        this.$emit('increment', this.Province, this.City, this.District,this.Street);
+        this.$emit('increment', this.Province, this.City, this.District,this.Street,this.province,this.city,this.district,this.street);
         Util.other.setSessionStorage('cityId',this.street);
       },
       streetSelected:function () {
