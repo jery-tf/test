@@ -18,7 +18,7 @@
 </script>
 
 <style>
-  @import url("./assets/font/style.css");
+  @import url("./assets/font/iconfont.css");
 
   #app {
     box-sizing: border-box;

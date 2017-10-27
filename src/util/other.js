@@ -127,3 +127,12 @@ export const setDictionaries = (key,value)=>{
 };
 
 
+//参数处理函数
+export const reqParms = (params)=>{
+  let qs = '?';
+  for(let index in params){
+    qs += `${index}=${params[index]}&`
+  }
+  return qs;
+};
+
