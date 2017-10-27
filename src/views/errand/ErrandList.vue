@@ -3,7 +3,7 @@
 */
 
 <template>
-  <div class="h100 doubleListView">
+  <div class="h100 doubleListView errandListPopup">
     <div class="contentTop fff border-bottom padding-container-lr">
       <p><i class="OAIndexIcon C2-llmainpageback topIcon"></i></p>
       <div class="topTab">
@@ -27,25 +27,40 @@
         </div>
       </DoubleListView>
     </div>
-    <div class="foot" @click="openAddressSelect">
+    <div class="foot" @click="isShowAddressSelectFun(true)">
       <p>
         <i class="C2-dingwei" style="font-size: .24rem;color:#fb992e;"></i>
         <span>当前区域 : {{currentAddress}}</span>
         <i class="C2-xialagengduo addressIcon"></i>
       </p>
     </div>
+    <mt-popup
+      v-model="isShowAddressSelect" position="bottom"
+      popup-transition="popup-fade">
+      <div class="popupContent">
+        <p class="popupTop padding-container-lf">
+          <i></i>
+          <span @click="isShowAddressSelectFun(false)">
+            <i class="C2-guanbi1"></i>
+          </span>
+        </p>
+        <pickerArea :invator="showChose" v-on:increment="listenToMyBoy"
+                    :pickermore="pickermoreList"></pickerArea>
+      </div>
+    </mt-popup>
   </div>
 </template>
 
 <script>
   import DoubleListView from 'components/public/DoubleListView.vue'
+  import pickerArea from 'components/aboutCompany/pickerArea'
   import GuideLi from 'components/errand/guideLi.vue'
   import Api from '../../api'
   import Util from '../../util'
   export default {
     name: 'Errand',
     components: {
-      DoubleListView, GuideLi
+      DoubleListView, GuideLi,pickerArea
     },
     data () {
       return {
@@ -57,13 +72,31 @@
         guideList: [],//右侧列表
         selectedId: '',
         currentAddress:'长沙市',
-        errandName:Util.errand.getErrandClassName(this.$route.params.id)
+        errandName:Util.errand.getErrandClassName(this.$route.params.id),
+        //是否显示地址选择器
+        isShowAddressSelect:false,
+        //联动 数据
+        pickermoreList:[],
+        showChose:true
       }
     },
     created(){
       this.getLeftList(this.errandName);
+
+      Api.pickerAreaApi.pickerAreaf().then(res => {
+        console.log('pickerAreaf-->',JSON.parse(JSON.stringify(res)));
+        this.pickermoreList = res;
+      })
     },
     methods: {
+      selectedTest() {
+//        this.showChose = !this.showChose;
+
+      },
+      //省市区三级联动回调数据
+      listenToMyBoy(Province, City, District, Street) {
+        console.log('Province-->',Province)
+      },
       //获取左侧列表
       getLeftList(id){
         console.log('请求左侧', id);
@@ -215,9 +248,10 @@
         console.log(id);
         // @todo 根据选择的ID 重新加载数据
       },
-      //打开地址选择
-      openAddressSelect(){
-          console.log('打开地址选择');
+
+      //关闭/打开 地址选择
+      isShowAddressSelectFun(bool){
+        this.isShowAddressSelect = bool;
       }
     },
     computed: {
@@ -234,6 +268,18 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
+  .popupContent{
+    .popupTop{
+      display: flex;
+      justify-content: space-between;
+      span{
+        padding: .2rem;
+        i{
+          font-size: .3rem;
+        }
+      }
+    }
+  }
   .contentTop {
     display: flex;
     align-items: center;
