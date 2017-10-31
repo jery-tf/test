@@ -50,6 +50,7 @@
   import GuideLi from 'components/errand/guideLi.vue'
   import Api from '../../api'
   import Util from '../../util'
+  import { Toast } from 'mint-ui';
   export default {
     name: 'Errand',
     components: {
@@ -64,7 +65,7 @@
         leftDataList: [],//左侧列表
         guideList: [],//右侧列表
         selectedId: '',
-        currentAddress: '长沙市',
+//        currentAddress: '长沙市',
         errandName: Util.errand.getErrandClassName(this.$route.params.id),
         //是否显示地址选择器
         isShowAddressSelect: false,
@@ -78,20 +79,36 @@
     created(){
       this.getLeftList(this.errandName);
 
+      //获取定位信息 @todo 临时 改成获取微信位置
+      this.addressInfo = Util.other.getSessionStorage('errandAddressInfo');
       Api.pickerAreaApi.pickerAreaf().then(res => {
 //        console.log('pickerAreaf-->', JSON.parse(JSON.stringify(res)));
         this.pickermoreList = res;
       })
     },
     methods: {
-      //省市区三级联动回调数据
+      //省市区三级联动回调数据 获取地区ID
       listenToMyBoy(address) {
+        console.log(address);
         this.isShowAddressSelectFun(false);
         this.addressInfo = address;
-//        if(!address.sdfxxx){
-//
-//        }
-        console.log('Province-->', address)
+        if(address.street){
+          this.addressInfo = address.street;
+        }else{
+          if(address.district){
+            this.addressInfo = address.district;
+          }else{
+            if(address.city){
+              this.addressInfo = address.city;
+            }else{
+              if(address.province){
+                this.addressInfo = address.province;
+              }
+            }
+          }
+        }
+        Util.other.setSessionStorage('errandAddressInfo',this.addressInfo);
+        this.getLeftList(this.errandName);
       },
       //获取左侧列表
       getLeftList(id){
@@ -131,7 +148,12 @@
           if (this.$route.params.id === 'zrrfl') {//自然人
             serveOjbect = 1;
           }
-          Api.errandApi.getOrgsList(5, {cascade: false, categoryId: "10-Z", serveOjbect}).then(res => {
+
+          if(!this.addressInfo){
+            this.addressInfo = Util.other.getSessionStorage('errandAddressInfo');
+          }
+
+          Api.errandApi.getOrgsList(this.addressInfo.id, {cascade: false, categoryId: "10-Z", serveOjbect}).then(res => {
             console.log('getOrgsList', res);
             let list = [];
             for (let data of res) {
@@ -275,6 +297,17 @@
       //顶部选择的 id
       topTabClick(id){
         console.log('123123', id)
+        if (id == 'bm') { //按部门查询
+          //获取当前的地区ID
+          if(!this.addressInfo){
+            Toast('请先选择地区');
+            console.log('请先选择地区');
+            return
+          }
+          this.selectType = 'bm';
+        }else{
+          this.selectType = 'zt';
+        }
         //取消左侧当前选择
         this.selectedId = null;
         this.topSelect.forEach((item) => {
@@ -284,11 +317,7 @@
             item.isCurrent = false;
           }
         });
-        if (id == 'bm') { //按部门查询
-          this.selectType = 'bm';
-        }else{
-          this.selectType = 'zt';
-        }
+
         Util.other.setSessionStorage('errandSelectType',this.selectType);
 
         //重新渲染数据
@@ -308,7 +337,14 @@
           zrrfl: 'naturalpersonType'
         };
         return _catalog[this.$route.params.id];
+      },
+      currentAddress(){
+          if(this.addressInfo){
+            return this.addressInfo.value;
+          }
+          return '';
       }
+
     }
 
   }

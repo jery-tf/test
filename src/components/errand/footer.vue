@@ -11,7 +11,7 @@
           <span>收藏</span>
         </div>
         <div class="icon current" @click.one="deleteCollectionClick" v-else>
-          <i class="OAIndexIcon C2-aixin1"></i>
+          <i class="OAIndexIcon C2-shoucang1"></i>
           <span>收藏</span>
         </div>
       </template>
