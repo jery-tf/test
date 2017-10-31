@@ -147,7 +147,11 @@
       registercmp() {
         let postId = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
         if (this.socialno == "") {
-          Toast("请输入社会统一信息代码");
+          Toast("请输入社会统一信用代码");
+          return;
+        }
+        else if(!(/^[0-9A-Z]{18}$/).test(this.socialno)){
+          Toast("请输入有效的18位有效社会统一信用代码")
           return;
         }
         else if (this.cmpname == "") {
@@ -163,7 +167,6 @@
           Toast("请输入手机号码");
           return;
         }
-
         else if (!(/^1[34578]\d{9}$/.test(this.cmpphone))) {
           Toast("请输入有效的11位手机号码")
           return;
@@ -198,12 +201,14 @@
           }),
           {Headers: {'content-type': 'application/x-www-form-urlencoded'}}
         ).then(res => {
-          if (res.code = 200) {
-            Toast(res.info)
-            this.$router.push('/')
-          } else {
-            alert(res.info)
-          }
+//          if (res.code = 200) {
+//
+//          } else {
+//            alert(res.info)
+//          }
+          console.log(res)
+//          Toast(res)
+//          this.$router.push('/')
         })
       }
     },

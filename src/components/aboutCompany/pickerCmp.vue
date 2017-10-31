@@ -15,7 +15,8 @@
         <!--<div class="area" @click="provinceSelected()">{{City?City:'请选择'}}</div>-->
         <div class="area" @click="provinceSelected()" :class="Province?'':'active'">{{Province ? Province : '请选择'}}
         </div>
-        <div class="area" @click="citySelected()" :class="City?'':'active'">{{City ? City : '请选择'}}</div>
+        <div class="area" @click="citySelected()" :class="City?'':'active'" v-show="Province">{{City ? City : '请选择'}}
+        </div>
         <div class="area" @click="districtSelected()" :class="District?'':'active'" v-show="City">
           {{District ? District : '请选择'}}
         </div>
@@ -4494,6 +4495,10 @@
         this.showProvince = false;
         this.showCity = true;
         this.showDistrict = false;
+        this.showDistrict = false;
+        this.District = false;
+        this.City=false;
+        this.showCity=true
       },
       getDistrictId: function (code, input, index) {
         this.district = code;
