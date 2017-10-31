@@ -32,6 +32,7 @@
    * userId  默认是否选择    用户名       手机       地址    类型 1寄出 2收取
    * addressSelect 点击地址事件
    */
+  import Util from '../../util'
   export default {
     name: 'address',
     props: ['option', 'addressSelect'],
@@ -46,7 +47,11 @@
     },
     methods: {
       selectAddress(){
-        this.$router.push({path:`/errand/AddressManagement/${this.option.id}`})
+        let userInfo = Util.other.getLocalStorage('userDetails');
+        console.log(userInfo);
+//        this.$router.push({path:`/selfinfo/AddressList/${userInfo.certificateNum}`})
+        this.$router.push({path:`/errand/AddressManagement/${userInfo.certificateNum}`})
+
 //        if (this.addressSelect) {
 //          this.addressSelect(11);
 //        }

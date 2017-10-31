@@ -5,18 +5,18 @@
 <template>
   <div class="content fff box-margin-top">
     <div class="mall-warp padding-container">
-      <p class="font-large">{{addressInfo.userName}}</p>
-      <span style="font-size: .28rem;color:#333">{{addressInfo.phone}}</span>
+      <p class="font-large">{{addressInfo.apply_name}}</p>
+      <span style="font-size: .28rem;color:#333">{{addressInfo.mobilephone}}</span>
     </div>
     <div class="addressBox padding-container-lr">
       <p class="twoLineFont">
-        <span v-if="addressInfo.isDefault&&!isManagement" style="color:#ff3e3e">[默认地址]</span>
-        <span>{{addressInfo.address}}</span>
+        <span v-if="addressInfo.is_default === 'Y'&&!isManagement" style="color:#ff3e3e">[默认地址]</span>
+        <span>{{addressStr}}</span>
       </p>
     </div>
     <div class="padding-container mall-warp addressMan" v-if="isManagement">
       <div class="letf">
-        <p v-if="addressInfo.isDefault" class="colorRed" @click="_selecedAddFun">
+        <p v-if="addressInfo.is_default === 'Y'" class="colorRed" @click="_selecedAddFun">
           <i class="OAIndexIcon C2-check-R check"></i>
           <span>默认地址</span>
         </p>
@@ -58,21 +58,20 @@
     },
     methods: {
       _selecedAddFun(){
-        this.selecedAddFun(this.addressInfo.id);
+        this.selecedAddFun(this.addressInfo.addr_id);
       },
       _updatAddrFun(){
-        this.updatAddrFun(this.addressInfo.id);
+        this.updatAddrFun(this.addressInfo);
       },
       _deleltAddrFun(){
-        this.deleltAddrFun(this.addressInfo.id);
+        this.deleltAddrFun(this.addressInfo.addr_id);
       }
-
     },
-//    computed:{
-//      computedAddress(){
-//          return this.addressInfo.isDefault?`${this.addressInfo.address}`:this.addressInfo.address;
-//      }
-//    }
+    computed:{
+      addressStr(){
+          return this.addressInfo.province+this.addressInfo.city+this.addressInfo.county;
+      }
+    }
 
   }
 </script>

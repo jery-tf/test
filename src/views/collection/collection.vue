@@ -4,33 +4,41 @@
 
 <template>
   <div class="h100 doubleListView">
-    <!--<div class="contentTop fff border-bottom padding-container-lr">-->
+
+      <!--<div class="contentTop fff border-bottom padding-container-lr">-->
       <!--<p><i class="OAIndexIcon C2-llmainpageback topIcon"></i></p>-->
       <!--<div class="topTab">-->
-        <!--<p v-for="(item,index) in topSelect" :class="item.isCurrent?'current':''"-->
-           <!--@click="topTabClick(item.id)">-->
-          <!--{{item.name}}-->
-        <!--</p>-->
+      <!--<p v-for="(item,index) in topSelect" :class="item.isCurrent?'current':''"-->
+      <!--@click="topTabClick(item.id)">-->
+      <!--{{item.name}}-->
+      <!--</p>-->
       <!--</div>-->
       <!--<p><i class="OAIndexIcon C2-sousuo_sousuo topIcon"></i></p>-->
-    <!--</div>-->
-    <div>
-    <!--<div class="box-margin-top">-->
-      <div v-if="topSelect[0].isCurrent">
-        <template v-for="(item,index) in collectListErrand">
-          <div class="border-bottom marTop">
-            <CellSwipeErrand :rightFun="testFun" :data="item"></CellSwipeErrand>
-          </div>
-        </template>
+      <!--</div>-->
+      <div>
+        <!--<div class="box-margin-top">-->
+        <div v-if="topSelect[0].isCurrent">
+          <template v-if="collectListErrand.length>0">
+            <template v-for="(item,index) in collectListErrand">
+              <div class="border-bottom marTop">
+                <CellSwipeErrand :rightFun="testFun" :data="item"></CellSwipeErrand>
+              </div>
+            </template>
+          </template>
+          <template v-else>
+            <div style="text-align: center;margin-top: .2rem">
+              暂无收藏内容
+            </div>
+          </template>
+        </div>
+        <div v-else>
+          <template v-for="(item,index) in collectList">
+            <div class="border-bottom">
+              <CellSwipe :title="item.orgName" :rightFun="testFun" label="2017-05-12" :type="2"></CellSwipe>
+            </div>
+          </template>
+        </div>
       </div>
-      <div v-else>
-        <template v-for="(item,index) in collectList">
-          <div class="border-bottom">
-            <CellSwipe :title="item.orgName" :rightFun="testFun" label="2017-05-12" :type="2"></CellSwipe>
-          </div>
-        </template>
-      </div>
-    </div>
   </div>
 </template>
 

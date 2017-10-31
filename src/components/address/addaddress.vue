@@ -35,7 +35,7 @@
   import  qs from "qs"
     export default {
         name: 'addaddress',
-        props:['addlist','selecedAddFun'],
+        props:['addlist'],
         components: {pickerCmp,'mint-button': Button},
         data() {
             return {
@@ -56,8 +56,6 @@
         },
         methods: {
           _selecedAddFun(){
-            this.selecedAddFun(this.addlist.addr_id);
-            let isDefault=(this.addlist.is_default=='Y')
             this.isDefault=!this.isDefault
             console.log( this.isDefault)
           },
@@ -96,10 +94,11 @@
               }),
               {Headers:{'content-type':'application/x-www-form-urlencoded'}}).then(res => {
               if(res.code==200){
+//                this.$emit('increment')
+                history.go(0)
               }
             })
-            this.$emit('increment')
-            history.go(0)
+
           },
         }
 
