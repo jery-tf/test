@@ -12,7 +12,7 @@ export default [
     },
   },
  {
-   path: '/aboutcmp/aboutlist/:id',
+   path: '/aboutcmp/aboutlist',
      name: 'aboutlist',
    component: views.AboutCmp.AblutList,
    meta:{

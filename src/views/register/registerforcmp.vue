@@ -95,12 +95,12 @@
         cmpphone: '',
         ispwd: '',
         address: '',
-        socialno: ''
+        socialno: '',
       }
     },
     components: {'mint-button': Button, AbleInput, pickerArea},
     created() {
-      this.listenToMyBoy()
+
     },
     methods: {
       selectAreaa(){
@@ -144,6 +144,7 @@
           this.addressInfo={}
         }
       },
+//      企业注册的正则验证非空验证以及请求接口
       registercmp() {
         let postId = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
         if (this.socialno == "") {

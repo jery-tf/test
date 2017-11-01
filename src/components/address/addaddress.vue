@@ -19,7 +19,6 @@
       <div class="addressorder"  :class="isDefault?'colorRed':''"  @click="_selecedAddFun" >
         <span>设为默认地址</span><i class="OAIndexIcon C2-check-R"></i>
       </div>
-
       <div class="box-margin-top">
         <mint-button type="primary" size="large" @click="addaddress(addlist)">保存</mint-button>
       </div>

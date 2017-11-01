@@ -24,15 +24,22 @@
       <div class="pname padding-container-lr">咨询内容</div>
       <textarea v-model="concultconts"></textarea>
     </div>
-    <div class="addressorder padding-container-lr pname consult">
+    <div class="addressorder padding-container-lr pname consult" :class="isopen?'colorRed':''" @click="isopendown">
       <span>是否公开</span><i class="OAIndexIcon C2-check-R"></i>
     </div>
     <div class="box-margin-top about top52">
       <mint-button type="primary" size="large" @click="subconsult">提交</mint-button>
     </div>
     <p class="autions">提示：本栏目接受办事群众和企业对进驻各级政务服务中心政务服务大厅的部门行政审批服务过程中有关法规，政策程序等问题的咨询</p>
-    <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
-                :pickermore="list"></pickerArea>
+    <!--<pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"-->
+                <!--:pickermore="list"></pickerArea>-->
+    <mt-popup
+      v-model="popupVisibles"
+      popup-transition="popup-fade"
+      position="center">
+      <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
+                  :pickermore="list"  :popupVisibles="popupVisibles"></pickerArea>
+    </mt-popup>
     <mt-popup
       v-model="popupVisible"
       popup-transition="popup-fade"
@@ -69,18 +76,21 @@
         District: null,
         Street: null,
         colorRed: false,
+        areacode:'',
         isDefault: false,
         pname: '',
         phone: '',
         list: {},
         popupVisible: false,
+        popupVisibles:false,
         cityshow: [],
         Apartment: null,
         Sumshine: null,
         proshow: [],
         isdep:true,
-        consulttitle:null,
-        concultconts:null
+        consulttitle:'',
+        concultconts:'',
+      isopen:true
       }
     },
     created() {
@@ -91,10 +101,17 @@
       console.log(this.userid)
     },
     methods: {
+      isopendown(){
+        this.isopen=!this.isopen
+      },
+      closedown(){
+        this.popupVisibles = !this.popupVisibles
+      },
       close() {
         this.popupVisible = !this.popupVisible
       },
       selected() {
+        this.popupVisibles=!this.popupVisibles
         this.showChose = !this.showChose
         Api.pickerAreaApi.pickerAreaf().then(res => {
           this.list = res
@@ -107,29 +124,34 @@
           this.City = addressInfo.city.value
           this.District = addressInfo.district.value
           this.Street = addressInfo.street.value
+          this.areacode=addressInfo.street.id
           this.addressInfo = {}
         }
         else if (addressInfo.district) {
           this.Province = addressInfo.province.value
           this.City = addressInfo.city.value
           this.District = addressInfo.district.value
+          this.areacode=addressInfo.district.id
           this.Street = ''
           this.addressInfo = {}
         }
         else if (addressInfo.city) {
           this.Province = addressInfo.province.value
           this.City = addressInfo.city.value
+          this.areacode=addressInfo.city.id
           this.District = ''
           this.Street = ''
           this.addressInfo = {}
         }
         else if (addressInfo.province) {
           this.Province = addressInfo.province.value
+          this.areacode=addressInfo.province.id
           this.City = ''
           this.District = ''
           this.Street = ''
           this.addressInfo = {}
         }
+        this.popupVisibles = false
       },
       department() {
         this.popupVisible = !this.popupVisible
@@ -184,7 +206,28 @@
         })
       },
       subconsult(){
-        let content={consultTitle:this.consulttitle,
+        if(this.pname==''){
+          Toast("输入姓名不能为空")
+          return
+        }
+        else if(this.phone==''){
+          Toast("请输入输入手机号码")
+          return
+        }
+        else if(this.Apartment==''){
+          Toast("请选择您要咨询的部门")
+          return
+        }
+        else if(this.consulttitle==''){
+          Toast("请输入您要咨询的主题")
+          return
+        }
+        else if(this.concultconts==''){
+          Toast("咨询内容不能为空")
+          return
+        }
+        let content={
+          consultTitle:this.consulttitle,
           orgId:this.apartment,
           orgName:this.Apartment,
           applyId:this.userid,
@@ -192,15 +235,15 @@
           approveId:this.sumshine,
           consultContent:this.concultconts,
           applyPhone:this.phone,
-          areaCode:'5',
+          areaCode:this.areacode,
           applyType:'1',
-          isOpen:'Y',
+          isOpen:this.isopen==true?'Y':'N',
           consultSource:'4'
-
         }
         Api.consultApi.PutConsult(content).then(res=>{
          if(res.code=200){
            alert('咨询成功，即将跳转')
+           this.$router.push('/mySelfInfo')
          }
         })
       }
@@ -301,6 +344,9 @@
     }
     .mint-field-core{
       font-size: 0.24rem;
+    }
+    .colorRed{
+      color:#ff3e3e;
     }
   }
 

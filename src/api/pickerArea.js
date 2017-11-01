@@ -7,6 +7,5 @@ export const pickerAreaf = (params,config)=>axiosGet(`/uop/v1/orgs/${1}`,params,
 export const pickerAreas= (nameid,params,config)=>axiosGet(`/uop/v1/orgs/${nameid}/children${reqParms(params)}`,params,config);
 const reqParms = (params)=>{
   let qs = ['categoryId=10-Z'];
-
   return '?'+qs;
 };

@@ -63,7 +63,6 @@
             ).then(res => {
               if (res.code == "703") {
                 Toast(res.info)
-
               }
               else if(res.code=="200"){
                 Api.registerApi.uableRegi(
@@ -73,7 +72,7 @@
                   },
                   {Headers:{'content-type':'application/x-www-form-urlencoded'}}
                 ).then(res => {
-                  if (res.code == "100") {
+                  if (res.code == "205") {
                     Util.other.setLocalStorage('newPersonId',res.data[0]);
                     this.dis=true;
                     this.$router.push("/setting/forgetpwdnum")

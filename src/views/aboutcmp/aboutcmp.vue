@@ -33,10 +33,11 @@
        <h5 class="padding-container-lr">授权用户</h5>
      </div>
     <div class="accrepeo" v-for="item in list">
-      <router-link v-bind="{to:'/aboutcmp/aboutlist/'+item.id}">
-        <div class="peo" >
-          <img src="../../assets/img/hport.png" alt=""><span>{{item.listname}}</span>
-          <div class="waite" :style="`background:${item.backgroundcolor};color:${item.colorcolorfor}`">{{item.idcar}}</div>
+      <!--<router-link v-bind="{to:'/aboutcmp/aboutlist/'+item.id}">-->
+      <router-link :to="{ path: '/aboutcmp/aboutlist', params: { id: item.id, aupe_idcard: item.aupe_idcard }}">
+        <div class="peo" @click="getunicon">
+          <img src="../../assets/img/hport.png"><span>{{item.aupe_name}}</span>
+          <div class="waite" :style="`background:${item.backgroundcolor};color:${item.colorcolorfor}`">{{item.star}}</div>
         </div>
       </router-link>
       <!--<div class="peo">-->
@@ -73,32 +74,71 @@
 </template>
 
 <script>
+  import Api from '../../api'
+  import {Swipe, SwipeItem,Toast} from 'mint-ui';
+  import Util from '../../util'
+  import  qs from "qs"
     export default {
         name: 'aboutcmp',
         components: {},
         data() {
             return {
               list:[
-                {id:1,listname:'陈在人',idcar:'法定代表人',backgroundcolor:'#e7f3fd',colorcolorfor:'#108ee9'},
-                {id:2,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
-                {id:3,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
-                {id:4,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
-                {id:5,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
-                {id:6,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
-                {id:7,listname:'陈在人',idcar:'二级被授权人',backgroundcolor:'#feeeed',colorcolorfor:'#f15a4a'},
-                {id:8,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
+//                {id:1,listname:'陈在人',idcar:'法定代表人',backgroundcolor:'#e7f3fd',colorcolorfor:'#108ee9'},
+//                {id:2,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
+//                {id:3,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
+//                {id:4,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
+//                {id:5,listname:'陈在人',idcar:'一级被授权人',backgroundcolor:'#edf6f4',colorcolorfor:'#29ab91'},
+//                {id:6,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
+//                {id:7,listname:'陈在人',idcar:'二级被授权人',backgroundcolor:'#feeeed',colorcolorfor:'#f15a4a'},
+//                {id:8,listname:'陈在人',idcar:'三级被授权人',backgroundcolor:'#fff5e9',colorcolorfor:'#fc992c'},
               ],
               idcard:1
             }
         },
         created() {
           this.idcard = this.$route.params.id;
+          this.getauthorise()
         },
-        methods: {}
+        methods: {
+          getauthorise(){
+            Api.registerApi.getauthorise(
+              qs.stringify({
+                aupe_parentid: this.idcard
+              }),
+              {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res => {
+              if(res.code=200){
+                console.log(res)
+                let arr = [];
+                for (let item of res.list) {
+                  let _item = {
+                    aupe_name: item.aupe_name, star: '法定代表人',aupe_parentname:item.aupe_parentname,
+                    status: item.aupe_state,id:item.id,aupe_idcard:item.aupe_idcard
+                  };
+                  arr.push(_item);
+                }
+                this.list = arr;
+                console.log(this.list)
+              }
+            })
+          },
+          getunicon(){
+//            console.log('-----',this.list.aupe_idcard)
+//           Api.registerApi.getunicon(
+//             qs.stringify({
+//               aupe_parentid:this.item.id,
+//               aupe_idcard:this.item.aupe_idcard
+//             }),
+//             {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res=>{
+//               if(res.code=200){
+//                 console.log(res)
+//               }
+//           })
+          }
+        }
 
     }
 </script>
-
 <style scoped lang="less" rel="stylesheet/less">
         .cmp{
           width: 7.2rem;
