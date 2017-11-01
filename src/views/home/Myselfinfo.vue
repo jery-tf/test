@@ -125,7 +125,6 @@
     </div>
   </div>
 </template>
-
 <script>
   import Api from '../../api'
   import $ from 'jquery'
@@ -234,26 +233,25 @@
       },
       getabcmp(){
         this.selfid = JSON.parse(localStorage.getItem('userInfo')).certificateNum
-//        console.log(this.selfid)
+        console.log(this.selfid)
         Api.registerApi.getabcmp(
           qs.stringify({
-            aupe_idcard:'430181198912091251'
+            aupe_idcard:'43010119870516123X'
 
           }),
         {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res => {
-          console.log(res)
-//          if(res.code=200){
-//              console.log(res)
-//              let arr = [];
-//              for (let item of res.list) {
-//                let _item = {
-//                  aupe_parentname: item.aupe_parentname, star: '法定代表人',aupe_time:item.aupe_time,
-//                  status: item.aupe_state,aupe_parentid:item.aupe_parentid,aupe_state:item.aupe_state
-//                };
-//                arr.push(_item);
-//              }
-//              this.list = arr;
-//            }
+          if(res.code=200){
+              console.log(res)
+              let arr = [];
+              for (let item of res.list) {
+                let _item = {
+                  aupe_parentname: item.aupe_parentname, star: '法定代表人',aupe_time:item.aupe_time,
+                  status: item.aupe_state,aupe_parentid:item.aupe_parentid,aupe_state:item.aupe_state
+                };
+                arr.push(_item);
+              }
+              this.list = arr;
+            }
         })
       }
     },

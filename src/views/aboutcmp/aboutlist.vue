@@ -27,6 +27,7 @@
     data() {
       return {
         id: 1,
+        arr:[],
         list: [
           {classn:'C2-ertongshouyang',backgroundcolor:'#29ab91',title:'结婚生育',datatime:'2017-02-20-2017-06-15'},
           {classn:'C2-jiaoyu',backgroundcolor:'#fc992c',title:'教育培训',datatime:'2017-02-20-2017-06-15'},
@@ -43,18 +44,24 @@
       this.getunicon()
     },
     methods: {
-//      getunicon(){
-//         Api.registerApi.getunicon(
-//             qs.stringify({
-//               aupe_parentid:123456,
-//               aupe_idcard: this.aupe_idcard
-//             }),
-//             {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res=>{
-//               if(res.code=200){
-//                 console.log('----',res)
-//               }
-//           })
-//      }
+      getunicon(){
+         Api.registerApi.getunicon(
+             qs.stringify({
+               aupe_parentid:123456,
+               aupe_idcard: this.aupe_idcard
+             }),
+             {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res=>{
+               if(res.code=200){
+                 console.log(res)
+                let str=res.list.aupe_zt
+                 console.log(str)
+                 let arr=[]
+                 arr.push(str)
+                 console.log(arr)
+               }
+
+           })
+      }
     }
   }
 </script>
