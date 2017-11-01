@@ -38,10 +38,10 @@ AxiosIns.interceptors.request.use(config => {
 })
 
 AxiosIns.interceptors.response.use(response => {
-  // for (let t of timer) {
-  //   clearTimeout(t);
-  // }
-  // MintUI.Indicator.close();
+  for (let t of timer) {
+    clearTimeout(t);
+  }
+  MintUI.Indicator.close();
   // if(isLoading){
   //   MintUI.Indicator.close();
   //   isLoading = false;
