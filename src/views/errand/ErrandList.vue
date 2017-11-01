@@ -77,10 +77,19 @@
       }
     },
     created(){
+      //获取定位信息 @todo 临时 改成获取微信位置
+      let _addressInfo = Util.other.getSessionStorage('errandAddressInfo');
+      if(_addressInfo){
+        this.addressInfo = _addressInfo;
+      }else{
+        this.addressInfo = {id:'4',value:'省本级'};  //地址默认
+      }
+
+      this.selectedId = Util.other.getSessionStorage('errandLeftId');
+
       this.getLeftList(this.errandName);
 
-      //获取定位信息 @todo 临时 改成获取微信位置
-      this.addressInfo = Util.other.getSessionStorage('errandAddressInfo');
+
       Api.pickerAreaApi.pickerAreaf().then(res => {
 //        console.log('pickerAreaf-->', JSON.parse(JSON.stringify(res)));
         this.pickermoreList = res;
@@ -149,9 +158,9 @@
             serveOjbect = 1;
           }
 
-          if(!this.addressInfo){
-            this.addressInfo = Util.other.getSessionStorage('errandAddressInfo');
-          }
+//          if(!this.addressInfo){
+//            this.addressInfo = Util.other.getSessionStorage('errandAddressInfo');
+//          }
 
           Api.errandApi.getOrgsList(this.addressInfo.id, {cascade: false, categoryId: "10-Z", serveOjbect}).then(res => {
             console.log('getOrgsList', res);
@@ -199,7 +208,10 @@
       //点击左侧列表 单元格
       selecedLeftFun(id){
         console.log('i---d', id)
+
+        Util.other.setSessionStorage('errandLeftId',id);
         this.selectedId = id;
+
 
         //缓存用的key
         let cacheKey = `${this.errandName}-${id}`;

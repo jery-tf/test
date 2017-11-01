@@ -215,6 +215,7 @@
     computed: {
       //事项类型
       CdictionariesXZLB(){
+        console.log('this.dictionariesXZLB',this.dictionariesXZLB,this.approve.typeCode);
         if (this.dictionariesXZLB) {
           for (let i in this.dictionariesXZLB) {
             if (this.dictionariesXZLB[i].dictdataName == this.approve.typeCode) {
@@ -222,7 +223,7 @@
             }
           }
         }
-        return '查询中...'
+        return '';
       },
 //      办件形式
       CtransactionFrom(){
