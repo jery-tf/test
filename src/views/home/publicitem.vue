@@ -87,11 +87,8 @@
           },
           {headers: {'content-type': 'application/x-www-form-urlencoded'}}
         ).then(res => {
-//          console.log(res.data)
           this.list = res.data
-//        else if(res.code=="200"){
-//          this.$router.push("/register/registerinfo");
-//        }
+
         })
         Api.getnewsApi.getnewsinfo(
           {
@@ -107,6 +104,7 @@
           {headers: {'content-type': 'application/x-www-form-urlencoded'}}
         ).then(res => {
           if (res.resp_code == "1") {
+            console.log(res)
             this.list1 = res.data
           }
 //        else if(res.code=="200"){

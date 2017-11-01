@@ -24,7 +24,6 @@
     components: {Btncommon},
     data() {
       return {
-        dis:true,
         telphone:''
       }
     },
@@ -34,6 +33,7 @@
     computed:{
       totelName(){
         const telphone= JSON.parse(localStorage.getItem('newphone'));
+        console.log(telphone)
         this.telphone=telphone
         let start = telphone.slice(0,3);
         let end = telphone.slice(-2);
