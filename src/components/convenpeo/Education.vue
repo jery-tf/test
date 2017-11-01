@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bhi">
     <div class="range"  v-for="item in datainfoto"  >
       <h6>{{item.name}}</h6>
       <div class="allbtn" v-for="(item1,index) in datainfolist" :key="index"   v-if="item.channelId==21">
@@ -57,84 +57,91 @@
   }
 </script>
 <style lang="less" scoped>
-  .range {
-    padding: 0.26rem 0.24rem;
-    margin-top: 0.24rem;
-    background-color: #fff;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    h6 {
-      font-size: 0.24rem;
-      color: #333;
-      font-weight: 400;
-      padding-bottom: 0.4rem;
-      font-family: "微软雅黑";
-      width: 4.59rem;
-    }
-    .allbtn {
-      text-align: center;
-      .btn {
-        display: inline-block;
-        border: 0;
-        outline: 0;
-        border-radius: 0.1rem;
-        height: 1.18rem;
-        line-height: 1.18rem;
-        border: 1px solid #cecece;
-        background-color: #fff;
-        margin-bottom: 0.24rem;
+  .bhi{
+    position: relative;
+    .range {
+      padding: 0.26rem 0.24rem;
+      margin-top: 0.24rem;
+      background-color: #fff;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      h6 {
         font-size: 0.24rem;
         color: #333;
+        font-weight: 400;
+        padding-bottom: 0.4rem;
+        font-family: "微软雅黑";
+        width: 4.59rem;
+      }
+      .allbtn {
+        text-align: center;
+        .btn {
+          display: inline-block;
+          border: 0;
+          outline: 0;
+          border-radius: 0.1rem;
+          height: 1.18rem;
+          line-height: 1.18rem;
+          border: 1px solid #cecece;
+          background-color: #fff;
+          margin-bottom: 0.24rem;
+          font-size: 0.24rem;
+          color: #333;
+        }
       }
     }
-  }
-  .fullclass {
-    width: 4.59rem;
-  }
-  .otherclass {
-    width: 2.22rem;
-  }
-  .modal{
-    width: 6.54rem;
-    height: 7.14rem;
-   h3{
-     font-weight: 400;
-     text-align: center;
-     font-size: 0.32rem;
-     color: #333;
-     height: 0.92rem;
-     line-height: 0.92rem ;
-     border-bottom: 1px solid #d9d9d9;
-     .C2-guanbi1{
-       font-size: 0.32rem;
-       position: absolute;
-       top:0.26rem;
-       left: 0.26rem;
-     }
-   }
-    ul{
-      margin-top: 0.38rem;
-      margin-left: 0.26rem;
-      margin-right: 0.53rem;
-      font-family: "微软雅黑";
-      li{
-        vertical-align: bottom;
-        padding-left: 0.22rem;
-        font-size: 0.24rem;
-        color: #666;
-        line-height:0.4rem;
-        position: relative;
-        .C2-ZHicon-{
-          font-size: 0.07rem;
-          display: inline-block;
+    .fullclass {
+      width: 4.59rem;
+    }
+    .otherclass {
+      width: 2.22rem;
+    }
+    .modal{
+      position: absolute;
+      top:5rem;
+      left:2.5rem;
+      width: 4rem;
+      height: 7.14rem;
+      h3{
+        font-weight: 400;
+        text-align: center;
+        font-size: 0.32rem;
+        color: #333;
+        height: 0.92rem;
+        line-height: 0.92rem ;
+        border-bottom: 1px solid #d9d9d9;
+        .C2-guanbi1{
+          font-size: 0.32rem;
           position: absolute;
-          top:0;
-          left:0;
+          top:0.26rem;
+          left: 0.26rem;
+        }
+      }
+      ul{
+        margin-top: 0.38rem;
+        margin-left: 0.26rem;
+        margin-right: 0.53rem;
+        font-family: "微软雅黑";
+        li{
+          vertical-align: bottom;
+          padding-left: 0.22rem;
+          font-size: 0.24rem;
+          color: #666;
+          line-height:0.4rem;
+          position: relative;
+          .C2-ZHicon-{
+            font-size: 0.07rem;
+            display: inline-block;
+            position: absolute;
+            top:0;
+            left:0;
+          }
         }
       }
     }
   }
+
 </style>
 

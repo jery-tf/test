@@ -6,16 +6,14 @@
   <div class="h100 doubleListView bm">
     <LeftView :dataList="leftDataList" :liClickFun="selecedLeftFun"
               :selectedId="selectedId">
-      <div class="flex1 right">
+      <div class="flex1">
         <template :selectedId="selectedId">
           <Education :datainfoto="list" :datainfolist="list1"></Education>
         </template>
       </div>
     </LeftView>
-
   </div>
 </template>
-
 <script>
   import LeftView from 'components/convenpeo/LeftView.vue'
   import Education from 'components/convenpeo/Education.vue'
