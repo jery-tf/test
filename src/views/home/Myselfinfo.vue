@@ -78,15 +78,15 @@
           <!--<em class="OAIndexIcon C2-next"></em>-->
         <!--</div>-->
       <router-link to="/setting/paycost">
-        <div class="particulars">
-          <span>
-             <i class="OAIndexIcon C2-qianbao"></i>公共缴费
-          </span>
-          <em class="OAIndexIcon C2-next"></em>
-        </div>
+        <!--<div class="particulars">-->
+          <!--<span>-->
+             <!--<i class="OAIndexIcon C2-qianbao"></i>公共缴费-->
+          <!--</span>-->
+          <!--<em class="OAIndexIcon C2-next"></em>-->
+        <!--</div>-->
       </router-link>
       <router-link to="/setting/consulting">
-        <div class="particulars company setting">
+        <div class="particulars company">
         <span>
            <i class="OAIndexIcon C2-tousu"></i>我的咨询
         </span>
@@ -96,18 +96,18 @@
 
     </div>
     <div class="parttop padding-container-lr">
-      <div class="particulars " @click="authentication">
+      <div class="particulars setting" @click="authentication">
         <span>
            <i class="OAIndexIcon C2-shimingrenzheng"></i>实人认证
         </span>
         <em class="OAIndexIcon C2-next"></em>
       </div>
-      <div class="particulars " @click="authenticationTwo">
-        <span>
-           <i class="OAIndexIcon C2-shimingrenzheng"></i>二次认证
-        </span>
-        <em class="OAIndexIcon C2-next"></em>
-      </div>
+      <!--<div class="particulars " @click="authenticationTwo">-->
+        <!--<span>-->
+           <!--<i class="OAIndexIcon C2-shimingrenzheng"></i>二次认证-->
+        <!--</span>-->
+        <!--<em class="OAIndexIcon C2-next"></em>-->
+      <!--</div>-->
       <!--<div class="particulars">-->
         <!--<span>-->
            <!--<i class="OAIndexIcon C2-bangzhu"></i>帮助与反馈-->
@@ -115,7 +115,7 @@
         <!--<em class="OAIndexIcon C2-next"></em>-->
       <!--</div>-->
       <router-link to="/setting/setting">
-        <div class="particulars company setting">
+        <div class="particulars company ">
         <span>
            <i class="OAIndexIcon C2-shezhi2"></i>设置
         </span>
@@ -454,7 +454,7 @@
     background-color: #fff;
     font-size: 0.32rem;
     color: #333;
-    border-bottom: 1px solid #d9d9d9;
+    /*border-bottom: 1px solid #d9d9d9;*/
     font-family: "微软雅黑";
     position: relative;
     .C2-shijian, .C2-qianbao, .C2-tousu, .C2-shimingrenzheng, .C2-bangzhu, .C2-shezhi2 {
@@ -494,6 +494,7 @@
     margin-bottom: 0.24rem;
   }
 
-  .active {
+  .setting {
+    border-bottom: 1px solid #d9d9d9;
   }
 </style>

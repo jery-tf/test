@@ -11,7 +11,7 @@ export default
     name: 'newsmore',
     component: views.Gk.Publicmore,
     meta:{
-      title:'查看更多'
+      title:'通知公告'
     },
   },
 
@@ -20,7 +20,7 @@ export default
     name: 'newsmoreone',
     component: views.Gk.Publicmore1,
     meta:{
-      title:'查看更多'
+      title:'政府动态'
     },
   },
   {
@@ -28,7 +28,7 @@ export default
     name: 'newsmoretwo',
     component: views.Gk.Publicmore2,
     meta:{
-      title:'查看更多'
+      title:'媒体聚焦'
     },
   }
 
