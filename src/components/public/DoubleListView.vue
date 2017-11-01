@@ -68,6 +68,7 @@
       .li.active {
         background: #f2f2f2;
         color: #13b7f6;
+        margin-right: -1px;
       }
       p{
         width: 100%;
