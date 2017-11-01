@@ -55,7 +55,6 @@
       top:0;
       bottom: 0;
       background-color: #fff;
-      /*z-index: -1;*/
       .li {
         display: flex;
         align-items: center;
