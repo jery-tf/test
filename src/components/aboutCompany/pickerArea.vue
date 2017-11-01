@@ -6,11 +6,11 @@
   <!--居住地址三级联动选项-->
   <section class="showChose" v-show="showChose">
     <section class="address">
-      <section class="title addresst">
-        <h4>企业地址
-          <i class="C2-guanbi1 OAIndexIcon" @click="closeAdd()"></i>
-        </h4>
-      </section>
+      <!--<section class="title addresst">-->
+        <!--<h4>企业地址-->
+          <!--<i class="C2-guanbi1 OAIndexIcon" @click="closeAdd()"></i>-->
+        <!--</h4>-->
+      <!--</section>-->
       <section class="title" :province1="this.Province">
         <!--<div class="area" @click="provinceSelected()">{{City?City:'请选择'}}</div>-->
         <div class="area" @click="provinceSelected()" :class="Province?'':'active'">{{Province ? Province : '请选择'}}
@@ -41,7 +41,6 @@
     </section>
   </section>
 </template>
-
 <script>
   import Api from '../../api'
   import Util from '../../util'
@@ -4726,13 +4725,12 @@
 
   .showChose {
     width: 100%;
-    height: 100%;
     position: fixed;
     bottom:0;
     left: 0;
     z-index: 120;
     background: rgba(0, 0, 0, 0.5);
-    height: 9rem;
+    height: 8rem;
   }
 
   .address {
@@ -4742,7 +4740,7 @@
     z-index: 121;
     background-color: #fff;
     width: 100%;
-    height: 9rem;
+    height: 8rem;
   }
 
   .title {

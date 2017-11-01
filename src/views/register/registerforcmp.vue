@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="addresslist">
     <div class="cmp">
       <div class="regi padding-container-lr common">
         <em>企业类型</em><select name="企业类型" id="select_k1" class="xla_k">
@@ -58,8 +58,18 @@
     <div class="top52">
       <mint-button type="primary" size="large" @click="registercmp">提交</mint-button>
     </div>
-    <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
-                :pickermore="list" :selectAreaa="selectAreaa"></pickerArea>
+    <!--<pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"-->
+                <!--:pickermore="list" :selectAreaa="selectAreaa"></pickerArea>-->
+    <mt-popup
+      v-model="popupVisible"
+      popup-transition="popup-fade"
+      position="bottom">
+        <h3 class="addresstitle">企业地址<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
+      <template>
+        <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
+                    :pickermore="list" :selectAreaa="selectAreaa"></pickerArea>
+      </template>
+    </mt-popup>
   </div>
 </template>
 <script>
@@ -96,6 +106,7 @@
         ispwd: '',
         address: '',
         socialno: '',
+        popupVisible:false,
       }
     },
     components: {'mint-button': Button, AbleInput, pickerArea},
@@ -103,10 +114,14 @@
 
     },
     methods: {
+      close(){
+        this.isshowarea(false);
+      },
       selectAreaa(){
         console.log(address)
       },
       selected() {
+        this.isshowarea(true);
         this.showChose = !this.showChose
         Api.pickerAreaApi.pickerAreaf().then(res => {
           this.list = res
@@ -143,6 +158,10 @@
           this.Street=''
           this.addressInfo={}
         }
+      },
+      //打开关闭添加修改模态框
+      isshowarea(bool){
+        this.popupVisible = bool;
       },
 //      企业注册的正则验证非空验证以及请求接口
       registercmp() {
@@ -202,120 +221,142 @@
           }),
           {Headers: {'content-type': 'application/x-www-form-urlencoded'}}
         ).then(res => {
-//          if (res.code = 200) {
-//
-//          } else {
-//            alert(res.info)
-//          }
-          console.log(res)
-//          Toast(res)
-//          this.$router.push('/')
+          if (res.code = 200) {
+            Toast(res.info)
+            this.$router.push('/')
+          } else {
+            alert(res.info)
+          }
         })
       }
     },
   }
 </script>
 <style lang='less'>
-  .cmp {
-    margin: 0.19rem 0;
-    width: 7.2rem;
-    background-color: #fff;
+  .addresslist{
+    .cmp {
+      margin: 0.19rem 0;
+      width: 7.2rem;
+      background-color: #fff;
 
-    .xla_k {
-      width: 4.7rem;
-      height: 0.98rem;
+      .xla_k {
+        width: 4.7rem;
+        height: 0.98rem;
+        border: 0;
+        outline: 0;
+        font-size: 0.23rem;
+        color: #333;
+      }
+    }
+
+    .regi,
+    .ableipt {
+      font-size: 0;
+      width: 7.2rem;
+      height: 0.97rem;
+      line-height: 0.97rem;
+      border-top: 1px solid #d9d9d9;
+      background-color: #fff;
+      position: relative;
+      .ipt {
+        .C2-next {
+          color: #c9c9c9;
+          position: absolute;
+          top: 0.35rem;
+          right: 0.24rem;
+        }
+      }
+      .mint-cell-wrapper {
+        padding: 0 0.24rem;
+        .mint-field-core {
+          font-size: 0.23rem;
+        }
+      }
+      .mint-field {
+        .mint-cell-text {
+          font-size: 0.23rem;
+        }
+      }
+    }
+
+    .idform {
       border: 0;
       outline: 0;
+      width: 3rem;
+      height: 0.8rem;
       font-size: 0.23rem;
       color: #333;
     }
-  }
 
-  .regi,
-  .ableipt {
-    font-size: 0;
-    width: 7.2rem;
-    height: 0.97rem;
-    line-height: 0.97rem;
-    border-top: 1px solid #d9d9d9;
-    background-color: #fff;
-    position: relative;
-    .ipt {
-      .C2-next {
-        color: #c9c9c9;
-        position: absolute;
-        top: 0.35rem;
-        right: 0.24rem;
-      }
+    .common {
+      font-size: 0.23rem;
+      color: #333;
+      padding-left: 0.24rem;
     }
-    .mint-cell-wrapper {
-      padding: 0 0.24rem;
-      .mint-field-core {
-        font-size: 0.23rem;
-      }
-    }
-    .mint-field {
-      .mint-cell-text {
-        font-size: 0.23rem;
-      }
-    }
-  }
 
-  .idform {
-    border: 0;
-    outline: 0;
-    width: 3rem;
-    height: 0.8rem;
-    font-size: 0.23rem;
-    color: #333;
-  }
-
-  .common {
-    font-size: 0.23rem;
-    color: #333;
-    padding-left: 0.24rem;
-  }
-
-  em {
-    display: inline-block;
-    font-style: normal;
-    width: 1.95rem;
-  }
-
-  .telp {
-    margin-top: 0.19rem;
-    background: #fff;
-  }
-
-  .yan {
-    width: 7.2rem;
-    height: 1.07rem;
-    line-height: 1.07rem;
-    background-color: #fff;
-    border: 1px solid #d9d9d9;
-    strong {
-      font-weight: 400;
+    em {
       display: inline-block;
-      width: 1.88rem;
-    }
-    .ipt {
-      border: 0;
-      outline: 0;
-      height: 0.8rem;
-      font-size: .28rem;
-      color: #aaa;
-      width: 2.36rem;
-    }
-    .btn {
-      border: 1px solid #a0a0a0;
-      outline: 0;
-      background-color: #f8f8f8;
-      width: 1.82rem;
-      height: 0.68rem;
-      vertical-align: 20%;
-      border-radius: 10px;
-      font-size: 0.2rem;
+      font-style: normal;
+      width: 1.95rem;
     }
 
+    .telp {
+      margin-top: 0.19rem;
+      background: #fff;
+    }
+
+    .yan {
+      width: 7.2rem;
+      height: 1.07rem;
+      line-height: 1.07rem;
+      background-color: #fff;
+      border: 1px solid #d9d9d9;
+      strong {
+        font-weight: 400;
+        display: inline-block;
+        width: 1.88rem;
+      }
+      .ipt {
+        border: 0;
+        outline: 0;
+        height: 0.8rem;
+        font-size: .28rem;
+        color: #aaa;
+        width: 2.36rem;
+      }
+      .btn {
+        border: 1px solid #a0a0a0;
+        outline: 0;
+        background-color: #f8f8f8;
+        width: 1.82rem;
+        height: 0.68rem;
+        vertical-align: 20%;
+        border-radius: 10px;
+        font-size: 0.2rem;
+      }
+    }
+    .mint-popup{
+      width: 7.2rem;
+      height: 9rem;
+    }
+    .addresstitle{
+      width: 7.2rem;
+      height: 1rem;
+      line-height: 1rem;
+      border-bottom: 1px solid #ededed;
+      position: relative;
+      text-align: center;
+      font-weight: 400;
+      line-height:1rem;
+      border-bottom: 1px solid #d9d9d9;
+      font-size: 0.38rem;
+      .C2-guanbi1 {
+        position: absolute;
+        top:0.35rem;
+        right:0.24rem;
+        font-size: 0.45rem;
+      }
+    }
   }
+
 </style>

@@ -17,6 +17,10 @@
 </template>
 
 <script>
+  import Api from '../../api'
+  import {Swipe, SwipeItem,Toast} from 'mint-ui';
+  import Util from '../../util'
+  import  qs from "qs"
   export default {
     name: 'aboutlist',
     components: {},
@@ -35,13 +39,25 @@
     },
     created() {
       this.id = this.$route.params.id;
-      console.log(this.id)
+      this.aupe_idcard= this.$route.params.aupe_idcard
+      this.getunicon()
     },
-    methods: {}
-
+    methods: {
+//      getunicon(){
+//         Api.registerApi.getunicon(
+//             qs.stringify({
+//               aupe_parentid:123456,
+//               aupe_idcard: this.aupe_idcard
+//             }),
+//             {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res=>{
+//               if(res.code=200){
+//                 console.log('----',res)
+//               }
+//           })
+//      }
+    }
   }
 </script>
-
 <style scoped lang="less" rel="stylesheet/less">
   .tmp {
     background-color: #fff;

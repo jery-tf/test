@@ -34,8 +34,8 @@
      </div>
     <div class="accrepeo" v-for="item in list">
       <!--<router-link v-bind="{to:'/aboutcmp/aboutlist/'+item.id}">-->
-      <router-link :to="{ path: '/aboutcmp/aboutlist', params: { id: item.id, aupe_idcard: item.aupe_idcard }}">
-        <div class="peo" @click="getunicon">
+      <router-link :to="{ name:'aboutlist', params: {id:item.id,aupe_idcard:item.aupe_idcard}}">
+        <div class="peo" >
           <img src="../../assets/img/hport.png"><span>{{item.aupe_name}}</span>
           <div class="waite" :style="`background:${item.backgroundcolor};color:${item.colorcolorfor}`">{{item.star}}</div>
         </div>
@@ -122,19 +122,6 @@
               }
             })
           },
-          getunicon(){
-//            console.log('-----',this.list.aupe_idcard)
-//           Api.registerApi.getunicon(
-//             qs.stringify({
-//               aupe_parentid:this.item.id,
-//               aupe_idcard:this.item.aupe_idcard
-//             }),
-//             {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res=>{
-//               if(res.code=200){
-//                 console.log(res)
-//               }
-//           })
-          }
         }
 
     }

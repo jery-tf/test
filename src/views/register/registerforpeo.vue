@@ -48,11 +48,11 @@
         ).then(res => {
           if (res.code == "100") {
             Toast(res.info);
-            this.dis=true
-            return
-          }else if(res.code =="200"){
-//            Toast(res.info)
             this.dis=false
+            return
+          }else if(res.code =="205"){
+            Toast(res.info)
+            this.dis=true
             return
           }
         })
@@ -86,8 +86,6 @@
             this.$router.push("/register/registerinfo");
           }
         })
-        this.$router.push("/register/registerinfo");
-
       }
     }
 
