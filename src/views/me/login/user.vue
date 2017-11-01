@@ -6,7 +6,7 @@
       <img class="name" src="../../../assets/img/logoName.png">
     </div>
     <div class="top100">
-      <Field placeholder="用户名/省份证/手机号码" v-model="userName"></Field>
+      <Field placeholder="身份证/手机号码" v-model="userName"></Field>
     </div>
     <div>
       <Field placeholder="登录密码" v-model="password" :disableClear="true"
@@ -30,7 +30,7 @@
 
 <script>
   import LoginTop from '../../../components/login/LoginTop.vue'
-  import {Field, Button,Toset,Toast} from 'mint-ui'
+  import MintUI,{Field, Button,Toset,Toast} from 'mint-ui'
   import Api from '../../../api'
   import Util from '../../../util'
   import Config from '../../../config'
@@ -61,6 +61,7 @@
         let _this = this;
         content = {content:JSON.stringify(content)};
         //获取登录加密
+        MintUI.Indicator.open('请稍后...');
         Api.loginApi.getLoginAes(content).then(res => {
           let data = {clientId:Config.clientId,s:res};
           //登录
@@ -69,14 +70,17 @@
             Api.userApi.getUserInfo({access_token: res.access_token}).then(res => {
               //获取用户详情
               Api.userApi.getUserDetails(res.userId).then(res=>{
+                MintUI.Indicator.close();
                 Util.other.setLocalStorage('userDetails',res);
                 //跳转页面
                 _this.toNextPage();
               }).catch(err=>{ //获取用户详情失败
+//                MintUI.Indicator.close();
                 console.log('获取用户详情失败');
               });
               Util.user.setUserInfo(res);
             }).catch(err=>{ //获取用户信息失败
+//              MintUI.Indicator.close();
               console.log('获取用户详情失败');
             });
             let tokenTime = new Date().getTime();
@@ -86,7 +90,13 @@
             Util.login.setToken(res);
           }).catch(err=>{  //登录失败
             console.log('登录失败,原因->',err.errorMessage);
-            Toast(err.errorMessage);
+//            MintUI.Indicator.close();
+            if(err.errorMessage){
+              Toast(err.errorMessage);
+            }else{
+              Toast('登录超时');
+            }
+
           })
         })
       }

@@ -14,6 +14,7 @@ let AxiosIns = axios.create({
 
 let timer = [];
 let delay = 300;
+let isLoading = false;
 
 AxiosIns.interceptors.request.use(config => {
   if (proConfig.environment == 'dev') {
@@ -24,19 +25,27 @@ AxiosIns.interceptors.request.use(config => {
     }
   }
 
-  if (config.loading) {
-    timer.push(setTimeout(() => {
-      MintUI.Indicator.open(config.loading);
-    }, delay))
-  }
+  // if (config.loading) {
+    // timer.push(setTimeout(() => {
+    //   MintUI.Indicator.open(config.loading);
+    // }, delay))
+    // setTimeout(() => {
+    //   isLoading = true;
+    //   MintUI.Indicator.open(config.loading);
+    // }, delay)
+  // }
   return config;
 })
 
 AxiosIns.interceptors.response.use(response => {
-  for (let t of timer) {
-    clearTimeout(t);
-  }
-  MintUI.Indicator.close();
+  // for (let t of timer) {
+  //   clearTimeout(t);
+  // }
+  // MintUI.Indicator.close();
+  // if(isLoading){
+  //   MintUI.Indicator.close();
+  //   isLoading = false;
+  // }
   return response.data;
 }, error => {
   for (let t of timer) {
