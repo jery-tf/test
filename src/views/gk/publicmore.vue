@@ -4,11 +4,19 @@
       <ul class="pubcont">
         <template v-for="item1 in list1">
           <li class="publist">
-            <a href="http://172.16.17.83:8100/hunanzhengwu/2/10/content_13.html" v-if="item1.type==2">
+            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_40.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_40.html'">
               <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
               <span>{{item1.time}}</span>
             </a>
-            <a href="http://172.16.17.83:8100/hunanzhengwu/2/10/content_12.html" v-if="item1.type==1">
+            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_39.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_39.html'">
+              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
+              <span>{{item1.time}}</span>
+            </a>
+            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_13.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_13.html'">
+              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
+              <span>{{item1.time}}</span>
+            </a>
+            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_12.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_12.html'">
               <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
               <span>{{item1.time}}</span>
             </a>

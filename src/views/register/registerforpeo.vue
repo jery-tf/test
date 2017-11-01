@@ -16,7 +16,7 @@
       <input type="text" class="idform" placeholder="请输入18位身份证号码" v-model="idcard" v-on:blur="changeCount()">
     </div>
     <!--<router-link to="/register/registerinfo">-->
-    <button class="btn2" @click="postId()" v-bind:disabled="dis">下一步</button>
+    <button class="btn2" @click="postId()" v-bind:disabled="disab">下一步</button>
     <!--</router-link>-->
   </div>
 </template>
@@ -34,7 +34,7 @@
       return {
         pname: '',
         idcard: '',
-        dis:false
+        disab:true
       }
     },
     methods: {
@@ -46,18 +46,19 @@
           },
           {Headers:{'content-type':'application/x-www-form-urlencoded'}}
         ).then(res => {
-          if (res.code == "100") {
+          if (res.code == "205") {
             Toast(res.info);
-            this.dis=true
+            this.disab=true
             return
           }else if(res.code =="200"){
 //            Toast(res.info)
-            this.dis=false
+            this.disab=false
             return
           }
         })
       },
       postId() {
+        console.log(123)
         let postId = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
         if (this.pname == '') {
           Toast("请输入姓名");
@@ -78,11 +79,13 @@
           }),
           {Headers:{'content-type':'application/x-www-form-urlencoded'}}
         ).then(res => {
-          if (res.code == "703") {
+          console.log(res.code)
+          if (res.code=="703" || res.code=='2') {
             Toast(res.info)
-
+            return
           }
           else if(res.code=="200"){
+            this.disab=false
             this.$router.push("/register/registerinfo");
           }
         })

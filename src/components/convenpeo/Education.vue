@@ -110,7 +110,7 @@
      .C2-guanbi1{
        font-size: 0.32rem;
        position: absolute;
-       top:0;
+       top:0.26rem;
        left: 0.26rem;
      }
    }

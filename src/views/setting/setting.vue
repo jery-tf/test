@@ -41,7 +41,7 @@ export default {
       alert('退出成功')
       //清除用户相关信息
       Util.login.clearUserInfo();
-      this.$router.push('/')
+      this.$router.push('/mySelfInfo')
     }
   }
 }

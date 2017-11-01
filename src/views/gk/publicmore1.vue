@@ -4,11 +4,11 @@
       <ul class="pubcont">
         <template v-for="item2 in list2">
           <li class="publist">
-            <a href="http://172.16.17.83:8100/hunanzhengwu/2/11/content_15.html" v-if="item2.type==1">
+            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/11/content_15.html" v-if="item2.type==1">
               <img :src="item2.imageUrls" v-if="item2.imageUrls"> <p>{{item2.title}}</p><br>
               <span>{{item2.time}}</span>
             </a>
-            <a href="http://172.16.17.83:8100/hunanzhengwu/2/11/content_14.html" v-if="item2.type==2">
+            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/11/content_14.html" v-if="item2.type==2">
               <img :src="item2.imageUrls" v-if="item2.imageUrls"> <p>{{item2.title}}</p><br>
               <span>{{item2.time}}</span>
             </a>

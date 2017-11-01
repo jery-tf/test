@@ -4,7 +4,7 @@
       <ul class="pubcont">
         <template v-for="item3 in list3">
           <li class="publist">
-            <a href="http://172.16.17.83:8100/hunanzhengwu/2/12/content_16.html" v-if="item3.type==1">
+            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/12/content_16.html" v-if="item3.type==1">
               <img :src="item3.imageUrls" v-if="item3.imageUrls"> <p>{{item3.title}}</p><br>
               <span>{{item3.time}}</span>
             </a>

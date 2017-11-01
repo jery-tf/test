@@ -87,7 +87,7 @@
             Toast("注册成功")
             this.$router.push("/register/registerfinish")
           }else{
-            Toast(res.info)
+            Toast('该身份号已注册')
           }
         })
       }

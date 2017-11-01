@@ -26,12 +26,18 @@
       </div>
     </div>
     <a href="javascript:void(0)">
-      <p class="looklook">暂不进行认证</p>
+      <p class="looklook" @click="noren">暂不进行认证</p>
     </a>
   </div>
 </template>
 <script>
-  export default {}
+  export default {
+methods:{
+  noren(){
+    this.$router.push('/mySelfInfo')
+  }
+}
+  }
 </script>
 <style scoped lang="less">
   .tmpl {
