@@ -6,7 +6,7 @@
   <div class="box-margin-top ">
     <div class="verify">
       <span>已发送验证码短信到</span>
-      <p>15202325896</p>
+      <p>{{totelName}}</p>
     </div>
     <input type="text" class="ipt padding-container-lr" placeholder="请输入验证码">
     <button class="btn">获取验证码</button>
@@ -24,13 +24,22 @@
     components: {Btncommon},
     data() {
       return {
-        dis:true
+        dis:true,
+        telphone:''
       }
     },
     created() {
 
     },
-    methods: {}
+    computed:{
+      totelName(){
+        const telphone= JSON.parse(localStorage.getItem('newphone'));
+        this.telphone=telphone
+        let start = telphone.slice(0,3);
+        let end = telphone.slice(-2);
+        return `${start}******${end}`;
+      }
+    }
 
   }
 </script>

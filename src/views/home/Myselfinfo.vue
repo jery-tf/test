@@ -57,7 +57,6 @@
         <div class="num">5</div>
       </li>
     </ul>
-
     <div class="padding-container-lr officework">
       <span class="myoffice">相关企业/单位(3)</span>
       <span class="checkall">查看全部<i class="OAIndexIcon C2-next"></i></span>
@@ -65,14 +64,13 @@
     <div class="contentsall padding-container-lr" >
       <ul v-for="item in list">
           <li>
-            <router-link v-bind="{to:'/aboutcmp/aboutcmp/'+item.id}">
+            <router-link v-bind="{to:'/aboutcmp/aboutcmp/'+item.aupe_parentid}">
             <AboutCompany :data="item"></AboutCompany>
             </router-link>
           </li>
       </ul>
     </div>
     <div class="parttop  padding-container-lr">
-
         <!--<div class="particulars ">-->
           <!--<span>-->
              <!--<i class="OAIndexIcon C2-shijian"></i>我的预约-->
@@ -127,23 +125,19 @@
     </div>
   </div>
 </template>
-
 <script>
   import Api from '../../api'
   import $ from 'jquery'
   import AboutCompany from '../../components/aboutCompany/company.vue'
   import {Swipe, SwipeItem,Toast} from 'mint-ui';
   import Util from '../../util'
-
+  import  qs from "qs"
   export default {
     name: 'myselfinfo',
     components: {AboutCompany},
     data() {
       return {
-        list: [
-          {id:1,contents: "湖南科创信息技术有限公司", time: '2017-07-05', star: '法定代表人', status: '开业'},
-          {id:2,contents: "企业技术改造项目有限公司企业技术改造项目有限公司", time: '2017-07-05', star: '法定代表人', status: '注销'}
-        ],
+        list: [],
         islogin: false,
         pname: '',
         isshow:'false',
@@ -152,6 +146,7 @@
     },
     created() {
       this.getimgs()
+      this.getabcmp()
     },
     methods: {
       authentication() {
@@ -235,6 +230,29 @@
           this.pname='请登陆'
           this.isshow=false
         }
+      },
+      getabcmp(){
+        this.selfid = JSON.parse(localStorage.getItem('userInfo')).certificateNum
+        console.log(this.selfid)
+        Api.registerApi.getabcmp(
+          qs.stringify({
+            aupe_idcard:'43010119870516123X'
+
+          }),
+        {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res => {
+          if(res.code=200){
+              console.log(res)
+              let arr = [];
+              for (let item of res.list) {
+                let _item = {
+                  aupe_parentname: item.aupe_parentname, star: '法定代表人',aupe_time:item.aupe_time,
+                  status: item.aupe_state,aupe_parentid:item.aupe_parentid,aupe_state:item.aupe_state
+                };
+                arr.push(_item);
+              }
+              this.list = arr;
+            }
+        })
       }
     },
     computed: {}

@@ -24,19 +24,27 @@
       <div class="pname padding-container-lr">咨询内容</div>
       <textarea v-model="concultconts"></textarea>
     </div>
-    <div class="addressorder padding-container-lr pname consult">
+    <div class="addressorder padding-container-lr pname consult" :class="isopen?'colorRed':''" @click="isopendown">
       <span>是否公开</span><i class="OAIndexIcon C2-check-R"></i>
     </div>
     <div class="box-margin-top about top52">
       <mint-button type="primary" size="large" @click="subconsult">提交</mint-button>
     </div>
     <p class="autions">提示：本栏目接受办事群众和企业对进驻各级政务服务中心政务服务大厅的部门行政审批服务过程中有关法规，政策程序等问题的咨询</p>
-    <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
-                :pickermore="list"></pickerArea>
+    <mt-popup
+      v-model="popupVisibles"
+      popup-transition="popup-fade"
+      position="bottom">
+      <h3 class="addresstitle">企业地址<i class="C2-guanbi1 OAIndexIcon" @click="isshowarea(false)"></i></h3>
+      <template>
+        <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
+                    :pickermore="list"></pickerArea>
+      </template>
+    </mt-popup>
     <mt-popup
       v-model="popupVisible"
       popup-transition="popup-fade"
-      position="center">
+      position="bottom">
       <h3>咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
       <template>
         <DepartPro :cityshow="cityshow" v-on:increments="addaddress" :isdep="isdep"  :proshow="proshow"  v-on:increment="addproject"></DepartPro>
@@ -69,18 +77,21 @@
         District: null,
         Street: null,
         colorRed: false,
+        areacode:'',
         isDefault: false,
         pname: '',
         phone: '',
         list: {},
         popupVisible: false,
+        popupVisibles:false,
         cityshow: [],
         Apartment: null,
         Sumshine: null,
         proshow: [],
         isdep:true,
-        consulttitle:null,
-        concultconts:null
+        consulttitle:'',
+        concultconts:'',
+      isopen:true
       }
     },
     created() {
@@ -91,10 +102,18 @@
       console.log(this.userid)
     },
     methods: {
+      //打开关闭添加修改模态框
+      isshowarea(bool){
+        this.popupVisibles = bool;
+      },
+      isopendown(){
+        this.isopen=!this.isopen
+      },
       close() {
         this.popupVisible = !this.popupVisible
       },
       selected() {
+       this.isshowarea(true)
         this.showChose = !this.showChose
         Api.pickerAreaApi.pickerAreaf().then(res => {
           this.list = res
@@ -107,29 +126,34 @@
           this.City = addressInfo.city.value
           this.District = addressInfo.district.value
           this.Street = addressInfo.street.value
+          this.areacode=addressInfo.street.id
           this.addressInfo = {}
         }
         else if (addressInfo.district) {
           this.Province = addressInfo.province.value
           this.City = addressInfo.city.value
           this.District = addressInfo.district.value
+          this.areacode=addressInfo.district.id
           this.Street = ''
           this.addressInfo = {}
         }
         else if (addressInfo.city) {
           this.Province = addressInfo.province.value
           this.City = addressInfo.city.value
+          this.areacode=addressInfo.city.id
           this.District = ''
           this.Street = ''
           this.addressInfo = {}
         }
         else if (addressInfo.province) {
           this.Province = addressInfo.province.value
+          this.areacode=addressInfo.province.id
           this.City = ''
           this.District = ''
           this.Street = ''
           this.addressInfo = {}
         }
+        this.popupVisibles = false
       },
       department() {
         this.popupVisible = !this.popupVisible
@@ -143,7 +167,6 @@
       addaddress(Apartment,apartment) {
           this.Apartment = Apartment
         this.apartment=apartment;
-          console.log(apartment)
           this.popupVisible = false
       },
 //      获得咨询项目的列表
@@ -151,7 +174,6 @@
         this.Sumshine = Sumshine
         this.sumshine=sumshine
         this.popupVisible = false
-        console.log( this.sumshine)
       },
 //      根据ID获取到咨询项目
       seleproject() {
@@ -184,23 +206,44 @@
         })
       },
       subconsult(){
-        let content={consultTitle:this.consulttitle,
-          orgId:this.apartment,
-          orgName:this.Apartment,
-          applyId:this.userid,
-          applyName:this.pname,
-          approveId:this.sumshine,
-          consultContent:this.concultconts,
-          applyPhone:this.phone,
-          areaCode:'5',
-          applyType:'1',
-          isOpen:'Y',
-          consultSource:'4'
-
+        if(this.pname==''){
+          Toast("输入姓名不能为空")
+          return
+        }
+        else if(this.phone==''){
+          Toast("请输入输入手机号码")
+          return
+        }
+        else if(this.Apartment==''){
+          Toast("请选择您要咨询的部门")
+          return
+        }
+        else if(this.consulttitle==''){
+          Toast("请输入您要咨询的主题")
+          return
+        }
+        else if(this.concultconts==''){
+          Toast("咨询内容不能为空")
+          return
+        }
+        let content={
+          consultTitle:this.consulttitle, //咨询主题
+          orgId:this.apartment, //申请部门id
+          orgName:this.Apartment, //申请部门
+          applyId:this.userid, //申请者ID
+          applyName:this.pname, //申请者名字
+          approveId:this.sumshine, // 事项id
+          consultContent:this.concultconts, //咨询内容
+          applyPhone:this.phone, //申请者电话
+          areaCode:this.areacode, //区域编码
+          applyType:'1',//申请者类型
+          isOpen:this.isopen==true?'Y':'N',  //是否公开
+          consultSource:'4' //消息来源
         }
         Api.consultApi.PutConsult(content).then(res=>{
          if(res.code=200){
            alert('咨询成功，即将跳转')
+           this.$router.push('/mySelfInfo')
          }
         })
       }
@@ -301,6 +344,31 @@
     }
     .mint-field-core{
       font-size: 0.24rem;
+    }
+    .colorRed{
+      color:#ff3e3e;
+    }
+    .mint-popup{
+      width: 7.2rem;
+      height: 9rem;
+    }
+    .addresstitle{
+      width: 7.2rem;
+      height: 1rem;
+      line-height: 1rem;
+      border-bottom: 1px solid #ededed;
+      position: relative;
+      text-align: center;
+      font-weight: 400;
+      line-height:1rem;
+      border-bottom: 1px solid #d9d9d9;
+      font-size: 0.38rem;
+      .C2-guanbi1 {
+        position: absolute;
+        top:0.35rem;
+        right:0.24rem;
+        font-size: 0.45rem;
+      }
     }
   }
 

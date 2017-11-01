@@ -40,9 +40,7 @@
            Util.login.clearUserInfo();
            this.$router.push("/")
          }
-
         })
-
       }
     },
     computed: {

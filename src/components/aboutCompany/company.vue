@@ -3,11 +3,11 @@
 */
 
 <template>
-  <div class="company" >
-      <p>{{data.contents}}</p>
-    <span class="datat">注册日期：{{data.time}}</span>
+  <div class="company">
+      <p>{{data.aupe_parentname}}</p>
+    <span class="datat">注册日期：2017-07-05</span>
     <span class="star">授权等级：{{data.star}}</span>
-    <button class="btn">{{data.status}}</button>
+    <button class="btn">{{data.status='2'?"开业":'注销'}}</button>
   </div>
 </template>
 

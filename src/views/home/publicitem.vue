@@ -222,6 +222,12 @@
             height: 1.3rem;
             padding-left: .4rem
           }
+          p{
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            width:4.3rem;
+            overflow: hidden;
+          }
           span{
             display: block;
             padding-top: 0.1rem;

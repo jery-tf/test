@@ -131,7 +131,6 @@
       },
       //添加地址
       addAddress() {
-        console.log('新增地址')
         this.list.is_default=false
         this.popupVisible = true
         this.ordername = '新增地址'

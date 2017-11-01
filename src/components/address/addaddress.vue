@@ -19,7 +19,6 @@
       <div class="addressorder"  :class="isDefault?'colorRed':''"  @click="_selecedAddFun" >
         <span>设为默认地址</span><i class="OAIndexIcon C2-check-R"></i>
       </div>
-
       <div class="box-margin-top">
         <mint-button type="primary" size="large" @click="addaddress(addlist)">保存</mint-button>
       </div>
@@ -70,12 +69,20 @@
           },
           //编辑修改地址列表
           addaddress(addlist){
-          if (this.addlist.mobilephone == "") {
-              Toast("请输入手机号码");
+            if(this.addlist.apply_name==''){
+              alert('请选择收货人')
+              return
+            }
+          else if (this.addlist.mobilephone == "") {
+              alert("请输入手机号码");
               return;
             }
             else if (!(/^1[34578]\d{9}$/.test(this.addlist.mobilephone))) {
               alert("请输入有效的11位手机号码")
+              return;
+            }
+            else if (this.addlist.addressee='') {
+              alert("请输入详细收货地址")
               return;
             }
             this.certificateNum = JSON.parse(localStorage.getItem('userInfo')).certificateNum;

@@ -55,9 +55,6 @@
       console.log(this.idcard)
     },
     methods: {
-      getitems() {
-
-      },
       inputgo() {
         console.log(this.idcard,this.telp)
         //判断手机号码是否为11位有效手机号码
@@ -89,6 +86,8 @@
           if (res.code == "200") {
             Toast("注册成功")
             this.$router.push("/register/registerfinish")
+          }else{
+            Toast(res.info)
           }
         })
       }

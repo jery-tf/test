@@ -48,6 +48,7 @@
 
     },
     methods: {
+
       showPassword() {
         this.isShowPassword = !this.isShowPassword;
       },
@@ -55,11 +56,28 @@
         this.isShowPasswordtwo = !this.isShowPasswordtwo;
       },
       restPwd(){
+      if(this.oldpwd==""){
+          Toast("新密码输入不能为空");
+          return;
+        }
+        else if(this.newpwd==""){
+          Toast("新密码输入不能为空")
+          return
+        }
+        else if (this.oldpwd != this.newpwd) {
+          Toast({
+            message: '两次密码输入不一致，请重新输入',
+            position: 'top',
+          });
+        return
+        }
         this.userId = JSON.parse(localStorage.getItem('newPersonId')).id
         console.log( this.userId)
         let params={password:this.oldpwd}
         Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
           Toast("设置密码成功，即将跳转")
+          Util.login.clearUserInfo();
+          this.$router.push('/')
         })
       }
     }

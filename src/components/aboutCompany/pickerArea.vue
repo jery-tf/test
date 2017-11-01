@@ -6,11 +6,11 @@
   <!--居住地址三级联动选项-->
   <section class="showChose" v-show="showChose">
     <section class="address">
-      <section class="title addresst">
-        <h4>企业地址
-          <i class="C2-guanbi1 OAIndexIcon" @click="closeAdd()"></i>
-        </h4>
-      </section>
+      <!--<section class="title addresst">-->
+        <!--<h4>企业地址-->
+          <!--<i class="C2-guanbi1 OAIndexIcon" @click="closeAdd()"></i>-->
+        <!--</h4>-->
+      <!--</section>-->
       <section class="title" :province1="this.Province">
         <!--<div class="area" @click="provinceSelected()">{{City?City:'请选择'}}</div>-->
         <div class="area" @click="provinceSelected()" :class="Province?'':'active'">{{Province ? Province : '请选择'}}
@@ -41,7 +41,6 @@
     </section>
   </section>
 </template>
-
 <script>
   import Api from '../../api'
   import Util from '../../util'
@@ -4473,7 +4472,9 @@
         }
         return result;
       },
+//      省级选项的列表
       getProvinceId: function (code, input, index) {
+        this.popupVisibles=false
         this.province = code;
         this.Province = input;
         this.showProvince = false;
@@ -4487,6 +4488,8 @@
           this.showCityList = res
         })
       },
+
+//      省级待选区域
       provinceSelected: function () {
         // 清除市级和区级列表
         this.showCityList = false;
@@ -4499,6 +4502,7 @@
         this.showCity = false;
         this.showDistrict = false;
       },
+//      地级市选择
       getCityId: function (code, input, index) {
         this.city = code;
         this.City = input;
@@ -4513,7 +4517,7 @@
         //判断是否是省本级
         if (this.nameid == 4) {
           this.addressInfo = {}
-          this.showChose = false;
+          this.showChose = !this.showChose;
           this.showCityList = '';
           this.addressInfo.province = {
             id: this.province,
@@ -4523,7 +4527,6 @@
             id: this.city,
             value: this.City
           }
-          console.log(this.addressInfo)
           this.$emit('increment', this.addressInfo);
           this.$emit('closedown');
           Util.other.setSessionStorage('cityId', this.city);
@@ -4532,10 +4535,10 @@
         }
         Api.pickerAreaApi.pickerAreas(this.nameid).then(res => {
           this.showDistrictList = res
-          //选择的城市
-//          console.log(this.city)
         })
       },
+
+//      地级市待选项
       citySelected: function () {
         this.showProvince = false;
         this.showCity = true;
@@ -4545,6 +4548,7 @@
         this.City=false;
         this.showCity=true
       },
+//      区级选项
       getDistrictId: function (code, input, index) {
         this.district = code;
         this.District = input;
@@ -4570,8 +4574,7 @@
           for (let i = 0; i < arr.length; i++) {
             if (arr.indexOf((this.district + '')) != -1) {
               this.addressInfo = {}
-              console.log(456)
-              this.showChose = false;
+              this.showChose = !this.showChose;
               this.addressInfo.province = {
                 id: this.province,
                 value: this.Province
@@ -4584,7 +4587,6 @@
                 id: this.district,
                 value: this.District
               }
-              console.log(this.addressInfo)
               this.$emit('increment', this.addressInfo);
               this.$emit('closedown');
               Util.other.setSessionStorage('cityId', this.district);
@@ -4594,7 +4596,7 @@
           }
           if (this.showStreetList == '') {
             this.addressInfo = {}
-            this.showChose = false;
+            this.showChose = !this.showChose;
             this.addressInfo.province = {
               id: this.province,
               value: this.Province
@@ -4614,6 +4616,7 @@
         })
 
       },
+//      区级待选项
       districtSelected: function () {
         this.showProvince = false;
         this.showCity = false;
@@ -4622,6 +4625,7 @@
         this.Street = false;
         this.District = false
       },
+//      街道选择项
       getStreetId: function (code, input, index) {
         this.addressInfo = {}
         this.street = code;
@@ -4634,7 +4638,7 @@
           this.showStreetList = res
         })
         // 选取镇级选项之后关闭弹层
-        this.showChose = false;
+        this.showChose = !this.showChose;
         this.addressInfo.province = {
           id: this.province,
           value: this.Province
@@ -4655,6 +4659,7 @@
         this.$emit('closedown');
         Util.other.setSessionStorage('cityId', this.street);
       },
+//      街道待选项
       streetSelected: function () {
         this.showProvince = false;
         this.showCity = false;
@@ -4720,13 +4725,12 @@
 
   .showChose {
     width: 100%;
-    height: 100%;
     position: fixed;
-    top: 0;
+    bottom:0;
     left: 0;
     z-index: 120;
     background: rgba(0, 0, 0, 0.5);
-    height: 9rem;
+    height: 8rem;
   }
 
   .address {
@@ -4734,9 +4738,9 @@
     bottom: 0;
     left: 0;
     z-index: 121;
-    background: #fff;
+    background-color: #fff;
     width: 100%;
-    height: 9rem;
+    height: 8rem;
   }
 
   .title {
@@ -4790,9 +4794,10 @@
   /* 修改的格式 */
   .address ul {
     width: 7.2rem;
-    height: 100%;
+    height: 7rem;
     /*max-height: 4.4rem;*/
-    overflow: auto;
+    /*overflow: auto;*/
+    overflow-y: auto;
   }
 
   .address ul li {
