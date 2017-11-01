@@ -109,6 +109,7 @@
       },
       //删除上传的缓存文件
       deleteUploadData(id){
+        console.log('要删除的ID',id);
         let errandData = Util.other.getSessionStorage('errandData');
         for(let key in errandData){
           if(key == this.errandDataId){

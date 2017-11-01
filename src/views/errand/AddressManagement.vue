@@ -68,7 +68,15 @@
       },
       //选择默认地址
       selecedAddFun(id){
-          console.log(id)
+        Api.AddressApi.addressMoreList(
+          qs.stringify({
+            addr_id: id
+          }),
+          {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res => {
+          if (res.code == 200) {
+            console.log(res);
+          }
+        })
         for (let item of this.addressList) {
           if (id == item.addr_id) {
             item.is_default = 'Y';
