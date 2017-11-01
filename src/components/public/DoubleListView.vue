@@ -4,7 +4,7 @@
 
 <template>
   <div class="doubleListBox">
-    <div class="left fff">
+    <div class="left">
       <div v-for="(item,index) in dataList" :key="index"
            :class="item.id==selectedId?'li active':'li fff'"
            @click="liClickFun(item.id)">
@@ -13,7 +13,6 @@
           <span>{{item.name}}</span>
         </p>
       </div>
-
     </div>
     <div class="right padding-container-lr">
       <slot></slot>
@@ -35,6 +34,7 @@
       return {}
     },
     created(){
+        this.isShow = true;
     },
     methods: {
     },
@@ -56,6 +56,7 @@
       position: relative;
       top:0;
       bottom: 0;
+      box-sizing: border-box;
       .li {
         display: flex;
         align-items: center;
@@ -68,7 +69,7 @@
       .li.active {
         background: #f2f2f2;
         color: #13b7f6;
-        margin-right: -1px;
+        /*margin-right: -1px;*/
       }
       p{
         width: 100%;
