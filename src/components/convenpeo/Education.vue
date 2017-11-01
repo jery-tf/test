@@ -10,11 +10,12 @@
     </div>
     <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal"  pop-transition="popup-fade">
      <h3> <i class="C2-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
-      <ul v-for="(item1,index) in datainfolist">
-        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">{{item1.name}}</a></li>
-        <!--<li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">种子生产地点检疫证明</a></li>-->
-        <!--<li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">委托种子生产合同复印件或自行组织种子生产的情况说明和证明材料</a></li>-->
-        <!--<li><i class="OAIndexIcon C2-ZHicon-"></i><a href="#">种子生产、加工贮藏、检验专业技术人员的基本情况及其企业缴纳的社保证明复印件...</a></li>-->
+      <ul>
+        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_17.html">收费政策</a></li>
+        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_18.html">入园政策</a></li>
+        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_19.html">幼儿园信息</a></li>
+        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_20.html">办事指南</a></li>
+        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_21.html">异地剩余费用报账</a></li>
       </ul>
     </mt-popup>
   </div>
@@ -99,10 +100,7 @@
       width: 2.22rem;
     }
     .modal{
-      position: absolute;
-      top:5rem;
-      left:2.5rem;
-      width: 4rem;
+      width: 6rem;
       height: 7.14rem;
       h3{
         font-weight: 400;
@@ -129,13 +127,13 @@
           padding-left: 0.22rem;
           font-size: 0.24rem;
           color: #666;
-          line-height:0.4rem;
+          line-height:0.8rem;
           position: relative;
           .C2-ZHicon-{
             font-size: 0.07rem;
             display: inline-block;
             position: absolute;
-            top:0;
+            top:0.28rem;
             left:0;
           }
         }

@@ -32,16 +32,17 @@
     },
     data() {
       return {
-        selected: '13',
+        selected: '14',
         currentView: 'Education',
         leftDataList: [],
-        selectedId: 13,
+        selectedId: 14,
         list: [],
         list1: [],
       }
     },
     created() {
       this.peolist()
+      this.selecedLeftFun(14)
     },
     methods: {
       //发送请求获取左侧栏的数据
