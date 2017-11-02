@@ -6,12 +6,13 @@
   <div class="h100 doubleListView bm">
     <LeftView :dataList="leftDataList" :liClickFun="selecedLeftFun"
               :selectedId="selectedId">
-      <div class="flex1">
-        <template :selectedId="selectedId">
-          <Education :datainfoto="list" :datainfolist="list1"></Education>
-        </template>
-      </div>
+
     </LeftView>
+    <div class="flex1">
+      <template :selectedId="selectedId">
+        <Education :datainfoto="list" :datainfolist="list1"></Education>
+      </template>
+    </div>
   </div>
 </template>
 <script>
@@ -122,7 +123,9 @@
       height: .96rem;
     }
   }
-
+.flex1{
+  margin-left: 1.7rem;
+}
   .bm {
     div.doubleListBox {
       top: 0;

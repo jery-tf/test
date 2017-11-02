@@ -85,6 +85,7 @@
         ).then(res => {
           if (res.code == "200") {
             Toast("注册成功")
+
             this.$router.push("/register/registerfinish")
           }else{
             Toast('该身份号已注册')

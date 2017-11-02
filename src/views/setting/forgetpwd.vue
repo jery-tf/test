@@ -73,6 +73,7 @@
                   {Headers:{'content-type':'application/x-www-form-urlencoded'}}
                 ).then(res => {
                   if (res.code == "205") {
+                    console.log(res)
                     Util.other.setLocalStorage('newPersonId',res.data[0]);
                     this.dis=true;
                     this.$router.push("/setting/forgetpwdnum")
