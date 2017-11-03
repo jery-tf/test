@@ -4,7 +4,7 @@ import Config from '../config';
 export const getnews = (params,config)=>{
   return axiosGetToken(`${Config.cmsUrl}/creatorCMS/docManage/remoteSubChannelList.page`,params,config);
 }
-//获取公开列表的二级页面
+//获取公开、便民列表的二级页面
 export const getnewsinfo = (params,config)=>{
   return axiosGetToken(`${Config.cmsUrl}/creatorCMS/docManage/remotePubDocList.page`,params,config);
 }

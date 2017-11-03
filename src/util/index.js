@@ -8,7 +8,8 @@ import * as other from './other'
 import * as errand from './errand'
 import * as icon from './icon'
 import * as cache from './cache'
+import * as ctime from './ctime'
 
 export default {
-  user,login,home,other,errand,icon,cache
+  user,login,home,other,errand,icon,cache,ctime
 }

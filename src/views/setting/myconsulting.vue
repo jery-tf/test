@@ -9,7 +9,7 @@
       <p class="contents ">
         {{item.consultContent}}
       </p>
-      <span class="padding-container-lr">2017-07-05 14:21:05</span>
+      <span class="padding-container-lr">{{item.consultTime}}</span>
     </div>
   </div>
 </template>
@@ -47,23 +47,22 @@
         }
         let params = {page: 1, rows: 100, cond: JSON.stringify(cond)};
         Api.consultApi.myConsult(params).then(res => {
-          console.log(res)
+//          console.log(res)
           //取咨询的数据
           let arr = [];
           for (let item of res.contents) {
             let _item = {
               applyId: item.applyId, applyName: item.applyName, applyPhone: item.applyPhone,
               consultContent: item.consultContent, approveId: item.approveId, consultTitle: item.consultTitle,
-              orgName: item.orgName
+              orgName: item.orgName,consultTime: Util.ctime.ctime(item.consultTime)
             };
             arr.push(_item);
             this.consult = arr
           }
+          let ctime=this.consult.consultTime
         })
       },
-
     }
-
   }
 </script>
 

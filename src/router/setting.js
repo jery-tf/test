@@ -100,6 +100,14 @@ export default [
     name: 'consulting',
     component: views.Setting.Consulting,
     meta: {
+      title: '办事咨询'
+    },
+  },
+  {
+    path: '/setting/myconsulting',
+    name: 'myconsulting',
+    component: views.Setting.MyConsulting,
+    meta: {
       title: '我的咨询'
     },
   },

@@ -88,6 +88,14 @@
       <router-link to="/setting/consulting">
         <div class="particulars company">
         <span>
+           <i class="OAIndexIcon C2-tousu"></i>办事咨询
+        </span>
+          <em class="OAIndexIcon C2-next"></em>
+        </div>
+      </router-link>
+      <router-link to="/setting/myconsulting">
+        <div class="particulars company">
+        <span>
            <i class="OAIndexIcon C2-tousu"></i>我的咨询
         </span>
           <em class="OAIndexIcon C2-next"></em>

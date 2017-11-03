@@ -226,6 +226,8 @@
           Toast("咨询内容不能为空")
           return
         }
+        let myDate = new Date();
+        console.log(myDate)
         let content={
           consultTitle:this.consulttitle, //咨询主题
           orgId:this.apartment, //申请部门id
@@ -238,7 +240,8 @@
           areaCode:this.areacode, //区域编码
           applyType:'1',//申请者类型
           isOpen:this.isopen==true?'Y':'N',  //是否公开
-          consultSource:'4' //消息来源
+          consultSource:'4' ,//消息来源
+          consultTime:myDate
         }
         Api.consultApi.PutConsult(content).then(res=>{
          if(res.code=200){

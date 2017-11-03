@@ -10,5 +10,6 @@ export default {
   SettingPwd: resolve => require(['./settingpwd.vue'], resolve),//忘记密码重新设置
   RegardTo: resolve => require(['./regardto.vue'], resolve),//关于设置
   PayCost: resolve => require(['./paycost.vue'], resolve),//公共缴费
-  Consulting: resolve => require(['./consulting.vue'], resolve),//我的咨询
+  Consulting: resolve => require(['./consulting.vue'], resolve),//办事咨询
+  MyConsulting: resolve => require(['./myconsulting.vue'], resolve),//我的咨询
 }

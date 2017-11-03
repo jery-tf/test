@@ -115,9 +115,6 @@
             console.log(res)
             this.list1 = res.data
           }
-//        else if(res.code=="200"){
-//          this.$router.push("/register/registerinfo");
-//        }
         })
         Api.getnewsApi.getnewsinfo(
           {
