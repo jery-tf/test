@@ -61,8 +61,8 @@
               }),
               {Headers:{'content-type':'application/x-www-form-urlencoded'}}
             ).then(res => {
-              if (res.code == "703") {
-                Toast(res.info)
+              if (res.code == "703" ||res.code=='2') {
+                Toast('身份证与姓名不符，请重新输入')
               }
               else if(res.code=="200"){
                 Api.registerApi.uableRegi(

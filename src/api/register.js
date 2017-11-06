@@ -17,3 +17,8 @@ export const getabcmp = (params,config)=>axiosPost(`/xndt/v1/usercoverauthorizat
 export const getauthorise = (params,config)=>axiosPost(`/xndt/v1/authorizedmanmanagement`,params,config);
 //被授权人管理查看接口
 export const getunicon = (params,config)=>axiosPost(`/xndt/v1/viewauthorization`,params,config);
+
+//被授权人授权事项高级查询
+
+export const getapprove = (params,config)=>axiosGet(`/approveinterface/v1/dicttypes/dictdatas/法人分类
+`,params,config);
