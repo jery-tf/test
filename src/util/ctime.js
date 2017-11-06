@@ -1,14 +1,4 @@
-// export const getLocalStorage = (name) => {
-//   if (name) {
-//     let data = localStorage.getItem(name);
-//     if (data) {
-//       return JSON.parse(data);
-//     }
-//     return null;
-//   }
-//   return null;
-// };
-
+//将13位毫秒数转换成标准时间
 export const ctime = (nowtime) => {
   var oDate = new Date(nowtime),
     oYear = oDate.getFullYear(),

@@ -253,7 +253,7 @@
               let arr = [];
               for (let item of res.list) {
                 let _item = {
-                  aupe_parentname: item.aupe_parentname, star: '法定代表人',aupe_time:item.aupe_time,
+                  aupe_parentname: item.aupe_parentname, star: '法定代表人',aupe_time:item.aupe_time.substr(0,10),
                   status: item.aupe_state,aupe_parentid:item.aupe_parentid,aupe_state:item.aupe_state
                 };
                 arr.push(_item);

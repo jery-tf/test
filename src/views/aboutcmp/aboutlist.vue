@@ -4,7 +4,7 @@
 
 <template>
   <div class="tmp">
-    <div class="theader box-margin-top" v-for="item in list" v-if="list">
+    <div class="theader box-margin-top" v-for="item in list" v-if="list.length>0">
       <div class="images-t">
         <i :class="`OAIndexIcon ${item.classn}`" :style="`background:${item.backgroundcolor}`"></i>
       </div>
@@ -12,6 +12,9 @@
         <p>{{item.dictdataValue}}</p>
         <span>授权期限:{{aupe_termsta}}-{{aupe_termend}}</span>
       </div>
+    </div>
+    <div class="noconsult" v-if="list.length==0">
+      暂无授权事项
     </div>
   </div>
 </template>
@@ -28,17 +31,10 @@
     data() {
       return {
         aupe_termsta: '',
-        aupe_termend:'',
+        aupe_termend: '',
         id: 1,
-        arr: [],
-        list: [
-//          {classn:'C2-ertongshouyang',backgroundcolor:'#29ab91',title:'结婚生育',datatime:'2017-02-20-2017-06-15'},
-//          {classn:'C2-jiaoyu',backgroundcolor:'#fc992c',title:'教育培训',datatime:'2017-02-20-2017-06-15'},
-//          {classn:'C2-weibiaoti9',backgroundcolor:'#108ee9',title:'求职执业',datatime:'2017-02-20-2017-06-15'},
-//          {classn:'C2-jiuyifuwu',backgroundcolor:'#f15a4a',title:'就医保健',datatime:'2017-02-20-2017-06-15'},
-//          {classn:'C2-weibiaoti9',backgroundcolor:'#108ee9',title:'求职执业',datatime:'2017-02-20-2017-06-15'},
-//          {classn:'C2-jiuyifuwu',backgroundcolor:'#f15a4a',title:'就医保健',datatime:'2017-02-20-2017-06-15'},
-        ]
+        arrN: [],
+        list: [],
       }
     },
     created() {
@@ -46,7 +42,6 @@
       this.aupe_idcard = this.$route.params.aupe_idcard
       this.aupe_termsta = this.$route.params.aupe_termsta
       this.aupe_termend = this.$route.params.aupe_termend
-      console.log(this.aupe_termend)
       this.getunicon()
     },
     methods: {
@@ -66,11 +61,12 @@
               let arrN = []
               for (let i = 0; i < arr.length; i++) {
                 if (str.indexOf(arr[i].dictdataName) != -1) {
+                  this.isconsult = true
                   arrN.push(arr[i])
                 }
               }
               this.list = arrN
-              console.log(this.list)
+              console.log(arrN.length)
             })
           }
         })
@@ -118,6 +114,12 @@
           font-family: "微软雅黑";
         }
       }
+    }
+    .noconsult {
+      text-align: center;
+      width: 7.2rem;
+      height: 2rem;
+      line-height: 2rem;
     }
   }
 </style>
