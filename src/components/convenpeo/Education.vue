@@ -2,20 +2,20 @@
   <div class="bhi">
     <div class="range"  v-for="item in datainfoto"  >
       <h6>{{item.name}}</h6>
-      <div class="allbtn" v-for="(item1,index) in datainfolist" :key="index"   v-if="item.channelId==21">
-        <!--<input type="button" v-model="item1.name" class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)">-->
-        <a href="javascript:void(0)"class="btn" :class="item1.name.length>=6? 'fullclass':'otherclass'" @click="popupup(item1)">
-          <i></i>{{item1.name}}</a>
-      </div>
+     <template v-for="items in item.sub">
+       <div class="allbtn">
+         <a href="javascript:void(0)"class="btn" :class="items.name.length>=6? 'fullclass':'otherclass'" @click="popupup(items.channelId)">
+           <i :class="`OAIndexIcon ${item.icon}`" class="oson"></i>{{items.name}}</a>
+       </div>
+     </template>
     </div>
     <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal"  pop-transition="popup-fade">
      <h3> <i class="C2-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
       <ul>
-        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_17.html">收费政策</a></li>
-        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_18.html">入园政策</a></li>
-        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_19.html">幼儿园信息</a></li>
-        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_20.html">办事指南</a></li>
-        <li><i class="OAIndexIcon C2-ZHicon-"></i><a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/3/14/21/24/content_21.html">异地剩余费用报账</a></li>
+        <template v-for="rig in lists">
+          <li><i class="OAIndexIcon C2-ZHicon-"></i>
+            <a :href="`${rig.detailUrl}`">{{rig.briefContent}}</a></li>
+        </template>
       </ul>
     </mt-popup>
   </div>
@@ -24,12 +24,13 @@
   import { Popup } from 'mint-ui'
   import Popupname from './popupname.vue'
   import {Toast} from 'mint-ui';
+  import Util from '../../util'
   export default {
     data() {
       return {
         msg: "",
         list: [],
-        list1:[],
+        lists:[],
         clicked: false,
         showModel:false,
         popupVisible:false,
@@ -46,13 +47,22 @@
       close(){
         this.popupVisible=!this.popupVisible
       },
-      popupup(item1){
-        if(item1.channelId=="24"){
+      popupup(items){
+        console.log(items)
           this.popupVisible=true
-          console.log(this.showModel)
-        }else{
-          alert("功能正在开发中，敬请期待")
-        }
+        Util.cmsdao.fetchAllSubChnlNArti(`${items}`,2).then(res=>{
+          let arr = [];
+          for (let item of res) {
+            arr.push({
+              detailUrl: item.detailUrl,
+              briefContent: Util.icon.getstr(item.briefContent)
+            });
+          }
+         this.lists=arr
+          console.log(arr)
+        })
+
+
   }
     },
   }
@@ -94,10 +104,10 @@
       }
     }
     .fullclass {
-      width: 4.59rem;
+      width: 5rem;
     }
     .otherclass {
-      width: 2.22rem;
+      width: 2.42rem;
     }
     .modal{
       width: 6rem;
@@ -136,8 +146,18 @@
             top:0.28rem;
             left:0;
           }
+          a{
+            text-overflow:ellipsis;
+            width: 4.3rem;
+            overflow: hidden;
+            height: 1rem;
+            display: inline;
+          }
         }
       }
+    }
+    .oson{
+      margin-right: 0.1rem;
     }
   }
 
