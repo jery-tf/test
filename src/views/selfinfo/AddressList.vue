@@ -9,7 +9,7 @@
                    :updatAddrFun="updatAddrFun" :deleltAddrFun="deleltAddrFun"
                    :selecedAddFun="selecedAddFun"></AddressMang>
     </template>
-    <p class="add fff box-margin-top" @click="addAddress">
+    <p class="add fff " @click="addAddress">
       <i class="OAIndexIcon C2-xinjian"></i>
     </p>
     <mt-popup
