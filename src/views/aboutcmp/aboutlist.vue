@@ -6,11 +6,11 @@
   <div class="tmp">
     <div class="theader box-margin-top" v-for="item in list" v-if="list.length>0">
       <div class="images-t">
-        <i :class="`OAIndexIcon ${item.classn}`" :style="`background:${item.backgroundcolor}`"></i>
+        <i :class="`OAIndexIcon ${item.characterset}`" :style="`background:${item.backgroundcolor}`"></i>
       </div>
       <div class="contents">
         <p>{{item.dictdataValue}}</p>
-        <span>授权期限:{{aupe_termsta}}-{{aupe_termend}}</span>
+        <span>授权期限:{{aupe_termsta}} {{aupe_termend}}</span>
       </div>
     </div>
     <div class="noconsult" v-if="list.length==0">
@@ -57,16 +57,20 @@
             let str = res.list.aupe_zt.split(',')
             //获取授权人的授权事项
             Api.registerApi.getapprove().then(res => {
+              console.log('oooo',res)
               let arr = res.法人分类
               let arrN = []
               for (let i = 0; i < arr.length; i++) {
                 if (str.indexOf(arr[i].dictdataName) != -1) {
-                  this.isconsult = true
-                  arrN.push(arr[i])
+                  arrN.push({
+                    dictdataValue:arr[i].dictdataValue,
+                    characterset:arr[i].characterset,
+                    backgroundcolor:Util.icon.getBgcBySeed(arr[i].dictdataValue)
+                  })
                 }
               }
               this.list = arrN
-              console.log(arrN.length)
+              console.log(arrN)
             })
           }
         })

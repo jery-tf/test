@@ -7,29 +7,11 @@ import views from '@/views'
 export default
 [
   {
-    path: '/publicmore',
+    path: '/publicmore/:id',
     name: 'newsmore',
     component: views.Gk.Publicmore,
     meta:{
       title:'通知公告'
     },
   },
-
-  {
-    path: '/publicmore1',
-    name: 'newsmoreone',
-    component: views.Gk.Publicmore1,
-    meta:{
-      title:'政府动态'
-    },
-  },
-  {
-    path: '/publicmore2',
-    name: 'newsmoretwo',
-    component: views.Gk.Publicmore2,
-    meta:{
-      title:'媒体聚焦'
-    },
-  }
-
 ]

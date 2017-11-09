@@ -51,7 +51,7 @@
       width: 1.66rem;
       overflow-y: auto;
       height: 100%;
-      position: relative;
+      position: fixed;
       top:0;
       bottom: 0;
       background-color: #fff;

@@ -50,9 +50,14 @@
         this.popupVisible = !this.popupVisible
       },
       popupup(items) {
-        console.log(items)
-        this.popupVisible = true
         Util.cmsdao.fetchAllSubChnlNArti(`${items}`, 2).then(res => {
+          if(res==null){
+            Toast('功能正在开发中，敬请期待')
+            this.popupVisible = false
+            this.lists=''
+            return
+          }
+          this.popupVisible = true
           let arr = [];
           for (let item of res) {
             arr.push({
@@ -61,7 +66,6 @@
             });
           }
           this.lists = arr
-          console.log(arr)
         })
 
 
