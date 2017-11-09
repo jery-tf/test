@@ -1,16 +1,17 @@
 <template>
   <div class="bhi">
-    <div class="range"  v-for="item in datainfoto"  >
+    <div class="range" v-for="item in datainfoto">
       <h6>{{item.name}}</h6>
-     <template v-for="items in item.sub">
-       <div class="allbtn">
-         <a href="javascript:void(0)"class="btn" :class="items.name.length>=6? 'fullclass':'otherclass'" @click="popupup(items.channelId)">
-           <i :class="`OAIndexIcon ${item.icon}`" class="oson"></i>{{items.name}}</a>
-       </div>
-     </template>
+      <template v-for="items in item.sub">
+        <div class="allbtn">
+          <a href="javascript:void(0)" class="btn" :class="items.name.length>=6? 'fullclass':'otherclass'"
+             @click="popupup(items.channelId)">
+            <i :class="`OAIndexIcon ${item.icon}`" class="oson"></i>{{items.name}}</a>
+        </div>
+      </template>
     </div>
-    <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal"  pop-transition="popup-fade">
-     <h3> <i class="C2-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
+    <mt-popup v-model="popupVisible" closeOnClickModal="false" class="modal" pop-transition="popup-fade">
+      <h3><i class="C2-guanbi1 OAIndexIcon" @click="close()"></i>便民列表</h3>
       <ul>
         <template v-for="rig in lists">
           <li><i class="OAIndexIcon C2-ZHicon-"></i>
@@ -21,36 +22,37 @@
   </div>
 </template>
 <script>
-  import { Popup } from 'mint-ui'
+  import {Popup} from 'mint-ui'
   import Popupname from './popupname.vue'
   import {Toast} from 'mint-ui';
   import Util from '../../util'
+
   export default {
     data() {
       return {
         msg: "",
         list: [],
-        lists:[],
+        lists: [],
         clicked: false,
-        showModel:false,
-        popupVisible:false,
-        showModel:false
+        showModel: false,
+        popupVisible: false,
+        showModel: false
       }
     },
-    components:{
+    components: {
       Popupname
     },
-    props: ['datainfoto', 'liClickFun', 'selectedId','datainfolist'],
+    props: ['datainfoto', 'liClickFun', 'selectedId', 'datainfolist'],
     created() {
     },
     methods: {
-      close(){
-        this.popupVisible=!this.popupVisible
+      close() {
+        this.popupVisible = !this.popupVisible
       },
-      popupup(items){
+      popupup(items) {
         console.log(items)
-          this.popupVisible=true
-        Util.cmsdao.fetchAllSubChnlNArti(`${items}`,2).then(res=>{
+        this.popupVisible = true
+        Util.cmsdao.fetchAllSubChnlNArti(`${items}`, 2).then(res => {
           let arr = [];
           for (let item of res) {
             arr.push({
@@ -58,17 +60,17 @@
               briefContent: Util.icon.getstr(item.briefContent)
             });
           }
-         this.lists=arr
+          this.lists = arr
           console.log(arr)
         })
 
 
-  }
+      }
     },
   }
 </script>
 <style lang="less" scoped>
-  .bhi{
+  .bhi {
     position: relative;
     .range {
       padding: 0.26rem 0.24rem;
@@ -109,45 +111,45 @@
     .otherclass {
       width: 2.42rem;
     }
-    .modal{
+    .modal {
       width: 6rem;
       height: 7.14rem;
-      h3{
+      h3 {
         font-weight: 400;
         text-align: center;
         font-size: 0.32rem;
         color: #333;
         height: 0.92rem;
-        line-height: 0.92rem ;
+        line-height: 0.92rem;
         border-bottom: 1px solid #d9d9d9;
-        .C2-guanbi1{
+        .C2-guanbi1 {
           font-size: 0.32rem;
           position: absolute;
-          top:0.26rem;
+          top: 0.26rem;
           left: 0.26rem;
         }
       }
-      ul{
+      ul {
         margin-top: 0.38rem;
         margin-left: 0.26rem;
         margin-right: 0.53rem;
         font-family: "微软雅黑";
-        li{
+        li {
           vertical-align: bottom;
           padding-left: 0.22rem;
           font-size: 0.24rem;
           color: #666;
-          line-height:0.8rem;
+          line-height: 0.8rem;
           position: relative;
-          .C2-ZHicon-{
+          .C2-ZHicon- {
             font-size: 0.07rem;
             display: inline-block;
             position: absolute;
-            top:0.28rem;
-            left:0;
+            top: 0.28rem;
+            left: 0;
           }
-          a{
-            text-overflow:ellipsis;
+          a {
+            text-overflow: ellipsis;
             width: 4.3rem;
             overflow: hidden;
             height: 1rem;
@@ -156,7 +158,7 @@
         }
       }
     }
-    .oson{
+    .oson {
       margin-right: 0.1rem;
     }
   }
