@@ -11,14 +11,15 @@
       <div class="isSubmitList box-margin-top">
         <template v-for="(item,index) in materialList">
           <ErrandSubmitLi :title='item.materialTitle'
-          :isSubmint="isSubmint(item.materialId)" :btnClick="toLoadFile.bind(this,item)"></ErrandSubmitLi>
+                          :isSubmint="isSubmint(item.materialId)"
+                          :btnClick="toLoadFile.bind(this,item)"></ErrandSubmitLi>
         </template>
         <!--<ErrandSubmitLi title='测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下下看看测试下下看看测试下看看测试下看看'-->
-                        <!--:isSubmint="true" :btnClick="toLoadFile.bind(this,1)"></ErrandSubmitLi>-->
+        <!--:isSubmint="true" :btnClick="toLoadFile.bind(this,1)"></ErrandSubmitLi>-->
         <!--<ErrandSubmitLi title='测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看'-->
-                        <!--:isSubmint="false" :btnClick="toLoadFile.bind(this,21)"></ErrandSubmitLi>-->
+        <!--:isSubmint="false" :btnClick="toLoadFile.bind(this,21)"></ErrandSubmitLi>-->
         <!--<ErrandSubmitLi title='测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看测试下看看'-->
-                        <!--:isSubmint="true" :btnClick="toLoadFile.bind(this,31)"></ErrandSubmitLi>-->
+        <!--:isSubmint="true" :btnClick="toLoadFile.bind(this,31)"></ErrandSubmitLi>-->
       </div>
 
       <div class="box-margin-top">
@@ -49,9 +50,10 @@
     data () {
       return {
         approve: {},
-        currentFileList:{},//当前已上传的文件列表
-        currentFlieKey:[],//当前已上传的文件列表id
-        materialList:[],//材料列表
+        currentFileList: {},//当前已上传的文件列表
+        currentFlieKey: [],//当前已上传的文件列表id
+        currentFlies: [],//当前已经上传的文件列表
+        materialList: [],//材料列表
         option: {
           userName: '张三',
           phone: '123123123',
@@ -85,7 +87,7 @@
       },
       //跳转到上传文件页面
       toLoadFile(obj){
-        sessionStorage.setItem('errandTitle',obj.materialTitle);
+        sessionStorage.setItem('errandTitle', obj.materialTitle);
 //        this.$router.push({path: `/errand/fileUpload/${this.$route.params.id}/new`});
         this.$router.push({path: `/errand/fileUpload/${this.$route.params.id}/${obj.materialId}`});
       },
@@ -114,116 +116,135 @@
           Api.errandApi.getMaterialList(params)])
           .then(res => {
 
-            console.log('approve',Object.assign({}, res[0], res[1]));
+            console.log('approve', Object.assign({}, res[0], res[1]));
             this.approve = Object.assign({}, res[0], res[1]);
 
             //材料列表
-            console.log('材料列表',JSON.parse(JSON.stringify(res[2].contents)));
+            console.log('材料列表', JSON.parse(JSON.stringify(res[2].contents)));
             this.materialList = res[2].contents;
           })
       },
       //获取当前id下的所有材料列表
       getFileListById(id){
         let errandData = Util.other.getSessionStorage('errandData');
-        console.log('errandData',errandData);
+//        console.log('errandData', errandData);
         let data = {};
-        for(let key in errandData){
-            if(key.indexOf(id)!=-1){
-              let filesId = key.split('-')[1];
-              if(data[filesId]){
-                data[filesId].push(errandData[key]);
-              }else{
-                data[filesId] = [];
-                data[filesId].push(errandData[key]);
-              }
-              this.currentFlieKey.push(filesId);
+        for (let key in errandData) {
+          if (key.indexOf(id) != -1) {
+//            console.log('errandData[key]',errandData[key])
+            let filesId = key.split('-')[1];
+            if (data[filesId]) {
+              data[filesId].push(errandData[key]);
+            } else {
+              data[filesId] = [];
+              data[filesId].push(errandData[key]);
             }
+            this.currentFlieKey.push(filesId);
+            let errandDataLi = {
+                value:errandData[key],
+              id:filesId
+            };
+            this.currentFlies.push(errandDataLi);
+          }
         }
 //        console.log('已提交的材料列表',JSON.parse(JSON.stringify(data)));
         this.currentFileList = data;
       },
       //判断是否已经提交
       isSubmint(materialId){
-        if(!materialId) return;
-        return this.currentFlieKey.indexOf(materialId)!=-1;
+        if (!materialId) return;
+        return this.currentFlieKey.indexOf(materialId) != -1;
       },
       //提交数据
       onlineSubmit(){
+        let allUserInfo = Util.user.getUserAllInfo();
+        console.log('allUserInfo-->',allUserInfo);
+        let applicantMap = {
+          name: allUserInfo.username,
+          sex: allUserInfo.sex,
+          certificateNum: allUserInfo.certificateNum,
+          phone: allUserInfo.phone,
+          email: allUserInfo.email,
+          certificateType: 'idcard'
+        };
 
-          console.log('提交的材料列表',this.currentFileList);
-          if(this.currentFlieKey.length==0||this.materialList.length<this.currentFlieKey.length){
-              console.log('去暂存');
-          }
+        Api.errandApi.addApplicant(applicantMap).then(res => {
           let approveInfo = this.approve;
-          let userInfo = Object.assign({},Util.user.getUserInfo(),Util.user.getUserDetails());
-          console.log('userInfo',userInfo);
           let params = {
-            "approveCode": approveInfo.approveCode,
-            "applyId": userInfo.id,
-            "applyType": 1,
-            "applyName": userInfo.username,
-            "orgId": userInfo.orgs[0].orgnumber,
-            "areaCode": userInfo.orgs[0].xzqm,
-            "projectState": 0,
-//            "queueCode": "string",
-//            "queryCode": "string",
-//            "notacceptReason": "string",
-//            "correctionTime": "2017-10-21T03:09:18.915Z",
-            "approveName": approveInfo.approveName,
-            "orgName": approveInfo.orgName,
-            "approveId": this.$route.params.id,
-//            "acceptId": "string",
-//            "endId": "string",
-//            "nextExecutor": "string",
-//            "formInstanceList": [
-//              {
-//                "formInsId": "string",
-//                "formId": "string",
-//                "instanceId": "string",
-//                "engName": "string",
-//                "formValue": "string"
-//              }
-//            ],
-            "materialList": [
-              {
-                "materialInsId": "string",
-                "materialId": "string",
-                "instanceId": "string",
-                "materialName": "string",
-                "copiesNum": 0,
-                "commitWay": "string",
-                "submitTime": "2017-10-21T03:09:18.915Z",
-                "isMust": "string",
-                "orderNum": 0,
-                "submitState": "string",
-                "typeId": "string",
-                "isValid": "string",
-                "attachList": [
-                  {
-                    "attachId": "string",
-                    "attachCode": "string",
-                    "businessId": "string",
-                    "attachName": "string",
-                    "attachType": "string",
-                    "attachPath": "string",
-                    "attachSize": 0,
-                    "isValid": "string",
-                    "attachContent": [
-                      "string"
-                    ],
-                    "attachConStr": "string"
-                  }
-                ]
-              }
-            ]
+            projectState: '9',
+            instanceSource: '4',
+            approveCode: approveInfo.approveCode,
+            instanceName: approveInfo.parentName,
+            approveName: approveInfo.approveName,
+            approveId: approveInfo.approveId,
+            orgId: approveInfo.orgId,
+            areaCode: approveInfo.areaCode,
+            orgName: approveInfo.orgName,
+            rzApplyId:allUserInfo.id,
+            applyType: '1',
+            applyName: allUserInfo.username,
+            applyId: res.applicantId,
           }
-//        console.log('approve',this.approve);
+          if (this.materialList.length < this.currentFlieKey.length) {
+            params.projectState = '0';
+          }
+          Api.errandApi.getApprovematerial(approveInfo.approveId).then(result=>{
 
-//          Api.errandApi.addErrandExample().then(res=>{
-//              console.log(res);
-//          }).catch(e=>{
-//              console.log(e);
-//          })
+
+            let _materialList = [];
+            for (let item of this.currentFlies) {
+              for (let jItem of result) {
+                if (jItem.materialId === item.id) {
+                  console.log('jItem',jItem)
+                  let _materLi = {
+                    materialId: jItem.materialId,
+                    copiesNum:jItem.copiesNum,
+                    commitWay:jItem.commitWay,
+                    isMust:jItem.isMust,
+                    orderNum:jItem.orderNum,
+                    materialName:jItem.materialTitle,
+                    attachList:[]
+                  };
+                  for(let kItem of item.value){
+                    let kItemLi = {
+                      attachName:kItem.title,
+                      attachSize:parseInt(kItem.label)*1024,
+                      attachType:kItem.type,
+                      attachPath:kItem.url,
+                      attachCode:'000004',
+                      isValid:'Y',
+                      isDel:'N'
+                    }
+                    _materLi.attachList.push(kItemLi);
+                  }
+                  if(_materLi.attachList.length>0){
+                    _materLi.submitState = '1';
+                  }else{
+                    _materLi.submitState = '0';
+                  }
+                  _materialList.push(_materLi);
+                  break;
+
+                }
+              }
+            }
+            params.materialList = _materialList;
+            params.applicant = res;
+            console.log('params-->', params);
+            Api.errandApi.addErrandExample(params).then(res => {
+              console.log(res);
+              if(res){
+                //成功
+              }
+            }).catch(e => {
+              console.log(e);
+            })
+          })
+
+        })
+
+
+
       },
 
       //监听返回事件

@@ -17,12 +17,15 @@ export const getApproveName = (approveId,config)=>axiosGetToken(`/approveinterfa
 export const getMaterialList = (params,config)=>axiosGet(`/approveinterface/v1/approveMaterial${reqParms(params)}`,'',config);
 
 //附件上传接口
-export const uploadFile = (params,config)=>axiosPost('/minio/apk/attach/upload',params,config)
+export const uploadFile = (params,config)=>axiosPost('/minio/apk/attach/upload',params,config);
 
+
+//新建申请人
+export const addApplicant = (params,config)=>axiosPostToken('/accept/v1/applicant',params,config);
 
 //办件暂存 新增
 export const addErrandExample = (params,config) =>
-  axiosPostToken('/accept/v1/instance/saveInstance',params,config);
+  axiosPostToken('/accept/v1/instance/saveInstance/allinfo',params,config);
 
 //获取办件实例
 export const getErrandInstance = (instanceId,config) =>
@@ -35,6 +38,11 @@ export const updataErrandInstance = (instanceId,params,config)=>
 // 删除办件实例
 export const deleteErrandInstance = (instanceId,config)=>
   axiosDeleteToken(`/accept/v1/instance/${instanceId}`,config);
+
+// 获取材料列表id
+export const getApprovematerial = (approveId,config) =>
+  axiosGet(`/approveinterface/v1/approvematerial/selectByApproveId/${approveId}`,null,config);
+
 
 //根据部门查询机构列表
 export const getOrgsList = (orgId,params,config) => axiosGet(`/uop/v1/orgs/${orgId}/children`,params,config);

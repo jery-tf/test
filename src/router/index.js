@@ -68,6 +68,10 @@ router.beforeEach((to,from,next)=>{
         sessionStorage.setItem('isRefreshToken',true);
         next();
       }).catch(err=>{
+        //如果刷新token实效 则清除登录信息
+        if(err.errorMessage === 'refresh_token has expired!'){
+          Util.login.clearUserInfo();
+        }
         next();
       })
     }else{
