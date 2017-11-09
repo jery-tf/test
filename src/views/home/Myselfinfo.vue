@@ -57,19 +57,19 @@
         <div class="num">5</div>
       </li>
     </ul>
-    <!--<div class="padding-container-lr officework">-->
-      <!--<span class="myoffice">相关企业/单位(3)</span>-->
-      <!--<span class="checkall">查看全部<i class="OAIndexIcon C2-next"></i></span>-->
-    <!--</div>-->
-    <!--<div class="contentsall padding-container-lr" >-->
-      <!--<ul v-for="item in list">-->
-          <!--<li>-->
-            <!--<router-link v-bind="{to:'/aboutcmp/aboutcmp/'+item.aupe_parentid}">-->
-            <!--<AboutCompany :data="item"></AboutCompany>-->
-            <!--</router-link>-->
-          <!--</li>-->
-      <!--</ul>-->
-    <!--</div>-->
+    <div class="padding-container-lr officework">
+      <span class="myoffice">相关企业/单位(3)</span>
+      <span class="checkall">查看全部<i class="OAIndexIcon C2-next"></i></span>
+    </div>
+    <div class="contentsall padding-container-lr" >
+      <ul v-for="item in list">
+          <li>
+            <router-link v-bind="{to:'/aboutcmp/aboutcmp/'+item.aupe_parentid}">
+            <AboutCompany :data="item"></AboutCompany>
+            </router-link>
+          </li>
+      </ul>
+    </div>
     <div class="parttop  padding-container-lr">
         <!--<div class="particulars ">-->
           <!--<span>-->
@@ -85,14 +85,14 @@
           <!--<em class="OAIndexIcon C2-next"></em>-->
         <!--</div>-->
       </router-link>
-      <router-link to="/setting/consulting">
-        <div class="particulars company">
-        <span>
-           <i class="OAIndexIcon C2-tousu"></i>办事咨询
-        </span>
-          <em class="OAIndexIcon C2-next"></em>
-        </div>
-      </router-link>
+      <!--<router-link to="/setting/consulting">-->
+        <!--<div class="particulars company">-->
+        <!--<span>-->
+           <!--<i class="OAIndexIcon C2-tousu"></i>办事咨询-->
+        <!--</span>-->
+          <!--<em class="OAIndexIcon C2-next"></em>-->
+        <!--</div>-->
+      <!--</router-link>-->
       <router-link to="/setting/myconsulting">
         <div class="particulars company">
         <span>
@@ -253,7 +253,7 @@
               let arr = [];
               for (let item of res.list) {
                 let _item = {
-                  aupe_parentname: item.aupe_parentname, star: '法定代表人',aupe_time:item.aupe_time,
+                  aupe_parentname: item.aupe_parentname, star: '法定代表人',aupe_time:item.aupe_time.substr(0,10),
                   status: item.aupe_state,aupe_parentid:item.aupe_parentid,aupe_state:item.aupe_state
                 };
                 arr.push(_item);

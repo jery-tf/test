@@ -8,7 +8,7 @@
       <div v-for="(item,index) in dataList" :key="index"
            :class="item.channelId==selectedId?'li active':'li fff'"
            @click="liClickFun(item.channelId)">
-        <i class="OAIndexIcon C2-ertongshouyang"></i>
+        <i :class="`OAIndexIcon ${item.icon}`"></i>
         <span>{{item.name}}</span>
       </div>
 
