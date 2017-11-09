@@ -83,7 +83,7 @@
       height: 1.34rem;
       padding-top: 0.26rem;
       /*line-height: 1.34rem;*/
-      border-bottom: 1px solid #d9d9d9;
+      border-top: 1px solid #d9d9d9;
       margin: 0 0.28rem;
       .images-t {
         height: 1.34rem;

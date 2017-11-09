@@ -18,3 +18,8 @@ export const getValueBySeed = (seed)=>{
     return iconNames[index];
   }
 }
+
+export const getstr =(str)=>{
+  str = str.substr(0,20)
+  return str
+}

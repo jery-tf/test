@@ -137,7 +137,7 @@
   .idform {
     border: 0;
     outline: 0;
-    width: 3rem;
+    width: 4.9rem;
     height: 0.8rem;
     font-size: 0.23rem;
     color: #333;

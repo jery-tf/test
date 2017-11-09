@@ -9,7 +9,7 @@ import * as errand from './errand'
 import * as icon from './icon'
 import * as cache from './cache'
 import * as ctime from './ctime'
-
+import * as cmsdao from './cmsdao'
 export default {
-  user,login,home,other,errand,icon,cache,ctime
+  user,login,home,other,errand,icon,cache,ctime,cmsdao
 }

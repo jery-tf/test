@@ -33,17 +33,17 @@
     },
     data() {
       return {
-        selected: '14',
+        selected: '13',
         currentView: 'Education',
         leftDataList: [],
-        selectedId: 14,
+        selectedId: 13,
         list: [],
         list1: [],
       }
     },
     created() {
       this.peolist()
-      this.selecedLeftFun(14)
+      this.selecedLeftFun(13)
     },
     methods: {
       //发送请求获取左侧栏的数据
@@ -61,51 +61,40 @@
           },
           {headers: {'content-type': 'application/x-www-form-urlencoded'}}
         ).then(res => {
-          this.leftDataList = res.data
+          let arr = [];
+          for (let item of res.data) {
+            arr.push({
+              channelId: item.channelId,
+              name: item.name,
+              icon: Util.icon.getValueBySeed(item.name)
+            });
+          }
+          this.leftDataList = arr
+          //列表中的默认值给 selectedId
+          if (!this.selectedId && item.dictdataIsdefault) {
+            this.selectedId = item.name;
+          }
         })
       },
       //点击左侧列表 单元格
       selecedLeftFun(channelId) {
         //左侧列表发生变化  右侧组件变化成不同组件
-        this.selectedId = channelId;
-//        console.log( this.selectedId)
-//        if (this.selectedId == 14) {
-          Api.getnewsApi.getnews(
-            {
-              content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
-                channelId: `${this.selectedId}`,
-                start: "0",
-                count: "99",
-                grantUserName: "xxld",
-                userName: "xxld",
-                site: "hunanzhengwu"
-              })))
-            },
-            {headers: {'content-type': 'application/x-www-form-urlencoded'}}
-          ).then(res => {
-            this.list = res.data;
-//            console.log(res.data.channelId)
-              Api.getnewsApi.getnews(
-                {
-                  content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
-                    channelId:"21",
-                    start: "0",
-                    count: "99",
-                    grantUserName: "xxld",
-                    userName: "xxld",
-                    site: "hunanzhengwu"
-                  })))
-                },
-                {headers: {'content-type': 'application/x-www-form-urlencoded'}}
-              ).then(res => {
-                this.list1 = res.data;
-
-              })
-          })
-//       }
-//        else {
-//           alert("功能正在开发中，敬请期待")
-//        }
+       this.selectedId = channelId;
+        Util.cmsdao.fetchAllSubChnlNArti(`${this.selectedId}`,2).then(res=>{
+//           this.list=res
+//          console.log(res)
+          let arr = [];
+          for (let item of res) {
+            arr.push({
+              sub:item.sub,
+              channelId: item.channelId,
+              name: item.name,
+              icon: Util.icon.getValueBySeed(item.name)
+            });
+          }
+          this.list = arr
+          console.log(arr)
+        })
       }
     }
 
@@ -123,9 +112,11 @@
       height: .96rem;
     }
   }
-.flex1{
-  margin-left: 1.7rem;
-}
+
+  .flex1 {
+    margin-left: 1.7rem;
+  }
+
   .bm {
     div.doubleListBox {
       top: 0;

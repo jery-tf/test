@@ -71,7 +71,7 @@
               }),
               {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res => {
               if(res.code=200){
-                console.log(res)
+                console.log('1',res)
                 let arr = [];
                 for (let item of res.list) {
                   let _item = {
@@ -187,7 +187,7 @@
          .accred{
            border-bottom: 1px solid #d9d9d9;
            h5{
-             width: 7.2rem;
+             width: 6.72rem;
              height: 0.95rem;
              line-height:0.95rem;
              font-size: 0.32rem;

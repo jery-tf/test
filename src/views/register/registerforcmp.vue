@@ -234,6 +234,11 @@
 </script>
 <style lang='less'>
   .addresslist{
+    .mint-button--large{
+      width: 6.72rem;
+      margin: 0.24rem 0.24rem;
+    }
+
     .cmp {
       margin: 0.19rem 0;
       width: 7.2rem;
