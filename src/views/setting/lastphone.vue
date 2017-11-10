@@ -38,7 +38,7 @@
            Toast("修改手机号码成功,即将跳转到首页")
            //清除用户相关信息
            Util.login.clearUserInfo();
-           this.$router.push("/")
+           this.$router.push("/mySelfInfo")
          }
         })
       }

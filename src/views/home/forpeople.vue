@@ -82,7 +82,11 @@
        this.selectedId = channelId;
         Util.cmsdao.fetchAllSubChnlNArti(`${this.selectedId}`,2).then(res=>{
 //           this.list=res
-//          console.log(res)
+          if(res==null){
+            Toast('功能正在开发中，敬请期待')
+            this.list=''
+            return
+          }
           let arr = [];
           for (let item of res) {
             arr.push({
@@ -93,7 +97,6 @@
             });
           }
           this.list = arr
-          console.log(arr)
         })
       }
     }

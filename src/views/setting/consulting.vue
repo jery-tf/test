@@ -95,8 +95,8 @@
       }
     },
     created() {
-      this.pname = JSON.parse(localStorage.getItem('userInfo')).name
-      this.phone = JSON.parse(localStorage.getItem('userInfo')).phone
+//      this.pname = JSON.parse(localStorage.getItem('userInfo')).name
+//      this.phone = JSON.parse(localStorage.getItem('userInfo')).phone
       this.userid = JSON.parse(localStorage.getItem('userInfo')).userId
       console.log(this.pname)
       console.log(this.userid)

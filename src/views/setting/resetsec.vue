@@ -10,7 +10,7 @@
       <mt-field label="请再次输入新密码" class="ipt" :type="ablesee2?'text':'password'" v-model="password2">
         <span class="OAIndexIcon C2-yanjing1" @click="isshow2()"></span>
       </mt-field>
-      <div class="top52">
+      <div class="top52 reseto">
         <mint-button type="primary" size="large" @click.native="handleClick">保存</mint-button>
       </div>
     </div>
@@ -79,7 +79,7 @@ export default {
           Api.checkPwdApi.checkPwd(this.userId,params).then(res=>{
                Toast('修改密码成功，即将跳转到首页')
             Util.login.clearUserInfo();
-            this.$router.push('/')
+            this.$router.push('/mySelfInfo')
           })
         }
 
@@ -133,11 +133,14 @@ export default {
       border-bottom: 1px solid #d9d9d9
     }
   }
+  .reseto{
+    margin:0.24rem 0 0 0.24rem
+  }
 }
 
-.mint-button {
-  margin: 0.5rem 0.24rem 0;
-}
+/*.mint-button {*/
+  /*margin: 0.5rem 0.24rem 0;*/
+/*}*/
 
 .mint-button--large {
   width: 6.72rem;

@@ -1,24 +1,12 @@
 <template>
   <div id="tmpl">
-    <div class="public padding-container-lr" >
+    <div class="public padding-container-lr">
       <ul class="pubcont">
-        <template v-for="item1 in list1">
+        <template v-for="item in result">
           <li class="publist">
-            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_40.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_40.html'">
-              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
-              <span>{{item1.time}}</span>
-            </a>
-            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_39.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_39.html'">
-              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
-              <span>{{item1.time}}</span>
-            </a>
-            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_13.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_13.html'">
-              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
-              <span>{{item1.time}}</span>
-            </a>
-            <a href="http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_12.html" v-if="item1.detailUrl=='http://hnzwfwcms.s1.natapp.cc/hunanzhengwu/2/10/content_12.html'">
-              <img :src="item1.imageUrls" v-if="item1.imageUrls"> <p>{{item1.title}}</p><br>
-              <span>{{item1.time}}</span>
+            <a :href="`${item.detailUrl}`">
+              <img :src="item.imageUrls" v-if="item.imageUrls"> <p>{{item.title}}</p><br>
+              <span>{{item.time}}</span>
             </a>
           </li>
         </template>
@@ -28,7 +16,6 @@
 
 </template>
 <script>
-  //import Publicitem from 'components/publicitem/publicitem.vue'
   import {Toast} from 'mint-ui';
   import Api from '../../api'
   import Util from '../../util'
@@ -37,37 +24,24 @@
   import qs from "qs"
 
   export default {
-//  components:{Publicitem},
     data() {
       return {
-        list1: [],
+        result: [],
       }
     },
     created() {
       this.getnews()
     },
     methods: {
-      getnews() {
-        Api.getnewsApi.getnewsinfo(
-          {
-            content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
-              channelId: "10",
-              start: "0",
-              count: "99",
-              grantUserName: "xxld",
-              userName: "xxld",
-              site: "hunanzhengwu"
-            })))
-          },
-          {headers: {'content-type': 'application/x-www-form-urlencoded'}}
-        ).then(res => {
-          if (res.resp_code == "1") {
-            this.list1 = res.data
-            this.$router.push("")
-          }
-//        else if(res.code=="200"){
-//          this.$router.push("/register/registerinfo");
-//        }
+      getnews( ) {
+        this.id = this.$route.params.id;
+        Util.cmsdao.fetchAllSubChnlNArti('2',4).then(res=>{
+         for(let i=0;i<res.length;i++){
+            if(this.id==res[i].channelId){
+              this.result=res[i].sub
+              console.log(this.result)
+            }
+         }
         })
       },
 

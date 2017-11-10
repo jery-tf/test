@@ -49,8 +49,8 @@
     },
     created() {
       //获取上个页面传过来的姓名和身份证号
-      this.pname = JSON.parse(localStorage.getItem('orderList')).pname
-      this.idcard = JSON.parse(localStorage.getItem('orderList')).idcard
+      this.pname = JSON.parse(sessionStorage.getItem('orderList')).pname
+      this.idcard = JSON.parse(sessionStorage.getItem('orderList')).idcard
       console.log(this.pname)
       console.log(this.idcard)
     },
