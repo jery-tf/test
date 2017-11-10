@@ -25,7 +25,7 @@ export const addApplicant = (params,config)=>axiosPostToken('/accept/v1/applican
 
 //办件暂存 新增
 export const addErrandExample = (params,config) =>
-  axiosPostToken('/accept/v1/instance/saveInstance/allinfo',params,config);
+  axiosPostToken('/accept/v1/instance/saveOuterInstance/allinfo',params,config);
 
 //获取办件实例
 export const getErrandInstance = (instanceId,config) =>
