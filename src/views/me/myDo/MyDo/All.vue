@@ -3,9 +3,9 @@
 */
 
 <template>
-  <div class="piecesBox">
+  <div class="piecesBox" ref="obj">
     <mt-loadmore :bottom-method="loadBottom" :autoill="false" :bottom-all-loaded="allLoaded"
-                 :bottomDistance="20" ref="loadmore">
+                 :bottomDistance="30" ref="loadmore">
       <ul>
         <li v-for="item in list">
           <Piece :option="item"></Piece>
@@ -17,98 +17,56 @@
 
 <script>
   import Piece from 'components/myDo/Piece.vue'
+  import Util from '@/util'
+  import Api from '@/api'
+  import MintUI,{Field, Button,Toset,Toast} from 'mint-ui'
   export default {
     name: 'All',
     components: {Piece},
     data () {
       return {
         allLoaded:false,
-        pieceOption: {
-          id: 'test',
-          number: 123123123123123,
-          state: 2,
-          content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-          logisticsNo: '12312312312',//物流单号
-        },
-        list: [
-          {
-            id: 'test',
-            number: 123123123123123,
-            state: 2,
-            content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-            logisticsNo: '12312312312',//物流单号
-          },
-          {
-            id: 'test',
-            number: 123123123123123,
-            state: 2,
-            content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-            logisticsNo: '12312312312',//物流单号
-          }, {
-            id: 'test',
-            number: 123123123123123,
-            state: 2,
-            content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-            logisticsNo: '12312312312',//物流单号
-          },
-          {
-            id: 'test',
-            number: 123123123123123,
-            state: 2,
-            content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-            logisticsNo: '12312312312',//物流单号
-          },
-          {
-            id: 'test',
-            number: 123123123123123,
-            state: 2,
-            content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-            logisticsNo: '12312312312',//物流单号
-          },
-          {
-            id: 'test',
-            number: 123123123123123,
-            state: 2,
-            content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-            logisticsNo: '12312312312',//物流单号
-          }, {
-            id: 'test',
-            number: 123123123123123,
-            state: 2,
-            content: '中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文中文全部是中文',
-            logisticsNo: '12312312312',//物流单号
-          }
-        ]
+        pieceOption: {},
+        list: [],
+        page:1,
+        rows:10,
+
       }
+
     },
     created(){
-
+      this.initData();
     },
     methods: {
       loadBottom(){
         console.log('执行加载');
-        let data = [
-          {
-            id: 'test',
-            number: 222222222222,
-            state: 2,
-            content: '222222',
-            logisticsNo: '222222',//物流单号
-          },
-          {
-            id: 'test',
-            number: 3333333,
-            state: 2,
-            content: '33333333',
-            logisticsNo: '33333333',//物流单号
-          },
-        ];
         setTimeout(() => {
-          this.list.push(...data);
-//          this.allLoaded = true;// 若数据已全部获取完毕
-          this.$refs.loadmore.onBottomLoaded();
-        }, 1000);
 
+        }, 500);
+      },
+      initData() {
+        //获取用户id
+        let userId =  Util.other.getLocalStorage('userInfo').userId;
+        let cond = {
+          filters: {
+            groupOp: "AND",
+            rules: [{ field: "rzApplyId", op: "eq", data: userId }]
+          }
+        };
+        let _params = {page: this.page, rows: this.rows, cond: encodeURI(JSON.stringify(cond))};
+        MintUI.Indicator.open('请稍后...');
+        Api.errandApi.getProceedingList(_params).then(res => {
+          console.log(res);
+          this.list = res.contents;
+          MintUI.Indicator.close();
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    },
+    watch:{
+      top(val){
+          console.log(val)
       }
     }
 
@@ -117,7 +75,6 @@
 
 <style scoped lang="less" rel="stylesheet/less">
   .piecesBox {
-    overflow-y: auto;
     flex: 1;
     li{
       margin-top: .2rem;

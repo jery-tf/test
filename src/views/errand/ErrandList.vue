@@ -226,8 +226,7 @@
                 {field: this.catalog, op: "eq", data: id},
                 {field: this.catalog, op: "bw", data: id + ","},
                 {field: this.catalog, op: "cn", data: "," + id + ","},
-                //todo 办事列表
-                //{field:this.catalog,op:"ew",data:","+id} 该运算符有问题，暂不使用该条件
+                {field:this.catalog,op:"ew",data:","+id}
               ]
             }
           };

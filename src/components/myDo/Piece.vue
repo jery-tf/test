@@ -6,20 +6,20 @@
   <div class="content">
     <router-link :to="`/me/doDetails/${option.id}`">
       <div class="font-small padding-container border-bottom">
-        <p class="number oneLineFont">受理编号 : {{option.number || ''}}</p>
-        <span :class="`state${option.state}`">{{ stateToZW }}</span>
+        <p class="number oneLineFont">受理编号 : {{option.approveCode || ''}}</p>
+        <span :class="`state${pieceState}`" class="state">{{ stateToZW }}</span>
       </div>
-      <div class="img border-bottom padding-container">
+      <div class="content-warpper">
         <p>
           <img :src="stateToImg">
         </p>
         <div>
-          <p class="font twoLineFont">{{option.content || ''}}</p>
-          <span class="time">{{option.time || ''}}</span>
+          <p class="font twoLineFont">{{option.instanceName || ''}}</p>
+          <span class="time">{{format(option.submitTime,'yyyy-MM-dd')}}</span>
         </div>
       </div>
     </router-link>
-    <div class="foot padding-container">
+    <!--<div class="foot padding-container">
       <div>
         <i v-if="option.state=='1'" class="OAIndexIcon C2-wuliu"></i>
         <p v-if="option.state=='1'">{{option.logisticsNo || ''}}</p>
@@ -43,7 +43,7 @@
           我要评价
         </mt-button>
       </p>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -60,19 +60,23 @@
    *    }
    *根据状态来显示不同的操作按钮
    */
+  import tp from '@/assets/img/ok.png'
+  import api from '@/api'
+  import { format} from '@/util/ctime.js'
   export default {
     name: 'Piece',
     components: {},
     props: ['option'],
     data () {
       return {
-        pieceState: this.option.state
+        pieceState: this.option.projectState
       }
     },
     created(){
-
+      console.log(this.option)
     },
     methods: {
+      format,
       cancelFun(){
         let id = this.option.id;
         console.log(id);
@@ -82,28 +86,36 @@
         let id = this.option.id;
         console.log(id);
       },
-      //我要评价
+      /*//我要评价
       svaluateFun(){
         let id = this.option.id;
         console.log(id);
-      }
+      }*/
 
     },
     computed: {
       //根据状态 返回当前中文状态
       stateToZW(){
         let pieceStateSheet = {
-          1: '未完成',
-          2: '已办结',
-          3: '已完成'
+          0:'暂存',
+          1:'受理',
+          2:'不予受理',
+          3:'补正补齐',
+          4:'业务办结',
+          5:'统一办结',
+          6:'办结',
+          7:'作废办结',
+          8:'网上提交',
+          9:'预审通过',
+          10:'预审不通过'
         };
         return pieceStateSheet[this.pieceState];
       },
       //根据状态 返回图标
       stateToImg(){
         let pieceStateImg = {
-          1: '../../assets/img/ok.png',
-          2: '已办结',
+          1: '',
+          2: tp,
           3: '已完成'
         };
         return pieceStateImg[this.pieceState];
@@ -160,37 +172,37 @@
     .state {
       text-align: right;
       width: 1.2rem;
-    }
-    .state1 {
-      color: #ff0000;
-    }
-    .state2, .state3 {
       color: #5fd8b7;
+    }
+    .state2,.state7,.state10{
+      color: #ff0000;
     }
     .number {
       color: #666;
     }
-    .img {
+    .content-warpper{
+      padding: 0.24rem 0.26rem;
       display: flex;
-      align-items: center;
-      > div {
-        margin-left: .32rem;
+      &>p{
+        img{
+           width:0.81rem;
+        }
       }
-      > p, img {
-        width: .81rem;
-        height: .81rem;
-      }
-      .time {
-        font-size: .2rem;
-        color: #aaa;
-      }
-      .font {
-        color: #333;
-        font-size: .28rem;
+      &>div{
+        flex:1;
+        margin-left:0.21rem;
+        .font{
+          font-size:0.28rem;
+        }
+        .time{
+          font-size:0.2rem;
+          color:#aaa;
+        }
+
       }
     }
     .foot {
-      display: flex;
+
       align-items: center;
       justify-content: space-between;
       > div {

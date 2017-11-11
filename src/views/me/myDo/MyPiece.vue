@@ -5,23 +5,26 @@
 
 <template>
   <div>
-    我的办件详情
-  </div>
+    <doDetails></doDetails>
+   </div>
 </template>
 
 <script>
-    export default {
-        name: 'MyPiece',
-        components: {},
-        data () {
-            return {}
-        },
-        created(){
+  import doDetails from '@/views/errand/completeData'
+  export default {
+      name: 'MyPiece',
+      components: {
+        doDetails
+      },
+      data () {
+          return {}
+      },
+      created(){
 
-        },
-        methods: {}
+      },
+      methods: {}
 
-    }
+  }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">

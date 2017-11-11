@@ -47,6 +47,11 @@ export const getApprovematerial = (approveId,config) =>
 //根据部门查询机构列表
 export const getOrgsList = (orgId,params,config) => axiosGet(`/uop/v1/orgs/${orgId}/children`,params,config);
 
+//获取办件实例列表
+
+export const getProceedingList = (params,config) => axiosGet(`/accept/v1/instance${reqParms(params)}`,config);
+//
+
 //参数处理函数
 const reqParms = (params)=>{
   let qs = '?';
