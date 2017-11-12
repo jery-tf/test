@@ -102,6 +102,7 @@ export default [
     meta: {
       title: '办事咨询'
     },
+    beforeEnter: Util.login.checkLogin
   },
   {
     path: '/setting/myconsulting',

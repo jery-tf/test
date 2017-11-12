@@ -24,7 +24,7 @@
     box-sizing: border-box;
     width: 100vw;
     height: 100%;
-    overflow-y: auto;
+    /*overflow-y: scroll;*/
     font-size: .32rem;
   }
 

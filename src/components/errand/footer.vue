@@ -118,6 +118,7 @@
     background: #fff;
     color: #26a2ff;
     border-top: 1px solid #eee;
+    position: fixed;
     .iconAll {
       display: flex;
       flex: 1;
