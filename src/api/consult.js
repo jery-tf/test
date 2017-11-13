@@ -13,3 +13,10 @@ const reqParms = (params)=>{
 
 //我的咨询
 export const myConsult = (params,config)=>axiosGet(`/accept/v1/consult`,params,config);
+
+
+//根据id获得咨询列表
+export const ConsultList = (params)=>axiosGet(`/accept/v1/consult${reqParm(params)}`);
+const reqParm = (params)=>{
+  return '/'+params;
+};

@@ -112,4 +112,12 @@ export default [
       title: '我的咨询'
     },
   },
+  {
+    path: '/setting/consultingList/:id',
+    name: 'myconsultingList',
+    component: views.Setting.consultingList,
+    meta: {
+      title: '咨询详情'
+    },
+  },
 ]

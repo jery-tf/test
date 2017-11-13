@@ -6,7 +6,9 @@
           <h3 :class="islogin ? 'classa' : 'OAIndexIcon C2-yonghu21' "></h3>
           <!--<img :src="'islogin'?'../../assets/img/hport.png':'../../assets/img/img1.png'">-->
           <!--<img src="../../assets/img/hport.png" alt="">-->
+        <div class="psaaname">
           <span :class="text?'classc':'classd'">{{pname}}</span><i class="OAIndexIcon C2-fanhui2" v-if="isshow"></i>
+        </div>
         </div>
       </router-link>
       <div class="spanceclt">
@@ -282,16 +284,20 @@
       font-size: 0.32rem;
       color: #999;
       position: relative;
-      .C2-fanhui2{
-        color:#333;
-        display: inline-block;
-        width: 0.1rem;
-        height: 0.17rem;
-        font-size: 0.34rem;
-       position: absolute;
-        top:1.6rem;
-        right:0;
+      .psaaname{
+        position: relative;
+        .C2-fanhui2{
+          color:#333;
+          display: inline-block;
+          width: 0.1rem;
+          height: 0.17rem;
+          font-size: 0.34rem;
+          position: absolute;
+          top:0.03rem;
+          right:0;
+        }
       }
+
       h3 {
         margin-bottom: 0.14rem;
       }

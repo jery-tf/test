@@ -4,12 +4,11 @@
 
 <template>
   <div class="consult  box-margin-top">
-    <div class="myconsult" v-for="item in consult">
-      <h4 class="padding-container-lr">{{item.consultTitle}}</h4>
-      <p class="contents ">
-        {{item.consultContent}}
-      </p>
-      <span class="padding-container-lr">{{item.consultTime}}</span>
+    <div class="myconsult" v-for="item in consult" >
+      <router-link v-bind="{to:'/setting/consultingList/'+item.consultId}">
+        <Consult :title="item.consultTitle" :content="item.consultContent" :time="item.consultTime"></Consult>
+      </router-link>
+
     </div>
   </div>
 </template>
@@ -19,10 +18,10 @@
   import Util from '../../util'
   import axios from 'axios'
   import qs from "qs"
-
+  import Consult from 'components/others/consult.vue'
   export default {
     name: 'myconsulting',
-    components: {},
+    components: {Consult},
     data() {
       return {
         consult: []
@@ -47,12 +46,12 @@
         }
         let params = {page: 1, rows: 100, cond: JSON.stringify(cond)};
         Api.consultApi.myConsult(params).then(res => {
-//          console.log(res)
+          console.log(res)
           //取咨询的数据
           let arr = [];
           for (let item of res.contents) {
             let _item = {
-              applyId: item.applyId, applyName: item.applyName, applyPhone: item.applyPhone,
+              consultId: item.consultId, applyName: item.applyName, applyPhone: item.applyPhone,
               consultContent: item.consultContent, approveId: item.approveId, consultTitle: item.consultTitle,
               orgName: item.orgName,consultTime: Util.ctime.ctime(item.consultTime)
             };

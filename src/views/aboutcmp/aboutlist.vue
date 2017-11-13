@@ -13,7 +13,7 @@
         <span>授权期限:{{aupe_termsta}} {{aupe_termend}}</span>
       </div>
     </div>
-    <div class="noconsult" v-if="list.length==0">
+    <div class="noconsult" v-if="isshow">
       暂无授权事项
     </div>
   </div>
@@ -35,6 +35,7 @@
         id: 1,
         arrN: [],
         list: [],
+        isshow:false
       }
     },
     created() {
@@ -57,7 +58,6 @@
             let str = res.list.aupe_zt.split(',')
             //获取授权人的授权事项
             Api.registerApi.getapprove().then(res => {
-              console.log('oooo',res)
               let arr = res.法人分类
               let arrN = []
               for (let i = 0; i < arr.length; i++) {
@@ -70,7 +70,9 @@
                 }
               }
               this.list = arrN
-              console.log(arrN)
+             if(this.list.length==0){
+                this.isshow=true
+             }
             })
           }
         })

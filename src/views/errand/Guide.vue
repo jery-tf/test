@@ -122,7 +122,6 @@
         } else {
           this.searchBarFixed = false
         }
-    console.log(scrollTop)
       },
       testBtn(){
         this.$router.push({path: `/errand/online/${this.$route.params.id}`})
@@ -226,6 +225,7 @@
       },
 
     },
+    //清除页面滚动事件
     destroyed () {
       window.removeEventListener('scroll', this.handleScroll)
     },
