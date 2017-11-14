@@ -22,7 +22,7 @@ export default [
     }
   },
   {
-    path:'/me/doDetails/:id',
+    path:'/me/doDetails',
     name:'myPiece',
     meta:{
       title:"我的办件",

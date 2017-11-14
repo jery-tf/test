@@ -6,12 +6,15 @@
   <div>
     <div class="padding-container topImg">
       <div>
-        <p>补正补齐</p>
+        <p>{{dataInfo.title}}</p>
         <div class="box-margin-top font21">
           <p>
             <i class="OAIndexIcon C2-chuangkou"></i><span>3号窗口</span>
-            <i class="OAIndexIcon C2-icon21"></i><span>张三</span>
-            <i class="OAIndexIcon C2-shijian"></i><span>2017-9-23</span>
+            <i class="OAIndexIcon C2-icon21"></i><span>{{dataInfo.applyName}}</span>
+            <i class="OAIndexIcon C2-shijian"></i>
+            <span>
+            {{format( parseInt(dataInfo.submitTime),'yyyy-MM-dd')}}
+          </span>
           </p>
         </div>
       </div>
@@ -20,17 +23,17 @@
 
     <p class="remind fff padding-container">
       <i class="OAIndexIcon C2-guanyu1"></i>
-      <span>XXXX材料缺失,请于2017年12月12日之前进行重新提交</span>
+      <span>XXXX材料缺失,请于2017年12月12日之前进行重新提交(接口没有字段)</span>
     </p>
 
     <div class="box-margin-top padding-container fff">
-      <p class="twoLineFont">文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多文字很多</p>
+      <p class="twoLineFont">{{dataInfo.instanceName}}</p>
     </div>
 
     <div class="box-margin-top padding-container fff Eno">
       <p>
         <span class="label">受理编号</span>
-        <span class="number">2312312312</span>
+        <span class="number">{{dataInfo.approveCode}}</span>
       </p>
       <p>
         <span class="label">查询编码</span>
@@ -43,7 +46,7 @@
       <p class="padding-container border-bottom">办件信息</p>
       <div class="padding-container">
         <div>
-          <Subtitle title="这是标题" content="这是内容"></Subtitle>
+          <Subtitle title="申报事项" content="这是内容"></Subtitle>
         </div>
         <div class="box-margin-top">
           <Subtitle title="办件类型" content="承诺件"></Subtitle>
@@ -66,55 +69,36 @@
       </div>
     </div>
 
-    <CompleteAddress :key="index" v-for="(item,index) in userInfoArr" :userInfo="item.userInfo"
+    <!--<CompleteAddress :key="index" v-for="(item,index) in userInfoArr" :userInfo="item.userInfo"
                      :expressInfo="item.expressInfo" :type="item.type">
     </CompleteAddress>
 
     <div class="box-margin-top fff padding-container submintBtn">
       <p>提交审批</p>
     </div>
+  </div>-->
   </div>
 </template>
 
 <script>
   import Subtitle from 'components/errand/Subtitle.vue'
   import CompleteAddress from 'components/errand/completeData/address.vue'
+  import { format} from '@/util/ctime.js'
   export default {
     name: 'completeData',
     components: {Subtitle, CompleteAddress},
+    props:['dataInfo','doInfo'], // dataInfo事项信息  doInfo办件信息
     data () {
       return {
-        userInfoArr: [
-          {
-            userInfo: {
-              name: '张三',
-              phone: '123123123',
-              address: '这是地址信息这是地址信息这是地址信息这是地址信息这是地址信息这是地址信息这是地址信息'
-            },
-            expressInfo:{
-                no:'123123123',
-            },
-            type:1
-          },
-          {
-            userInfo: {
-              name: '张三',
-              phone: '123123123',
-              address: '这是地址信息这是地址信息这是地址信息这是地址信息这是地址信息这是地址信息这是地址信息'
-            },
-            expressInfo:{
-              no:'123123123',
-            },
-            type:2
-          }
-        ],
+        userInfoArr: this.dataInfo
       }
     },
     created(){
 
     },
-    methods: {}
-
+    methods: {
+      format
+    }
   }
 </script>
 
@@ -173,6 +157,9 @@
       border: 1px solid #ddd;
       border-radius: .1rem;
     }
+  }
+  .box-margin-top{
+    margin-top: -0.01rem;
   }
   .submintBtn{
     display: flex;

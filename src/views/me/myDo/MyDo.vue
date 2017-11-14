@@ -9,24 +9,28 @@
       <mt-tab-item id="2">暂存</mt-tab-item>
       <mt-tab-item id="3">待受理</mt-tab-item>
       <mt-tab-item id="4">待审核</mt-tab-item>
-      <mt-tab-item id="5">待评价</mt-tab-item>
+      <mt-tab-item id="5">已办结</mt-tab-item>
+      <mt-tab-item id="6">不予受理</mt-tab-item>
     </mt-navbar>
 
     <mt-tab-container v-model="selected" class="content">
       <mt-tab-container-item id="1" class="flex">
-        <AllPiece></AllPiece>
+        <AllPiece :type="0"></AllPiece>
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
-        <p>222</p>
+        <AllPiece type=0></AllPiece>
       </mt-tab-container-item>
       <mt-tab-container-item id="3">
-        <p>333</p>
+        <AllPiece type=9></AllPiece>
       </mt-tab-container-item>
       <mt-tab-container-item id="4">
-        <p>444</p>
+        <AllPiece type=4></AllPiece>
       </mt-tab-container-item>
       <mt-tab-container-item id="5">
-        <p>555</p>
+        <AllPiece type=5></AllPiece>
+      </mt-tab-container-item>
+      <mt-tab-container-item id="6">
+        <AllPiece type=2></AllPiece>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -44,7 +48,7 @@
       }
     },
     created(){
-
+      document.getElementsByTagName('body')[0].scrollTop = 0;
     },
     methods: {
 
