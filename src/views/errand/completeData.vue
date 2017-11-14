@@ -158,6 +158,9 @@
       border-radius: .1rem;
     }
   }
+  .box-margin-top{
+    margin-top: -0.01rem;
+  }
   .submintBtn{
     display: flex;
     justify-content: flex-end;

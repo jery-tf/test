@@ -2,7 +2,7 @@
  * Created by wyg on 2017/10/2.
  */
 
-import {axiosGet,axiosGetToken,axiosPost,axiosPostToken,axiosDeleteToken} from './baseApi'
+import {axiosGet,axiosGetToken,axiosPost,axiosPostToken,axiosDeleteToken,axiosDelete} from './baseApi'
 
 //根据事项id 获取事项接口
 export const getErrandList = (params,config)=>axiosGet(`/approveinterface/v1/approveinfo${reqParms(params)}`,'',config);
@@ -48,8 +48,10 @@ export const getApprovematerial = (approveId,config) =>
 export const getOrgsList = (orgId,params,config) => axiosGet(`/uop/v1/orgs/${orgId}/children`,params,config);
 
 //获取办件实例列表
-export const getProceedingList = (params,config) => axiosGet(`/accept/v1/instance${reqParms(params)}`,config);
-//
+export const getProceedingList = (params,config) => axiosGet(`/accept/v1/instance/getListByStatusAndApply${reqParms(params)}
+`,config);
+//删除办件实例
+export const deleteProceeding = (instanceId,config) => axiosDelete(`/accept/v1/instance/${instanceId}`,config);
 //根据事项信息获取事项基本信息
 export const getProceedingDetail = (approveId,config) => axiosGet(`/accept/v1/instance/${approveId}`,config);
 

@@ -62,7 +62,7 @@
       </div>
     </div>
     <ErrandFoot tel="0731-231224223" :btnClick="testBtn" :isShowCollection="true" :isCollection="isCollection"
-                btnName="在线提交" :errandId="$route.params.id" :updataIsCollection="updataIsCollection"></ErrandFoot>
+                btnName="在线办理" :errandId="$route.params.id" :updataIsCollection="updataIsCollection"></ErrandFoot>
   </div>
 </template>
 

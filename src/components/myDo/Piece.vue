@@ -17,9 +17,9 @@
         <span class="time">{{format(option.submitTime,'yyyy-MM-dd')}}</span>
       </div>
     </div>
-    <div class="foot padding-container">
+    <div class="foot padding-container" v-if="pieceState === '0' || pieceState ==='3'">
       <p>
-        <mt-button  size="small" plain :type="operButtonName === '查看详情'||operButtonName === '我要评价'? 'default':'danger'">
+        <mt-button  size="small" plain type="danger" @click.stop="deleteItem">
           {{operButtonName}}
         </mt-button>
         {{stateStyle}}
@@ -43,9 +43,12 @@
   import tp from '@/assets/img/ok.png'
   import api from '@/api'
   import { format} from '@/util/ctime.js'
+  import { MessageBox } from 'mint-ui'
   export default {
     name: 'Piece',
-    components: {},
+    components: {
+      MessageBox
+    },
     props: ['option'],
     data () {
       return {
@@ -58,13 +61,13 @@
               "stateColour":'#ff0000',
               "stateIcon":'ertongshouyang',
               "stateIconColor":'#f15a4a',
-              "operButtonName":'提交审批',
+              "operButtonName":'删除',
             }
           },
           {
             "projectState": 1,
             "projectAttr" : {
-              "projectStateName": "受理",
+              "projectStateName": "待受理",
               "stateColour":'#ff0000',
               "stateIcon":'ertongshouyang',
               "stateIconColor":'#f15a4a',
@@ -166,7 +169,8 @@
         stateColor:'',
         operButtonName:'',//当前状态操作名称
         operButtonColor:'',
-        state:''
+        state:'',
+        isShow:false
       }
     },
     created(){
@@ -177,26 +181,14 @@
       doDetails(){
         this.option.title =  this.state; //当前状态
         this.$router.push({path:'/me/doDetails/',query:this.option})
+      },
+      deleteItem(){
+        /* // console.log(this.option)*/
+
+        this.$emit('delete',this.option.instanceId)
       }
     },
     computed: {
-      //根据状态 返回当前中文状态
-      stateToZW(){
-        let pieceStateSheet = {
-          0:'暂存',
-          1:'受理',
-          2:'不予受理',
-          3:'补正补齐',
-          4:'业务办结',
-          5:'统一办结',
-          6:'办结',
-          7:'作废办结',
-          8:'网上提交',
-          9:'预审通过',
-          10:'预审不通过'
-        };
-        return pieceStateSheet[this.pieceState];
-      },
       //根据状态 返回图标
       stateToImg(){
         let pieceStateImg = {
@@ -210,7 +202,6 @@
       stateStyle(){
         this.stateJson.forEach(e=>{
           if (parseInt(this.pieceState)===parseInt(e.projectState) ){
-              console.log(e)
               this.stateColor =  e.projectAttr.stateColour
               this.operButtonName =e.projectAttr.operButtonName
               this.state = e.projectAttr.projectStateName

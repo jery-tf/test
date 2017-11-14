@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" btnName="在线提交"
+    <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" btnName="提交"
                 :errandId="$route.params.id"></ErrandFoot>
   </div>
 </template>
@@ -189,8 +189,6 @@
             params.projectState = '0';
           }
           Api.errandApi.getApprovematerial(approveInfo.approveId).then(result=>{
-
-
             let _materialList = [];
             for (let item of this.currentFlies) {
               for (let jItem of result) {
@@ -235,6 +233,7 @@
               console.log(res);
               if(res){
                 //成功
+                alert(111)
               }
             }).catch(e => {
               console.log(e);

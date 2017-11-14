@@ -4,22 +4,22 @@
 
 <template>
   <div class="piecesBox" ref="obj">
-    <mt-loadmore :bottom-method="loadBottom" :autoill="false" :bottom-all-loaded="allLoaded"
-                 :bottomDistance="30" ref="loadmore">
-      <ul>
-        <li v-for="item in list">
-          <Piece :option="item"></Piece>
-        </li>
-      </ul>
-    </mt-loadmore>
+    <ul>
+      <li v-for="item in list">
+        <Piece :option="item" @delete="deleteItem"></Piece>
+      </li>
+    </ul>
   </div>
+
+
+
 </template>
 
 <script>
   import Piece from 'components/myDo/Piece.vue'
   import Util from '@/util'
   import Api from '@/api'
-  import MintUI,{Field, Button,Toset,Toast} from 'mint-ui'
+  import MintUI,{Field, Button,Toset,Toast,MessageBox} from 'mint-ui'
   export default {
     name: 'All',
     components: {Piece},
@@ -37,25 +37,32 @@
       this.initData();
     },
     methods: {
-      loadBottom(){
-        console.log('执行加载');
-        setTimeout(() => {
-
-        }, 500);
+      loadBottomUse(){
+        console.log(11)
+      },
+      /*删除*/
+      deleteItem(instanceId){
+        let _this = this;
+        MessageBox.confirm('确定执行此操作?').then(action => {
+          //deleteProceeding 执行删除
+          Api.errandApi.deleteProceeding(instanceId).then(res=>{
+            let instance = Toast('删除成功');
+            setTimeout(() => {
+              instance.close();
+            }, 2000);
+          })
+        }).catch(error=>{
+          console.log(error)
+        });
       },
       initData() {
         //获取用户id
-        let userId =  Util.other.getLocalStorage('userInfo').userId;
-        let cond = {
-          filters: {
-            groupOp: "AND",
-            rules: [{ field: "rzApplyId", op: "eq", data: userId }]
-          }
-        };
-        let _params = {page: this.page, rows: this.rows, cond: encodeURI(JSON.stringify(cond))};
+        let certificateNum =  Util.other.getLocalStorage('userInfo').cidcard;
+        let _params = {page: this.page, rows: this.rows,params:encodeURIComponent(JSON.stringify({certificateNum:certificateNum,projectStatus:this.type}))};
         MintUI.Indicator.open('请稍后...');
         Api.errandApi.getProceedingList(_params).then(res => {
-          this.list = res.contents;
+          this.list.push(...res.contents);
+          console.log( this.list)
           MintUI.Indicator.close();
         }).catch(err => {
           console.log(err)
@@ -63,8 +70,8 @@
       }
     },
     watch:{
-      top(val){
-          console.log(val)
+      type(val){
+        console.log(val)
       }
     }
 
