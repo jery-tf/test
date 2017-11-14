@@ -110,6 +110,7 @@
         <span>
            <i class="OAIndexIcon C2-shimingrenzheng"></i>实人认证
         </span>
+        <strong class="level">{{authLevel=='2'?'已认证':'未认证'}}</strong>
         <em class="OAIndexIcon C2-next"></em>
       </div>
       <!--<div class="particulars " @click="authenticationTwo">-->
@@ -151,7 +152,8 @@
         islogin: false,
         pname: '',
         isshow:'false',
-        text:false
+        text:false,
+        authLevel:''
       }
     },
     created() {
@@ -164,7 +166,7 @@
         let appId = '4454', method = 'auth';
         //签名
         Api.realNameApi.getAppSign({method, type: 'H5'}).then(res => {
-          console.log(res);
+          console.log(res)
           let _signature = res.signature;
           if (res.signature == 0) {
             _signature = '';
@@ -224,13 +226,11 @@
           form.submit();
         })
       },
-//      getcompany() {
-//        this.$router.push('/aboutcmp/aboutcmp')
-//      },
       getimgs() {
         let token = Util.login.getAccessToken();
         let userInfo = Util.user.getUserAllInfo();
-        console.log(userInfo)
+       this.authLevel=userInfo.authLevel
+        console.log(userInfo.authLevel)
         if (token && userInfo) {
           let username = userInfo.name;
           this.islogin = true
@@ -243,7 +243,7 @@
       },
       getabcmp(){
         this.selfid = JSON.parse(localStorage.getItem('userInfo')).certificateNum
-        console.log(this.selfid)
+//        console.log(this.selfid)
         Api.registerApi.getabcmp(
           qs.stringify({
             aupe_idcard:'43010119870516123X'
@@ -251,7 +251,7 @@
           }),
         {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res => {
           if(res.code=200){
-              console.log(res)
+//              console.log(res)
               let arr = [];
               for (let item of res.list) {
                 let _item = {
@@ -471,6 +471,15 @@
     /*border-bottom: 1px solid #d9d9d9;*/
     font-family: "微软雅黑";
     position: relative;
+    .level{
+      position: absolute;
+      top:0;
+      right:0.4rem;
+      font-size: 0.32rem;
+      color: #999;
+      font-weight: 400;
+      font-family: '微软雅黑';
+    }
     .C2-shijian, .C2-qianbao, .C2-tousu, .C2-shimingrenzheng, .C2-bangzhu, .C2-shezhi2 {
       font-size: 0.41rem;
       color: #F48074;
