@@ -14,7 +14,7 @@
 
     <mt-tab-container v-model="selected" class="content">
       <mt-tab-container-item id="1" class="flex">
-        <AllPiece></AllPiece>
+        <AllPiece :type="selected"></AllPiece>
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
         <p>222</p>

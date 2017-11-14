@@ -5,24 +5,37 @@
 
 <template>
   <div>
-    <doDetails></doDetails>
+    <doDetails :dataInfo="MyPiceInfo" :doInfo="doInfo"></doDetails>
    </div>
 </template>
 
 <script>
   import doDetails from '@/views/errand/completeData'
+  import Api from '@/api'
   export default {
       name: 'MyPiece',
       components: {
         doDetails
       },
       data () {
-          return {}
+          return {
+            MyPiceInfo:{},
+            doInfo:{}
+          }
       },
       created(){
-
+       // console.log(this.$route.query);
+        this.MyPiceInfo = this.$route.query;
+        console.log(this.MyPiceInfo)
+        this._initData();
       },
-      methods: {}
+      methods: {
+        _initData() {
+          Api.errandApi.getProceedingDetail(this.MyPiceInfo.approveId).then(res=>{
+             this.doInfo = res;
+          })
+        }
+      }
 
   }
 </script>

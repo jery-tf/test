@@ -23,6 +23,7 @@
   export default {
     name: 'All',
     components: {Piece},
+    props:['type'],
     data () {
       return {
         allLoaded:false,
@@ -30,9 +31,7 @@
         list: [],
         page:1,
         rows:10,
-
       }
-
     },
     created(){
       this.initData();
@@ -56,7 +55,6 @@
         let _params = {page: this.page, rows: this.rows, cond: encodeURI(JSON.stringify(cond))};
         MintUI.Indicator.open('请稍后...');
         Api.errandApi.getProceedingList(_params).then(res => {
-          console.log(res);
           this.list = res.contents;
           MintUI.Indicator.close();
         }).catch(err => {

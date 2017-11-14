@@ -3,50 +3,30 @@
 */
 
 <template>
-  <div class="content">
-    <router-link :to="`/me/doDetails/${option.id}`">
-      <div class="font-small padding-container border-bottom">
-        <p class="number oneLineFont">受理编号 : {{option.approveCode || ''}}</p>
-        <span :class="`state${pieceState}`" class="state">{{ stateToZW }}</span>
-      </div>
-      <div class="content-warpper">
-        <p>
-          <img :src="stateToImg">
-        </p>
-        <div>
-          <p class="font twoLineFont">{{option.instanceName || ''}}</p>
-          <span class="time">{{format(option.submitTime,'yyyy-MM-dd')}}</span>
-        </div>
-      </div>
-    </router-link>
-    <!--<div class="foot padding-container">
-      <div>
-        <i v-if="option.state=='1'" class="OAIndexIcon C2-wuliu"></i>
-        <p v-if="option.state=='1'">{{option.logisticsNo || ''}}</p>
-      </div>
+  <div class="content" @click="doDetails">
+    <div class="font-small padding-container border-bottom">
+      <p class="number oneLineFont">受理编号 : {{option.approveCode || ''}}</p>
+      <span :class="`state${pieceState}`" :style="{color:stateColor}" class="state">{{ state }}</span>
+    </div>
+    <div class="content-warpper">
       <p>
-        <mt-button v-if="isShowCancel" size="small" plain type="default"
-                   @click="cancelFun">
-          取消
-        </mt-button>
-        <mt-button v-if="isShowSubmitBtn" size="small" plain type="danger"
-                   @click="submitFun">
-          提交审核
-        </mt-button>
-        <router-link :to="`/me/doDetails/${option.id}`" v-if="isShowDetails">
-          <mt-button size="small" plain type="default">
-            查看详情
-          </mt-button>
-        </router-link>
-        <mt-button v-if="isShowSvaluate" size="small" plain type="default"
-                   @click="svaluateFun">
-          我要评价
-        </mt-button>
+        <i class="C2-ertongshouyang"></i>
       </p>
-    </div>-->
+      <div>
+        <p class="font twoLineFont">{{option.instanceName || ''}}</p>
+        <span class="time">{{format(option.submitTime,'yyyy-MM-dd')}}</span>
+      </div>
+    </div>
+    <div class="foot padding-container">
+      <p>
+        <mt-button  size="small" plain :type="operButtonName === '查看详情'||operButtonName === '我要评价'? 'default':'danger'">
+          {{operButtonName}}
+        </mt-button>
+        {{stateStyle}}
+      </p>
+    </div>
   </div>
 </template>
-
 <script>
   /***
    * 我的办件  单个办件单组件
@@ -69,29 +49,135 @@
     props: ['option'],
     data () {
       return {
-        pieceState: this.option.projectState
+        pieceState: this.option.projectState,
+        stateJson:[
+          {
+            "projectState": 0,
+            "projectAttr" : {
+              "projectStateName": "暂存",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'提交审批',
+            }
+          },
+          {
+            "projectState": 1,
+            "projectAttr" : {
+              "projectStateName": "受理",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'查看详情',
+            }
+
+          },
+          {
+            "projectState": 2,
+            "projectAttr" : {
+              "projectStateName": "不予受理",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'查看详情',
+            }
+          },
+          {
+            "projectState": 3,
+            "projectAttr" : {
+              "projectStateName": "补正补齐",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'提交审批',
+            }
+          },
+          {
+            "projectState": 4,
+            "projectAttr" : {
+              "projectStateName": "业务办结",
+              "stateColour":'#13b76f',
+              "stateIcon":'qiyeyonghu',
+              "stateIconColor":'#29ab91',
+              "operButtonName":'快递寄送',
+            }
+          },
+          {
+            "projectState": 5,
+            "projectAttr" : {
+              "projectStateName": "统一办结",
+              "stateColour":'#13b76f',
+              "stateIcon":'qiyeyonghu',
+              "stateIconColor":'#29ab91',
+              "operButtonName":'我要评价',
+            }
+          },
+          {
+            "projectState": 6,
+            "projectAttr" : {
+              "projectStateName": "办结",
+              "stateColour":'#13b76f',
+              "stateIcon":'qiyeyonghu',
+              "stateIconColor":'#29ab91',
+              "operButtonName":'查看详情',
+            }
+          },
+          {
+            "projectState": 7,
+            "projectAttr" : {
+              "projectStateName": "作废办结",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'查看详情',
+            }
+          },
+          {
+            "projectState": 9,
+            "projectAttr" : {
+              "projectStateName": "网上提交",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'查看详情',
+            }
+          },
+          {
+            "projectState": 10,
+            "projectAttr" : {
+              "projectStateName": "预审通过",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'查看详情',
+            }
+          },
+          {
+            "projectState": 11,
+            "projectAttr" : {
+              "projectStateName": "预审不通过",
+              "stateColour":'#ff0000',
+              "stateIcon":'ertongshouyang',
+              "stateIconColor":'#f15a4a',
+              "operButtonName":'查看详情',
+            }
+          }
+        ],
+        stateColor:'',
+        operButtonName:'',//当前状态操作名称
+        operButtonColor:'',
+        state:''
       }
     },
     created(){
-      console.log(this.option)
+
     },
     methods: {
       format,
-      cancelFun(){
-        let id = this.option.id;
-        console.log(id);
-      },
-      //提交审核
-      submitFun(){
-        let id = this.option.id;
-        console.log(id);
-      },
-      /*//我要评价
-      svaluateFun(){
-        let id = this.option.id;
-        console.log(id);
-      }*/
-
+      doDetails(){
+        this.option.title =  this.state; //当前状态
+        this.$router.push({path:'/me/doDetails/',query:this.option})
+      }
     },
     computed: {
       //根据状态 返回当前中文状态
@@ -120,41 +206,16 @@
         };
         return pieceStateImg[this.pieceState];
       },
-      //是否显示提交按钮
-      isShowSubmitBtn(){
-        let pieceStateShow = {
-          1: true,
-          2: true,
-          3: false
-        };
-        return pieceStateShow[this.pieceState];
-      },
-      //是否显示取消按钮
-      isShowCancel(){
-        let pieceStateShow = {
-          1: false,
-          2: true,
-          3: false
-        };
-        return pieceStateShow[this.pieceState];
-      },
-      //是否显示详情按钮
-      isShowDetails(){
-        let pieceStateShow = {
-          1: true,
-          2: true,
-          3: true
-        };
-        return pieceStateShow[this.pieceState];
-      },
-      //是否显示评价按钮
-      isShowSvaluate(){
-        let pieceStateShow = {
-          1: true,
-          2: true,
-          3: true
-        };
-        return pieceStateShow[this.pieceState];
+      /*各状态样式*/
+      stateStyle(){
+        this.stateJson.forEach(e=>{
+          if (parseInt(this.pieceState)===parseInt(e.projectState) ){
+              console.log(e)
+              this.stateColor =  e.projectAttr.stateColour
+              this.operButtonName =e.projectAttr.operButtonName
+              this.state = e.projectAttr.projectStateName
+          }
+        })
       }
 
     },
@@ -183,9 +244,18 @@
     .content-warpper{
       padding: 0.24rem 0.26rem;
       display: flex;
+      border-bottom: 1px solid #eee;
       &>p{
-        img{
-           width:0.81rem;
+        width:0.81rem;
+        height:0.81rem;
+        border-radius: 50%;
+        background: #f15a4a;
+        i{
+          font-size:0.4rem;
+          display: block;
+          text-align: center;
+          color:#fff;
+          line-height: 0.81rem;
         }
       }
       &>div{
@@ -202,22 +272,12 @@
       }
     }
     .foot {
-
-      align-items: center;
-      justify-content: space-between;
       > div {
-        display: flex;
-        align-items: center;
         font-size: .24rem;
         color: #999;
-        i {
-          margin-right: .2rem;
-          font-size: .32rem;
-        }
       }
       > p {
-        display: flex;
-        align-items: center;
+        text-align: right;
       }
       .is-plain {
         margin-left: .1rem;
@@ -230,6 +290,12 @@
       }
       .mint-button--danger.is-plain {
         border: 1px solid #ff3e3e;
+      }
+      .mint-button{
+        border-radius:0.04rem;
+      }
+      .mint-button--small{
+        height:0.5rem;
       }
     }
   }

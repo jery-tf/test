@@ -48,9 +48,12 @@ export const getApprovematerial = (approveId,config) =>
 export const getOrgsList = (orgId,params,config) => axiosGet(`/uop/v1/orgs/${orgId}/children`,params,config);
 
 //获取办件实例列表
-
 export const getProceedingList = (params,config) => axiosGet(`/accept/v1/instance${reqParms(params)}`,config);
 //
+//根据事项信息获取事项基本信息
+export const getProceedingDetail = (approveId,config) => axiosGet(`/accept/v1/instance/${approveId}`,config);
+
+
 
 //参数处理函数
 const reqParms = (params)=>{
