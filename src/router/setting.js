@@ -102,6 +102,7 @@ export default [
     meta: {
       title: '办事咨询'
     },
+    beforeEnter: Util.login.checkLogin
   },
   {
     path: '/setting/myconsulting',
@@ -109,6 +110,14 @@ export default [
     component: views.Setting.MyConsulting,
     meta: {
       title: '我的咨询'
+    },
+  },
+  {
+    path: '/setting/consultingList/:id',
+    name: 'myconsultingList',
+    component: views.Setting.consultingList,
+    meta: {
+      title: '咨询详情'
     },
   },
 ]

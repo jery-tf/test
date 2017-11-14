@@ -12,4 +12,5 @@ export default {
   PayCost: resolve => require(['./paycost.vue'], resolve),//公共缴费
   Consulting: resolve => require(['./consulting.vue'], resolve),//办事咨询
   MyConsulting: resolve => require(['./myconsulting.vue'], resolve),//我的咨询
+  consultingList: resolve => require(['./consultingList.vue'], resolve),//咨询详情
 }
