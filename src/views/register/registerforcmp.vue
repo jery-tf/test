@@ -64,10 +64,10 @@
       v-model="popupVisible"
       popup-transition="popup-fade"
       position="bottom">
-        <h3 class="addresstitle">企业地址<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
       <template>
+        <h3 class="addresstitle">企业地址<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
         <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
-                    :pickermore="list" :selectAreaa="selectAreaa"></pickerArea>
+                    :pickermore="list" :selectAreaa="selectAreaa" :isshowarea="isshowarea"></pickerArea>
       </template>
     </mt-popup>
   </div>

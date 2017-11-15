@@ -48,7 +48,7 @@
   import qs from "qs"
   export default {
     name: 'myAddress',
-    props: ['invator', 'pickermore'],
+    props: ['invator', 'pickermore','isshowarea'],
     data() {
       return {
         showChose: this.invator,
@@ -4517,7 +4517,7 @@
         //判断是否是省本级
         if (this.nameid == 4) {
           this.addressInfo = {}
-          this.showChose = !this.showChose;
+          this.isshowarea(false);
           this.showCityList = '';
           this.addressInfo.province = {
             id: this.province,
@@ -4574,7 +4574,7 @@
           for (let i = 0; i < arr.length; i++) {
             if (arr.indexOf((this.district + '')) != -1) {
               this.addressInfo = {}
-              this.showChose = !this.showChose;
+              this.isshowarea(false);
               this.addressInfo.province = {
                 id: this.province,
                 value: this.Province
@@ -4596,7 +4596,7 @@
           }
           if (this.showStreetList == '') {
             this.addressInfo = {}
-            this.showChose = !this.showChose;
+            this.isshowarea(false);
             this.addressInfo.province = {
               id: this.province,
               value: this.Province
@@ -4638,7 +4638,7 @@
           this.showStreetList = res
         })
         // 选取镇级选项之后关闭弹层
-        this.showChose = !this.showChose;
+        this.isshowarea(false);
         this.addressInfo.province = {
           id: this.province,
           value: this.Province
