@@ -7,6 +7,11 @@
 </template>
 
 <script>
+  import Util from '../../util'
+  import axios from 'axios'
+  import Config from '../../config'
+  import qs from "qs"
+  import {Toast} from 'mint-ui';
     export default {
         name: 'facilities',
         components: {},
@@ -16,8 +21,15 @@
         created() {
           this.id = this.$route.params.id;
           console.log(this.id)
+          this.getplay()
         },
-        methods: {}
+        methods: {
+          getplay(){
+            Util.cmsdao.fetchAllSubChnlNArti(`${this.id}`, 4).then(res => {
+              console.log(res)
+            })
+          }
+        }
 
     }
 </script>

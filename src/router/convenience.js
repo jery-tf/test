@@ -21,7 +21,7 @@ export default [
   {
     path: '/convenience/facilities/:id',
     name: 'facilities',
-    component: views.Convenience.facilities,
+    component: views.Convenience.Facilities,
     meta:{
       title:'便民设施'
     }
