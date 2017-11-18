@@ -3,28 +3,30 @@
 */
 
 <template>
-  <div class="content" @click="doDetails">
-    <div class="font-small padding-container border-bottom">
-      <p class="number oneLineFont">受理编号 : {{option.approveCode || ''}}</p>
-      <span :class="`state${pieceState}`" :style="{color:stateColor}" class="state">{{ state }}</span>
-    </div>
-    <div class="content-warpper">
-      <p>
-        <i class="C2-ertongshouyang"></i>
-      </p>
-      <div>
-        <p class="font twoLineFont">{{option.instanceName || ''}}</p>
-        <span class="time">{{format(option.submitTime,'yyyy-MM-dd')}}</span>
+  <div class="content">
+    <div @click="doDetails">
+      <div class="font-small padding-container border-bottom">
+        <p class="number oneLineFont">受理编号 : {{option.instanceCode || ''}}</p>
+        <span :class="`state${pieceState}`" :style="{color:stateColor}" class="state">{{ state }}</span>
+      </div>
+      <div class="content-warpper">
+        <p>
+          <i class="C2-ertongshouyang"></i>
+        </p>
+        <div>
+          <p class="font twoLineFont">{{option.instanceName || ''}}</p>
+          <span class="time">{{format(option.submitTime,'yyyy-MM-dd')}}</span>
+        </div>
       </div>
     </div>
-    <div class="foot padding-container" v-if="pieceState === '0' || pieceState ==='3'">
+    <div class="foots padding-container" >
       <p>
-        <mt-button  size="small" plain type="danger" @click.stop="deleteItem">
+        <mt-button  size="small" plain type="danger"  v-if="option.projectState === '0'" @click.stop="deleteItem">
           {{operButtonName}}
         </mt-button>
-        {{stateStyle}}
       </p>
     </div>
+    <!--为空-->
   </div>
 </template>
 <script>
@@ -112,7 +114,7 @@
               "stateColour":'#13b76f',
               "stateIcon":'qiyeyonghu',
               "stateIconColor":'#29ab91',
-              "operButtonName":'我要评价',
+              "operButtonName":'查看详情',
             }
           },
           {
@@ -170,21 +172,35 @@
         operButtonName:'',//当前状态操作名称
         operButtonColor:'',
         state:'',
-        isShow:false
+        isShow:false,
+        isEmpty:false
+      }
+    },
+    watch:{
+      'this.option.projectState':{
+          handler:(val)=>{
+              this.pieceState =  this.option.projectState
+          },
+          deep:true
       }
     },
     created(){
-
+      this.stateStyle
     },
     methods: {
       format,
       doDetails(){
+        if (this.pieceState === '0'){
+          let params = {instanceId:this.option.instanceId,approveId:this.option.approveId}
+          this.$router.push({path: `/errand/storageOnline`,query:params});
+          return false;
+        }
         this.option.title =  this.state; //当前状态
+        this.option.operButtonName =  this.operButtonName; //当前状态
         this.$router.push({path:'/me/doDetails/',query:this.option})
       },
       deleteItem(){
         /* // console.log(this.option)*/
-
         this.$emit('delete',this.option.instanceId)
       }
     },
@@ -205,6 +221,7 @@
               this.stateColor =  e.projectAttr.stateColour
               this.operButtonName =e.projectAttr.operButtonName
               this.state = e.projectAttr.projectStateName
+
           }
         })
       }
@@ -262,7 +279,7 @@
 
       }
     }
-    .foot {
+    .foots {
       > div {
         font-size: .24rem;
         color: #999;

@@ -8,8 +8,6 @@
       <p class="twoLineFont">{{title}}</p>
     </div>
     <div class="box-margin-top fff">
-      <!--<CellSwipe title="这是标题" :rightFun="testFun" label="10kb 2017-05-12" :type="2"></CellSwipe>-->
-      <!--<CellSwipe title="标题2" :rightFun="testFun" label="10.3kb 2017-05-12" :type="1"></CellSwipe>-->
       <template v-for="(item,index) in fileList">
         <CellSwipe :title="item.title" :rightFun="deleteUploadData" :label="item.label"
                    :type="1" :id="item.id"></CellSwipe>
@@ -42,13 +40,8 @@
       }
     },
     created(){
-//      if(!sessionStorage.getItem('errandTitle')){
-//
-//      }
       this.title = sessionStorage.getItem('errandTitle');
       this.getUploadData(this.errandDataId);
-
-
     },
     methods: {
       submit(){
@@ -70,58 +63,59 @@
       //文件上传
       fileUploadFun(e){
         let files = e.target.files;
-//        console.log('files-->',files)
-//        console.log('-->',files[0])
-
         let formData = new FormData();
         formData.append('file', files[0]);
+        console.log(files[0]);
         let fileNameArr = files[0].name.split('.');
         let li = {
-            type:fileNameArr[1],
-            title:fileNameArr[0],
+            type:'.'+fileNameArr[1],
+            title:files[0].name,
             label:`${(files[0].size/1024).toFixed(1)}kb `,
             url:'',
             id:`${new Date().getTime()}${Math.floor(Math.random()*10)}`
         };
 
-        // todo 临时
-        li.url = '/sdfsdf/sdfsdf.sdf';
-        this.fileList.push(li);
-
-
-        this.saveUploadData(li);
-
+        // 返回文件路径
+        Api.errandApi.uploadFile(formData,config).then(res=>{
+          if(res){
+            li.url = res.url;
+            li.label += this.returnTime();
+            this.fileList.push(li);
+            this.saveUploadData(li);
+          }
+        })
         let config = {
           headers: {
             'Content-Type': 'multipart/form-data',
           }
         };
-//        console.log('li----->',li);
-//        Api.errandApi.uploadFile(formData,config).then(res=>{
-//          console.log('文件',res);
-//
-//          if(res){
-//            li.url = res;
-//            li.label += this.returnTime();
-//            this.fileList.push(li);
-//          }
-//        })
       },
       //删除上传的缓存文件
       deleteUploadData(id){
         console.log('要删除的ID',id);
         let errandData = Util.other.getSessionStorage('errandData');
         for(let key in errandData){
-          if(key == this.errandDataId){
+          if(key === this.errandDataId){
             let arr = errandData[key];
             for(let i in arr){
-              if(arr[i].id == id){
-                arr.splice(i,1);
+              if(arr[i].id === id){
+                if(arr[i].attachId){ //判断是否为暂存修改
+                   Api.errandApi.deleteListByBusinessId(arr[i].attachId).then(res=>{
+                     arr.splice(i,1);
+                     console.log('errandData',JSON.stringify(errandData));
+                   })
+                }else{
+                  arr.splice(i,1);
+                }
+
               }
             }
             this.fileList = arr;
           }
         }
+
+
+
         Util.other.setSessionStorage('errandData',errandData);
       },
       //根据ID获取缓存中的文件 渲染到数据
@@ -137,9 +131,7 @@
       //保存上传的文件
       saveUploadData(data){
         let id = this.errandDataId;
-//        console.log('id--->',id);
         let errandData = Util.other.getSessionStorage('errandData');
-//        console.log('errandData',errandData);
         let isMatching = false;
         if(errandData){
           for(let key in errandData){
@@ -158,6 +150,7 @@
           errandData[id]=[];
           errandData[id].push(data);
         }
+        alert(JSON.stringify(errandData))
         Util.other.setSessionStorage('errandData',errandData);
       }
 

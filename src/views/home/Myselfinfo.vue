@@ -161,6 +161,7 @@
     created() {
       this.getimgs()
       this.getabcmp()
+      Util.other.setSessionStorage('type','1')
     },
     methods: {
       authentication() {

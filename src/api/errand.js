@@ -50,12 +50,30 @@ export const getOrgsList = (orgId,params,config) => axiosGet(`/uop/v1/orgs/${org
 //获取办件实例列表
 export const getProceedingList = (params,config) => axiosGet(`/accept/v1/instance/getListByStatusAndApply${reqParms(params)}
 `,config);
+
 //删除办件实例
 export const deleteProceeding = (instanceId,config) => axiosDelete(`/accept/v1/instance/${instanceId}`,config);
+
 //根据事项信息获取事项基本信息
-export const getProceedingDetail = (approveId,config) => axiosGet(`/accept/v1/instance/${approveId}`,config);
+export const getApproveinterface = (approveId,config) => axiosGet(`/approveinterface/v1/approveinfo/${approveId}`,config);
 
+//获取事项扩展信息
+export const getApproveinterfaceExtend = (approveId,config) => axiosGet(`/approveinterface/v1/approveAdvancedByApplyId/${approveId}`,config);
 
+/*根据ID查询申请人*/
+export const getApplyInfo = (applicantId,config) => axiosGet(`/accept/v1/applicant/${applicantId}`,config);
+
+/*根据ID查询申请单位*/
+export const getApplyBankInfo = (applycorpId,config) => axiosGet(`/accept/v1/applycorp/${applycorpId}`,config);
+
+//根据办件实例ID查所有材料实例信息
+export const findByInstanceId = (instanceId,config) => axiosGet(`/accept/v1/instancematerial/findByInstanceId/${instanceId}`,config);
+
+//根据材料实例ID查所有附件信息
+export const findListByBusinessId = (materialInsId,config) => axiosGet(`/accept/v1/attach/findListByBusinessId/${materialInsId}`,config);
+
+//根据附件ID删除附件
+export const deleteListByBusinessId = (attachId,config) => axiosDelete(`/accept/v1/attach/${attachId}`,config)
 
 //参数处理函数
 const reqParms = (params)=>{

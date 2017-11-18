@@ -10,8 +10,6 @@ require('./style/base.less');
 Vue.config.productionTip = false
 
 Vue.use(MintUI)
-
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

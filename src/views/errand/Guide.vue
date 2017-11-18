@@ -129,7 +129,7 @@
       //数据初始化
       getErrandDetails(id){
         MintUI.Indicator.open('请稍后...');
-        Promise.all([Api.errandApi.getErrandDetails(id), Api.errandApi.getApproveName(id)])
+        Promise.all([Api.errandApi.getErrandDetails(id), Api.errandApi.getApproveinterfaceExtend(id)])
           .then(res => {
             this.approve = Object.assign({}, res[0], res[1]);
 //            console.log(Object.assign({}, res[0], res[1]));
