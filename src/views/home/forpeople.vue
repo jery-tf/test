@@ -83,7 +83,7 @@
         Util.cmsdao.fetchAllSubChnlNArti(`${this.selectedId}`,2).then(res=>{
 //           this.list=res
           if(res==null){
-            Toast('功能正在开发中，敬请期待')
+//            Toast('功能正在开发中，敬请期待')
             this.list=''
             return
           }

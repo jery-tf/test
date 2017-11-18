@@ -38,7 +38,7 @@
       <h3 class="addresstitle">企业地址<i class="C2-guanbi1 OAIndexIcon" @click="isshowarea(false)"></i></h3>
       <template>
         <pickerArea :invator="showChose" @changingType="selected" v-on:increment="listenToMyBoy"
-                    :pickermore="list"></pickerArea>
+                    :pickermore="list" :isshowarea="isshowarea"></pickerArea>
       </template>
     </mt-popup>
     <mt-popup
