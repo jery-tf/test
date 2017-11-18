@@ -12,25 +12,24 @@
       <mt-tab-item id="5">已办结</mt-tab-item>
       <mt-tab-item id="6">不予受理</mt-tab-item>
     </mt-navbar>
-
     <mt-tab-container v-model="selected" class="content">
-      <mt-tab-container-item id="1" class="flex">
-        <AllPiece :type="0"></AllPiece>
+      <mt-tab-container-item id="1" class="flex" >
+        <AllPiece type="1" v-if="selected==='1'"></AllPiece>
       </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-        <AllPiece type=0></AllPiece>
+      <mt-tab-container-item id="2" >
+        <AllPiece type="2" v-if="selected==='2'"></AllPiece>
       </mt-tab-container-item>
       <mt-tab-container-item id="3">
-        <AllPiece type=9></AllPiece>
+        <AllPiece type="3"></AllPiece>
       </mt-tab-container-item>
       <mt-tab-container-item id="4">
-        <AllPiece type=4></AllPiece>
+        <AllPiece type="4"></AllPiece>
       </mt-tab-container-item>
-      <mt-tab-container-item id="5">
-        <AllPiece type=5></AllPiece>
+      <mt-tab-container-item id="5" >
+        <AllPiece type="5"></AllPiece>
       </mt-tab-container-item>
-      <mt-tab-container-item id="6">
-        <AllPiece type=2></AllPiece>
+      <mt-tab-container-item id="6" >
+        <AllPiece type="6"></AllPiece>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -39,19 +38,25 @@
 <script>
   import Piece from 'components/myDo/Piece.vue'
   import AllPiece from './MyDo/All.vue'
+  import Util from '@/util'
   export default {
     name: 'myDo',
     components: {Piece,AllPiece},
     data () {
       return {
-        selected: '1',
+        selected: Util.other.getSessionStorage('type') ? Util.other.getSessionStorage('type') :'1',
       }
     },
     created(){
-      document.getElementsByTagName('body')[0].scrollTop = 0;
+      Util.other.setSessionStorage('type','1')
     },
     methods: {
 
+    },
+    watch:{
+      selected(val){
+        Util.other.setSessionStorage('type',val)
+      }
     }
 
   }

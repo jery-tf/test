@@ -53,12 +53,22 @@ export default [
     meta:{
       title:'地址管理'
     }
-  },{
+  },
+  {
     path:'/errand/completeData/:id',
     name:'completeData',
     component:views.Errand.CompleteData,
     meta:{
       title:'补正补齐'
+    }
+
+  },
+  {
+    path: '/errand/storageOnline/',
+    name: 'storageOnline',
+    component: views.Errand.StorageOnline,
+    meta: {
+      title: '补正补齐'
     }
   }
 ]

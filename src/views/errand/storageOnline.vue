@@ -11,8 +11,8 @@
       <div class="isSubmitList box-margin-top">
 
         <template v-for="(item,index) in materialList">
-          <ErrandSubmitLi :title='item.materialTitle'
-                          :isSubmint="isSubmint(item.materialId)"
+          <ErrandSubmitLi :title='item.materialName'
+                          :isSubmint="isSubmint(item.submitState)"
                           :btnClick="toLoadFile.bind(this,item)">
           </ErrandSubmitLi>
         </template>
@@ -36,7 +36,7 @@
   import ErrandSubmitLi from 'components/errand/SubmitLi.vue'
   import ErrandAddress from 'components/errand/address.vue'
   import ErrandFoot from 'components/errand/footer.vue'
-  import MintUI, {MessageBox,Toast } from 'mint-ui'
+  import MintUI, {MessageBox} from 'mint-ui'
   import Util from '../../util'
   import Api from '../../api'
 
@@ -50,6 +50,7 @@
         currentFlieKey: [],//当前已上传的文件列表id
         currentFlies: [],//当前已经上传的文件列表
         materialList: [],//材料列表
+        approveId:'',
         option: {
           userName: '张三',
           phone: '123123123',
@@ -65,23 +66,60 @@
           address: '木有地址',
           isDefault: false,
           type: 2
-        }
+        },
       }
     },
     created(){
-      this.getErrandDetails(this.$route.params.id);
-      this.getFileListById(this.$route.params.id);
+      //console.log(this.$route.query);
+      this.approveId = this.$route.query.approveId
+      this.getErrandDetails(this.$route.query.approveId);
+      this.getFileListById(this.$route.params.approveId);
+      /*清除附件信息*/
+      sessionStorage.removeItem('errandData')
       window.addEventListener("popstate", this.bindPopstate, false);
-
+      Api.errandApi.findByInstanceId(this.$route.query.instanceId).then(res=>{
+        this.materialList = res
+        console.log('materialList',this.materialList)
+        let errandData = JSON.parse(sessionStorage.getItem('errandData'))
+        for (let item in this.materialList){
+          /*获取各材料对应的附件并保存到缓存中*/
+          Api.errandApi.findListByBusinessId(item.materialInsId).then(res=>{
+             console.log(res)
+             if (res.length){
+               let key = this.approveId+'-'+obj.materialId;
+               let storeData = [];
+               res.forEach(e=>{
+                 storeData.push({
+                   "type": e.attachType,
+                   "title": e.attachName,
+                   "label": e.attachSize/1000/1000+'kb',
+                   "url": e.attachPath,
+                   "id": "15109063502651",
+                   "attachId":e.attachId
+                 })
+               })
+               if (!errandData) {
+                errandData = {};
+               }
+               errandData[key] = storeData;
+               sessionStorage.setItem('errandData',JSON.stringify(errandData));
+             }
+           })
+        }
+      })
     },
+
     methods: {
       testBtn(data){
         this.$router.push({path: `/errand/fileUpload/test/111`})
       },
       //跳转到上传文件页面
       toLoadFile(obj){
-        sessionStorage.setItem('errandTitle', obj.materialTitle);
-        this.$router.push({path: `/errand/fileUpload/${this.$route.params.id}/${obj.materialId}`});
+        //根据材料实例ID查所有附件信息
+        console.log(obj)
+        sessionStorage.setItem('errandTitle', obj.materialName);
+        /*在缓存里面标识为暂存修改*/
+        this.$router.push({path: `/errand/fileUpload/${this.$route.query.approveId}/${obj.materialId}`});
       },
       testAddress(){
         console.log(22)
@@ -104,14 +142,10 @@
         let params = {page: 1, rows: 100, cond: encodeURI(JSON.stringify(cond))};
 
         MintUI.Indicator.open('请稍后...');
-        Promise.all([Api.errandApi.getErrandDetails(id), Api.errandApi.getApproveinterfaceExtend(id),
-          Api.errandApi.getMaterialList(params)])
+        Promise.all([Api.errandApi.getErrandDetails(id), Api.errandApi.getApproveinterfaceExtend(id)
+         ])
           .then(res => {
-            console.log(res);
             this.approve = Object.assign({}, res[0], res[1]);
-            //材料列表
-            console.log('材料列表', JSON.parse(JSON.stringify(res[2].contents)));
-            this.materialList = res[2].contents;
           })
       },
       //获取当前id下的所有材料列表
@@ -127,6 +161,7 @@
               data[filesId] = [];
               data[filesId].push(errandData[key]);
             }
+            console.log();
             if (errandData[key].length){
               this.currentFlieKey.push(key);
             }
@@ -142,10 +177,8 @@
         this.currentFileList = data;
       },
       //判断是否已经提交
-      isSubmint(materialId){
-        //debugger
-        if (!materialId) return;
-        return this.currentFlieKey.join("").indexOf(materialId) > 0 && this.currentFlieKey.length>0
+      isSubmint(submitState){
+        return submitState === '2'
       },
       /**/
       //提交数据
@@ -176,73 +209,67 @@
             orgName: approveInfo.orgName,
             rzApplyId:allUserInfo.id,
             applyType: '1',
-            applyName: allUserInfo.name,
+            applyName: allUserInfo.username,
             applyId: res.applicantId,
           }
           if (this.materialList.length > this.currentFlieKey.length) {
             params.projectState = '0'
           }
-          Api.errandApi.getApprovematerial(approveInfo.approveId).then(result=>{
-            let _materialList = [];
-            for (let jItem of result) {
-              let _materLi = {
-                materialId: jItem.materialId,
-                copiesNum:jItem.copiesNum,
-                commitWay:jItem.commitWay,
-                isMust:jItem.isMust,
-                orderNum:jItem.orderNum,
-                materialName:jItem.materialTitle,
-                attachList:[],
 
-              };
-              _materialList.push(_materLi);
-            }
-            for(let sitem of this.currentFlies){
-              for(let item of _materialList){
-                if (item.materialId ===sitem.id ){
-                  for(let kItem of sitem.value){
+          Api.errandApi.getApprovematerial(approveInfo.approveId).then(result=>{
+            //debugger
+            let _materialList = [];
+            console.log('currentFlies',this.currentFlies);
+            console.log('result',result);
+            for (let item of this.currentFlies) {
+              for (let jItem of result) {
+                if (jItem.materialId === item.id) {
+                  console.log('jItem',jItem)
+                  let _materLi = {
+                    materialId: jItem.materialId,
+                    copiesNum:jItem.copiesNum,
+                    commitWay:jItem.commitWay,
+                    isMust:jItem.isMust,
+                    orderNum:jItem.orderNum,
+                    materialName:jItem.materialTitle,
+                    attachList:[]
+                  };
+                  /*材料文件数据*/
+                  for(let kItem of item.value){
                     let kItemLi = {
                       attachName:kItem.title,
                       attachSize:parseInt(kItem.label)*1024,
                       attachType:kItem.type,
                       attachPath:kItem.url,
                       attachCode:'000005',
-                      creatTime:new Date().getTime(),
                       isValid:'Y',
                       isDel:'N'
                     }
-                    item.attachList.push(kItemLi)
+                    _materLi.attachList.push(kItemLi);
+
                   }
+                  if(_materLi.attachList.length>0){
+                    _materLi.submitState = '1';
+                  }else{
+                    _materLi.submitState = '0';
+                  }
+                  _materialList.push(_materLi);
+
+                  break;
                 }
-              }
-            }
-            for(let item of _materialList){
-              if(item.attachList.length>0){
-                item.submitState = '2';
-              }else{
-                item.submitState = '1';
               }
             }
             params.materialList = _materialList;
             params.applicant = res;
-
-            console.log('params',JSON.stringify(params));
-
+            console.log('params:',JSON.stringify(params))
             Api.errandApi.addErrandExample(params).then(_res => {
               console.log('instanceInfo:',_res);
               if(_res){
-                let instance = Toast('提交成功');
-                setTimeout(() => {
-                  instance.close();
-                  this.$router.push({path:'/errandList/zrrfl'})
-                }, 1000);
+                //成功
+                console.log("提交成功");
               }
             }).catch(e => {
-              let instance = Toast('提交失败');
-              setTimeout(() => {
-                instance.close();
-                this.$router.push({path:'/errandList/zrrfl'})
-              }, 1000);
+              console.log(e);
             })
           })
 

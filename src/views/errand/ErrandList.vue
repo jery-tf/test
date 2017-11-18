@@ -94,6 +94,8 @@
 //        console.log('pickerAreaf-->', JSON.parse(JSON.stringify(res)));
         this.pickermoreList = res;
       })
+      /*清除附件信息*/
+      sessionStorage.removeItem('errandData')
     },
     methods: {
       //省市区三级联动回调数据 获取地区ID

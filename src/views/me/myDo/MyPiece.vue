@@ -5,7 +5,7 @@
 
 <template>
   <div>
-    <doDetails :dataInfo="MyPiceInfo" :doInfo="doInfo"></doDetails>
+    <doDetails :dataInfo="MyPiceInfo" :doInfo="doInfo" :applyInfo="applyInfo"></doDetails>
    </div>
 </template>
 
@@ -20,7 +20,8 @@
       data () {
           return {
             MyPiceInfo:{},
-            doInfo:{}
+            doInfo:{},
+            applyInfo:{}
           }
       },
       created(){
@@ -31,9 +32,30 @@
       },
       methods: {
         _initData() {
-          Api.errandApi.getProceedingDetail(this.MyPiceInfo.approveId).then(res=>{
+            /*获取事项基本信息*/
+          Api.errandApi.getApproveinterface(this.MyPiceInfo.approveId).then(res=>{
              this.doInfo = res;
+            // console.log(this.doInfo)
+            /*获取事项扩展信息*/
           })
+          Api.errandApi.getApproveinterfaceExtend(this.MyPiceInfo.approveId).then(res=>{
+            this.doInfo.commitmentLimit = res.commitmentLimit;
+          })
+          this._getApplyById();
+        },
+        /*根据ID查询申请人*/
+        _getApplyById(){
+          let type = this.MyPiceInfo.applyType;
+          let applyId = this.MyPiceInfo.applyId
+          if (type === '1'){
+            Api.errandApi.getApplyInfo(applyId).then(res=>{
+              this.applyInfo = res;
+            })
+          }else{
+            Api.errandApi.getApplyBankInfo(applyId).then(res=>{
+              this.applyInfo = res;
+            })
+          }
         }
       }
 
