@@ -17,5 +17,13 @@ export default [
     meta:{
       title:'办事指南'
     }
+  },
+  {
+    path: '/convenience/facilities/:id',
+    name: 'facilities',
+    component: views.Convenience.facilities,
+    meta:{
+      title:'便民设施'
+    }
   }
 ]

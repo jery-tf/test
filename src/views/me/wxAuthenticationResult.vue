@@ -52,6 +52,13 @@
       init(){
         let wxAuthen = localStorage.getItem('wxAuthen');
         wxAuthen = JSON.parse(wxAuthen);
+        this.cidcard =JSON.parse(localStorage.getItem('userDetails')).certificateNum;
+        this.userid =JSON.parse(localStorage.getItem('userDetails')).id;
+        this.authToken=wxAuthen.token
+        let params={authToken:this.authToken}
+        Api.realNameApi.postWxAuthenticationResult(this.userid,params).then(res=>{
+          console.log(123)
+        })
 //        if (!wxAuthen) {
 //          this.errormsg = '认证失败,请重试!';
 //          this.testData = '缓存获取失败';
@@ -70,9 +77,15 @@
                 Util.other.setLocalStorage('wxAuthenUserInfo', res.data);
                 //成功
                 this.testData = JSON.stringify(res.data);
-
-                this.wxAuthenResult = res.data;
-                this.isOk = true;
+//                this.wxAuthenResult = res.data.id;
+                if( res.data.ID!=this.cidcard){
+                      this.isError=true
+                      this.isOk = false;
+                      this.errormsg='实人身份证与注册用户不相符'
+                }
+                else{
+                  this.isOk = true;
+                }
               } else {
                 this.errormsg = res.data.yt_errormsg;
                 this.isError = true;
@@ -122,7 +135,13 @@
           return
         }
         console.log('成功');
-        this.$router.replace('/')
+        let wxAuthen = localStorage.getItem('wxAuthen');
+        let params={authLevel:'2'}
+        Api.realNameApi.postWxAuthenticationResult(this.userid,params).then(res=>{
+          console.log(res)
+          Util.other.setLocalStorage('userDetails',res);
+        })
+        this.$router.replace('/mySelfInfo')
       }
     },
     computed: {}

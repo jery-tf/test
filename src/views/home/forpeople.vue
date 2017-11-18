@@ -3,17 +3,92 @@
 */
 
 <template>
-  <div class="h100 doubleListView bm">
-    <LeftView :dataList="leftDataList" :liClickFun="selecedLeftFun"
-              :selectedId="selectedId">
+  <div class="box-margin-top ">
+    <div class="padding-container-lr convenf">
+      <h6>互动交流</h6>
+      <ul>
+        <li class="fle">
+          <i class="OAIndexIcon  C2-xinwenfabuhui-"></i>
+          <p>新闻发布会</p>
+        </li>
+        <li class="fle">
+          <i class="OAIndexIcon  C2-tiaocha"></i>
+          <p> 调查征集</p>
+        </li>
+        <li class="fle">
+          <i class="OAIndexIcon  C2-xinxiang"></i>
+          <p>省长信箱</p>
+        </li>
+        <li class="fle">
+          <i class="OAIndexIcon  C2-hangzhengwenti"></i>
+          <p>我要问政</p>
+        </li>
+      </ul>
+    </div>
+    <div class="padding-container-lr convenf">
+      <h6>网上支付</h6>
+      <ul>
+        <li class="fle">
+          <i class="OAIndexIcon  C2-shebao"></i>
+          <p>社保缴费</p>
+        </li>
+        <li class="fle">
+          <i class="OAIndexIcon  C2-yinxingqiazhifu"></i>
+          <p>教育缴费</p>
+        </li>
+        <li class="fle">
+          <i class="OAIndexIcon C2-jiaotongfakuanjiaofacopy"></i>
+          <p>交通罚款</p>
+        </li>
+        <li class="fle"></li>
+      </ul>
+    </div>
+    <div class=" padding-container-lr convenf" v-for="item in list" v-if="item.channelId==297">
+      <div>
+        <h6>{{item.name}}</h6>
+        <ul>
+          <li v-for="items in item.sub" class="wid">
+            <i class="OAIndexIcon  C2-shebao"></i>
+            <p>{{items.name}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="padding-container-lr convenf" v-for="item in list" v-if="item.channelId==305">
+      <div>
+        <h6>{{item.name}}</h6>
+        <ul >
+            <li v-for="items in item.sub" class="fle">
+              <router-link v-bind="{to:'/convenience/facilities/'+items.channelId}">
+              <i class="OAIndexIcon  C2-hangzhengwenti"></i>
+              <p>{{items.name}}</p>
+              </router-link>
+            </li>
+            <li class="fle"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="padding-container-lr convenf" v-for="item in list" v-if="item.channelId==304">
+      <div>
+        <h6>{{item.name}}</h6>
+        <ul>
+          <li v-for="items in listss" class="coun" >
+            <div class="left" :style="`background:${items.backgroundcolor}`">
+              <i class="OAIndexIcon  C2-dianhua"></i>
+            </div>
+            <div class="right">
+              <a :href="`tel:${items.subtitle}`">
+                <p>{{items.subtitle}}</p>
+                <span>{{items.title}}</span>
+              </a>
+            </div>
+          </li>
 
-    </LeftView>
-    <div class="flex1">
-      <template :selectedId="selectedId">
-        <Education :datainfoto="list" :datainfolist="list1"></Education>
-      </template>
+        </ul>
+      </div>
     </div>
   </div>
+
 </template>
 <script>
   import LeftView from 'components/convenpeo/LeftView.vue'
@@ -27,102 +102,134 @@
 
   export default {
     name: 'forpeople',
-    components: {
-      LeftView: LeftView,
-      Education: Education,
-    },
+    components: {},
     data() {
       return {
-        selected: '13',
-        currentView: 'Education',
-        leftDataList: [],
-        selectedId: 13,
         list: [],
-        list1: [],
+        listss:[]
       }
     },
     created() {
-      this.peolist()
-      this.selecedLeftFun(13)
+      this.getinfonews()
     },
     methods: {
-      //发送请求获取左侧栏的数据
-      peolist() {
-        Api.opacityApi.forpeo(
-          {
-            content: btoa(Util.other.Utf8ToUnicode(JSON.stringify({
-              channelId: "3",
-              start: "0",
-              count: "99",
-              grantUserName: "xxld",
-              userName: "xxld",
-              site: "hunanzhengwu"
-            })))
-          },
-          {headers: {'content-type': 'application/x-www-form-urlencoded'}}
-        ).then(res => {
-          let arr = [];
-          for (let item of res.data) {
-            arr.push({
-              channelId: item.channelId,
-              name: item.name,
-              icon: Util.icon.getValueBySeed(item.name)
-            });
-          }
-          this.leftDataList = arr
-          //列表中的默认值给 selectedId
-          if (!this.selectedId && item.dictdataIsdefault) {
-            this.selectedId = item.name;
-          }
-        })
-      },
-      //点击左侧列表 单元格
-      selecedLeftFun(channelId) {
-        //左侧列表发生变化  右侧组件变化成不同组件
-       this.selectedId = channelId;
-        Util.cmsdao.fetchAllSubChnlNArti(`${this.selectedId}`,2).then(res=>{
-//           this.list=res
-          if(res==null){
-//            Toast('功能正在开发中，敬请期待')
-            this.list=''
+      getinfonews() {
+        Util.cmsdao.fetchAllSubChnlNArti('296', 4).then(res => {
+          console.log(res)
+          if (res == null) {
+            this.list = ''
             return
           }
           let arr = [];
           for (let item of res) {
             arr.push({
-              sub:item.sub,
+              sub: item.sub,
               channelId: item.channelId,
               name: item.name,
-              icon: Util.icon.getValueBySeed(item.name)
             });
           }
           this.list = arr
+          this.lists = arr[2].sub
+          let arrn=[]
+          for(let items of this.lists){
+            arrn.push({
+              backgroundcolor:Util.icon.getBgcBySeed(items.title),
+              subtitle:items.subtitle,
+              title:items.title
+            })
+          }
+          this.listss=arrn
         })
       }
+
     }
 
   }
 </script>
 
 <style lang="less" rel="stylesheet/less">
-  .doubleListView {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    .contentTop {
-      height: .96rem;
-    }
-  }
+  .convenf {
+    background-color: #fff;
+    padding-top: 0.3rem;
+    padding-bottom: 0.24rem;
+    margin-bottom: 0.18rem;
 
-  .flex1 {
-    margin-left: 1.7rem;
-  }
-
-  .bm {
-    div.doubleListBox {
-      top: 0;
+    .C2-xinwenfabuhui-, .C2-yinxingqiazhifu {
+      color: #29ab91;
     }
+    .C2-tiaocha, .C2-jiaotongfakuanjiaofacopy {
+      color: #fc992c;
+    }
+    .C2-xinxiang {
+      color: #f15a5a;
+    }
+    .C2-hangzhengwenti, .C2-shebao {
+      color: #108ee9;
+    }
+    h6 {
+      margin-bottom: 0.52rem;
+      line-height: 1;
+      font-size: 0.32rem;
+      color: #000;
+      font-weight: 400;
+      border-left: 3px solid #29a1f7;
+      padding-left: 0.12rem;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      .fle {
+        flex: 1;
+        font-size: 0.24rem;
+        text-align: center;
+        .OAIndexIcon {
+          font-size: 0.57rem;
+        }
+        p {
+          margin-top: 0.18rem;
+        }
+      }
+      .wid {
+        font-size: 0.24rem;
+        text-align: center;
+        width: 25%;
+        margin-bottom: 0.5rem;
+        .OAIndexIcon {
+          font-size: 0.57rem;
+        }
+      }
+      .coun {
+        font-size: 0.24rem;
+        width: 50%;
+        margin-bottom: 0.5rem;
+        position: relative;
+        .OAIndexIcon {
+          font-size: 0.4rem;
+          color: #fff;
+        }
+        .left {
+          border-radius: 50%;
+          text-align: center;
+          width: 0.6rem;
+          height: 0.6rem;
+          line-height: 0.7rem;
+          position: absolute;
+          top: 0.2rem;
+          left: 0;
+        }
+        .right {
+          margin-left: 0.76rem;
+          p {
+            font-size: 0.33rem;
+            margin-bottom: 0.16rem;
+          }
+          span {
+            font-size: 0.21rem;
+            color: #666;
+          }
+        }
+      }
+    }
+
   }
 </style>

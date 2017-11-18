@@ -14,4 +14,12 @@ export default
       title:'通知公告'
     },
   },
+  {
+    path: '/publicitem/information',
+    name: 'infomation',
+    component: views.Gk.Information,
+    meta:{
+      title:'咨询'
+    },
+  },
 ]

@@ -32,6 +32,6 @@ export const getBgcBySeed = (seed)=>{
   if(isNaN(index)){
     return null;
   }else{
-    return iconBackground[index];
+    return iconBackground[index]||iconBackground[0];
   }
 }

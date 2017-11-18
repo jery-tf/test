@@ -35,7 +35,7 @@ export default [
     name: 'publicitem',
     component: views.Home.Publicitem,
     meta:{
-      title:'公开'
+      title:'新闻资讯'
     },
     beforeEnter:Util.login.checkLogin
   },

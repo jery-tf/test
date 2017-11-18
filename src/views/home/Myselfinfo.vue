@@ -104,6 +104,8 @@
         </div>
       </router-link>
 
+      <!--<div @click="idgo">测试按钮</div>-->
+
     </div>
     <div class="parttop padding-container-lr">
       <div class="particulars setting" @click="authentication">
@@ -229,7 +231,7 @@
       getimgs() {
         let token = Util.login.getAccessToken();
         let userInfo = Util.user.getUserAllInfo();
-       this.authLevel=userInfo.authLevel
+        this.authLevel=userInfo.authLevel
         console.log(userInfo.authLevel)
         if (token && userInfo) {
           let username = userInfo.name;
@@ -263,7 +265,33 @@
               this.list = arr;
             }
         })
-      }
+      },
+
+
+
+//这是测试存储实人认证的接口用的
+//      idgo(){
+//        this.cidcard =JSON.parse(localStorage.getItem('userDetails')).certificateNum;
+//        this.userid =JSON.parse(localStorage.getItem('userDetails')).id;
+//        console.log(this.cidcard)
+//        let wxAuthen = localStorage.getItem('wxAuthen');
+//        let params={authLevel:'0'}
+//
+//
+//        Api.realNameApi.getWxAuthenticationResult({token:'{891A5FAE-A430-453A-8933-661AA2C2BDC3}'
+//          ,type:'H5'}, {loading: '请稍后...'})
+//          .then(res => {
+//                      console.log(res.data.ID)
+//          })
+//
+//
+//        Api.realNameApi.postWxAuthenticationResult(this.userid,params).then(res=>{
+//          Util.other.setLocalStorage('userDetails',res);
+//        })
+//        this.$router.push('/mySelfInfo')
+//      }
+
+
     },
     computed: {}
   }
