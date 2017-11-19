@@ -2,36 +2,44 @@
 import views from '@/views'
 
 export default [
-{
+  {
     path: '/convenience/police',
     name: 'police',
     component: views.Convenience.Police,
-    meta:{
-      title:'便民政策'
+    meta: {
+      title: '便民政策'
     },
   },
   {
     path: '/convenience/guideto',
     name: 'guideto',
     component: views.Convenience.Guideto,
-    meta:{
-      title:'办事指南'
+    meta: {
+      title: '办事指南'
     }
   },
   {
     path: '/convenience/facilities/:id',
     name: 'facilities',
     component: views.Convenience.Facilities,
-    meta:{
-      title:'便民设施'
+    meta: {
+      title: '便民设施'
     }
   },
   {
     path: '/convenience/grades/:id',
     name: 'grades',
     component: views.Convenience.Grades,
-    meta:{
-      title:'便民设施'
+    meta: {
+      title: '便民设施'
+    }
+  },
+  {
+    path: '/convenience/hotserver',
+    name: 'hotserver',
+    component: views.Convenience.Hotserver,
+    meta: {
+      title: '便民服务'
     }
   }
 ]

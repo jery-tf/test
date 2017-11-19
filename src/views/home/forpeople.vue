@@ -4,7 +4,11 @@
 
 <template>
   <div class="box-margin-top ">
-    <div class="padding-container-lr convenf">
+    <!--暂时是放在这里-->
+    <router-link to="/convenience/hotserver">
+    <button>热门服务</button>
+    </router-link>
+    <div class="padding-container-lr convenf" v-show="alltrue">
       <h6>互动交流</h6>
       <ul>
         <li class="fle">
@@ -29,10 +33,10 @@
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="items in item.sub" class="wid">
-            <a :href="`${items.detailUrl}`">
-              <i :class="`OAIndexIcon ${item.icon}`" :style="`background:${items.backgroundcolor}`"></i>
-              <p>{{items.title}}</p>
+          <li v-for="itemss in onpayfor" class="wid">
+            <a :href="`${itemss.detailUrl}`">
+              <i :class="`OAIndexIcon ${itemss.icon}`" :style="`color:${itemss.backgroundcolor}`"></i>
+              <p>{{itemss.title}}</p>
             </a>
           </li>
         </ul>
@@ -42,10 +46,10 @@
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="items in item.sub" class="wid">
-            <router-link v-bind="{to:'/convenience/grades/'+items.channelId}">
-              <i class="OAIndexIcon  C2-shebao" :style="`color:${items.backgroundcolor}`"></i>
-              <p>{{items.name}}</p>
+          <li v-for="itemsss in oncheckser" class="wid">
+            <router-link v-bind="{to:'/convenience/grades/'+itemsss.channelId}">
+              <i :class="`OAIndexIcon ${itemsss.icon}`":style="`color:${itemsss.backgroundcolor}`"></i>
+              <p>{{itemsss.name}}</p>
             </router-link>
           </li>
         </ul>
@@ -55,10 +59,10 @@
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="items in item.sub" class="fle">
-            <router-link v-bind="{to:'/convenience/facilities/'+items.channelId}">
-              <i class="OAIndexIcon  C2-hangzhengwenti"></i>
-              <p>{{items.name}}</p>
+          <li v-for="itemssss in onplaycmp" class="fle">
+            <router-link v-bind="{to:'/convenience/facilities/'+itemssss.channelId}">
+              <i :class="`OAIndexIcon ${itemssss.icon}`":style="`color:${itemssss.backgroundcolor}`"></i>
+              <p>{{itemssss.name}}</p>
             </router-link>
           </li>
           <li class="fle"></li>
@@ -96,23 +100,30 @@
   import Config from '../../config'
   import qs from "qs"
   import {Toast} from 'mint-ui';
-
+  import { Indicator } from 'mint-ui';
   export default {
     name: 'forpeople',
     components: {},
     data() {
       return {
         list: [],
-        listss: []
+        listss: [],
+        alltrue:false,
+        onpayfor:[],
+        oncheckser:[],
+        onplaycmp:[]
       }
     },
     created() {
+      Indicator.open();
       this.getinfonews()
     },
     methods: {
       getinfonews() {
         Util.cmsdao.fetchAllSubChnlNArti('296', 4).then(res => {
           console.log(res)
+          this.alltrue=true
+          Indicator.close();
           if (res == null) {
             this.list = ''
             return
@@ -127,6 +138,8 @@
             });
           }
           this.list = arr
+
+          //便民热线
           this.lists = arr[2].sub
           let arrn = []
           for (let items of this.lists) {
@@ -137,6 +150,47 @@
             })
           }
           this.listss = arrn
+
+          //网上支付
+          let payfor =[]
+          for(let itemss of arr[3].sub){
+            payfor.push({
+              backgroundcolor: Util.icon.getBgcBySeed(itemss.title),
+              icon: Util.icon.getValueBySeed(itemss.title),
+              detailUrl:itemss.detailUrl,
+              title:itemss.title
+            })
+          }
+          this.onpayfor=payfor
+
+          //查询服务
+          let checkser =[]
+          for(let itemsss of arr[0].sub){
+            checkser.push({
+              backgroundcolor: Util.icon.getBgcBySeed(itemsss.channelId),
+              icon: Util.icon.getValueBySeed(itemsss.channelId),
+              detailUrl:itemsss.detailUrl,
+              title:itemsss.title,
+              channelId:itemsss.channelId,
+              name:itemsss.name
+            })
+          }
+          this.oncheckser=checkser
+
+       //便民设施
+          let playcmp =[]
+          for(let itemssss of arr[1].sub){
+            playcmp.push({
+              backgroundcolor: Util.icon.getBgcBySeed(itemssss.channelId),
+              icon: Util.icon.getValueBySeed(itemssss.channelId),
+              detailUrl:itemssss.detailUrl,
+              title:itemssss.title,
+              channelId:itemssss.channelId,
+              name:itemssss.name
+            })
+          }
+          this.onplaycmp=playcmp
+
         })
       }
 

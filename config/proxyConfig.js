@@ -4,7 +4,7 @@
 module.exports = {
   proxy: {
     '/proxy': {
-      target: 'http://222.240.80.61/gateway',
+      target: 'http://172.17.89.21:30538',
       changeOrigin: true,
       pathRewrite: {
         '^/proxy': ''
