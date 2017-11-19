@@ -3,7 +3,6 @@
 */
 <!--咨询部门以及咨询项目-->
 <template>
-    <div>
       <section class="showChose" v-if="isdep">
         <section class="address">
           <section class="title">
@@ -28,7 +27,6 @@
           </ul>
         </section>
       </section>
-    </div>
 </template>
 <script>
   import Util from '../../util'
@@ -119,11 +117,11 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     z-index: 120;
     background: rgba(0, 0, 0, 0.5);
-    height: 9rem;
+    height: 8rem;
   }
   .address {
     position: absolute;
@@ -132,7 +130,7 @@
     z-index: 121;
     background: #fff;
     width: 100%;
-    height: 9rem;
+    height: 8rem;
   }
   .title {
     width: 7.2rem;

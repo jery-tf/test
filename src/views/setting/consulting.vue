@@ -45,7 +45,7 @@
       v-model="popupVisible"
       popup-transition="popup-fade"
       position="bottom">
-      <h3>咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
+      <h3 class="addresstitle">咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="isshowpub(false)"></i></h3>
       <template>
         <DepartPro :cityshow="cityshow" v-on:increments="addaddress" :isdep="isdep"  :proshow="proshow"  v-on:increment="addproject"></DepartPro>
       </template>
@@ -105,6 +105,9 @@
       //打开关闭添加修改模态框
       isshowarea(bool){
         this.popupVisibles = bool;
+      },
+      isshowpub(bool){
+        this.popupVisible = bool;
       },
       isopendown(){
         this.isopen=!this.isopen

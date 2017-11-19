@@ -155,6 +155,7 @@
       justify-content: center;
       align-items: center;
       height: .81rem;
+      margin-top: 0.26rem;
       i {
         font-size: .41rem;
         color: #ccc;

@@ -77,7 +77,6 @@
         cateid = cateid || 0;
         let box = document.getElementById('conven');
         var w = box.clientWidth;
-        console.log(w)
         var count = this.list.length + 1;
         this.ulWidth = (w + 72) * count;
         console.log(this.ulWidth)
@@ -114,6 +113,7 @@
         margin: 0px;
         padding-left: 0.3rem;
         overflow-x: hidden;
+        height: 0.7rem;
         li {
           width: 0.96rem;
           list-style: none;
@@ -121,10 +121,13 @@
           color: #222;
           font-size: 0.24rem;
           margin-right: 0.72rem;
+          height:0.6rem;
         }
         li:hover {
           color: #13B7F6;
           border-bottom: 2px solid #13B7F6;
+          height:0.6rem;
+
         }
       }
     }
