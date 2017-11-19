@@ -3,16 +3,14 @@
 */
 
 <template>
-    <div class="facilities">
-        <div>
-          <div v-for="item in list" class="gym">
-            <a :href="`${item.detailUrl}`">
-              <img :src="item.imageUrls" >
-              <p>{{item.title}}</p>
-            </a>
-          </div>
-        </div>
-    </div>
+  <div class="facilities">
+      <div v-for="item in lists" class="gym">
+        <a :href="`${item.detailUrl}`">
+          <p>{{item.title}}<i class="OAIndexIcon C2-next"></i></p>
+
+        </a>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -22,16 +20,15 @@
   import qs from "qs"
   import {Toast} from 'mint-ui';
     export default {
-        name: 'facilities',
+        name: 'grades',
         components: {},
         data() {
             return {
-              list:[]
+              lists:[]
             }
         },
         created() {
           this.id = this.$route.params.id;
-          console.log(this.id)
           this.getplay()
         },
         methods: {
@@ -46,7 +43,7 @@
                   detailUrl:item.detailUrl
                 });
               }
-              this.list=arr
+              this.lists=arr
             })
           }
         }
@@ -55,21 +52,25 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-          .facilities{
-            width: 7.2rem;
-              .gym{
-                padding: 0.26rem  0.26rem 0;
-                text-align: center;
-                margin-bottom: 0.18rem;
-                background-color: #fff;
-                img{
-                  width: 100%;
-                  height: 2.68rem;
-                }
-                p{
-                  height: 0.7rem;
-                  line-height:0.7rem;
-                }
-              }
-            }
+  .facilities{
+    background-color: #fff;
+    padding: 0 0.3rem;
+    .gym{
+      height: 0.98rem;
+      line-height:0.98rem;
+      border-bottom:1px solid #d9d9d9 ;
+      p{
+        font-size: 0.28rem;
+        color: #333;
+        position: relative;
+      .OAIndexIcon{
+        position: absolute;
+        top:0.4rem;
+        right:0;
+        font-size: 0.24rem;
+        color: #ccc;
+      }
+      }
+    }
+  }
 </style>

@@ -25,5 +25,13 @@ export default [
     meta:{
       title:'便民设施'
     }
+  },
+  {
+    path: '/convenience/grades/:id',
+    name: 'grades',
+    component: views.Convenience.Grades,
+    meta:{
+      title:'便民设施'
+    }
   }
 ]

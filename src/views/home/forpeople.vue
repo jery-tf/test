@@ -25,31 +25,28 @@
         </li>
       </ul>
     </div>
-    <div class="padding-container-lr convenf">
-      <h6>网上支付</h6>
-      <ul>
-        <li class="fle">
-          <i class="OAIndexIcon  C2-shebao"></i>
-          <p>社保缴费</p>
-        </li>
-        <li class="fle">
-          <i class="OAIndexIcon  C2-yinxingqiazhifu"></i>
-          <p>教育缴费</p>
-        </li>
-        <li class="fle">
-          <i class="OAIndexIcon C2-jiaotongfakuanjiaofacopy"></i>
-          <p>交通罚款</p>
-        </li>
-        <li class="fle"></li>
-      </ul>
+    <div class=" padding-container-lr convenf" v-for="item in list" v-if="item.channelId==359">
+      <div>
+        <h6>{{item.name}}</h6>
+        <ul>
+          <li v-for="items in item.sub" class="wid">
+            <a :href="`${items.detailUrl}`">
+              <i :class="`OAIndexIcon ${item.icon}`" :style="`background:${items.backgroundcolor}`"></i>
+              <p>{{items.title}}</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class=" padding-container-lr convenf" v-for="item in list" v-if="item.channelId==297">
       <div>
         <h6>{{item.name}}</h6>
         <ul>
           <li v-for="items in item.sub" class="wid">
-            <i class="OAIndexIcon  C2-shebao"></i>
-            <p>{{items.name}}</p>
+            <router-link v-bind="{to:'/convenience/grades/'+items.channelId}">
+              <i class="OAIndexIcon  C2-shebao" :style="`color:${items.backgroundcolor}`"></i>
+              <p>{{items.name}}</p>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -57,14 +54,14 @@
     <div class="padding-container-lr convenf" v-for="item in list" v-if="item.channelId==305">
       <div>
         <h6>{{item.name}}</h6>
-        <ul >
-            <li v-for="items in item.sub" class="fle">
-              <router-link v-bind="{to:'/convenience/facilities/'+items.channelId}">
+        <ul>
+          <li v-for="items in item.sub" class="fle">
+            <router-link v-bind="{to:'/convenience/facilities/'+items.channelId}">
               <i class="OAIndexIcon  C2-hangzhengwenti"></i>
               <p>{{items.name}}</p>
-              </router-link>
-            </li>
-            <li class="fle"></li>
+            </router-link>
+          </li>
+          <li class="fle"></li>
         </ul>
       </div>
     </div>
@@ -72,7 +69,7 @@
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="items in listss" class="coun" >
+          <li v-for="items in listss" class="coun">
             <div class="left" :style="`background:${items.backgroundcolor}`">
               <i class="OAIndexIcon  C2-dianhua"></i>
             </div>
@@ -106,7 +103,7 @@
     data() {
       return {
         list: [],
-        listss:[]
+        listss: []
       }
     },
     created() {
@@ -126,19 +123,20 @@
               sub: item.sub,
               channelId: item.channelId,
               name: item.name,
+              icon: Util.icon.getValueBySeed(item.name)
             });
           }
           this.list = arr
           this.lists = arr[2].sub
-          let arrn=[]
-          for(let items of this.lists){
+          let arrn = []
+          for (let items of this.lists) {
             arrn.push({
-              backgroundcolor:Util.icon.getBgcBySeed(items.title),
-              subtitle:items.subtitle,
-              title:items.title
+              backgroundcolor: Util.icon.getBgcBySeed(items.title),
+              subtitle: items.subtitle,
+              title: items.title,
             })
           }
-          this.listss=arrn
+          this.listss = arrn
         })
       }
 
@@ -196,6 +194,9 @@
         margin-bottom: 0.5rem;
         .OAIndexIcon {
           font-size: 0.57rem;
+        }
+        p {
+          margin-top: 0.18rem;
         }
       }
       .coun {
