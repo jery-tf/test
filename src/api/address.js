@@ -1,4 +1,4 @@
-import {axiosPost,axiosDeleteToken} from './baseApi'
+import {axiosPost,axiosDeleteToken,axiosGet } from './baseApi'
 //获取地址列表
 export const addresslist = (params,config)=>axiosPost(`/xndt/v1/deliveryaddressquery`,params,config);
 //修改地址、添加地址
@@ -14,3 +14,13 @@ const reqParms = (params)=>{
   }
   return '?'+qs.join('&');
 };
+
+
+//全国省级地址查询
+export const province = (params,config)=>axiosGet(`/logistics/v1/dicNormarea/selectAreaCode1`,params,config);
+
+//查询省级下去的地级市
+export const getcity = (params,config)=>axiosGet(`/logistics/v1/dicNormarea/selectAreaCode2/${params}`,params,config);
+
+//查询地级市下面的区级
+export const district = (params,config)=>axiosGet(`/logistics/v1/dicNormarea/selectAreaCode3/${params}`,params,config);

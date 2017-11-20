@@ -6,8 +6,8 @@
     <div id="tmpl" class="box-margin-top">
         <div class="column padding-container-lr">
           <div class="read"><span>我的订阅</span><i>点击进入栏目</i></div>
-          <div class="columnbot">
-            <div>1234</div><div v-show="isshow"   @click="ding">5678</div><div>21</div>
+          <div class="columnbot" >
+              <Column :data="item" :list="list.length" v-for="(item,index) in list"></Column>
           </div>
         </div>
     </div>
@@ -15,21 +15,25 @@
 </template>
 
 <script>
+  import Column from 'components/publicitem/column.vue'
     export default {
         name: 'information',
-        components: {},
+        components: {
+          Column
+        },
         data() {
             return {
-              isshow:true
+              list: [
+                {id: '1', name: '湖南政务'}, {id: '2', name: '长沙新闻'}, {id: '3', name: '岳阳动态'}, {id: '4', name: '常德牛粉'}, {
+                  id: '5', name: '川麻辣烫'
+                }, {id: '6', name: '汉热干面'}, {id: '7', name: '汉热干面'}, {id: '8', name: '汉热干面'}
+              ],
             }
         },
         created() {
-
+              //console.log(this.list.length)
         },
         methods: {
-          ding(){
-           this.isshow=false
-          }
         }
 
     }
@@ -56,19 +60,6 @@
            padding-left: 0.24rem;
          }
        }
-        .columnbot{
-          width: 100%;
-          div{
-            display: inline-block;
-            width: 2.06rem;
-            height: 0.82rem;
-           line-height: 0.82rem;
-            text-align: center;
-            background-color: #f4f5f6;
-            margin-right: 0.26rem;
-            margin-bottom: 0.26rem;
-          }
-        }
       }
     }
 </style>

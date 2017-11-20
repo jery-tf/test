@@ -10,7 +10,7 @@
     </div>
     <div class="addressBox padding-container-lr">
       <p class="twoLineFont">
-        <span class="adddline">{{addressInfo.province}}{{addressInfo.city}}{{addressInfo.county}}</span>
+        <span class="adddline">{{addressInfo.province_name}}{{addressInfo.city_name}}{{addressInfo.county_name}}</span>
       </p>
     </div>
     <div class="padding-container mall-warp addressMan">
