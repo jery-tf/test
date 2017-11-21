@@ -9,5 +9,6 @@ export default {
   StorageOnline:resolve => require(['./storageOnline.vue'], resolve),//缓存在线办理
   FileUpload:resolve => require(['./FileUpload.vue'], resolve),//文件上传
   AddressManagement:resolve => require(['./AddressManagement.vue'], resolve),//地址管理
-  CompleteData:resolve => require(['./completeData.vue'], resolve)
+  CompleteData:resolve => require(['./completeData.vue'], resolve),
+  ErrandProgress:resolve => require(['./ErrandProgress.vue'], resolve),//办件进度
 }

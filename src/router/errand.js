@@ -68,7 +68,15 @@ export default [
     name: 'storageOnline',
     component: views.Errand.StorageOnline,
     meta: {
-      title: '补正补齐'
+      title: '在线办理'
+    }
+  },
+  {
+    path: '/errand/errandProgress/',
+    name: 'history',
+    component: views.Errand.ErrandProgress,
+    meta: {
+      title: '办件进度'
     }
   }
 ]

@@ -18,7 +18,7 @@
           </p>
         </div>
       </div>
-      <p><i class="OAIndexIcon C2-fanhui2"></i></p>
+      <p @click="lookProgress(dataInfo.instanceId)"><i class="OAIndexIcon C2-fanhui2"></i></p>
     </div>
     <p class="remind fff padding-container">
       <i class="OAIndexIcon C2-guanyu1"></i>
@@ -63,8 +63,9 @@
         </div>
       </div>
     </div>
-    <div class="box-margin-top fff padding-container submintBtn" v-show="userInfoArr.projectState === '3'&&serInfoArr.projectState === '0'">
-      <p>{{userInfoArr.operButtonName}}</p>
+
+    <div class="box-margin-top fff padding-container submintBtn" v-show="userInfoArr.projectState === '3'||userInfoArr.projectState === '0'">
+      <p @click="submit">{{userInfoArr.operButtonName}}</p>
     </div>
   </div>
 </template>
@@ -104,6 +105,17 @@
           alert("none");
         }
         document.execCommand("Copy");
+      },
+      submit(){
+        sessionStorage.setItem('stateType',3)
+        let params = {instanceId:this.dataInfo.instanceId,approveId:this.dataInfo.approveId}
+        console.log('this.applyInfoData',this.dataInfo)
+        this.$router.push({path: `/errand/storageOnline`,query:params});
+      },
+      lookProgress(instanceId){
+        console.log(instanceId);
+        let param = {title:this.dataInfo.instanceName,instanceId:instanceId}
+        this.$router.push({path:'/errand/errandProgress/',query:param})
       }
     },
     created(){

@@ -4,6 +4,7 @@
 
 <template>
   <div class="content">
+    {{option.instanceId}}
     <div @click="doDetails">
       <div class="font-small padding-container border-bottom">
         <p class="number oneLineFont">受理编号 : {{option.instanceCode || ''}}</p>
@@ -21,7 +22,7 @@
     </div>
     <div class="foots padding-container" >
       <p>
-        <mt-button  size="small" plain type="danger"  v-if="option.projectState === '0'" @click.stop="deleteItem">
+        <mt-button  size="small" plain type="danger"  v-if="option.projectState === '0' ||option.projectState === '3' " @click.stop="deleteItem(option.projectState)">
           {{operButtonName}}
         </mt-button>
       </p>
@@ -185,7 +186,8 @@
       }
     },
     created(){
-      this.stateStyle
+      this.stateStyle;
+      sessionStorage.removeItem('stateType')
     },
     methods: {
       format,
@@ -197,10 +199,16 @@
         }
         this.option.title =  this.state; //当前状态
         this.option.operButtonName =  this.operButtonName; //当前状态
+        console.log(this.option)
         this.$router.push({path:'/me/doDetails/',query:this.option})
       },
-      deleteItem(){
-        /* // console.log(this.option)*/
+      deleteItem(state){
+        if (state === '3'){
+          sessionStorage.setItem('stateType',3)
+          let params = {instanceId:this.option.instanceId,approveId:this.option.approveId}
+          this.$router.push({path: `/errand/storageOnline`,query:params});
+          return false;
+        }
         this.$emit('delete',this.option.instanceId)
       }
     },

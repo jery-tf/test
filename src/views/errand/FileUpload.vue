@@ -82,6 +82,26 @@
             li.label += this.returnTime();
             this.fileList.push(li);
             this.saveUploadData(li);
+            let errandType = sessionStorage.getItem('errandType');
+            if (errandType){
+              //addAttach
+              let materialInsId = sessionStorage.getItem('materialInsId');
+              let attachInfo = {
+                attachName:li.title,
+                attachSize:parseInt(li.label)*1024,
+                attachType:li.type,
+                attachPath:li.url,
+                attachCode:'000005',
+                createTime:new Date().getTime(),
+                isValid:'Y',
+                isDel:'N',
+                businessId:materialInsId
+              }
+              Api.errandApi.addAttach(attachInfo).then(res=>{
+                this.changeSubmitState(materialInsId,2)
+              })
+
+            }
           }
         })
         let config = {
@@ -89,6 +109,15 @@
             'Content-Type': 'multipart/form-data',
           }
         };
+      },
+      /*修改提交状态*/
+      changeSubmitState(materialInsId,state){
+        Api.errandApi.changeSubmitState(materialInsId,{
+          materialInsId:materialInsId,
+          submitState:state
+        }).then(res=>{
+          console.log('成功')
+        })
       },
       //删除上传的缓存文件
       deleteUploadData(id){
@@ -100,22 +129,22 @@
             for(let i in arr){
               if(arr[i].id === id){
                 if(arr[i].attachId){ //判断是否为暂存修改
+                   let materialInsId = arr[i].materialInsId
                    Api.errandApi.deleteListByBusinessId(arr[i].attachId).then(res=>{
                      arr.splice(i,1);
-                     console.log('errandData',JSON.stringify(errandData));
+                     if (!arr.length){
+                       /*修改提交状态*/
+                       this.changeSubmitState(materialInsId,1);
+                     }
                    })
                 }else{
                   arr.splice(i,1);
                 }
-
               }
             }
             this.fileList = arr;
           }
         }
-
-
-
         Util.other.setSessionStorage('errandData',errandData);
       },
       //根据ID获取缓存中的文件 渲染到数据
@@ -150,7 +179,6 @@
           errandData[id]=[];
           errandData[id].push(data);
         }
-        alert(JSON.stringify(errandData))
         Util.other.setSessionStorage('errandData',errandData);
       }
 

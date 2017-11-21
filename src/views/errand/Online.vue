@@ -50,6 +50,9 @@
         currentFlieKey: [],//当前已上传的文件列表id
         currentFlies: [],//当前已经上传的文件列表
         materialList: [],//材料列表
+        isStorge:false, //是否暂存 默认为不暂存
+        projectState:9,
+        toastStr:'提交成功请到我的办理里查看',
         option: {
           userName: '张三',
           phone: '123123123',
@@ -81,6 +84,7 @@
       //跳转到上传文件页面
       toLoadFile(obj){
         sessionStorage.setItem('errandTitle', obj.materialTitle);
+        sessionStorage.removeItem('errandType')
         this.$router.push({path: `/errand/fileUpload/${this.$route.params.id}/${obj.materialId}`});
       },
       testAddress(){
@@ -147,11 +151,7 @@
         if (!materialId) return;
         return this.currentFlieKey.join("").indexOf(materialId) > 0 && this.currentFlieKey.length>0
       },
-      /**/
-      //提交数据
-      onlineSubmit(){
-        /*材料不全默认提交到暂存*/
-
+      submitData(){
         let allUserInfo = Util.user.getUserAllInfo();
         let applicantMap = {
           name: allUserInfo.name,
@@ -163,9 +163,8 @@
         };
         Api.errandApi.addApplicant(applicantMap).then(res => {
           let approveInfo = this.approve;
-          console.log(approveInfo);
           let params = {
-            projectState: '9',
+            projectState: this.projectState,
             instanceSource: '4',
             approveCode: approveInfo.approveCode,
             instanceName: allUserInfo.name+'办理'+approveInfo.approveName+'项目',
@@ -178,9 +177,6 @@
             applyType: '1',
             applyName: allUserInfo.name,
             applyId: res.applicantId,
-          }
-          if (this.materialList.length > this.currentFlieKey.length) {
-            params.projectState = '0'
           }
           Api.errandApi.getApprovematerial(approveInfo.approveId).then(result=>{
             let _materialList = [];
@@ -207,7 +203,7 @@
                       attachType:kItem.type,
                       attachPath:kItem.url,
                       attachCode:'000005',
-                      creatTime:new Date().getTime(),
+                      createTime:new Date().getTime(),
                       isValid:'Y',
                       isDel:'N'
                     }
@@ -229,9 +225,8 @@
             console.log('params',JSON.stringify(params));
 
             Api.errandApi.addErrandExample(params).then(_res => {
-              console.log('instanceInfo:',_res);
               if(_res){
-                let instance = Toast('提交成功');
+                let instance = Toast(this.toastStr);
                 setTimeout(() => {
                   instance.close();
                   this.$router.push({path:'/errandList/zrrfl'})
@@ -245,20 +240,28 @@
               }, 1000);
             })
           })
-
         })
+      },
+      //提交数据
+      onlineSubmit(){
+        if (this.materialList.length > this.currentFlieKey.length) {
+          //材料未上传完整提示用户是否缓存
+          MessageBox.confirm('材料未上传完整是否暂存?').then(action => {
+            this.projectState =0;
+            this.toastStr = '暂存成功请到我的附件里查看'
+            this.submitData();
+          }).catch(e=>{
+              return false;
+          });
+        }else{
+          this.submitData();
+        }
+
       },
 
       //监听返回事件
       bindPopstate(e){
-        console.log('返回 暂存');
-//        MessageBox.confirm('需要暂存之前的数据么?','提示').then(active=>{
-//          console.log('确定',active);
-//          //开始保存
-//          MessageBox.alert('可以到我的办件中查看','操作成功').then(action => {});
-//        }).catch(active=>{
-//            console.log('取消',active);
-//        })
+
       },
     },
     beforeRouteLeave(to, from, next){

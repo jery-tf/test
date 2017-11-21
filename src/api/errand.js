@@ -1,9 +1,8 @@
 /**
  * Created by wyg on 2017/10/2.
  */
-
+var ApiHost = 'http://172.16.17.125:8080'
 import {axiosGet,axiosGetToken,axiosPost,axiosPostToken,axiosDeleteToken,axiosDelete} from './baseApi'
-
 //根据事项id 获取事项接口
 export const getErrandList = (params,config)=>axiosGet(`/approveinterface/v1/approveinfo${reqParms(params)}`,'',config);
 
@@ -21,11 +20,11 @@ export const uploadFile = (params,config)=>axiosPost('/minio/apk/attach/upload',
 
 
 //新建申请人
-export const addApplicant = (params,config)=>axiosPostToken('/accept/v1/applicant',params,config);
+export const addApplicant = (params,config)=>axiosPostToken(`${ApiHost}/accept/v1/applicant`,params,config);
 
 //办件暂存 新增
 export const addErrandExample = (params,config) =>
-  axiosPostToken('/accept/v1/instance/saveOuterInstance/allinfo',params,config);
+  axiosPostToken(`${ApiHost}/accept/v1/instance/saveOuterInstance/allinfo`,params,config);
 
 //获取办件实例
 export const getErrandInstance = (instanceId,config) =>
@@ -52,7 +51,7 @@ export const getProceedingList = (params,config) => axiosGet(`/accept/v1/instanc
 `,config);
 
 //删除办件实例
-export const deleteProceeding = (instanceId,config) => axiosDelete(`/accept/v1/instance/${instanceId}`,config);
+export const deleteProceeding = (instanceId,config) => axiosDelete(`${ApiHost}/accept/v1/instance/${instanceId}`,config);
 
 //根据事项信息获取事项基本信息
 export const getApproveinterface = (approveId,config) => axiosGet(`/approveinterface/v1/approveinfo/${approveId}`,config);
@@ -67,13 +66,27 @@ export const getApplyInfo = (applicantId,config) => axiosGet(`/accept/v1/applica
 export const getApplyBankInfo = (applycorpId,config) => axiosGet(`/accept/v1/applycorp/${applycorpId}`,config);
 
 //根据办件实例ID查所有材料实例信息
-export const findByInstanceId = (instanceId,config) => axiosGet(`/accept/v1/instancematerial/findByInstanceId/${instanceId}`,config);
+export const findByInstanceId = (instanceId,config) => axiosGet(`${ApiHost}/accept/v1/instancematerial/findByInstanceId/${instanceId}`,config);
 
 //根据材料实例ID查所有附件信息
-export const findListByBusinessId = (materialInsId,config) => axiosGet(`/accept/v1/attach/findListByBusinessId/${materialInsId}`,config);
+export const findListByBusinessId = (materialInsId,config) => axiosGet(`${ApiHost}/accept/v1/attach/findListByBusinessId/${materialInsId}`,config);
 
 //根据附件ID删除附件
 export const deleteListByBusinessId = (attachId,config) => axiosDelete(`/accept/v1/attach/${attachId}`,config)
+
+//根据材料实例ID修改材料提交状态
+export const changeSubmitState = (materialInsId,params,config) => axiosPost(`/accept/v1/instancematerial/${materialInsId}`,params,config)
+
+//插入附件实例记录
+export const addAttach= (params,config) => axiosPost(`/accept/v1/attach`,params,config)
+
+//更新办件状态
+export const updateInstanceStateById= (instanceId,params,config) => axiosPost(`${ApiHost}/accept/v1/instance/${instanceId}`,params,config)
+
+//根据办件实例id获取办件的详细过程
+export const getDetailProcessinfo = (instanceId,config) => axiosGet(`/accept/v1/detailProcess/getByInstanceId/${instanceId}
+`,config);
+
 
 //参数处理函数
 const reqParms = (params)=>{
