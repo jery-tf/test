@@ -4,7 +4,7 @@
 
 <template>
   <div v-if="isshow">
-    <div>{{data.name}}<i class="OAIndexIcon C2-guanbi2" @click="onshow" v-show="cro"></i></div>
+    <div>{{data.name}}<i class="OAIndexIcon C2-guanbi2" @click="onshow" v-show="onshow"></i></div>
   </div>
 </template>
 
@@ -16,25 +16,27 @@
     data() {
       return {
         isshow: true,
-        _list:8
+        onsshow:true
       }
     },
     created() {
-      console.log(this.data)
+
     },
     methods: {
       onshow() {
-        this.isshow = false;
-        this._list--;
-        console.log(this._list)
+        if(this.data.id=='1'){
+            this.onshow=false
+            this.isshow=true
+        }
+        else{
+          this.isshow = false;
+        }
+      },
 
-      }
     },
+
     computed:{
-      cro(){
-//        console.log(this._list)
-        return this.data.id == 8
-      }
+
     }
 
   }

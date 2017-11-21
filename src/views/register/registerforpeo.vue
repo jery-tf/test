@@ -79,15 +79,15 @@
           }),
           {Headers:{'content-type':'application/x-www-form-urlencoded'}}
         ).then(res => {
-          console.log(res.code)
-          if (res.code=="703" || res.code=='2') {
-            Toast(res.info)
-            return
-          }
-          else if(res.code=="200"){
+//          console.log(res.code)
+//          if (res.code=="703" || res.code=='2') {
+//            Toast(res.info)
+//            return
+//          }
+//          else if(res.code=="200"){
             this.disab=false
             this.$router.push("/register/registerinfo");
-          }
+//          }
         })
       }
     }

@@ -61,10 +61,12 @@
               }),
               {Headers:{'content-type':'application/x-www-form-urlencoded'}}
             ).then(res => {
-              if (res.code == "703" ||res.code=='2') {
-                Toast('身份证与姓名不符，请重新输入')
-              }
-              else if(res.code=="200"){
+              console.log(res)
+//              if (res.code == "703" ||res.code=='2') {
+//                console.log(res)
+//                Toast('身份证与姓名不符，请重新输入')
+//              }
+//              else if(res.code=="200"){
                 Api.registerApi.uableRegi(
                   {
                     type:"idcard",
@@ -83,7 +85,7 @@
                     this.dis=false
                   }
                 })
-              }
+//              }
             })
           }
 

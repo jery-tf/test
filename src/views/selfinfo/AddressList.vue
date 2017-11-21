@@ -73,8 +73,8 @@
             for (let item of res.list) {
               let _item = {
                 apply_name: item.apply_name, mobilephone: item.mobilephone,
-                city: item.city, is_default: item.is_default, county: item.county,province:item.province,
-                addr_id:item.addr_id
+                county_name: item.county_name, is_default: item.is_default, city_name: item.city_name,province_name:item.province_name,
+                addr_id:item.addr_id,addressee:item.addressee
               };
               arr.push(_item);
             }

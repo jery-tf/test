@@ -90,7 +90,7 @@
           alert("请输入有效的11位手机号码")
           return;
         }
-        else if (this.addlist.addressee = '') {
+        else if (this.addlist.addressee == '') {
           alert("请输入详细收货地址")
           return;
         }
@@ -102,13 +102,13 @@
             apply_type: 1,
             province_name: encodeURIComponent(this.addlist.province),
             province:this.provincecode,
-            city_name: this.addlist.city,
+            city_name: encodeURIComponent(this.addlist.city),
             city:this.citycode,
-            county_name: this.addlist.county,
+            county_name: encodeURIComponent(this.addlist.county),
             county:this.districtcode,
-            addressee: this.addlist.addressee,
+            addressee: encodeURIComponent(this.addlist.addressee),
             mobilephone: this.addlist.mobilephone,
-            apply_name: this.addlist.apply_name,
+            apply_name: encodeURIComponent(this.addlist.apply_name),
             is_default: this.isDefault == true ? 'Y' : 'N'
           }),
           {Headers: {'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'}}).then(res => {
