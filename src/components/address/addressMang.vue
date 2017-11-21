@@ -72,15 +72,18 @@
             province:this.addressInfo.province,
             city: this.addressInfo.city,
             county:this.addressInfo.county,
-            addressee:this.addressInfo.county,
+            addressee:encodeURIComponent(this.addressInfo.addressee),
+            province_name:encodeURIComponent(this.addressInfo.province_name),
+            city_name:encodeURIComponent(this.addressInfo.city_name),
+            county_name:encodeURIComponent( this.addressInfo.county_name),
             mobilephone:this.addressInfo.mobilephone,
-            apply_name:this.addressInfo.apply_name,
+            apply_name:encodeURIComponent(this.addressInfo.apply_name),
             is_default:this.addressInfo.is_default='Y'
           }),
           {Headers:{'content-type':'application/x-www-form-urlencoded'}}).then(res => {
+            console.log(res)
           if(res.code==200){
             console.log(res)
-
           }
         })
       },

@@ -8,8 +8,8 @@
     <mt-field label="手机号码" class="ipt" v-model="addlist.mobilephone"></mt-field>
     <div class="regi " @click="selected">
       <em>所属区域</em>
-      {{addlist.province}} <span v-show="addlist.province">-</span> {{addlist.city}} <span
-      v-show="addlist.province">-</span>{{addlist.county}}
+      {{addlist.province_name}} <span v-show="addlist.province_name">-</span> {{addlist.city_name}} <span
+      v-show="addlist.county_name">-</span>{{addlist.county_name}}
       <span class="ipt">
                     <i class="OAIndexIcon C2-next common"></i>
                 </span>
@@ -69,11 +69,11 @@
       //省市区三级联动数据
       listenToMyBoy(Province, province, City, city, District, district) {
         console.log(Province, province, City, city, District, district)
-          this.addlist.province = Province,
+          this.addlist.province_name = Province,
             this.provincecode=province,
-          this.addlist.city = City,
+          this.addlist.city_name = City,
             this.citycode=city,
-          this.addlist.county = District
+          this.addlist.county_name = District
         this.districtcode=district
       },
       //编辑修改地址列表
@@ -100,11 +100,11 @@
             addr_id: this.addlist.addr_id,
             apply_id: this.certificateNum,
             apply_type: 1,
-            province_name: encodeURIComponent(this.addlist.province),
+            province_name: encodeURIComponent(this.addlist.province_name),
             province:this.provincecode,
-            city_name: encodeURIComponent(this.addlist.city),
+            city_name: encodeURIComponent(this.addlist.city_name),
             city:this.citycode,
-            county_name: encodeURIComponent(this.addlist.county),
+            county_name: encodeURIComponent(this.addlist.county_name),
             county:this.districtcode,
             addressee: encodeURIComponent(this.addlist.addressee),
             mobilephone: this.addlist.mobilephone,

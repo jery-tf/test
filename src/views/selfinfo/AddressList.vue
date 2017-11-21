@@ -74,7 +74,7 @@
               let _item = {
                 apply_name: item.apply_name, mobilephone: item.mobilephone,
                 county_name: item.county_name, is_default: item.is_default, city_name: item.city_name,province_name:item.province_name,
-                addr_id:item.addr_id,addressee:item.addressee
+                addr_id:item.addr_id,addressee:item.addressee,city:item.city,province:item.province,county:item.county
               };
               arr.push(_item);
             }
@@ -134,11 +134,12 @@
         this.list.is_default=false
         this.popupVisible = true
         this.ordername = '新增地址'
-        this.list.province=''
-        this.list.city=''
-        this.list.county=''
+        this.list.province_name=''
+        this.list.city_name=''
+        this.list.county_name=''
         this.list.mobilephone=''
         this.list.apply_name=''
+        this.list.addressee=''
       },
       addaddress(){
         this.popupVisible = false
