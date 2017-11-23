@@ -1,43 +1,35 @@
 <template>
   <div id="tmpl">
     <div id='cate'>
-      <ul class="news" v-bind="{style:'width:'+ulWidth+'px'}">
-        <li v-for="(item,index) in list" :key='index' @click="getnews(item.id)" id="conven">{{item.name}}</li>
+      <ul class="news" v-bind="{style:'width:'+ulWidth+'px'}" >
+        <li v-for="(item,index) in list" :key='index' @click="getnews(item.cmsId)" id="conven" :class="item.cmsId==selectedId?'li active':'li'">{{item.name}}</li>
       </ul>
     </div>
-    <router-link to="/publicitem/information">
-      <i class="C2-xinjian OAIndexIcon"></i>
-    </router-link>
+    <!--<router-link to="/publicitem/information">-->
+      <!--<i class="C2-xinjian OAIndexIcon"></i>-->
+    <!--</router-link>-->
     <div class="contents">
-      <mt-swipe :auto="4000" :show-indicators="false">
-        <mt-swipe-item>
+      <mt-swipe :auto="4000" >
+        <mt-swipe-item v-for="(itemss,index) in listsfor">
           <a href="javascript:void(0)">
-            <img src="../../assets/img/1.jpg" alt="">
-          </a>
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <a href="javascript:void(0)">
-            <img src="../../assets/img/2.jpg" alt="">
-          </a>
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <a href="javascript:void(0)">
-            <img src="../../assets/img/3.jpg" alt="">
+            <img :src="itemss.imageUrls">
+           <div class="titlename">
+             <p>{{itemss.title}}</p>
+           </div>
           </a>
         </mt-swipe-item>
       </mt-swipe>
 
       <div class="public padding-container-lr" v-for="items in lists">
         <ul class="pubcont">
-          <template v-for="items in items.sub">
+          <!--<template v-for="items in items.sub">-->
             <li class="publist">
               <a :href="`${items.detailUrl}`">
-                <img :src="items.imageUrls" v-if="items.imageUrls">
                 <p>{{items.title}}</p><br>
-                <span>{{items.time}}</span>
+                <span>{{format(items.time,'yyyy-MM-dd')}}</span>
               </a>
             </li>
-          </template>
+          <!--</template>-->
         </ul>
       </div>
     </div>
@@ -51,7 +43,7 @@
   import Config from '../../config'
   import qs from "qs"
   import {Swipe, SwipeItem} from 'mint-ui';
-
+  import { format} from '@/util/ctime.js'
   export default {
     data() {
       return {
@@ -62,49 +54,68 @@
         ],
         result: [],
         ulWidth: 750,
-        lists: []
+        lists: [],
+        selectedId: '363',
+        listsfor:[]
+
       }
     },
     created() {
-
+      this.selectedId = 363
     },
     mounted() {
-      this.getnews()
+      this.getnews(363)
+
     },
     methods: {
-      getnews(cateid) {
+      format,
+      getnews(cmsId) {
         // 0.0 如果方法的cateid参数没有传递，则默认是0,代表获取所有新闻数据
-        cateid = cateid || 0;
+        cmsId = cmsId || 0;
+        this.selectedId = cmsId;
         let box = document.getElementById('conven');
         var w = box.clientWidth;
         var count = this.list.length + 1;
         this.ulWidth = (w + 72) * count;
-        console.log(this.ulWidth)
-        //旧版公开请求promise参数
-        Util.cmsdao.fetchAllSubChnlNArti('2', 4).then(res => {
-          let arr = [];
-          for (let item of res) {
-            arr.push({
-              sub: item.sub,
-              channelId: item.channelId,
-              name: item.name,
-              icon: Util.icon.getValueBySeed(item.name)
-            });
-          }
-          this.lists = arr
+        Api.opacityApi.publict().then(res => {
+         this.list=res
+        })
+        Util.cmsdao.fetchAllSubChnlNArti(`${cmsId}`, 2).then(res => {
+          console.log(res)
+         if(res){
+           let arrn = [];
+           let arrs=[]
+           for (let items of res) {
+             if(items.imageUrls){
+               arrs.push({
+                 detailUrl:items.detailUrl,
+                 title: items.title,
+                 time:items.time,
+                 imageUrls:items.imageUrls
+               })
+               this.listsfor=arrs
+               console.log(arrs)
+             }else{
+               arrn.push({
+                 detailUrl:items.detailUrl,
+                 title: items.title,
+                 time:items.time
+               });
+             }
+             this.lists=arrn
+             }
+         }
         })
       },
     }
   }
 </script>
-<style scoped lang="less">
+<style  lang="less">
   #tmpl {
     background-color: #fff;
     position: relative;
     height: 1000px;
     #cate {
-      width: 6.6rem;
-      max-width: 6.6rem;
       overflow-x: auto;
       background-color: #fff;
       height: 0.7rem;
@@ -114,6 +125,8 @@
         padding-left: 0.3rem;
         overflow-x: hidden;
         height: 0.7rem;
+        background-color: #fff;
+        position: fixed;
         li {
           width: 0.96rem;
           list-style: none;
@@ -121,12 +134,12 @@
           color: #222;
           font-size: 0.24rem;
           margin-right: 0.72rem;
-          height:0.6rem;
+          height:0.62rem;
         }
-        li:hover {
+        li.active {
           color: #13B7F6;
           border-bottom: 2px solid #13B7F6;
-          height:0.6rem;
+          height:0.62rem;
 
         }
       }
@@ -147,12 +160,35 @@
             width: 7.2rem;
             height: 3.2rem;
             display: inline-block;
+            position: relative;
             img {
               width: 100%;
               height: 100%;
             }
+            .titlename{
+              background-color: rgba(0,0,0,0.3);
+              padding-left: 0.26rem;
+              height: 0.74rem;
+              line-height:0.74rem;
+              font-size: 0.28rem;
+              color: #fff;
+              width: 7.2rem;
+              position: absolute;
+              bottom:0;
+              left:0;
+            }
+
           }
 
+        }
+        .mint-swipe-indicators{
+          position: absolute;
+          bottom:10%;
+          right:0!important;
+          left:0;
+          .mint-swipe-indicator{
+            background-color: red;
+        }
         }
       }
     }
@@ -182,16 +218,15 @@
             padding-left: .4rem
           }
           p {
-            /*white-space: nowrap;*/
-            /*text-overflow: ellipsis;*/
-            /*width: 4.3rem;*/
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 6.3rem;
             overflow: hidden;
           }
           span {
             display: block;
-            padding-top: 0.1rem;
             font-family: "微软雅黑";
-            color: #dcdcdc;
+            color: #aaa;
           }
         }
       }

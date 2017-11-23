@@ -12,6 +12,9 @@
             </a>
           </div>
         </div>
+      <div v-if="nocont" class="nocont">
+        暂无内容
+      </div>
     </div>
 </template>
 
@@ -26,27 +29,34 @@
         components: {},
         data() {
             return {
-              list:[]
+              list:[],
+              nocont:false
             }
         },
         created() {
           this.id = this.$route.params.id;
-          console.log(this.id)
           this.getplay()
         },
         methods: {
           getplay(){
             Util.cmsdao.fetchAllSubChnlNArti(`${this.id}`, 4).then(res => {
-              let arr = [];
-              for (let item of res) {
-                arr.push({
-                  imageUrls: item.imageUrls,
-                  title: item.title,
-                  parentId: item.parentId,
-                  detailUrl:item.detailUrl
-                });
+              console.log(res)
+              if(res){
+                let arr = [];
+                for (let item of res) {
+                  arr.push({
+                    imageUrls: item.imageUrls,
+                    title: item.title,
+                    parentId: item.parentId,
+                    detailUrl:item.detailUrl
+                  });
+                }
+                this.list=arr
               }
-              this.list=arr
+              else{
+                this.nocont=true
+              }
+
             })
           }
         }
@@ -71,5 +81,8 @@
                   line-height:0.7rem;
                 }
               }
+            .nocont{
+              text-align: center;
+            }
             }
 </style>

@@ -252,7 +252,7 @@
 //        console.log(this.selfid)
         Api.registerApi.getabcmp(
           qs.stringify({
-            aupe_idcard:'43010119870516123X'
+            aupe_idcard:'43018119891209125X'
 
           }),
         {Headers: {'content-type': 'application/x-www-form-urlencoded'}}).then(res => {

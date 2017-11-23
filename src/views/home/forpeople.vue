@@ -4,10 +4,6 @@
 
 <template>
   <div class="box-margin-top ">
-    <!--暂时是放在这里-->
-    <router-link to="/convenience/hotserver">
-    <button>热门服务</button>
-    </router-link>
     <div class="padding-container-lr convenf" v-show="alltrue">
       <h6>互动交流</h6>
       <ul>
@@ -29,58 +25,58 @@
         </li>
       </ul>
     </div>
-    <div class=" padding-container-lr convenf" v-for="item in list" v-if="item.channelId==359">
+    <div class=" padding-container-lr convenf" v-for="item in list" v-if="item.cmsId==348">
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="itemss in onpayfor" class="wid">
-            <a :href="`${itemss.detailUrl}`">
-              <i :class="`OAIndexIcon ${itemss.icon}`" :style="`color:${itemss.backgroundcolor}`"></i>
-              <p>{{itemss.title}}</p>
+          <li v-for="items in item.child" class="wid">
+            <a :href="`${items.url}`">
+              <i :class="`OAIndexIcon C2-${items.iconfont}`" :style="`color:${items.iconColor}`"></i>
+              <p>{{items.name}}</p>
             </a>
           </li>
         </ul>
       </div>
     </div>
-    <div class=" padding-container-lr convenf" v-for="item in list" v-if="item.channelId==297">
+    <div class=" padding-container-lr convenf" v-for="item in list" v-if="item.cmsId==336">
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="itemsss in oncheckser" class="wid">
-            <router-link v-bind="{to:'/convenience/grades/'+itemsss.channelId}">
-              <i :class="`OAIndexIcon ${itemsss.icon}`":style="`color:${itemsss.backgroundcolor}`"></i>
-              <p>{{itemsss.name}}</p>
+          <li v-for="items in item.child" class="wid">
+            <router-link v-bind="{to:'/convenience/grades/'+items.cmsId}">
+              <i :class="`OAIndexIcon  C2-${items.iconfont}`" :style="`color:${items.iconColor}`"></i>
+              <p>{{items.name}}</p>
             </router-link>
           </li>
         </ul>
       </div>
     </div>
-    <div class="padding-container-lr convenf" v-for="item in list" v-if="item.channelId==305">
+    <div class="padding-container-lr convenf" v-for="item in list" v-if="item.cmsId==338">
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="itemssss in onplaycmp" class="fle">
-            <router-link v-bind="{to:'/convenience/facilities/'+itemssss.channelId}">
-              <i :class="`OAIndexIcon ${itemssss.icon}`":style="`color:${itemssss.backgroundcolor}`"></i>
-              <p>{{itemssss.name}}</p>
+          <li v-for="items in item.child" class="fle">
+            <router-link v-bind="{to:'/convenience/facilities/'+items.cmsId}">
+              <i :class="`OAIndexIcon  C2-${items.iconfont}`":style="`color:${items.iconColor}`"></i>
+              <p>{{items.name}}</p>
             </router-link>
           </li>
           <li class="fle"></li>
         </ul>
       </div>
     </div>
-    <div class="padding-container-lr convenf" v-for="item in list" v-if="item.channelId==304">
+    <div class="padding-container-lr convenf" v-for="item in list" v-if="item.cmsId==337">
       <div>
         <h6>{{item.name}}</h6>
         <ul>
-          <li v-for="items in listss" class="coun">
-            <div class="left" :style="`background:${items.backgroundcolor}`">
+          <li v-for="itemss in listss" class="coun">
+            <div class="left" :style="`background:${itemss.backgroundcolor}`">
               <i class="OAIndexIcon  C2-dianhua"></i>
             </div>
             <div class="right">
-              <a :href="`tel:${items.subtitle}`">
-                <p>{{items.subtitle}}</p>
-                <span>{{items.title}}</span>
+              <a :href="`tel:${itemss.subtitle}`">
+                <p>{{itemss.subtitle}}</p>
+                <span>{{itemss.title}}</span>
               </a>
             </div>
           </li>
@@ -120,8 +116,8 @@
     },
     methods: {
       getinfonews() {
-        Util.cmsdao.fetchAllSubChnlNArti('296', 4).then(res => {
-          console.log(res)
+       Api.opacityApi.forpeo().then(res => {
+         console.log(res)
           this.alltrue=true
           Indicator.close();
           if (res == null) {
@@ -131,66 +127,25 @@
           let arr = [];
           for (let item of res) {
             arr.push({
-              sub: item.sub,
-              channelId: item.channelId,
+              child: item.child,
+              cmsId: item.cmsId,
               name: item.name,
-              icon: Util.icon.getValueBySeed(item.name)
+              icon: item.icon,
+              iconColor:item.iconColor
             });
           }
-          this.list = arr
-
-          //便民热线
-          this.lists = arr[2].sub
-          let arrn = []
-          for (let items of this.lists) {
-            arrn.push({
-              backgroundcolor: Util.icon.getBgcBySeed(items.title),
-              subtitle: items.subtitle,
-              title: items.title,
-            })
-          }
-          this.listss = arrn
-
-          //网上支付
-          let payfor =[]
-          for(let itemss of arr[3].sub){
-            payfor.push({
-              backgroundcolor: Util.icon.getBgcBySeed(itemss.title),
-              icon: Util.icon.getValueBySeed(itemss.title),
-              detailUrl:itemss.detailUrl,
-              title:itemss.title
-            })
-          }
-          this.onpayfor=payfor
-
-          //查询服务
-          let checkser =[]
-          for(let itemsss of arr[0].sub){
-            checkser.push({
-              backgroundcolor: Util.icon.getBgcBySeed(itemsss.channelId),
-              icon: Util.icon.getValueBySeed(itemsss.channelId),
-              detailUrl:itemsss.detailUrl,
-              title:itemsss.title,
-              channelId:itemsss.channelId,
-              name:itemsss.name
-            })
-          }
-          this.oncheckser=checkser
-
-       //便民设施
-          let playcmp =[]
-          for(let itemssss of arr[1].sub){
-            playcmp.push({
-              backgroundcolor: Util.icon.getBgcBySeed(itemssss.channelId),
-              icon: Util.icon.getValueBySeed(itemssss.channelId),
-              detailUrl:itemssss.detailUrl,
-              title:itemssss.title,
-              channelId:itemssss.channelId,
-              name:itemssss.name
-            })
-          }
-          this.onplaycmp=playcmp
-
+         this.list = arr
+         Util.cmsdao.fetchAllSubChnlNArti('304', 2).then(res => {
+           let arrn = [];
+           for (let itemss of res) {
+             arrn.push({
+               backgroundcolor: Util.icon.getBgcBySeed(itemss.title),
+                subtitle: itemss.subtitle,
+                  title: itemss.title,
+             });
+           }
+          this.listss=arrn
+         })
         })
       }
 
