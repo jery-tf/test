@@ -29,15 +29,13 @@ export default [
     meta:{
       title:'便民'
     },
-    beforeEnter:Util.login.checkLogin
   },{
     path: '/publicitem',
     name: 'publicitem',
     component: views.Home.Publicitem,
     meta:{
-      title:'新闻资讯'
+      title:'资讯'
     },
-    beforeEnter:Util.login.checkLogin
   },
 
 ]
