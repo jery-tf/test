@@ -78,5 +78,5 @@ export default [
     meta: {
       title: '办件进度'
     }
-  }
+  },
 ]

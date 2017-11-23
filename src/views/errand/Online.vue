@@ -6,10 +6,14 @@
   <div class="h100">
     <div class="soll">
       <ErrandHead :score="3" :workDay="approve.commitmentLimit" :workNo="approve.minSeq"
-                  :title="approve.approveName"></ErrandHead>
-
+                  :title="approve.approveName">
+      </ErrandHead>
       <div class="isSubmitList box-margin-top">
-
+        <CellBox>申请信息</CellBox>
+        <ApplyInfoLi :clickFn="toDoInfomation.bind(this)" :info="user_Info"></ApplyInfoLi>
+      </div>
+      <div class="isSubmitList box-margin-top">
+        <CellBox>申请材料</CellBox>
         <template v-for="(item,index) in materialList">
           <ErrandSubmitLi :title='item.materialTitle'
                           :isSubmint="isSubmint(item.materialId)"
@@ -17,7 +21,6 @@
           </ErrandSubmitLi>
         </template>
       </div>
-
       <div class="box-margin-top">
         <ErrandAddress :option="option" :addressSelect="testAddress"></ErrandAddress>
       </div>
@@ -26,23 +29,25 @@
       </div>
     </div>
 
-    <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" btnName="提交"
-                :errandId="$route.params.id"></ErrandFoot>
+    <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" storageBtnName="暂存" btnName="提交"
+                :errandId="$route.params.id" :storageBtnCallBack="storageSubmit" ></ErrandFoot>
   </div>
 </template>
 
 <script>
   import ErrandHead from 'components/errand/header.vue'
   import ErrandSubmitLi from 'components/errand/SubmitLi.vue'
+  import ApplyInfoLi from 'components/errand/applyInfoLi.vue'
   import ErrandAddress from 'components/errand/address.vue'
   import ErrandFoot from 'components/errand/footer.vue'
+  import CellBox from 'components/public/CellBox.vue'
   import MintUI, {MessageBox,Toast } from 'mint-ui'
   import Util from '../../util'
   import Api from '../../api'
 
   export default {
     name: 'Online',
-    components: {ErrandHead, ErrandSubmitLi, ErrandAddress, ErrandFoot},
+    components: {ErrandHead, ErrandSubmitLi, ErrandAddress, ErrandFoot,ApplyInfoLi,CellBox,Toast},
     data () {
       return {
         approve: {},
@@ -68,6 +73,12 @@
           address: '木有地址',
           isDefault: false,
           type: 2
+
+      },
+        formData:'',
+        user_Info:{},
+        applyInfoList:{
+          name:''
         }
       }
     },
@@ -75,11 +86,23 @@
       this.getErrandDetails(this.$route.params.id);
       this.getFileListById(this.$route.params.id);
       window.addEventListener("popstate", this.bindPopstate, false);
-
+      Api.errandApi.getFormInstance('2699').then(res=>{
+          this.formData =res;
+      })
+      //获取个人/企业信息
+      this.getUserInfo()
     },
     methods: {
+      getUserInfo(){
+        let userInfo = Util.user.getUserInfo();
+        this.user_Info['name'] = {str:'姓名',value:userInfo.name}
+        this.user_Info['cidcard'] = {str:'身份证号码',value:userInfo.certificateNum}
+      },
       testBtn(data){
         this.$router.push({path: `/errand/fileUpload/test/111`})
+      },
+      toDoInfomation(){
+        window.location.href=Api.errandApi.drawForm(2583,2598,this.$route.query.formData,encodeURIComponent('http://172.16.17.94:8080/#/errand/online/2598/'));
       },
       //跳转到上传文件页面
       toLoadFile(obj){
@@ -244,21 +267,22 @@
       },
       //提交数据
       onlineSubmit(){
+        this.projectState =9;
         if (this.materialList.length > this.currentFlieKey.length) {
           //材料未上传完整提示用户是否缓存
-          MessageBox.confirm('材料未上传完整是否暂存?').then(action => {
-            this.projectState =0;
-            this.toastStr = '暂存成功请到我的附件里查看'
-            this.submitData();
-          }).catch(e=>{
-              return false;
-          });
+          Toast('材料未上传');
+          return false;
         }else{
           this.submitData();
         }
 
       },
-
+      //提交暂存
+      storageSubmit(){
+        this.projectState =0;
+        this.toastStr = '暂存成功请到我的附件里查看'
+        this.submitData();
+      },
       //监听返回事件
       bindPopstate(e){
 

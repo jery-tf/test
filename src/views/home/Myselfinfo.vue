@@ -32,31 +32,31 @@
       <span class="checkall">查看全部<i class="OAIndexIcon C2-next"></i></span>
     </div>
     <ul class="unoffice">
-      <li>
+      <li @click="toMyDo('2')">
         <em class="C2-savetemp OAIndexIcon"></em>
         <p>暂存</p>
-        <div class="num">12</div>
+        <div class="num" v-html="stateCounts[0]" v-show="isShowCounts"></div>
       </li>
-      <li>
+      <li @click="toMyDo('3')">
         <em class="C2-daishouli1 OAIndexIcon"></em>
         <p>待受理</p>
-        <div class="num">6</div>
+        <div class="num" v-html="stateCounts[1]" v-show="isShowCounts"></div>
       </li>
-      <li>
+      <li @click="toMyDo('4')">
         <em class="C2-daishouli OAIndexIcon"></em>
         <p>待审核</p>
-        <div class="num">1</div>
+        <div class="num" v-html="stateCounts[2]" v-show="isShowCounts"></div>
       </li>
-      <li>
+      <li @click="toMyDo('5')">
         <em class="C2-yibanshixiang OAIndexIcon"></em>
         <p>已办结</p>
-        <div class="num">3</div>
+        <!--<div class="num">{{stateCounts[3]}}</div>-->
       </li>
-      <li>
+      <li @click="toMyDo()">
         <span class="linetoo"></span>
         <em class="C2-jiaofei OAIndexIcon"></em>
         <p>待您处理</p>
-        <div class="num">5</div>
+        <div class="num" v-html="stateCounts[4]" v-show="isShowCounts"></div>
       </li>
     </ul>
     <div class="padding-container-lr officework">
@@ -155,13 +155,16 @@
         pname: '',
         isshow:'false',
         text:false,
-        authLevel:''
+        authLevel:'',
+        stateCounts:[],
+        isShowCounts:false
       }
     },
     created() {
       this.getimgs()
       this.getabcmp()
-      Util.other.setSessionStorage('type','1')
+      Util.other.setSessionStorage('type','1');
+      this.getCountProjectStatus();
     },
     methods: {
       authentication() {
@@ -267,9 +270,6 @@
             }
         })
       },
-
-
-
 //这是测试存储实人认证的接口用的
 //      idgo(){
 //        this.cidcard =JSON.parse(localStorage.getItem('userDetails')).certificateNum;
@@ -291,8 +291,47 @@
 //        })
 //        this.$router.push('/mySelfInfo')
 //      }
+      /*
+      *
+      *
+      *  } else if (this.type === '2') {
+       this.projectStatus = '0'
+       } else if (this.type === '3') {
+       this.projectStatus = '9,3'
+       } else if (this.type === '4') {
+       this.projectStatus = '1,10'
+       } else if (this.type === '5') {
+       this.projectStatus = '4,5,6,7'
+       } else {
+       this.projectStatus = '2,11'
 
-
+       {0: 4, 1: 2, 2: 1, 3: 5, 5: 2, 6: 1, 7: 2, 9: 29}
+      * **/
+      getCountProjectStatus(){
+        let userInfo = Util.user.getUserInfo();
+       let _isNaN = num =>{
+         return isNaN(parseInt(num))? 0 : parseInt(num)
+       }
+        Api.errandApi.getCountProjectStatus(userInfo.cidcard).then(res=>{
+          console.log('dataCount',res);
+          this.isShowCounts = true;
+          let arrcounts = [];
+          arrcounts[0] = _isNaN(res[0]); //暂存
+          arrcounts[1] = _isNaN(res[9])+_isNaN(res[3]); //待受理
+          arrcounts[2] = _isNaN(res[1])+_isNaN(res[10]); //待审核
+          arrcounts[3] = _isNaN(res[4])+_isNaN(res[5])+_isNaN(res[6])+_isNaN(res[7]);//已办结
+          arrcounts[4] = _isNaN(res[1])+_isNaN(res[3]); //待您处理
+          this.stateCounts = arrcounts;
+        })
+      },
+      toMyDo(type){
+        if (type){
+          Util.other.setSessionStorage('type',type)
+          this.$router.push('/me/myDo');
+        }else{
+          this.$router.push({path:'/me/waitDo'});
+        }
+      }
     },
     computed: {}
   }

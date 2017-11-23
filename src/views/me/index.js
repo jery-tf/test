@@ -5,5 +5,6 @@ export default {
   UserLogin:resolve => require(['./login/user.vue'], resolve),
   MyDo:resolve => require(['./myDo/MyDo.vue'], resolve),
   MyPiece:resolve => require(['./myDo/MyPiece.vue'], resolve),
+  WaitDo:resolve => require(['./waitDo.vue'], resolve),
   WxAuthenticationResult:resolve => require(['./wxAuthenticationResult.vue'], resolve),
 }

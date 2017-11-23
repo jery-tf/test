@@ -1,10 +1,17 @@
 /**
-* Created by wyg on 2017/9/24.
+* Created by tf on 2017/11/22.
 */
 
 <template>
-  <div class="padding-container border-bottom" @click="btnClick">
-    <p class="twoLineFont font-middle">{{title}}</p>
+  <div class="padding-container border-bottom" @click="clickFn">
+    <div class="info-wrapper">
+      <div class="twoLineFont font-middle">
+        <span>{{info.name.str}}</span>{{info.name.value}}
+      </div>
+      <div class="twoLineFont font-middle bottom">
+        <span>{{info.cidcard.str}}</span>{{info.cidcard.value}}
+      </div>
+    </div>
     <div class="right">
       <span :class="`font-small ${fontContent._class}`">{{fontContent.content}}</span>
       <i class="OAIndexIcon C2-fanhui4"></i>
@@ -15,7 +22,7 @@
 <script>
   export default {
     name: 'SubmitLi',
-    props: ['title', 'isSubmint', 'btnClick'],
+    props: ['info', 'isSubmint', 'clickFn'],
     components: {},
     data () {
       return {}
@@ -23,10 +30,9 @@
     created(){
 
     },
-    methods: {},
     computed: {
       fontContent(){
-        return this.isSubmint ? {_class:'yes',content:'已提交'} : {_class:'no',content:'未提交'};
+        return this.isSubmint ? {_class:'yes',content:'已完成'} : {_class:'no',content:'待完善'};
       }
     }
 
@@ -36,12 +42,22 @@
 <style scoped lang="less" rel="stylesheet/less">
   .padding-container {
     background: #fff;
-    height: 1rem;
+    min-height: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     .twoLineFont{
+      color:#333;
       flex: 1;
+      font-size: 0.21rem;
+      &.bottom{
+        padding-top:.26rem;
+      }
+      &>span{
+        display: inline-block;
+        min-width:1.3rem;
+        color:#999;
+      }
     }
     .right{
       padding-left: .2rem;

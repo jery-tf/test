@@ -20,6 +20,7 @@
         <span>咨询</span>
       </div>
     </div>
+    <p class="onlineWork" @click="storgeBtnFun" v-show="storageBtnName">{{storageBtnName || ''}}</p>
     <p class="onlineWork" @click="btnFun">{{btnName || ''}}</p>
   </div>
 </template>
@@ -33,7 +34,7 @@
   import {Toast} from 'mint-ui';
   export default {
     name: 'footer',
-    props: ['tel', 'btnClick', 'btnName', 'errandId', 'isCollection', 'isShowCollection', 'updataIsCollection'],
+    props: ['tel', 'btnClick', 'btnName', 'errandId', 'isCollection', 'isShowCollection', 'updataIsCollection','storageBtnCallBack','storageBtnName'],
     //                                                  是否已经收藏        是否显示收藏        fun 修改收藏状态
     components: {},
     data () {
@@ -44,6 +45,9 @@
     methods: {
       btnFun(){
         this.btnClick();
+      },
+      storgeBtnFun(){
+        this.storageBtnCallBack();
       },
       callPhone(){
         location.href = `tel:${this.tel}`;

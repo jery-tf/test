@@ -1,7 +1,8 @@
 /**
  * Created by wyg on 2017/10/2.
  */
-var ApiHost = 'http://172.16.17.125:8080'
+let ApiHost = 'http://172.16.17.125:8080'
+let Api = 'http://172.16.17.125:8081'
 import {axiosGet,axiosGetToken,axiosPost,axiosPostToken,axiosDeleteToken,axiosDelete} from './baseApi'
 //根据事项id 获取事项接口
 export const getErrandList = (params,config)=>axiosGet(`/approveinterface/v1/approveinfo${reqParms(params)}`,'',config);
@@ -60,7 +61,7 @@ export const getApproveinterface = (approveId,config) => axiosGet(`/approveinter
 export const getApproveinterfaceExtend = (approveId,config) => axiosGet(`/approveinterface/v1/approveAdvancedByApplyId/${approveId}`,config);
 
 /*根据ID查询申请人*/
-export const getApplyInfo = (applicantId,config) => axiosGet(`/accept/v1/applicant/${applicantId}`,config);
+export const getApplyInfo = (applicantId,config) => axiosGet(`${ApiHost}/accept/v1/applicant/${applicantId}`,config);
 
 /*根据ID查询申请单位*/
 export const getApplyBankInfo = (applycorpId,config) => axiosGet(`/accept/v1/applycorp/${applycorpId}`,config);
@@ -72,13 +73,13 @@ export const findByInstanceId = (instanceId,config) => axiosGet(`${ApiHost}/acce
 export const findListByBusinessId = (materialInsId,config) => axiosGet(`${ApiHost}/accept/v1/attach/findListByBusinessId/${materialInsId}`,config);
 
 //根据附件ID删除附件
-export const deleteListByBusinessId = (attachId,config) => axiosDelete(`/accept/v1/attach/${attachId}`,config)
+export const deleteListByBusinessId = (attachId,config) => axiosDelete(`${ApiHost}/accept/v1/attach/${attachId}`,config)
 
 //根据材料实例ID修改材料提交状态
-export const changeSubmitState = (materialInsId,params,config) => axiosPost(`/accept/v1/instancematerial/${materialInsId}`,params,config)
+export const changeSubmitState = (materialInsId,params,config) => axiosPost(`${ApiHost}/accept/v1/instancematerial/${materialInsId}`,params,config)
 
 //插入附件实例记录
-export const addAttach= (params,config) => axiosPost(`/accept/v1/attach`,params,config)
+export const addAttach= (params,config) => axiosPost(`${ApiHost}/accept/v1/attach`,params,config)
 
 //更新办件状态
 export const updateInstanceStateById= (instanceId,params,config) => axiosPost(`${ApiHost}/accept/v1/instance/${instanceId}`,params,config)
@@ -86,6 +87,16 @@ export const updateInstanceStateById= (instanceId,params,config) => axiosPost(`$
 //根据办件实例id获取办件的详细过程
 export const getDetailProcessinfo = (instanceId,config) => axiosGet(`/accept/v1/detailProcess/getByInstanceId/${instanceId}
 `,config);
+
+//根据申请者信息获取各项目状态下的办件数量
+export const getCountProjectStatus
+  = (certificateNum,config) => axiosGet(`/accept/v1/instance/countProjectStatusByApply?certificateNum=${certificateNum}`,config)
+
+//自定义表单字段实例
+export const getFormInstance = (instanceId,config) => axiosGet(`${Api}/accept/v1/dform/forminstance/findListByInstanceId/${instanceId}`,config)
+
+//跳转后台页面绘制表单
+export const drawForm = (approveId,instanceId,formData=[],redirect_uri) => `${Api}/jsp/accept/customform.jsp?approveId=${approveId}&instanceId=${instanceId}&type=wx&formData=${formData}&redirect_uri=${redirect_uri}`
 
 
 //参数处理函数

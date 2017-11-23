@@ -22,10 +22,10 @@
     </div>
     <p class="remind fff padding-container">
       <i class="OAIndexIcon C2-guanyu1"></i>
-      <span>XXXX材料缺失,请于2017年12月12日之前进行重新提交(接口没有字段)</span>
+      <!--<span>XXXX材料缺失,请于2017年12月12日之前进行重新提交(接口没有字段)</span>-->
     </p>
-    <div class="box-margin-top padding-container fff">
-      <p class="twoLineFont">{{dataInfo.instanceName}}</p>
+    <div class="box-margin-top fff">
+      <CellBox :size=0.28>申请信息</CellBox>
     </div>
     <div class="box-margin-top padding-container fff Eno">
       <p>
@@ -39,26 +39,26 @@
       </p>
     </div>
     <div class="box-margin-top fff">
-      <p class="padding-container border-bottom">办件信息</p>
+      <CellBox :size=0.24>办件信息</CellBox>
       <div class="padding-container">
         <div>
           <Subtitle title="申报事项" :content="doInfo.approveName"></Subtitle>
         </div>
-        <div class="box-margin-top">
+        <div class="margin-top--1">
           <Subtitle title="办件类型" :content="_transType"></Subtitle>
         </div>
-        <div class="box-margin-top">
+        <div class="margin-top--1">
           <Subtitle title="办理时限" :content="_limitTime"></Subtitle>
         </div>
       </div>
     </div>
     <div class="box-margin-top fff">
-      <p class="padding-container border-bottom">申请人(单位)信息</p>
+      <CellBox :size=0.24>申请人(单位)信息</CellBox>
       <div class="padding-container">
         <div>
           <Subtitle title="申报人" :content="applyInfoData.name"></Subtitle>
         </div>
-        <div class="box-margin-top">
+        <div class="">
           <Subtitle title="联系电话" :content="applyInfoData.phone"></Subtitle>
         </div>
       </div>
@@ -74,9 +74,10 @@
   import Subtitle from 'components/errand/Subtitle.vue'
   import CompleteAddress from 'components/errand/completeData/address.vue'
   import { format} from '@/util/ctime.js'
+  import CellBox from '@/components/public/CellBox.vue'
   export default {
     name: 'completeData',
-    components: {Subtitle, CompleteAddress},
+    components: {Subtitle, CompleteAddress ,CellBox},
     props:['dataInfo','doInfo','applyInfo'], // dataInfo事项信息  doInfo办件信息  applyInfo申请人信息
     data () {
       return {
@@ -141,7 +142,10 @@
 
 <style scoped lang="less" rel="stylesheet/less">
   .wrapper{
-    background: #fff;position: absolute;height:100%;width:100%;
+    position: absolute;height:100%;width:100%;
+    .margin-top--1{
+      margin-top:-0.01rem;
+    }
     .topImg {
       display: flex;
       align-items: center;
@@ -197,9 +201,7 @@
         border-radius: .1rem;
       }
     }
-    .box-margin-top{
-      margin-top: -0.01rem;
-    }
+
     .submintBtn{
       display: flex;
       justify-content: flex-end;

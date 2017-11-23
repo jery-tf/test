@@ -28,9 +28,10 @@
   import axios from 'axios'
   import Api from '../../api'
   import Util from '../../util'
+  import {Indicator } from 'mint-ui'
   export default {
     name: 'fileUpload',
-    components: {CellSwipe},
+    components: {CellSwipe,Indicator},
     data () {
       return {
         isSubmit:false,
@@ -62,20 +63,19 @@
       },
       //文件上传
       fileUploadFun(e){
+        // 返回文件路径
+        Indicator.open();
         let files = e.target.files;
         let formData = new FormData();
         formData.append('file', files[0]);
-        console.log(files[0]);
         let fileNameArr = files[0].name.split('.');
         let li = {
-            type:'.'+fileNameArr[1],
-            title:files[0].name,
-            label:`${(files[0].size/1024).toFixed(1)}kb `,
-            url:'',
-            id:`${new Date().getTime()}${Math.floor(Math.random()*10)}`
+          type:'.'+fileNameArr[1],
+          title:files[0].name,
+          label:`${(files[0].size/1024).toFixed(1)}kb `,
+          url:'',
+          id:`${new Date().getTime()}${Math.floor(Math.random()*10)}`
         };
-
-        // 返回文件路径
         Api.errandApi.uploadFile(formData,config).then(res=>{
           if(res){
             li.url = res.url;
@@ -184,7 +184,8 @@
 
     },
     watch:{
-      'selectFiles':()=>{
+      'fileList':(val)=>{
+        Indicator.close();
       }
     },
     computed:{
@@ -197,6 +198,11 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
+  .mint-indicator{
+    .mint-indicator-wrapper{
+      padding: 0 0.3rem !important;
+    }
+  }
   .title{
     font-size: .28rem;
     height: 1.2rem;

@@ -7,7 +7,10 @@
     <div class="soll">
       <ErrandHead :score="3" :workDay="approve.commitmentLimit" :workNo="approve.minSeq"
                   :title="approve.approveName"></ErrandHead>
-
+      <div class="isSubmitList box-margin-top">
+        <CellBox>申请信息</CellBox>
+        <ApplyInfoLi :clickFn="toDoInfomation.bind(this)" :info="user_Info"></ApplyInfoLi>
+      </div>
       <div class="isSubmitList box-margin-top">
         <template v-for="(item,index) in materialList">
           <ErrandSubmitLi :title='item.materialName'
@@ -25,8 +28,8 @@
       </div>
     </div>
 
-    <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" btnName="提交"
-                :errandId="$route.params.id"></ErrandFoot>
+    <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" :storageBtnName="stateType?'':'暂存'" btnName="提交"
+                :errandId="$route.params.id" :storageBtnCallBack="storageSubmit"></ErrandFoot>
   </div>
 </template>
 
@@ -38,10 +41,12 @@
   import MintUI, {MessageBox,Toast} from 'mint-ui'
   import Util from '../../util'
   import Api from '../../api'
+  import CellBox from 'components/public/CellBox.vue'
+  import ApplyInfoLi from 'components/errand/applyInfoLi.vue'
 
   export default {
     name: 'Online',
-    components: {ErrandHead, ErrandSubmitLi, ErrandAddress, ErrandFoot,Toast},
+    components: {ErrandHead, ErrandSubmitLi, ErrandAddress, ErrandFoot,Toast,CellBox,ApplyInfoLi},
     data () {
       return {
         approve: {},
@@ -52,6 +57,8 @@
         approveId:'',
         submitState:'',
         toastStr:'',
+        user_Info:{},
+        stateType:'',
         option: {
           userName: '张三',
           phone: '123123123',
@@ -71,7 +78,7 @@
       }
     },
     created(){
-
+      this.stateType = sessionStorage.getItem('stateType');
       this.approveId = this.$route.query.approveId
       this.getErrandDetails(this.$route.query.approveId);
       /*清除附件信息*/
@@ -108,11 +115,17 @@
           })
         })
       })
+      this.getUserInfo();
     },
 
     methods: {
       testBtn(data){
         this.$router.push({path: `/errand/fileUpload/test/111`})
+      },
+      getUserInfo(){
+        let userInfo = Util.user.getUserInfo();
+        this.user_Info['name'] = {'str':'姓名',value:userInfo.name}
+        this.user_Info['cidcard'] = {'str':'身份证号码',value:userInfo.certificateNum}
       },
       //跳转到上传文件页面
       toLoadFile(obj){
@@ -126,6 +139,7 @@
       testAddress(){
         console.log(22)
       },
+      toDoInfomation(){},
       //数据初始化
       getErrandDetails(id){
         //获取材料列表参数
@@ -160,23 +174,15 @@
       updateInstanceStateById(state){
         let instanceId = this.$route.query.instanceId;
         Api.errandApi.updateInstanceStateById(instanceId,{instanceId:instanceId,projectState:state}).then(res=>{
-          Toast(this.toastStr);
           this.$router.push({path:`/me/myDo`})
         })
       },
       //提交数据
       onlineSubmit(){
-        //console.log(this.currentFliesCount)
-        let stateType = sessionStorage.getItem('stateType');
-        if (!stateType){
+        /*if (!this.stateType){
           if (this.currentFliesCount < this.materialList.length){
-            //材料未上传完整提示用户是否缓存
-            MessageBox.confirm('材料未上传完整是否暂存?').then(action => {
-              this.toastStr = '暂存成功请到我的附件里查看'
-              this.updateInstanceStateById(0);
-            }).catch(e=>{
-              return false;
-            });
+            this.toastStr = '材料未上传完整';
+            return false;
           }else{
             this.toastStr = '提交成功'
             this.updateInstanceStateById(9);
@@ -185,12 +191,25 @@
           this.toastStr = '材料上传不完整'
           Toast(this.toastStr);
           return false;
+        }*/
+
+        if (this.currentFliesCount < this.materialList.length){
+          Toast('材料未上传完整')
+          return false;
+        }else{
+          Toast('提交成功')
+          this.updateInstanceStateById(9);
         }
       },
 
       //监听返回事件
       bindPopstate(e){
         console.log('返回 暂存');
+      },
+      //提交暂存
+      storageSubmit(){
+        Toast('暂存成功请到我的附件里查看')
+        this.updateInstanceStateById(0)
       },
     },
     beforeRouteLeave(to, from, next){

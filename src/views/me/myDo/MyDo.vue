@@ -44,19 +44,27 @@
     components: {Piece,AllPiece},
     data () {
       return {
-        selected: Util.other.getSessionStorage('type') ? Util.other.getSessionStorage('type') :'1',
+        selected: 1
       }
     },
     created(){
-      Util.other.setSessionStorage('type','1')
+      this.initType();
     },
     methods: {
-
+      initType(){
+        this.selected = Util.other.getSessionStorage('type') ? Util.other.getSessionStorage('type') :'1'
+      }
     },
     watch:{
       selected(val){
         Util.other.setSessionStorage('type',val)
       }
+    },
+    beforeRouteLeave(to,from,next){
+      if (to.name !== 'myPiece' && to.name !=='storageOnline'){
+        sessionStorage.removeItem('type')
+      }
+      next();
     }
 
   }
