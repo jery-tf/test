@@ -20,7 +20,7 @@
         <span>咨询</span>
       </div>
     </div>
-    <p class="onlineWork" @click="storgeBtnFun" v-show="storageBtnName">{{storageBtnName || ''}}</p>
+    <p class="onlineWork storageBtnName" @click="storgeBtnFun" v-show="storageBtnName">{{storageBtnName || ''}}</p>
     <p class="onlineWork" @click="btnFun">{{btnName || ''}}</p>
   </div>
 </template>
@@ -164,6 +164,9 @@
       height: 100%;
       line-height: 1rem;
       text-align: center;
+    }
+    .storageBtnName{
+      background: #c7c7cd;
     }
 
   }

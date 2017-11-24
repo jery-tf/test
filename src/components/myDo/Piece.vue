@@ -4,7 +4,6 @@
 
 <template>
   <div class="content">
-    {{option.instanceId}}
     <div @click="doDetails">
       <div class="font-small padding-container border-bottom">
         <p class="number oneLineFont">受理编号 : {{option.instanceCode || ''}}</p>

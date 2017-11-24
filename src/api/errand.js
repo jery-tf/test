@@ -1,7 +1,7 @@
 /**
  * Created by wyg on 2017/10/2.
  */
-let ApiHost = 'http://172.16.17.125:8080'
+let ApiHost = ''
 let Api = 'http://172.16.17.125:8081'
 import {axiosGet,axiosGetToken,axiosPost,axiosPostToken,axiosDeleteToken,axiosDelete} from './baseApi'
 //根据事项id 获取事项接口

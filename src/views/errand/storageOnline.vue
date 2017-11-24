@@ -126,25 +126,33 @@
     },
     methods: {
       _isComplete(){
-        if (!this.formData.length) return false;
         let one = true;
-        let tow = true;
         let valueJson = JSON.parse(this.formData[0].valueJson);
-        let formData = this.$route.query.formData? JSON.parse(this.$route.query.formData) : '';
         for(let item in valueJson){
           if (!valueJson[item]){
-            one = false;
+            this.isComplete = false;
+            break;
           }
         }
-        if (formData) {
+        let formData = this.$route.query.formData? JSON.parse(this.$route.query.formData) : '';
+        console.log('valueJson',valueJson)
+        console.log('formData',formData)
+        if (!formData) {
+            return false
+        }else{
           for(let item in formData){
             if (!formData[item]){
-              tow = false;
+              one = false;
+              break;
             }
           }
-        }
-        if (!tow) {
-          this.isComplete = false;
+          console.log('one',one)
+
+          if (!one) {
+            this.isComplete = false;
+          }else{
+            this.isComplete = true;
+          }
         }
       },
       testBtn(data){
