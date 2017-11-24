@@ -10,7 +10,7 @@
       </ErrandHead>
       <div class="isSubmitList box-margin-top">
         <CellBox>申请信息</CellBox>
-        <ApplyInfoLi :clickFn="toDoInfomation.bind(this)" :info="user_Info"></ApplyInfoLi>
+        <ApplyInfoLi :clickFn="toDoInfomation.bind(this)" :info="user_Info" :isComplete="isComplete()"></ApplyInfoLi>
       </div>
       <div class="isSubmitList box-margin-top">
         <CellBox>申请材料</CellBox>
@@ -26,9 +26,10 @@
       </div>
       <div class="box-margin-top">
         <ErrandAddress :option="option2" :addressSelect="testAddress"></ErrandAddress>
+        <a href="https://wwww.baidu.com" target="showHere">点击</a>
       </div>
-    </div>
 
+    </div>
     <ErrandFoot tel="0731-231224223" :btnClick="onlineSubmit" storageBtnName="暂存" btnName="提交"
                 :errandId="$route.params.id" :storageBtnCallBack="storageSubmit" ></ErrandFoot>
   </div>
@@ -77,6 +78,7 @@
       },
         formData:'',
         user_Info:{},
+        iframeState:true,
         applyInfoList:{
           name:''
         }
@@ -86,11 +88,9 @@
       this.getErrandDetails(this.$route.params.id);
       this.getFileListById(this.$route.params.id);
       window.addEventListener("popstate", this.bindPopstate, false);
-      Api.errandApi.getFormInstance('2699').then(res=>{
-          this.formData =res;
-      })
       //获取个人/企业信息
-      this.getUserInfo()
+      this.getUserInfo();
+      this.formData = this.$route.query.formData ? JSON.parse(this.$route.query.formData) : '';
     },
     methods: {
       getUserInfo(){
@@ -99,10 +99,12 @@
         this.user_Info['cidcard'] = {str:'身份证号码',value:userInfo.certificateNum}
       },
       testBtn(data){
-        this.$router.push({path: `/errand/fileUpload/test/111`})
+        //this.$router.push({path: `/errand/fileUpload/test/111`})
       },
       toDoInfomation(){
-        window.location.href=Api.errandApi.drawForm(2583,2598,this.$route.query.formData,encodeURIComponent('http://172.16.17.94:8080/#/errand/online/2598/'));
+       /* window.location.href=Api.errandApi.drawForm(this.$route.params.id,'',this.$route.query.formData,);*/
+       let id = this.$route.params.id;
+        window.location.href= Api.errandApi.drawForm(id,'',this.$route.query.formData,encodeURIComponent(`http://172.16.17.94:8080/#/errand/online/${this.$route.params.id}/`))
       },
       //跳转到上传文件页面
       toLoadFile(obj){
@@ -168,11 +170,24 @@
 //        console.log('已提交的材料列表',JSON.parse(JSON.stringify(data)));
         this.currentFileList = data;
       },
-      //判断是否已经提交
+      //判断材料是否已经提交
       isSubmint(materialId){
         //debugger
         if (!materialId) return;
         return this.currentFlieKey.join("").indexOf(materialId) > 0 && this.currentFlieKey.length>0
+      },
+      //判断申请信息是否填写完整
+      isComplete(){
+        if (!this.formData) return false;
+        var result = true;
+        for(let item in this.formData) {
+            if (!this.formData[item]){
+               result = false;
+                break;
+            }
+        }
+        console.log(result)
+        return result;
       },
       submitData(){
         let allUserInfo = Util.user.getUserAllInfo();
@@ -248,10 +263,27 @@
             console.log('params',JSON.stringify(params));
 
             Api.errandApi.addErrandExample(params).then(_res => {
+                console.log('_res',_res)
               if(_res){
                 let instance = Toast(this.toastStr);
                 setTimeout(() => {
                   instance.close();
+                  console.log(JSON.stringify({
+                    "formInsId": "",
+                    "formId": _res.approveId,
+                    "instanceId": _res.instanceId,
+                    "valueJson": this.$route.query.formData
+                  }))
+                  Api.errandApi.addInstanceForms(
+                    {
+                      "formInsId": "",
+                      "formId": _res.approveId,
+                      "instanceId": _res.instanceId,
+                      "valueJson": this.$route.query.formData
+                    }
+                  ).then(res=>{
+                     console.log(res)
+                  })
                   this.$router.push({path:'/errandList/zrrfl'})
                 }, 1000);
               }
@@ -268,6 +300,10 @@
       //提交数据
       onlineSubmit(){
         this.projectState =9;
+        if (!this.isComplete()){
+          Toast('申请信息填写不完整');
+          return false;
+        }
         if (this.materialList.length > this.currentFlieKey.length) {
           //材料未上传完整提示用户是否缓存
           Toast('材料未上传');
@@ -275,22 +311,13 @@
         }else{
           this.submitData();
         }
-
       },
       //提交暂存
       storageSubmit(){
         this.projectState =0;
         this.toastStr = '暂存成功请到我的附件里查看'
         this.submitData();
-      },
-      //监听返回事件
-      bindPopstate(e){
-
-      },
-    },
-    beforeRouteLeave(to, from, next){
-      window.removeEventListener("popstate", this.bindPopstate, false);
-      next();
+      }
     },
 
   }
@@ -303,5 +330,12 @@
       padding-bottom: 1rem;
       overflow-y: auto;
     }
+  }
+  .ifame-wrapper{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    top:0;
+    left:0
   }
 </style>

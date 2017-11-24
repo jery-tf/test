@@ -9,7 +9,7 @@
                   :title="approve.approveName"></ErrandHead>
       <div class="isSubmitList box-margin-top">
         <CellBox>申请信息</CellBox>
-        <ApplyInfoLi :clickFn="toDoInfomation.bind(this)" :info="user_Info"></ApplyInfoLi>
+        <ApplyInfoLi :clickFn="toDoInfomation.bind(this)" :info="user_Info" :isComplete="isComplete"></ApplyInfoLi>
       </div>
       <div class="isSubmitList box-margin-top">
         <template v-for="(item,index) in materialList">
@@ -59,6 +59,8 @@
         toastStr:'',
         user_Info:{},
         stateType:'',
+        formData:{},
+        isComplete:true,
         option: {
           userName: '张三',
           phone: '123123123',
@@ -116,9 +118,35 @@
         })
       })
       this.getUserInfo();
+       Api.errandApi.getFormInstance(this.$route.query.instanceId).then(res=>{
+        this.formData =res;
+         //判断资料是否提交完整
+         this._isComplete();
+       })
     },
-
     methods: {
+      _isComplete(){
+        if (!this.formData.length) return false;
+        let one = true;
+        let tow = true;
+        let valueJson = JSON.parse(this.formData[0].valueJson);
+        let formData = this.$route.query.formData? JSON.parse(this.$route.query.formData) : '';
+        for(let item in valueJson){
+          if (!valueJson[item]){
+            one = false;
+          }
+        }
+        if (formData) {
+          for(let item in formData){
+            if (!formData[item]){
+              tow = false;
+            }
+          }
+        }
+        if (!tow) {
+          this.isComplete = false;
+        }
+      },
       testBtn(data){
         this.$router.push({path: `/errand/fileUpload/test/111`})
       },
@@ -139,7 +167,11 @@
       testAddress(){
         console.log(22)
       },
-      toDoInfomation(){},
+      toDoInfomation(){
+        let approveId = this.$route.query.approveId;
+        let instanceId = this.$route.query.instanceId;
+        window.location.href= Api.errandApi.drawForm(approveId,instanceId,this.$route.query.formData,encodeURIComponent(`http://172.16.17.94:8080/#/errand/storageOnline?`))
+      },
       //数据初始化
       getErrandDetails(id){
         //获取材料列表参数
@@ -177,29 +209,29 @@
           this.$router.push({path:`/me/myDo`})
         })
       },
+      /*上传申请信息*/
+      updateErrandInfo(){
+        let instanceId = this.$route.query.instanceId;
+        this.formData[0].valueJson = this.$route.query.formData;
+        Api.errandApi.updateFormData(instanceId,this.formData[0]).then(res=>{
+            console.log('res',res)
+        })
+      },
       //提交数据
       onlineSubmit(){
-        /*if (!this.stateType){
-          if (this.currentFliesCount < this.materialList.length){
-            this.toastStr = '材料未上传完整';
-            return false;
-          }else{
-            this.toastStr = '提交成功'
-            this.updateInstanceStateById(9);
-          }
-        }else{
-          this.toastStr = '材料上传不完整'
-          Toast(this.toastStr);
+        if (!this.isComplete){
+          Toast('申请信息填写不完整');
           return false;
-        }*/
-
+        }
         if (this.currentFliesCount < this.materialList.length){
           Toast('材料未上传完整')
           return false;
         }else{
           Toast('提交成功')
           this.updateInstanceStateById(9);
+          this.updateErrandInfo();
         }
+
       },
 
       //监听返回事件
@@ -210,6 +242,7 @@
       storageSubmit(){
         Toast('暂存成功请到我的附件里查看')
         this.updateInstanceStateById(0)
+        this.updateErrandInfo();
       },
     },
     beforeRouteLeave(to, from, next){

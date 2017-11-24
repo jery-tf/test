@@ -82,20 +82,25 @@
         let userInfo = Util.user.getUserInfo();
         let params = {certificate_no: userInfo.certificateNum};
         Api.collectionApi.getMatterCollection(params).then(res => {
+          console.log(res)
           if (res.code='200') {
             let list = [];
-            for(let item of res.list){
+            if (res.list.length) {
+              for(let item of res.list){
                 list.push(item.business_id);
+              }
             }
             let cond = {
               filters: {
                 groupOp: 'OR',
                 rules: [
-                  {field:'approveId',op:"in",data:list},
+                  {field:'approveId',op:"in",data:list.length? list : ''},
                 ]
               }
             };
             let params = {page: 1, rows: 100, cond: encodeURI(JSON.stringify(cond))};
+
+            console.log('params',params)
             //根据ID集合 获取列表
             Api.errandApi.getErrandList(params).then(res=>{
               this.collectList = res.contents;

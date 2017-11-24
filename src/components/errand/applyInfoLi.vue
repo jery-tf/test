@@ -22,7 +22,7 @@
 <script>
   export default {
     name: 'SubmitLi',
-    props: ['info', 'isSubmint', 'clickFn'],
+    props: ['info', 'isComplete', 'clickFn'],
     components: {},
     data () {
       return {}
@@ -32,7 +32,7 @@
     },
     computed: {
       fontContent(){
-        return this.isSubmint ? {_class:'yes',content:'已完成'} : {_class:'no',content:'待完善'};
+        return this.isComplete ? {_class:'yes',content:'已完成'} : {_class:'no',content:'待完善'};
       }
     }
 

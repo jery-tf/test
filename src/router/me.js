@@ -23,7 +23,7 @@ export default [
   },
   {
     path:'/me/waitDo',
-    name:'myDo',
+    name:'waitDo',
     component:views.Me.WaitDo,
     meta:{
       title:'待处理'

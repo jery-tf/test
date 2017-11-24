@@ -11,4 +11,5 @@ export default {
   AddressManagement:resolve => require(['./AddressManagement.vue'], resolve),//地址管理
   CompleteData:resolve => require(['./completeData.vue'], resolve),
   ErrandProgress:resolve => require(['./ErrandProgress.vue'], resolve),//办件进度
+  FormDataPage:resolve => require(['./FormDataPage.vue'], resolve),//申请信息表单
 }

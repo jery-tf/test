@@ -97,7 +97,10 @@ export const getFormInstance = (instanceId,config) => axiosGet(`${Api}/accept/v1
 
 //跳转后台页面绘制表单
 export const drawForm = (approveId,instanceId,formData=[],redirect_uri) => `${Api}/jsp/accept/customform.jsp?approveId=${approveId}&instanceId=${instanceId}&type=wx&formData=${formData}&redirect_uri=${redirect_uri}`
-
+//新增自定义表单字段实例
+export const addInstanceForms = (params,config) => axiosPost(`${Api}/accept/v1/dform/instanceforms `,params,config)
+//更新自定义表单字段实例
+export const updateFormData = (instanceId,params,config) =>axiosPost(`${Api}/accept/v1/dform/instanceforms/${instanceId}`,params,config)
 
 //参数处理函数
 const reqParms = (params)=>{

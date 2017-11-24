@@ -79,4 +79,12 @@ export default [
       title: '办件进度'
     }
   },
+  {
+    path: '/errand/formDataPage/:id',
+    name: 'formData',
+    component: views.Errand.FormDataPage,
+    meta: {
+      title: '申请信息'
+    }
+  }
 ]
