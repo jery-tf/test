@@ -32,6 +32,7 @@ export const getToken = () =>{
 export const clearUserInfo = () =>{
   localStorage.removeItem("token")
   localStorage.removeItem("userInfo")
+  localStorage.removeItem("inforid")
 };
 
 //登录拦截器

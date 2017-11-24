@@ -17,10 +17,15 @@
         </div>
         <i class="OAIndexIcon C2-gengduo11 red-color"></i>
       </div>
-      <div  class="paycost padding-container shoufei h88" v-show="approve.makeTransaction != 'N' ">
+      <div  class="paycost padding-container shoufei h88" v-if="approve.makeTransaction != 'N' ">
         <span> <i class="OAIndexIcon C2-yuyue"></i> 预约办理</span>
         <span> <i class="OAIndexIcon C2-rongzixindai"></i> 网上支付</span>
         <span> <i class="OAIndexIcon C2-wuliu"></i> 物流快递</span>
+      </div>
+      <div  class="nopaycost padding-container shoufei h88" v-else>
+        <span><i class="OAIndexIcon C2-yuyue"></i> 不支持预约办理</span>
+        <span><i class="OAIndexIcon C2-rongzixindai"></i>不支持网上支付</span>
+        <span><i class="OAIndexIcon C2-wuliu"></i> 不支持物流快递</span>
       </div>
       <div class="box-margin-top fff padding-container dingwei h88">
         <p>
@@ -31,9 +36,7 @@
       <div class="box-margin-top">
         <div class="box-margin-top fff dingwei h88" id="searchBar">
           <ul :class="searchBarFixed == true ? 'isFixed' :''" class="flexm">
-            <li @click="bgc1" class="infor">基本信息</li>
-            <li @click="bgc2" class="infor">申请材料</li>
-            <li @click="bgc3" class="infor">办理流程</li>
+            <li v-for="(item,index) in list" :key='index' @click="getprocess(item.id)" :class="item.id==selectedId?'li active':'li'">{{item.name}}</li>
           </ul>
         </div>
             <div class="padding-container fff" id="one">
@@ -85,6 +88,10 @@
         materialList: [],//材料列表
         isCollection:false,
         searchBarFixed:'',
+        list: [
+          {id: '1', name: '基本信息'}, {id: '2', name: '申请材料'}, {id: '3', name: '办理流程'}
+        ],
+        selectedId: '1',
       }
     },
     created(){
@@ -102,17 +109,33 @@
       this.handleScroll()
     },
     methods: {
-      bgc1(){
-        let aaaa=document.querySelector('#one').offsetTop;
+//      bgc1(){
+//        let aaaa=document.querySelector('#one').offsetTop;
+//        document.body.scrollTop =aaaa;
+//      },
+//      bgc2(){
+//        let bbbb=document.querySelector('#two').offsetTop;
+//        document.body.scrollTop =bbbb;
+//      },
+//      bgc3(){
+//        let cccc=document.querySelector('#three').offsetTop;
+//        document.body.scrollTop =cccc;
+//      },
+      getprocess(id){
+        this.selectedId = id;
+        if(this.selectedId==1){
+          console.log(1)
+          let aaaa=document.querySelector('#one').offsetTop;
         document.body.scrollTop =aaaa;
-      },
-      bgc2(){
-        let bbbb=document.querySelector('#two').offsetTop;
+        }else if(this.selectedId==2){
+          console.log(2)
+          let bbbb=document.querySelector('#two').offsetTop;
         document.body.scrollTop =bbbb;
-      },
-      bgc3(){
-        let cccc=document.querySelector('#three').offsetTop;
-        document.body.scrollTop =cccc;
+        }else if(this.selectedId==3){
+          console.log(3)
+          let bbbb=document.querySelector('#three').offsetTop;
+          document.body.scrollTop =bbbb;
+        }
       },
       handleScroll () {
         var scrollTop =  document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
@@ -302,6 +325,17 @@
     color: #333;
   }
 }
+.nopaycost{
+  background-color: #f9f9f9;
+  span{
+    .C2-yuyue,.C2-rongzixindai,.C2-wuliu{
+      font-size: 0.21rem;
+    }
+    margin-right: 0.36rem;
+    font-size: 0.21rem;
+    color: #333;
+  }
+}
   .h100 {
     .flex1 {
       flex: 1;
@@ -346,14 +380,15 @@
           color: #ccc;
         }
       }
+      li.active{
+        color: #13B7F6;
+        border-bottom: 2px solid #13B7F6 ;
+      }
       border-bottom: 1px solid #ddd;
     }
   }
   .isFixed{
     position: fixed
   }
-  .infor:hover{
-    color: #13B7F6;
-    border-bottom: 2px solid #13B7F6 ;
-  }
+
 </style>

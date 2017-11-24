@@ -45,4 +45,12 @@ export default [
           title:'注册'
         },
       },
+  {
+    path: '/register/registerinfocmp',
+    name: 'registerinfocmp',
+    component:views.Register.Registerinfocmp,
+    meta:{
+      title:'注册'
+    },
+  },
 ]
