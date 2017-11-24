@@ -8,7 +8,6 @@
       <router-link v-bind="{to:'/setting/consultingList/'+item.consultId}">
         <Consult :title="item.consultTitle" :content="item.consultContent" :time="item.consultTime"></Consult>
       </router-link>
-
     </div>
   </div>
 </template>

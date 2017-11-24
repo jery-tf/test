@@ -8,16 +8,16 @@
       <li>完成注册</li>
     </ul>
     <div class="registcmp other">
-      <mt-field label="企业名称"  ></mt-field>
+      <mt-field label="企业名称"  v-model="entname"></mt-field>
     </div>
     <div class="registcmp">
-      <mt-field label="统一社会信用代码"></mt-field>
+      <mt-field label="统一社会信用代码" v-model="uniscid"></mt-field>
     </div>
     <div class="registcmp">
-      <mt-field label="法定代表人" ></mt-field>
+      <mt-field label="法定代表人" v-model="legalname"></mt-field>
     </div>
     <div class="registcmp">
-      <mt-field label="身份证号码"  ></mt-field>
+      <mt-field label="身份证号码"  v-model="legalid"></mt-field>
     </div>
     <div class="checkbox">
       <mint-button type="primary" size="large" @click="validation">验证</mint-button>
@@ -35,6 +35,10 @@
   export default {
     data() {
       return {
+        entname:'',
+        legalname:'',
+        uniscid:'',
+        legalid:''
       }
     },
     components: {'mint-button': Button, },
@@ -43,6 +47,33 @@
     },
     methods: {
       validation(){
+//        if(this.entname==''){
+//            Toast('请输入企业名称')
+//          return
+//        }
+//        else if(this.uniscid==''){
+//          Toast('请输入18位统一社会信用代码')
+//        }
+//        else if(!(/^[0-9A-Z]{18}$/).test(this.uniscid)){
+//          Toast("请输入有效的18位有效社会统一信用代码")
+//          return;
+//        }
+//        else if(this.legalname==''){
+//          Toast('法定代表人名称')
+//        }
+//        else if(this.legalid==''){
+//          Toast('请输入身份证号')
+//        }
+//        this.uniscid=this.uniscid
+//        console.log(this.uniscid)
+//        let params={entname:this.entname,legalName:this.legalname,legalIdcard:this.legalid}
+//        Api.registerApi.seecompany(this.uniscid,params).then(res=>{
+//          console.log(res)
+//        })
+
+
+
+
         this.$router.push("/register/registerinfocmp");
       }
       //      企业注册的正则验证非空验证以及请求接口
@@ -81,6 +112,10 @@
           .mint-cell-title{
             width:2.44rem;
             font-size: 0.24rem;
+          }
+          .mint-field-core{
+            font-size: 0.24rem;
+            color: #333;
           }
         }
 

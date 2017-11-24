@@ -11,7 +11,7 @@
       <mt-field label="手机号码" v-model="telp"></mt-field>
     </div>
     <div class="registpeo">
-      <mt-field label="验证码" placeholder="请输入短信验证码"></mt-field>
+      <mt-field label="验证码" placeholder="请输入短信验证码" v-model="vcode"></mt-field>
       <div class="common">
         <span class="btn" @click="sendBtn" v-show="isshow">获取验证码</span>
         <span class="btn" v-show="!isshow">{{time}}秒后重新发送</span>
@@ -46,16 +46,15 @@
         telp: "",
         passwordfirst: "",
         passwordsecond: "",
-        time: 5,
-        isshow: true
+        time: 60,
+        isshow: true,
+        vcode:''
       }
     },
     created() {
       //获取上个页面传过来的姓名和身份证号
       this.pname = JSON.parse(sessionStorage.getItem('orderList')).pname
       this.idcard = JSON.parse(sessionStorage.getItem('orderList')).idcard
-      console.log(this.pname)
-      console.log(this.idcard)
     },
     methods: {
       sendBtn() {
@@ -64,8 +63,11 @@
           Toast('手机号码有误哦')
           return
         }
+        let mathRadom = Math.floor((Math.random() * 9000 + 1000))
+        console.log(mathRadom)
+        Util.other.setSessionStorage('mathRadom', mathRadom);
         this.isshow = false
-        this.time = 5;
+        this.time = 60;
         let resend = setInterval(() => {
 
           if (this.time != 0) {
@@ -78,6 +80,7 @@
         }, 1000)
       },
       inputgo() {
+        this.getradom = Util.other.getSessionStorage('mathRadom')
         console.log(this.idcard, this.telp)
         //判断手机号码是否为11位有效手机号码
         let telphone = /^1[34578]\d{9}$/
@@ -88,30 +91,48 @@
         //判断密码是否输入以及两次密码是否相同
         if (this.passwordfirst == "") {
           Toast("请输入密码")
+          return
         }
         else if (this.passwordsecond == "") {
           Toast("请再次输入密码")
+          return
         }
         else if (this.passwordfirst != this.passwordsecond) {
           Toast("两次输入的密码不一致，请重新输入")
+          return
         }
-        Api.registerApi.registerGo(
-          qs.stringify({
-            idcard: this.idcard,//身份证号
-            name: this.pname, //姓名
-            pwd: this.passwordfirst,//密码
+        Api.otherApi.senvCode(
+          {
+            content: this.getradom,//验证码
             phone: this.telp, //手机号码
-            grade: "1", // 认证级别：实名认证
-          }),
-          {Headers: {'content-type': 'application/x-www-form-urlencoded'}}
+            type: 'dev',//type类型
+          },
         ).then(res => {
-          if (res.code == "200") {
-            Toast("注册成功")
+          this.num = res.content
+          console.log(res)
+          if (this.num != this.vcode) {
+           Toast('验证码不一致，请重新输入')
+          }else{
+            Api.registerApi.registerGo(
+              qs.stringify({
+                idcard:this.idcard,//身份证号
+                name:this.pname, //姓名
+                pwd:this.passwordfirst,//密码
+                phone:this.telp, //手机号码
+                grade:"1", // 认证级别：实名认证
+              }),
+              {Headers:{'content-type':'application/x-www-form-urlencoded'}}
+            ).then(res => {
+              if (res.code == "200") {
+                Toast("注册成功")
 
-            this.$router.push("/register/registerfinish")
-          } else {
-            Toast('该身份号已注册')
+                this.$router.push("/register/registerfinish")
+              }else{
+                Toast('该身份号已注册')
+              }
+            })
           }
+
         })
       },
       //离开页面时清除定时器

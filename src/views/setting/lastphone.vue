@@ -5,8 +5,11 @@
       <span>{{totelName}}</span>
     </div>
     <div class="yan">
-      <input type="text" class=" padding-container-lr ipt" placeholder="请输入验证码">
-      <button class="btn">52秒后重新获取</button>
+      <mt-field label="验证码" placeholder="请输入短信验证码" v-model="vcode"></mt-field>
+      <div class="common">
+        <span class="btn" @click="sendBtn" v-show="isshow">获取验证码</span>
+        <span class="btn" v-show="!isshow">{{time}}秒后重新发送</span>
+      </div>
     </div>
     <div class="top52 box-margin-top">
       <mint-button type="primary" size="large" @click="successchange">保存</mint-button>
@@ -20,33 +23,84 @@
   import Api from '../../api'
   import axios from 'axios'
   import qs from "qs"
+
   export default {
     data() {
       return {
-        data: '18684892246'
+        data: '18684892246',
+        vcode: '',
+        isshow: true,
+        time: 60,
+        str: ''
       }
     },
     components: {'mint-button': Button},
     methods: {
+      sendBtn() {
+        let postId = /^1[34578]\d{9}$/;
+        if (!postId.test(this.str)) {
+          Toast('手机号码有误哦')
+          return
+        }
+        let mathRadom = Math.floor((Math.random() * 9000 + 1000))
+        Util.other.setSessionStorage('mathRadom', mathRadom);
+        console.log(mathRadom)
+        this.isshow = false
+        this.time = 60;
+        let resend = setInterval(() => {
+          if (this.time != 0) {
+            this.time--
+          }
+          else {
+            clearInterval(resend)
+            this.isshow = true
+          }
+        }, 1000)
+      },
       successchange() {
-        this.userId =JSON.parse(localStorage.getItem('userInfo')).userId;
-        let str = Util.other.getLocalStorage('newphone')
-        Api.checkPwdApi.changeNum(this.userId,{
-          phone:str
-        }).then(res=>{
-         if(res.code=200){
-           Toast("修改手机号码成功,即将跳转到首页")
-           //清除用户相关信息
-           Util.login.clearUserInfo();
-           this.$router.push("/mySelfInfo")
-         }
-        })
+        if (this.vcode == '') {
+          Toast('验证码不能为空')
+        }
+        else {
+          this.userId = JSON.parse(localStorage.getItem('userInfo')).userId;
+          this.str = Util.other.getLocalStorage('newphone')
+          this.getradom = Util.other.getSessionStorage('mathRadom')
+          console.log(this.getradom)
+          Api.otherApi.senvCode(
+            {
+              content: this.getradom,//验证码
+              phone: this.str, //手机号码
+              type: 'dev',//type类型
+            },
+          ).then(res => {
+            console.log(res)
+            this.num = res.content
+            if (this.num != this.vcode) {
+              Toast('验证码不一致，请重新输入')
+            } else {
+              console.log('验证成功')
+              Api.checkPwdApi.changeNum(this.userId, {
+                phone: this.str
+              }).then(res => {
+                if (res.code = 200) {
+                  Toast("修改手机号码成功,即将跳转到首页")
+                  //清除用户相关信息
+                  Util.login.clearUserInfo();
+                  this.$router.push("/mySelfInfo")
+                }
+              })
+            }
+
+          })
+        }
+
       }
     },
     computed: {
       totelName() {
         let str = Util.other.getLocalStorage('newphone')
-        console.log('--->'+str)
+        this.str = str
+        console.log('--->' + str)
         let start = str.slice(0, 3);
         let end = str.slice(-2);
         return `${start}******${end}`;
@@ -84,6 +138,20 @@
     background-color: #fff;
     margin-top: 0.56rem;
     margin-bottom: 0.26rem;
+    position: relative;
+    .common {
+      position: absolute;
+      top: 0.15rem;
+      right: 0.24rem;
+      width: 1.81rem;
+      height: 0.67rem;
+      line-height: 0.67rem;
+      border-radius: 5px;
+      font-size: 0.2rem;
+      color: #666;
+      text-align: center;
+      border: 1px solid #dcdcdc;
+    }
     .ipt {
       border: 0;
       outline: 0;
@@ -91,16 +159,6 @@
       font-size: .28rem;
       color: #aaa;
       width: 4.5rem;
-    }
-    .btn {
-      border: 1px solid #a0a0a0;
-      outline: 0;
-      background-color: #f8f8f8;
-      width: 1.82rem;
-      height: 0.68rem;
-      vertical-align: 20%;
-      border-radius: 10px;
-      font-size: 0.2rem;
     }
   }
 

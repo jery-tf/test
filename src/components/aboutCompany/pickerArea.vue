@@ -25,9 +25,9 @@
         </div>
       </section>
       <ul>
-        <li class="addList" @click="getProvinceId(pickermore.id, pickermore.name)" v-show="showProvince"
-            :class="pickermore.selected ? 'active' : ''">{{pickermore.name}}
-        </li>
+        <!--<li class="addList" @click="getProvinceId(pickermore.id, pickermore.name)" v-show="showProvince"-->
+            <!--:class="pickermore.selected ? 'active' : ''">{{pickermore.name}}-->
+        <!--</li>-->
         <li class="addList" v-for="(v,k) in showCityList" @click="getCityId(v.id, v.name, k)" v-show="showCity"
             :class="v.selected ? 'active' : ''">{{v.name}}
         </li>
@@ -142,6 +142,7 @@
         if (this.nameid == 4) {
           this.addressInfo = {}
           this.isshowarea(false);
+          this.Province = false
           this.addressInfo.province = {
             id: this.province,
             value: this.Province
@@ -153,12 +154,14 @@
           this.$emit('increment', this.addressInfo);
           this.$emit('closedown');
           Util.other.setSessionStorage('cityId', this.city);
-          this.City = false
+
           return
+        }else{
+          Api.pickerAreaApi.pickerAreas(this.nameid).then(res => {
+            this.showDistrictList = res
+          })
         }
-        Api.pickerAreaApi.pickerAreas(this.nameid).then(res => {
-          this.showDistrictList = res
-        })
+
       },
 
 //      地级市待选项

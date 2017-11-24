@@ -45,7 +45,7 @@
       v-model="popupVisible"
       popup-transition="popup-fade"
       position="bottom">
-      <h3>咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
+      <h3 class="addresstitle">咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
       <template>
         <DepartPro :cityshow="cityshow" v-on:increments="addaddress" :isdep="isdep"  :proshow="proshow"  v-on:increment="addproject"></DepartPro>
       </template>
@@ -116,6 +116,7 @@
         this.isshowarea(true)
         this.showChose = !this.showChose
         Api.pickerAreaApi.pickerAreaf().then(res => {
+
           this.list = res
         })
       },
