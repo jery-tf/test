@@ -28,37 +28,21 @@
   import axios from 'axios'
   import Config from '../../config'
   import  qs from "qs"
+  import {Field, Button} from 'mint-ui'
   export default {
-    components: {Btncommon},
+    components: {'mint-button': Button, },
     data() {
       return {
         pname: '',
         idcard: '',
-        disab:true
+        disab:false
       }
     },
     methods: {
       changeCount(){
-        Api.registerApi.uableRegi(
-         {
-            type:"idcard",
-            idcard:this.idcard,//身份证号
-          },
-          {Headers:{'content-type':'application/x-www-form-urlencoded'}}
-        ).then(res => {
-          if (res.code == "205") {
-            Toast(res.info);
-            this.disab=true
-            return
-          }else if(res.code =="200"){
-//            Toast(res.info)
-            this.disab=false
-            return
-          }
-        })
+
       },
       postId() {
-        console.log(123)
         let postId = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
         if (this.pname == '') {
           Toast("请输入姓名");
@@ -68,27 +52,43 @@
           Toast("请输入合法的身份证号")
           return
         }
-//        let orderList=[{"pname":this.pname},{"idcard":this.idCard}]{'pname',this.name;"idcard",this.idcard}
-        let orderList = {'pname': this.pname, "idcard": this.idcard}
-       sessionStorage.setItem("orderList", JSON.stringify(orderList))
-
-        Api.registerApi.legal(
-          qs.stringify({
+        Api.registerApi.uableRegi(
+          {
+            type:"idcard",
             idcard:this.idcard,//身份证号
-            name:this.pname, //姓名
-          }),
+          },
           {Headers:{'content-type':'application/x-www-form-urlencoded'}}
         ).then(res => {
+          if (res.code == "205") {
+            Toast(res.info);
+//            this.disab=true
+            return
+          }else if(res.code =="200"){
+//            Toast(res.info)
+            this.disab=false
+            let orderList = {'pname': this.pname, "idcard": this.idcard}
+            sessionStorage.setItem("orderList", JSON.stringify(orderList))
+
+            Api.registerApi.legal(
+              qs.stringify({
+                idcard:this.idcard,//身份证号
+                name:this.pname, //姓名
+              }),
+              {Headers:{'content-type':'application/x-www-form-urlencoded'}}
+            ).then(res => {
 //          console.log(res.code)
 //          if (res.code=="703" || res.code=='2') {
 //            Toast(res.info)
 //            return
 //          }
 //          else if(res.code=="200"){
-            this.disab=false
-            this.$router.push("/register/registerinfo");
+              this.disab=false
+              this.$router.push("/register/registerinfo");
 //          }
+            })
+          }
         })
+
       }
     }
 

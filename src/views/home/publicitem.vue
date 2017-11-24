@@ -2,16 +2,13 @@
   <div id="tmpl">
     <div id='cate'>
       <ul class="news" v-bind="{style:'width:'+ulWidth+'px'}" >
-        <li v-for="(item,index) in list" :key='index' @click="getnews(item.cmsId)" id="conven" :class="item.cmsId==selectedId?'li active':'li'">{{item.name}}</li>
+        <li v-for="(item,index) in list" :key='index' @click="getnews(item.cmsId)" id="conven" ><span :class="item.cmsId==selectedId?'span active':'span'">{{item.name}}</span></li>
       </ul>
     </div>
-    <!--<router-link to="/publicitem/information">-->
-      <!--<i class="C2-xinjian OAIndexIcon"></i>-->
-    <!--</router-link>-->
     <div class="contents">
-      <mt-swipe :auto="4000" >
+      <mt-swipe :auto="4000" v-show="isshow">
         <mt-swipe-item v-for="(itemss,index) in listsfor">
-          <a href="javascript:void(0)">
+          <a :href="`${itemss.detailUrl}`">
             <img :src="itemss.imageUrls">
            <div class="titlename">
              <p>{{itemss.title}}</p>
@@ -21,15 +18,13 @@
       </mt-swipe>
 
       <div class="public padding-container-lr" v-for="items in lists">
-        <ul class="pubcont">
-          <!--<template v-for="items in items.sub">-->
+        <ul class="pubcont" >
             <li class="publist">
               <a :href="`${items.detailUrl}`">
                 <p>{{items.title}}</p><br>
                 <span>{{format(items.time,'yyyy-MM-dd')}}</span>
               </a>
             </li>
-          <!--</template>-->
         </ul>
       </div>
     </div>
@@ -47,46 +42,44 @@
   export default {
     data() {
       return {
-        list: [
-          {id: '1', name: '湖南政务'}, {id: '2', name: '长沙新闻'}, {id: '3', name: '岳阳动态'}, {id: '4', name: '常德牛粉'}, {
-            id: '5', name: '川麻辣烫'
-          }, {id: '6', name: '汉热干面'}, {id: '6', name: '汉热干面'}, {id: '6', name: '汉热干面'}
-        ],
+        list: [],
         result: [],
         ulWidth: 750,
         lists: [],
         selectedId: '363',
-        listsfor:[]
+        listsfor:[],
+        isshow:false,
 
       }
     },
     created() {
-      this.selectedId = 363
+      this.selectedId =  Util.other.getLocalStorage('inforid')
     },
     mounted() {
-      this.getnews(363)
+      this.getnews( this.selectedId||363)
 
     },
     methods: {
       format,
       getnews(cmsId) {
-        // 0.0 如果方法的cateid参数没有传递，则默认是0,代表获取所有新闻数据
         cmsId = cmsId || 0;
+        Util.other.setLocalStorage('inforid',cmsId);
         this.selectedId = cmsId;
-        let box = document.getElementById('conven');
-        var w = box.clientWidth;
-        var count = this.list.length + 1;
-        this.ulWidth = (w + 72) * count;
         Api.opacityApi.publict().then(res => {
-         this.list=res
+          this.list=res
+          let box = document.getElementById('conven')||0;
+          var w = box.clientWidth;
+          var count = this.list.length + 1;
+          this.ulWidth = (w + 72) * count;
         })
         Util.cmsdao.fetchAllSubChnlNArti(`${cmsId}`, 2).then(res => {
-          console.log(res)
+//          console.log(res)
          if(res){
            let arrn = [];
            let arrs=[]
            for (let items of res) {
              if(items.imageUrls){
+               this.isonshow=true
                arrs.push({
                  detailUrl:items.detailUrl,
                  title: items.title,
@@ -94,16 +87,22 @@
                  imageUrls:items.imageUrls
                })
                this.listsfor=arrs
-               console.log(arrs)
              }else{
+               this.isonshow=true
                arrn.push({
                  detailUrl:items.detailUrl,
                  title: items.title,
                  time:items.time
                });
+               this.lists=arrn
              }
-             this.lists=arrn
              }
+          if(arrs==''){
+             this.isshow=false
+          }
+          else{
+            this.isshow=true
+          }
          }
         })
       },
@@ -114,7 +113,6 @@
   #tmpl {
     background-color: #fff;
     position: relative;
-    height: 1000px;
     #cate {
       overflow-x: auto;
       background-color: #fff;
@@ -126,7 +124,8 @@
         overflow-x: hidden;
         height: 0.7rem;
         background-color: #fff;
-        position: fixed;
+        /*position: fixed;*/
+        z-index: 999;
         li {
           width: 0.96rem;
           list-style: none;
@@ -136,7 +135,7 @@
           margin-right: 0.72rem;
           height:0.62rem;
         }
-        li.active {
+        span.active {
           color: #13B7F6;
           border-bottom: 2px solid #13B7F6;
           height:0.62rem;
@@ -200,7 +199,6 @@
       padding-right: 0.3rem;
       margin-top: 0.24rem;
       .pubcont {
-        margin-top: 0.26rem;
         overflow: hidden;
         position: relative;
         .publist {

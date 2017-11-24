@@ -22,3 +22,14 @@ export const getunicon = (params,config)=>axiosPost(`/xndt/v1/viewauthorization`
 
 export const getapprove = (params,config)=>axiosGet(`/approveinterface/v1/dicttypes/dictdatas/法人分类
 `,params,config);
+
+//根据统一社会信用代码查看企业
+export const seecompany = (uniscid,params,config)=>axiosGet(`http://172.16.17.20:8080/mobile/register/checkEnterpriseInfo/${uniscid}
+${reqParms(params)}`,config);
+const reqParms = (params)=>{
+  let qs = [];
+  for(let index in params){
+    qs.push(`${index}=${params[index]}`);
+  }
+  return '?'+qs.join('&');
+};

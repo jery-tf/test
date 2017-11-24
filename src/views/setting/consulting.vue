@@ -45,7 +45,7 @@
       v-model="popupVisible"
       popup-transition="popup-fade"
       position="bottom">
-      <h3 class="addresstitle">咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="isshowpub(false)"></i></h3>
+      <h3 class="addresstitle">咨询部门<i class="C2-guanbi1 OAIndexIcon" @click="close()"></i></h3>
       <template>
         <DepartPro :cityshow="cityshow" v-on:increments="addaddress" :isdep="isdep"  :proshow="proshow"  v-on:increment="addproject"></DepartPro>
       </template>
@@ -91,7 +91,7 @@
         isdep:true,
         consulttitle:'',
         concultconts:'',
-      isopen:true
+        isopen:true
       }
     },
     created() {
@@ -106,9 +106,6 @@
       isshowarea(bool){
         this.popupVisibles = bool;
       },
-      isshowpub(bool){
-        this.popupVisible = bool;
-      },
       isopendown(){
         this.isopen=!this.isopen
       },
@@ -116,9 +113,10 @@
         this.popupVisible = !this.popupVisible
       },
       selected() {
-       this.isshowarea(true)
+        this.isshowarea(true)
         this.showChose = !this.showChose
         Api.pickerAreaApi.pickerAreaf().then(res => {
+
           this.list = res
         })
       },
@@ -168,9 +166,9 @@
       },
 //      获得咨询部门的列表
       addaddress(Apartment,apartment) {
-          this.Apartment = Apartment
+        this.Apartment = Apartment
         this.apartment=apartment;
-          this.popupVisible = false
+        this.popupVisible = false
       },
 //      获得咨询项目的列表
       addproject(Sumshine,sumshine){
@@ -247,10 +245,10 @@
           consultTime:myDate
         }
         Api.consultApi.PutConsult(content).then(res=>{
-         if(res.code=200){
-           alert('咨询成功，即将跳转')
-           this.$router.push('/mySelfInfo')
-         }
+          if(res.code=200){
+            alert('咨询成功，即将跳转')
+            this.$router.push('/mySelfInfo')
+          }
         })
       }
     }

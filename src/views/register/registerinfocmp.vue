@@ -1,26 +1,26 @@
 <template>
-  <div class="registforpeo">
+  <div class="registforcmpa">
     <ul>
-      <li>验证身份</li>
+      <li>验证企业</li>
       <li>→</li>
       <li class="peoselect">设置密码</li>
       <li>→</li>
       <li>完成注册</li>
     </ul>
-    <div class="registpeo other">
+    <div class="registcmp other">
       <mt-field label="手机号码" v-model="telp"></mt-field>
     </div>
-    <div class="registpeo">
+    <div class="registcmp">
       <mt-field label="验证码" placeholder="请输入短信验证码" v-model="vcode"></mt-field>
       <div class="common">
         <span class="btn" @click="sendBtn" v-show="isshow">获取验证码</span>
         <span class="btn" v-show="!isshow">{{time}}秒后重新发送</span>
       </div>
     </div>
-    <div class="registpeo other">
+    <div class="registcmp other">
       <mt-field label="密码" v-model="passwordfirst"></mt-field>
     </div>
-    <div class="registpeo">
+    <div class="registcmp">
       <mt-field label="确认密码" v-model="passwordsecond"></mt-field>
     </div>
     <div class="checkbox">
@@ -46,15 +46,17 @@
         telp: "",
         passwordfirst: "",
         passwordsecond: "",
-        time: 60,
+        time: 5,
         isshow: true,
-        vcode:''
+        vcode: ''
       }
     },
     created() {
       //获取上个页面传过来的姓名和身份证号
-      this.pname = JSON.parse(sessionStorage.getItem('orderList')).pname
-      this.idcard = JSON.parse(sessionStorage.getItem('orderList')).idcard
+//      this.pname = JSON.parse(sessionStorage.getItem('orderList')).pname
+//      this.idcard = JSON.parse(sessionStorage.getItem('orderList')).idcard
+//      console.log(this.pname)
+//      console.log(this.idcard)
     },
     methods: {
       sendBtn() {
@@ -63,13 +65,11 @@
           Toast('手机号码有误哦')
           return
         }
-        let mathRadom = Math.floor((Math.random() * 9000 + 1000))
-        console.log(mathRadom)
-        Util.other.setSessionStorage('mathRadom', mathRadom);
+       this.mathRadom = Math.floor((Math.random() * 9000 + 1000))
+        console.log( this.mathRadom )
         this.isshow = false
-        this.time = 60;
+        this.time = 5;
         let resend = setInterval(() => {
-
           if (this.time != 0) {
             this.time--
           }
@@ -80,8 +80,6 @@
         }, 1000)
       },
       inputgo() {
-        this.getradom = Util.other.getSessionStorage('mathRadom')
-        console.log(this.idcard, this.telp)
         //判断手机号码是否为11位有效手机号码
         let telphone = /^1[34578]\d{9}$/
         if (!(/^1[34578]\d{9}$/.test(this.telp))) {
@@ -103,34 +101,17 @@
         }
         Api.otherApi.senvCode(
           {
-            content: this.getradom,//验证码
+            content: this.mathRadom,//验证码
             phone: this.telp, //手机号码
             type: 'dev',//type类型
           },
         ).then(res => {
-          this.num = res.content
           console.log(res)
+          this.num = res.content
           if (this.num != this.vcode) {
-           Toast('验证码不一致，请重新输入')
+            console.log('验证码不一致，请重新输入')
           }else{
-            Api.registerApi.registerGo(
-              qs.stringify({
-                idcard:this.idcard,//身份证号
-                name:this.pname, //姓名
-                pwd:this.passwordfirst,//密码
-                phone:this.telp, //手机号码
-                grade:"1", // 认证级别：实名认证
-              }),
-              {Headers:{'content-type':'application/x-www-form-urlencoded'}}
-            ).then(res => {
-              if (res.code == "200") {
-                Toast("注册成功")
-
-                this.$router.push("/register/registerfinish")
-              }else{
-                Toast('该身份号已注册')
-              }
-            })
+            console.log('验证成功')
           }
 
         })
@@ -143,8 +124,8 @@
 
   }
 </script>
-<style  lang='less'>
-  .registforpeo {
+<style lang='less'>
+  .registforcmpa {
     ul {
       width: 6.4rem;
       padding-left: 0.8rem;
@@ -157,14 +138,14 @@
         font-size: 0.26rem;
       }
     }
-    .registpeo {
+    .registcmp {
       position: relative;
+      padding-left: 0.28rem;
       background-color: #fff;
       border-bottom: 1px solid #d9d9d9;
       width: 7.2rem;
       height: 1.02rem;
       line-height: 1.02rem;
-      padding-left: 0.28rem;
       .mint-cell {
         min-height: 0;
         height: 1rem;
